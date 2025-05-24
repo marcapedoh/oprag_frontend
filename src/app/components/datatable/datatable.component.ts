@@ -10,13 +10,16 @@ export class DatatableComponent {
   @Input() data!: Array<any>;
   @Input() columns!: Array<any>
   @Input() dataType!: string;
+  @Input() routeNavigate!:string;
   filteredData: any = []
   numberData: number = 20
   inputSubject = new Subject<string>();
   subscription!: Subscription;
   filteredElements: any = []
   testSubscription!: Subscription;
-  warningBoolean:boolean=false
+  totalPages: number=0;
+  itemsPerPage: any=25;
+  currentPage: number=0;
   
   ngOnInit(): void {
     setTimeout(() => {
@@ -33,53 +36,26 @@ export class DatatableComponent {
         if (!searchText.trim()) return this.getRandomItems(this.data, this.numberData);
 
         const lowerSearch = searchText.toString().toLowerCase();
-        if (this.dataType == "cs") {
+        if (this.dataType === "CertificatControls") {
           this.filteredElements = this.filteredData.filter((item: any) =>
-            item.name.toLowerCase().includes(lowerSearch) ||
-            item.status.toLowerCase().includes(lowerSearch) ||
-            item.title.toLowerCase().includes(lowerSearch) ||
-            item.callDropCount.toString().includes(lowerSearch) ||
-            item.failureAmount.toString().includes(lowerSearch) ||
-            item.latency.toString().includes(lowerSearch) ||
-            item.luFailuresCount.toString().includes(lowerSearch) ||
-            item.smsFailuresCount.toString().includes(lowerSearch)
+            item.site.toLowerCase().includes(lowerSearch) ||
+            item.societe.toLowerCase().includes(lowerSearch) ||
+            item.numeroRapport.toLowerCase().includes(lowerSearch) ||
+            item.description.toString().includes(lowerSearch) ||
+            item.validite.toString().includes(lowerSearch) ||
+            item.utilisateur.nom.toString().includes(lowerSearch)        
 
           );
-        } else if (this.dataType == "ott") {
+        } else if (this.dataType === "Badges") {
           this.filteredElements = this.filteredData.filter((item: any) =>
-            item.name.toLowerCase().includes(lowerSearch) ||
-            item.ottName.toLowerCase().includes(lowerSearch) ||
-            item.status.toLowerCase().includes(lowerSearch) ||
-            item.title.toLowerCase().includes(lowerSearch) ||
-            item.pageResponseDelay.toString().includes(lowerSearch) ||
-            item.synAckAckDelay.toString().includes(lowerSearch) ||
-            item.synSynAckDelay.toString().includes(lowerSearch) ||
-            item.totalTrafficMb.toString().includes(lowerSearch) ||
-            item.webPageDlThroughput.toString().includes(lowerSearch)
-
-          );
-        } else if (this.dataType == "ps") {
-          this.filteredElements = this.filteredData.filter((item: any) =>
-            item.name.toLowerCase().includes(lowerSearch) ||
-            item.status.toLowerCase().includes(lowerSearch) ||
-            item.title.toLowerCase().includes(lowerSearch) ||
-            item.attachFailuresCount.toString().includes(lowerSearch) ||
-            item.gyFailuresCount.toString().includes(lowerSearch) ||
-            item.pingPongCount.toString().includes(lowerSearch)
-          );
-        }else{
-          this.filteredElements = this.filteredData.filter((item: any) =>
-            item.name.toLowerCase().includes(lowerSearch) ||
-            item.status.toLowerCase().includes(lowerSearch) ||
-            item.title.toLowerCase().includes(lowerSearch) ||
-            item.dnsDelay.toString().includes(lowerSearch) ||
-            item.dnsFailuresCount.toString().includes(lowerSearch) ||
-            item.synAckAckDelay.toString().includes(lowerSearch) ||
-            item.synSynAckDelay.toString().includes(lowerSearch) ||
-            item.totalTrafficMb.toString().includes(lowerSearch)
+            item.numero.toLowerCase().includes(lowerSearch) ||
+            item.validite.toLowerCase().includes(lowerSearch) ||
+            item.numeroParc.toLowerCase().includes(lowerSearch) ||
+            item.inspecteur.nom.toString().includes(lowerSearch) ||
+            item.codeQrString.toString().includes(lowerSearch) 
           );
         }
-        // filtre selon les champs que tu veux
+
         return this.filteredElements
       })
     ).subscribe(filtered => {
@@ -88,23 +64,10 @@ export class DatatableComponent {
 
   }
 
-  startWarningWatcher() {
-    if (this.testSubscription) {
-      this.testSubscription.unsubscribe(); // éviter les multiples abonnements
-    }
-  
-    this.testSubscription = interval(2500).pipe(
-      take(10),
-      tap(() => {
-        const warningFound = this.filteredData.some((item: any) => item.status === 'WARNING');
-        console.log('Warning found:', warningFound);
-        if (warningFound) {
-          this.warningBoolean = !this.warningBoolean;
-          console.log('⚠️ WARNING detected');
-        }
-      })
-    ).subscribe();
-  }
+  getNestedValue(obj: any, path: string): any {
+  return path.split('.').reduce((acc, part) => acc?.[part], obj);
+}
+
   
   ngOnDestroy(): void {
     if (this.testSubscription) {
@@ -116,13 +79,29 @@ export class DatatableComponent {
     this.inputSubject.next(event.target.value);
   }
   updateNumber() {
-    console.log(this.numberData)
     this.filteredData = this.getRandomItems(this.data, this.numberData);
-    this.startWarningWatcher()
   }
 
   getRandomItems(array: any[], count: number): any[] {
     const shuffled = [...array].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
+  }
+
+  updatePagination(): void {
+    this.totalPages = Math.ceil(this.data.length / +this.itemsPerPage);
+
+    this.data = this.data.slice(
+      (this.currentPage - 1) * +this.itemsPerPage,
+      this.currentPage * +this.itemsPerPage
+    );
+
+  }
+
+  changePage(event: any, page: number): void {
+    event.preventDefault()
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePagination();
+    }
   }
 }

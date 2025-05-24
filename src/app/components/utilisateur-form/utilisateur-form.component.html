@@ -1,0 +1,61 @@
+
+
+<div
+    [ngClass]="{'animate-slide-in-left': currentStep === 1, 'hidden': currentStep !== 1}"
+    class="max-w-screen-xl mx-auto p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl shadow-lg">
+    <div class="grid grid-cols-3 gap-8">
+
+        <form class="col-span-3 grid grid-cols-3 gap-6">
+
+            <div>
+                <label for="nom"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
+                <input type="text" id="nom"
+                    placeholder="nom" name="nom"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+            </div>
+            <div>
+                <label for="prenom"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prenom</label>
+                <input type="text" id="prenom"
+                    placeholder="prenom" name="nom"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+            </div>
+
+            <div>
+                <label for="userName"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">UserName</label>
+                <input type="text" id="userName"
+                    placeholder="username" name="username"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+            </div>
+            <div>
+                <label for="emailInput"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                <input type="email" id="emailInput"
+                    placeholder="email" name="username"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+            </div>
+
+            <div>
+                <label for="motDePasse"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot
+                    de Passe</label>
+                <input type="password" id="motDePasse"
+                    placeholder="mot de passe" name="passWord"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+            </div>
+        
+
+            <div class="col-start-3">
+                <button type="button"
+                    class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">
+
+                    Enregistrer
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

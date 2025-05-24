@@ -1,5 +1,11 @@
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-14">
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-14 p-3 m-3 bg-gray-700 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md">
+     <div class="flex  mt-8 ">
+        <button  type="button"   [routerLink]="routeNavigate"
+            class="cursor-pointer items-center justify-center py-2.5 px-5 me-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none  focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center">
+            Nouveau {{dataType}}
+     </button>
+    </div>
     <form class="flex items-center max-w-lg mx-auto mb-8 mt-8">
         <label for="voice-search" class="sr-only">Search</label>
         <div class="relative w-full">
@@ -28,8 +34,6 @@
                 </svg>
             </button> -->
         </div>
-       
-
     </form>
     <div class="flex justify-center mt-8">
         <button disabled type="button" *ngIf="!data"
@@ -62,13 +66,13 @@
         <tbody>
             <tr *ngFor="let line of filteredData"
             
-                class="border-b dark:border-gray-700 border-gray-200">
+                class="border-b dark:border-gray-700 border-gray-200 bg-gray-700 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md">
                 <th scope="row" 
                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                    {{line[columns[0]]}}
                 </th>
                 <td class="px-6 py-4 font-medium text-gray-900 dark:text-white" *ngFor="let col of columns.slice(1)">
-                    {{line[col]}}
+                    {{getNestedValue(line,col)}}
                 </td>
             </tr>
 
@@ -76,4 +80,4 @@
     </table>
 
 </div>
-<app-toast type="warning" *ngIf="warningBoolean"></app-toast>
+<!-- <app-toast type="success" ></app-toast> -->

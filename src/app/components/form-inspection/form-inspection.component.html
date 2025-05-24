@@ -34,7 +34,7 @@
             <!-- Champ 1 -->
             <div>
               <label for="site" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Site</label>
-              <input type="text" id="site" placeholder="site"
+              <input type="text" id="site" placeholder="site" name="site" [(ngModel)]="certificatControl.site"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                 required />
             </div>
@@ -42,7 +42,7 @@
             <!-- Champ 2 -->
             <div>
               <label for="societe" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Societe</label>
-              <input type="text" id="societe" placeholder="societe"
+              <input type="text" id="societe" placeholder="societe" name="societe" [(ngModel)]="certificatControl.societe"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                 required />
             </div>
@@ -50,19 +50,19 @@
             <!-- Champ 3 -->
             <div>
               <label for="numeroRapport" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero du Rapport</label>
-              <input type="text" id="numeroRapport" placeholder="numero Rapport"
+              <input type="text" id="numeroRapport" placeholder="numero Rapport" name="numeroDuRapport" [(ngModel)]="certificatControl.numeroRapport"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                  />
             </div>
             <div>
               <label for="localisation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Localisation</label>
-              <input type="text" id="localisation" placeholder="localisation"
+              <input type="text" id="localisation" placeholder="localisation" name="localisation" [(ngModel)]="certificatControl.localisationCertificationFait"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                  />
             </div>
             <div>
               <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-              <input type="email" id="description" placeholder="description"
+              <input type="email" id="description" placeholder="description" name="description" [(ngModel)]="certificatControl.description"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                 required />
             </div>
@@ -70,7 +70,7 @@
               <label for="noticeInstruction" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notice Instruction</label>
                <input 
                   type="checkbox" 
-                  id="noticeInstruction" 
+                  id="noticeInstruction" name="noticeInstruction" [(ngModel)]="certificatControl.noticeInstruction"
                   class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
             </div>
@@ -78,7 +78,7 @@
               <label for="livretMaintenance" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Livret Maintenance</label>
               <input 
                   type="checkbox" 
-                  id="livretMaintenance" 
+                  id="livretMaintenance" name="livretMaintenance" [(ngModel)]="certificatControl.livretMaintenance"
                   class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
             </div>
@@ -86,7 +86,7 @@
               <label for="declarationConformite" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Déclaration Conformité</label>
               <input 
                   type="checkbox" 
-                  id="declarationConformite" 
+                  id="declarationConformite" name="declarationConformite" [(ngModel)]="certificatControl.declarationConformite"
                   class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
             </div>
@@ -94,7 +94,7 @@
               <label for="rapportControlPrecedent" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rapport Control Précednt</label>
                <input 
                   type="checkbox" 
-                  id="rapportControlPrecedent" 
+                  id="rapportControlPrecedent" name="rapportControlPrecedent" [(ngModel)]="certificatControl.rapportControlePrecedent"
                   class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
             </div>
@@ -102,7 +102,7 @@
               <label for="declarationEcrite" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Déclaration Ecrite</label>
                <input 
                   type="checkbox" 
-                  id="declarationEcrite" 
+                  id="declarationEcrite" name="declarationEcrite" [(ngModel)]="certificatControl.declarationEcrite"
                   class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
             </div>
@@ -110,7 +110,7 @@
               <label for="moyenAccess" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Moyen Access</label>
               <input 
                   type="checkbox" 
-                  id="moyenAccess" 
+                  id="moyenAccess" name="moyenAccess" [(ngModel)]="certificatControl.moyenAccess"
                   class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
             </div>
@@ -118,7 +118,7 @@
               <label for="moyenAccessPartiel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Moyen Access Partiel</label>
               <input 
                   type="checkbox" 
-                  id="moyenAccessPartiel" 
+                  id="moyenAccessPartiel"  name="moyenAccessPartiel" [(ngModel)]="certificatControl.moyenAccessPartiel"
                   class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
             </div>
@@ -126,14 +126,14 @@
               <label for="moyenAccessConducteur" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Moyen Acces Conducteur</label>
               <input 
                   type="checkbox" 
-                  id="moyenAccessConducteur" 
+                  id="moyenAccessConducteur"  name="moyenAccessConducteur" [(ngModel)]="certificatControl.moyenAccessConducteur"
                   class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
             </div>
             <div>
               <label for="fonctionnementEtat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Etats de fonctionnement</label>
               <select 
-                  id="fonctionnementEtat" 
+                  id="fonctionnementEtat" name="etatFonctionnement" [(ngModel)]="certificatControl.essaiFonctionnementList"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" 
                   required
               >
@@ -156,12 +156,11 @@
               <label for="conformeReglement" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conforme Reglement</label>
               <input 
                   type="checkbox" 
-                  id="conformeReglement" 
+                  id="conformeReglement" name="conformeReglement" [(ngModel)]="certificatControl.conformeReglement"
                   class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
             </div>
-      
-           
+               
       
            <div class="col-start-3">
             <button type="button" (click)="nextStep()"
@@ -211,7 +210,7 @@
           <!-- Champ 1 -->
           <div>
             <label for="motifControl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Motif de Control</label>
-            <input type="text" id="motifControl" placeholder="Motif de Control"
+            <input type="text" id="motifControl" placeholder="Motif de Control" name="motifControl" [(ngModel)]="certificatControl.motifControle"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
               required />
           </div>
@@ -219,7 +218,7 @@
           <!-- Champ 2 -->
           <div>
             <label for="recommandationsObservations" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observations & Recommandations</label>
-            <input type="text" id="recommandationsObservations" placeholder="Observations & Recommandations"
+            <input type="text" id="recommandationsObservations" placeholder="Observations & Recommandations" name="observationEtRecommandations" [(ngModel)]="certificatControl.observationRecommendation"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
               required />
           </div>
@@ -228,7 +227,7 @@
           <div>
             <label for="validite" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Validite</label>
             <select 
-                id="validite" 
+                id="validite" name="validite" [(ngModel)]="certificatControl.validite"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" 
                 required
             >
@@ -253,11 +252,15 @@
                 <option value="DIX_HUIT_MOIS">18 MOIS</option>
                 <option value="DIX_NEUF_MOIS">19 MOIS</option>
                 <option value="VINGT_MOIS">20 MOIS</option>
+                <option value="VINGT_MOIS">21 MOIS</option>
+                <option value="VINGT_MOIS">22 MOIS</option>
+                <option value="VINGT_MOIS">23 MOIS</option>
+                <option value="VINGT_MOIS">24 MOIS</option>
             </select>
         </div>
           <div>
             <label for="normeFabrication" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Norme de Fabrication</label>
-            <input type="text" id="normeFabrication" placeholder="Norme de fabrication"
+            <input type="text" id="normeFabrication" placeholder="Norme de fabrication" name="normeFabrication" [(ngModel)]="certificatControl.normeFabrication"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                />
           </div>
@@ -265,13 +268,13 @@
             <label for="paye" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payé</label>
             <input 
                   type="checkbox" 
-                  id="paye" 
+                  id="paye" name="paye" [(ngModel)]="certificatControl.paye"
                   class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
           </div>
           <div>
             <label for="montant" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Montant</label>
-            <input type="number" id="normeFabrication" placeholder="Montant"
+            <input type="number" id="normeFabrication" placeholder="Montant" name="montant" [(ngModel)]="certificatControl.montant"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                />
           </div>
@@ -350,7 +353,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
                             de Permis</label>
                         <input type="text" id="numeroDePermis"
-                            placeholder="Numéro de Permis"
+                            placeholder="Numéro de Permis" name="numeroDePermis" [(ngModel)]="chauffeur.numeroPermis"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                             required />
                     </div>
@@ -359,7 +362,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
                             de Certificat Medical Valide</label>
                         <input type="text" id="numeroDeCertificatMedicalValide"
-                            placeholder="numero de Certificat Medical Valide"
+                            placeholder="numero de Certificat Medical Valide" name="numeroCertificatMedical" [(ngModel)]="chauffeur.numeroCertificatMedicalValide"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                             required />
                     </div>
@@ -368,7 +371,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numéro
                             de visite Technique</label>
                         <input type="text" id="numeroVisiteTechnique"
-                            placeholder="Numéro de visite Technique"
+                            placeholder="Numéro de visite Technique" name="numeroVisiteTechnique" [(ngModel)]="chauffeur.numeroVisiteTechnique"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                             required />
                     </div>
@@ -378,7 +381,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
                             Attestation Poids lourd</label>
                         <input type="text" id="numeroVisiteTechnique"
-                            placeholder="Attestation Poids lourds"
+                            placeholder="Attestation Poids lourds" name="numeroAttestationPoidsLourd" [(ngModel)]="chauffeur.attestionCapPoidsLourd"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                             required />
                     </div>
@@ -387,7 +390,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numéro
                             Attestation de conduite defensive</label>
                         <input type="text" id="attestationDeConduiteDefensive"
-                            placeholder="Attestation Poids lourds"
+                            placeholder="Attestation conduite defensive" name="attestationconduiteDefensive" [(ngModel)]="chauffeur.attestationDeConduiteDefensive"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                             required />
                     </div>
@@ -443,7 +446,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
                             de Carte Grise</label>
                         <input type="text" id="numeroDeCarteGrise"
-                            placeholder="Numéro de carte grise"
+                            placeholder="Numéro de carte grise" name="numeroCarteGrise" [(ngModel)]="vehicule.numeroCarteGrise"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                             required />
                     </div>
@@ -452,7 +455,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type
                             de voiture</label>
                         <select
-                            id="validite"
+                            id="validite" name="typeVoiture"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                             required>
                             <option value>Sélectionnez un type</option>
@@ -465,7 +468,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
                             d'Assurance</label>
                         <input type="text" id="numeroAssurance"
-                            placeholder="Numero Assurance"
+                            placeholder="Numero Assurance" name="numeroAssurance" [(ngModel)]="vehicule.numeroAssurance"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                             required />
                     </div>
@@ -474,7 +477,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numéro
                             de visite Technique</label>
                         <input type="text" id="numeroVisiteTechnique"
-                            placeholder="Numéro de visite Technique"
+                            placeholder="Numéro de visite Technique" name="numeroVisiteTechnique" [(ngModel)]="vehicule.numeroVisiteTechnique"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                             required />
                     </div>
@@ -484,7 +487,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">numero
                             VGP Remorque</label>
                         <input type="text" id="VGPRemorque"
-                            placeholder="VGP Remorque"
+                            placeholder="VGP Remorque" name="vgpRemorque" [(ngModel)]="vehicule.vgpRemorque"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
                             required />
                     </div>
@@ -494,7 +497,7 @@
                             Equipement obligatoire</label>
                         <input
                             type="checkbox"
-                            id="paye"
+                            id="paye" name="controleEquipementObligatoirel" [(ngModel)]="vehicule.controleEquipementObligatoirel"
                             class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                     </div>
 

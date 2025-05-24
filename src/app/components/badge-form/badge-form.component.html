@@ -1,0 +1,82 @@
+
+
+<div
+    [ngClass]="{'animate-slide-in-left': currentStep === 1, 'hidden': currentStep !== 1}"
+    class="max-w-screen-xl mx-auto p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl shadow-lg">
+    <div class="grid grid-cols-3 gap-8">
+
+        <form class="col-span-3 grid grid-cols-3 gap-6">
+
+            <!-- Champ 1 -->
+            <div>
+                <label for="validite"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Validite</label>
+                <select
+                    id="validite" name="validite"
+                    [(ngModel)]="certificatControl.validite"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+                    required>
+                    <option value>Sélectionnez une Validite</option>
+                    <option value="UN_MOIS">1 MOIS</option>
+                    <option value="DEUX_MOIS">2 MOIS</option>
+                    <option value="TROIS_MOIS">3 MOIS</option>
+                    <option value="QUATRE_MOIS">4 MOIS</option>
+                    <option value="CINQ_MOIS">5 MOIS</option>
+                    <option value="SIX_MOIS">6 MOIS</option>
+                    <option value="SEPT_MOIS">7 MOIS</option>
+                    <option value="HUIT_MOIS">8 MOIS</option>
+                    <option value="NEUF_MOIS">9 MOIS</option>
+                    <option value="DIX_MOIS">10 MOIS</option>
+                    <option value="ONZE_MOIS">11 MOIS</option>
+                    <option value="DOUZE_MOIS">12 MOIS</option>
+                    <option value="TREIZE_MOIS">13 MOIS</option>
+                    <option value="QUATORZE_MOIS">14 MOIS</option>
+                    <option value="QUINZE_MOIS">15 MOIS</option>
+                    <option value="SEIZE_MOIS">16 MOIS</option>
+                    <option value="DIX_SEPT_MOIS">17 MOIS</option>
+                    <option value="DIX_HUIT_MOIS">18 MOIS</option>
+                    <option value="DIX_NEUF_MOIS">19 MOIS</option>
+                    <option value="VINGT_MOIS">20 MOIS</option>
+                    <option value="VINGT_MOIS">21 MOIS</option>
+                    <option value="VINGT_MOIS">22 MOIS</option>
+                    <option value="VINGT_MOIS">23 MOIS</option>
+                    <option value="VINGT_MOIS">24 MOIS</option>
+                </select>
+            </div>
+
+            <!-- Champ 3 -->
+            <div>
+                <label for="numeroRapport"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
+                    du Parc</label>
+                <input type="text" id="numeroRapport"
+                    placeholder="numero Rapport" name="numeroDuRapport"
+                    [(ngModel)]="certificatControl.numeroParc"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+            </div>
+            <div>
+                <label for="fonctionnementEtat"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Inspection
+                    Concerné</label>
+                <select
+                    id="fonctionnementEtat" name="etatFonctionnement"
+                    [(ngModel)]="certificatControl.essaiFonctionnementList"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+                    required>
+                    <option value>Sélectionnez une Inspection de
+                        control</option>
+                </select>
+            </div>
+
+            <div class="col-start-3">
+                <button type="button"
+                    class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">
+
+                    Enregistrer
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

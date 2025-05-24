@@ -9,6 +9,9 @@ export class FormInspectionComponent {
 
    currentStep = 1;
    isChauffeurModal=true
+   certificatControl:any={}
+   chauffeur:any={}
+   vehicule:any={}
   nextStep() {
     if (this.currentStep < 2) {
       this.currentStep++;
