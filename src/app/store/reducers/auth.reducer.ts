@@ -1,20 +1,29 @@
 import { createReducer, on } from "@ngrx/store";
-import { login, loginFailure, loginSuccess } from "../actions/auth.action";
+import { clearAuthError, login, loginFailure, loginSuccess } from "../actions/auth.action";
 
-export interface AuthRequest{
-    username:string;
-    motDePasse:string;
+export interface AuthRequest {
+  username: string;
+  motDePasse: string;
 }
 
-export interface AuthState{
-    user:AuthRequest;
+export interface AuthState {
+  user: AuthRequest;
+  error: string | null;
 }
 
-const intialState:ReadonlyArray<AuthState>=[]
+const intialState: AuthState = {
+  user: {
+    username: "",
+    motDePasse: ""
+  },
+  error: null,
 
-export const authReducer=createReducer(
-    intialState,
-    on(login,(state)=>({...state})),
-    on(loginSuccess,(state,responseDAO)=>({...state,responseDAO})),
-    on(loginFailure,(state,{error})=> ({...state,error}))
+};
+
+export const authReducer = createReducer(
+  intialState,
+  on(login, (state) => ({ ...state })),
+  on(loginSuccess, (state, responseDAO) => ({ ...state, responseDAO })),
+  on(loginFailure, (state, { error }) => ({ ...state, error })),
+  on(clearAuthError, (state) => ({ ...state }))
 )

@@ -6,14 +6,54 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
 
-  constructor(private httpClient:HttpClient) { }
-  baseUrl:string="http://localhost"
+  constructor(private httpClient: HttpClient) { }
+  baseUrl: string = "http://localhost"
 
-  loadData(element:string){
-    return this.httpClient.get<any>(this.baseUrl+":8080/OPRAG/v0/endpoint/"+element+"/all");
+  loadData(element: string) {
+    return this.httpClient.get<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/" + element + "/all");
   }
 
-  createObject(element:string,obj:any){
-    return this.httpClient.post<any>(this.baseUrl+":8080/OPRAG/v0/endpoint/"+element+"create",obj);
+  createObject(element: string, obj: any) {
+
+    return this.httpClient.post<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/" + element + "/create", obj);
+  }
+
+  createReport(reportFormat: string, certificatControl: string) {
+    return this.httpClient.post<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Reports/exportReport/" + reportFormat + "/" + certificatControl, null, { responseType: 'blob' as 'json' })
+      .subscribe((blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'inspectionFiche.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      });
+
+  }
+
+  createQrCodeImage(numero: string) {
+    return this.httpClient.post<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Badges/getQrCode/" + numero, "", { responseType: 'blob' as 'json' })
+      .subscribe((blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'qrCodeImage.png';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      });
+  }
+
+  countAllPerDay() {
+    return this.httpClient.get<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Badges/countAllPerDay")
+  }
+
+  usersPerInspectionName(inspectionName: string) {
+    return this.httpClient.get<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Utilisateurs/findAllByInspectionNom/" + inspectionName)
+  }
+  countAllPerInterval(dateDebut: string, dateFin: string) {
+    return this.httpClient.get<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Badges/countAllPerIntervalDays/" + dateDebut + "/" + dateFin)
+  }
+  registerChauffeur(chauffeurRequest: any) {
+    return this.httpClient.post<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Chauffeurs/register", chauffeurRequest)
   }
 }

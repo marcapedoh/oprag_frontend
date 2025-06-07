@@ -15,7 +15,10 @@ export class BadgeListComponent implements OnInit {
   constructor(private store: Store<BadgeState>) {
     this.badges$ = this.store.pipe(select(selectAllBadges))
   }
-  columns: string[] = ["id","numero","validite","numeroParc","inspecteur.nom","codeQrString"]
+  columns: any = {
+    columnsName: ["id", "numero", "validite", "numeroParc", "inspecteur.nom"],
+    field: ["#", "numero", "validite", "Numero Parc", "NomInspecteur"]
+  }
   badges = []
   ngOnInit(): void {
     this.badges$.subscribe((badges: any) => {

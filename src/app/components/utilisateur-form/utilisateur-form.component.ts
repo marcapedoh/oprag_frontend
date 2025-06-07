@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./utilisateur-form.component.css']
 })
 export class UtilisateurFormComponent {
-currentStep = 1;
+  currentStep = 1;
   isChauffeurModal = true
   certificatControl: any = {}
   chauffeur: any = {}

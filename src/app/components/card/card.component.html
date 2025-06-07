@@ -1,0 +1,50 @@
+<div class="printable">
+
+  <div class="card-wrapper">
+
+    <!-- RECTO -->
+    <div class="card" #recto>
+      <div class="title"><strong>CARTE D'INSPECTION</strong></div>
+      <div class="subtitle"><strong>OPRAG / CIMFEP</strong></div>
+
+      <div class="content">
+        <div class="info">
+          <div><label>N° :</label> {{badge.numero}}</div>
+          <div><label>VALIDITÉ :</label> {{badge.validite}}</div>
+          <div><label>ID PARC :</label> {{badge.numeroParc}}</div>
+          <div><label>ENTREPRISE :</label> {{badge.inspecteur.userName}}</div>
+          <div><label>CODE INSPECTEUR :</label> {{
+            badge.inspecteur.codeInspecteur?badge.inspecteur.codeInspecteur:""
+            }}</div>
+        </div>
+
+        <div class="partners">
+          PARTENAIRES TECHNIQUES<br>
+          <strong>{{ badge.inspecteur.inspection.nom }}</strong><br>
+        </div>
+      </div>
+
+      <div class="qr">
+        <img [src]="imageUrl" alt="QR Code">
+      </div>
+    </div>
+
+    <!-- VERSO -->
+    <div class="card" #verso>
+      <div class="verso">
+        <h4>CARTE ÉDITÉE PAR</h4>
+        <b>© GDT - GABON DIGITAL TRANSPORTS<br>
+          GRPE PROLAB AFRIK</b>
+        <p>
+          Usage exclusif aux zones portuaires autorisées.<br>
+          Ne pas plier. Ne pas exposer à une source magnétique.
+        </p>
+        <small>https://prolabafrik.com</small>
+      </div>
+    </div>
+
+  </div>
+</div>
+<input class="print-button" type="file" (change)="onFileSelected($event)"
+  accept="image/*" /> <br>
+<button class="print-button" (click)="printCard()">Imprimer la carte</button>

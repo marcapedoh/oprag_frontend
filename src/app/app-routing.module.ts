@@ -8,6 +8,11 @@ import { BadgeListComponent } from './components/badge-list/badge-list.component
 import { BadgeFormComponent } from './components/badge-form/badge-form.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { UtilisateurFormComponent } from './components/utilisateur-form/utilisateur-form.component';
+import { CardComponent } from './components/card/card.component';
+import { guardGuard } from './guard/guard.guard';
+import { ChartsComponent } from './components/chart/chart.component';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { TechnicalPartenersComponent } from './components/technical-parteners/technical-parteners.component';
 
 const routes: Routes = [
   {
@@ -17,31 +22,48 @@ const routes: Routes = [
   {
     path: "",
     component: HomeComponent,
+    canActivate: [guardGuard],
     children: [
       {
         path: "inspecter",
         component: FormInspectionComponent
       },
       {
-        path:"inspection/collection",
-        component:InspectionsVehiculeListComponent
+        path: "inspection/collection",
+        component: InspectionsVehiculeListComponent
       },
       {
-        path:'badge/collection',
-        component:BadgeListComponent
+        path: 'badge/collection',
+        component: BadgeListComponent
       },
       {
-        path:'badge/ajout',
-        component:BadgeFormComponent
+        path: 'badge/ajout',
+        component: BadgeFormComponent
       },
       {
-        path:'profil',
-        component:ProfilComponent
+        path: 'profil',
+        component: ProfilComponent
       },
       {
-        path:'utilisateurs/ajout',
-        component:UtilisateurFormComponent
-      }
+        path: 'badge/:id',
+        component: CardComponent
+      },
+      {
+        path: 'utilisateurs/ajout',
+        component: UtilisateurFormComponent
+      },
+      {
+        path: 'vueEnsemble',
+        component: ChartsComponent
+      },
+      {
+        path: 'users',
+        component: ManageUsersComponent
+      },
+      {
+        path: 'partenaires-technique',
+        component: TechnicalPartenersComponent
+      },
     ]
   },
 

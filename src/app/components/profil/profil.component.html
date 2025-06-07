@@ -1,11 +1,14 @@
 <div class=" bg-white/80 dark:bg-gray-800/80 backdrop-blur-md py-10 px-4">
-  <div class="max-w-4xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-md rounded-2xl p-8">
+  <div
+    class="max-w-4xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-md rounded-2xl p-8">
     <div class="flex items-center gap-6">
-      <div class="w-24 h-24 rounded-full bg-white/70 dark:bg-gray-700/80 flex items-center justify-center text-white text-3xl">
+      <div
+        class="w-24 h-24 rounded-full bg-white/70 dark:bg-gray-700/80 flex items-center justify-center text-white text-3xl">
         {{ utilisateur.nom[0].toUpperCase() }}{{ utilisateur.prenom[0] }}
       </div>
       <div>
-        <h2 class="text-2xl font-bold text-white">{{ utilisateur.nom }} {{ utilisateur.prenom }}</h2>
+        <h2 class="text-2xl font-bold text-white">{{ utilisateur.nom }} {{
+          utilisateur.prenom }}</h2>
         <p class="text-white">Role: {{ utilisateur.role }}</p>
       </div>
     </div>
@@ -28,8 +31,7 @@
           </span>
         </p>
       </div>
-      
-      
+
       <div>
         <label class="block text-white">Signature</label>
         <p class="mt-1 text-white font-medium">
@@ -42,6 +44,11 @@
           {{ utilisateur.inspection?.nom ?? 'Aucune' }}
         </p>
       </div>
+
     </div>
+    <button type="submit"
+      class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">
+      Modifier
+    </button>
   </div>
 </div>

@@ -9,23 +9,27 @@ import { selectAllCertificatControls } from 'src/app/store/selector/certificatCo
   templateUrl: './inspections-vehicule-list.component.html',
   styleUrls: ['./inspections-vehicule-list.component.css']
 })
-export class InspectionsVehiculeListComponent implements OnInit{
+export class InspectionsVehiculeListComponent implements OnInit {
 
-  inpectionsVehicule$:Observable<ReadonlyArray<any>>;
+  inpectionsVehicule$: Observable<ReadonlyArray<any>>;
 
-  constructor(private store: Store<CertificatControlState>){
-    this.inpectionsVehicule$=this.store.pipe(select(selectAllCertificatControls))
+  constructor(private store: Store<CertificatControlState>) {
+    this.inpectionsVehicule$ = this.store.pipe(select(selectAllCertificatControls))
   }
-  columns:string[]=["id","site","societe","numeroRapport","essaiFonctionnementList","description","validite","utilisateur.nom"]
-  certificatControls=[]
+  columns: any =
+    {
+      columnsName: ["id", "creationDate", "societe", "numeroRapport", "localisationCertificationFait", "description", "validite", "utilisateur.nom"],
+      field: ["#", "Date Creation", "Societe", "Numero Rapport", "Localisation", "Description", "validite", "Inspecteur"]
+    }
+  certificatControls = []
   ngOnInit(): void {
-      this.inpectionsVehicule$.subscribe((certificatControl:any) => {
-        console.log(certificatControl.certificatControls)
-            if (Array.isArray(certificatControl.certificatControls) && certificatControl.certificatControls.length > 0) {
-                this.certificatControls=certificatControl.certificatControls
-            } else {
-                console.log('No certificatControl found or still loading.');
-            }
-        });
+    this.inpectionsVehicule$.subscribe((certificatControl: any) => {
+      console.log(certificatControl.certificatControls)
+      if (Array.isArray(certificatControl.certificatControls) && certificatControl.certificatControls.length > 0) {
+        this.certificatControls = certificatControl.certificatControls
+      } else {
+        console.log('No certificatControl found or still loading.');
+      }
+    });
   }
 }

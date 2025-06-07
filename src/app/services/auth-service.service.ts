@@ -7,16 +7,16 @@ import { tap } from 'rxjs';
 })
 export class AuthServiceService {
 
-  constructor(private httpClient:HttpClient) { }
-  baseUrl:string="http://localhost"
+  constructor(private httpClient: HttpClient) { }
+  baseUrl: string = "http://localhost"
 
-  login(authRequest:any){
-    console.log(authRequest)
-    return this.httpClient.post(this.baseUrl+":8080/OPRAG/v0/endpoint/auth/authenticate",{username:authRequest.username,motDePasse:authRequest.motDePasse})
+  login(authRequest: any) {
+
+    return this.httpClient.post(this.baseUrl + ":8080/OPRAG/v0/endpoint/auth/authenticate", { username: authRequest.username, motDePasse: authRequest.motDePasse })
   }
 
-  register(registerRequest:any){
-    return this.httpClient.post(this.baseUrl+":8080/OPRAG/v0/endpoint/auth/register",registerRequest)
+  register(registerRequest: any) {
+    return this.httpClient.post(this.baseUrl + ":8080/OPRAG/v0/endpoint/auth/register", registerRequest)
   }
 
 }

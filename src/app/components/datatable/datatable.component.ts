@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, map, interval, take, tap } from 'rxjs';
 
 @Component({
@@ -8,27 +9,29 @@ import { Subject, Subscription, debounceTime, distinctUntilChanged, map, interva
 })
 export class DatatableComponent {
   @Input() data!: Array<any>;
-  @Input() columns!: Array<any>
+  @Input() columns!: any
   @Input() dataType!: string;
-  @Input() routeNavigate!:string;
+  @Input() routeNavigate!: string;
   filteredData: any = []
-  numberData: number = 20
+  numberData: number = 10
   inputSubject = new Subject<string>();
   subscription!: Subscription;
   filteredElements: any = []
   testSubscription!: Subscription;
-  totalPages: number=0;
-  itemsPerPage: any=25;
-  currentPage: number=0;
-  
+  totalPages: number = 0;
+  itemsPerPage: any = 2;
+  currentPage: number = 0;
+
+  constructor(private router: Router) { }
+
   ngOnInit(): void {
     setTimeout(() => {
       if (this.data && this.data.length > 0) {
         this.updateNumber()
       }
-      
+
     }, 1500)
-    
+
     this.subscription = this.inputSubject.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -43,7 +46,7 @@ export class DatatableComponent {
             item.numeroRapport.toLowerCase().includes(lowerSearch) ||
             item.description.toString().includes(lowerSearch) ||
             item.validite.toString().includes(lowerSearch) ||
-            item.utilisateur.nom.toString().includes(lowerSearch)        
+            item.utilisateur.nom.toString().includes(lowerSearch)
 
           );
         } else if (this.dataType === "Badges") {
@@ -52,7 +55,7 @@ export class DatatableComponent {
             item.validite.toLowerCase().includes(lowerSearch) ||
             item.numeroParc.toLowerCase().includes(lowerSearch) ||
             item.inspecteur.nom.toString().includes(lowerSearch) ||
-            item.codeQrString.toString().includes(lowerSearch) 
+            item.codeQrString.toString().includes(lowerSearch)
           );
         }
 
@@ -63,18 +66,27 @@ export class DatatableComponent {
     });
 
   }
-
   getNestedValue(obj: any, path: string): any {
-  return path.split('.').reduce((acc, part) => acc?.[part], obj);
-}
+    const value = path.split('.').reduce((acc, part) => acc?.[part], obj);
 
-  
+    if (!value) return value;
+
+    if (path.toLowerCase().includes('creationdate')) {
+      // Convertit la chaîne Instant en date lisible (yyyy-mm-dd)
+      const date = new Date(value);
+      return date.toLocaleDateString('fr-CA'); // format ISO : yyyy-mm-dd
+    }
+
+    return value;
+  }
+
+
   ngOnDestroy(): void {
     if (this.testSubscription) {
       this.testSubscription.unsubscribe();
     }
   }
-  
+
   onInputChange(event: any) {
     this.inputSubject.next(event.target.value);
   }
@@ -103,5 +115,9 @@ export class DatatableComponent {
       this.currentPage = page;
       this.updatePagination();
     }
+  }
+
+  navigateToCardForPrint(id: number) {
+    this.router.navigate(["badge", id])
   }
 }
