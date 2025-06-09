@@ -40,6 +40,7 @@ import { ManageUsersComponent } from './components/manage-users/manage-users.com
 import { TechnicalPartenersComponent } from './components/technical-parteners/technical-parteners.component';
 import { userPerInspectionReducer } from './store/reducers/user-per-inspection.reducer';
 import { UsersPerInspectionEffect } from './store/effects/users-per-inspection.effect';
+import { UserStatsComponent } from './components/user-stats/user-stats.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { UsersPerInspectionEffect } from './store/effects/users-per-inspection.e
     CardComponent,
     ChartsComponent,
     ManageUsersComponent,
-    TechnicalPartenersComponent
+    TechnicalPartenersComponent,
+    UserStatsComponent
   ],
   imports: [
     BrowserModule,

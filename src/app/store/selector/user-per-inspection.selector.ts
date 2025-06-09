@@ -1,8 +1,8 @@
 import { createSelector } from "@ngrx/store";
-import { UsersPerInspection } from "../reducers/user-per-inspection.reducer";
+import { UsersPerInspectionState } from "../reducers/user-per-inspection.reducer";
 
 export const selectAllUserPerInspection = createSelector(
-  (state: UsersPerInspection) => state.usersPerInspection,
-  (usersPerInspection: ReadonlyArray<any>) => usersPerInspection
+  (state: UsersPerInspectionState) => state.usersInspection,
+  (usersInspection: ReadonlyArray<any>) => usersInspection,
 )
 

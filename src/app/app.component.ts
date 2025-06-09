@@ -11,6 +11,8 @@ import { getAllChartObject } from './store/actions/chartObject.action';
 import { ToastState } from './store/reducers/toast.reducer';
 import { selectToast } from './store/selector/toast.selector';
 import { hideToast } from './store/actions/toast.action';
+import { getAllUserPerInspectionName } from './store/actions/user-per-inspection.action';
+import { UsersPerInspectionState } from './store/reducers/user-per-inspection.reducer';
 
 @Component({
   selector: 'app-root',
@@ -20,13 +22,14 @@ import { hideToast } from './store/actions/toast.action';
 export class AppComponent implements OnInit {
 
   authError$: Observable<string | null>;
-  constructor(private store: Store<CertificatControlState>, private storeError: Store<AuthState>, private storeChart: Store<ChartBadgesObjectState>) {
+  constructor(private store: Store<CertificatControlState>, private storeError: Store<AuthState>, private storeChart: Store<ChartBadgesObjectState>, private storeUsersPerInspection: Store<UsersPerInspectionState>) {
     this.authError$ = this.store.select(selectAuthError);
   }
   ngOnInit(): void {
     this.store.dispatch(getAllCertificatControl("CertificatControls"))
     this.store.dispatch(getAllBadge("Badges"))
     this.storeChart.dispatch(getAllChartObject())
+    this.storeUsersPerInspection.dispatch(getAllUserPerInspectionName(localStorage.getItem("InspectionName")!))
   }
 
 

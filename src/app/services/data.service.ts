@@ -50,6 +50,17 @@ export class DataService {
   usersPerInspectionName(inspectionName: string) {
     return this.httpClient.get<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Utilisateurs/findAllByInspectionNom/" + inspectionName)
   }
+
+  lastUpdateDate(userId: number) {
+    return this.httpClient.get<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Utilisateurs/lastOperationDate/" + userId)
+  }
+
+  loadBadgeReport(inspecteurId: number) {
+    return this.httpClient.get<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Badges/findAllPerInspecteurId/" + inspecteurId)
+  }
+  loadCertificatReport(userId: number) {
+    return this.httpClient.get<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/CertificatControls/findCertificatControlByUtilisateurId/" + userId)
+  }
   countAllPerInterval(dateDebut: string, dateFin: string) {
     return this.httpClient.get<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Badges/countAllPerIntervalDays/" + dateDebut + "/" + dateFin)
   }

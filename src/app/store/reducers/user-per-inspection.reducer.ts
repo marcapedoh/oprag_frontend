@@ -1,8 +1,9 @@
 import { createReducer, on } from "@ngrx/store";
-import { getAllUserPerInspectionName, getAllUserPerInspectionNameFailure, getAllUserPerInspectionNameSuccess } from "../actions/user-per-inspection.action";
+import { getAllUserPerInspectionName, getAllUserPerInspectionNameFailure, getAllUserPerInspectionNameSuccess, getLastOperationDate, getLastOperationDateFailure, getLastOperationDateSuccess, getUserRapport, getUserRapportCertificat, getUserRapportCertificatSuccess, getUserRapportFailure, getUserRapportSuccess } from "../actions/user-per-inspection.action";
 
-export interface UsersPerInspection {
-  usersPerInspection: ReadonlyArray<any>;
+export interface UsersPerInspectionState {
+  usersInspection: ReadonlyArray<any>;
+  lastUpdateDate: any;
 }
 
 
@@ -12,5 +13,13 @@ export const userPerInspectionReducer = createReducer(
   initialState,
   on(getAllUserPerInspectionName, (state) => ({ ...state })),
   on(getAllUserPerInspectionNameSuccess, (state, { usersInspection }) => ({ ...state, usersInspection })),
-  on(getAllUserPerInspectionNameFailure, (state, { error }) => ({ ...state, error }))
+  on(getAllUserPerInspectionNameFailure, (state, { error }) => ({ ...state, error })),
+  on(getLastOperationDate, (state) => ({ ...state })),
+  on(getLastOperationDateSuccess, (state, { responseDAO }) => ({ ...state, responseDAO })),
+  on(getLastOperationDateFailure, (state, { error }) => ({ ...state, error })),
+  on(getUserRapport, (state) => ({ ...state })),
+  on(getUserRapportSuccess, (state, { rapportBadge }) => ({ ...state, rapportBadge })),
+  on(getUserRapportFailure, (state, { error }) => ({ ...state, error })),
+  on(getUserRapportCertificat, (state) => ({ ...state })),
+  on(getUserRapportCertificatSuccess, (state, { certificatRapport }) => ({ ...state, certificatRapport }))
 )
