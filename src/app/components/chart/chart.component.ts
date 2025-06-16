@@ -189,7 +189,7 @@ export class ChartsComponent implements OnInit {
         };
 
         this.totalBadgesActive = this.badges.reduce((count: any, badge: any) => badge.active === true ? count + 1 : count, 0)
-
+        console.log(this.badges)
       } else {
         console.log('No badges found or still loading.');
       }

@@ -12,9 +12,10 @@
           <div><label>N° :</label> {{badge.numero}}</div>
           <div><label>VALIDITÉ :</label> {{badge.validite}}</div>
           <div><label>ID PARC :</label> {{badge.numeroParc}}</div>
-          <div><label>ENTREPRISE :</label> {{badge.inspecteur.userName}}</div>
-          <div><label>CODE INSPECTEUR :</label> {{
-            badge.inspecteur.codeInspecteur?badge.inspecteur.codeInspecteur:""
+          <div><label>ENTREPRISE :</label>
+            {{badge.inspecteur.inspection.nom}}</div>
+          <div><label>CODE INSPECTION :</label> {{
+            badge.inspecteur.inspection.codeInspection?badge.inspecteur.inspection.codeInspection:""
             }}</div>
         </div>
 

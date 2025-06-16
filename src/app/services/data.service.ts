@@ -32,7 +32,7 @@ export class DataService {
   }
 
   createQrCodeImage(numero: string) {
-    return this.httpClient.post<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Badges/getQrCode/" + numero, "", { responseType: 'blob' as 'json' })
+    return this.httpClient.get<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Badges/getQrCode/" + numero, { responseType: 'blob' as 'json' })
       .subscribe((blob: Blob) => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
