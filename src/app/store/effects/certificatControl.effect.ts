@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { DataService } from "src/app/services/data.service";
-import { createCertificatControl, createCertificatControlFailure, createCertificatControlSuccess, getAllCertificatControl, getAllCertificatControlFailure, getAllCertificatControlSuccess, visualiserCertificatControl, visualiserCertificatControlFailure, visualiserCertificatControlSuccess } from "../actions/certificatControl.action";
+import { createCertificatControl, createCertificatControlFailure, createCertificatControlSuccess, deleteCertificatControl, deleteCertificatControlFailure, deleteCertificatControlSuccess, generateCertificatControl, getAllCertificatControl, getAllCertificatControlFailure, getAllCertificatControlSuccess, visualiserCertificatControl, visualiserCertificatControlFailure, visualiserCertificatControlSuccess } from "../actions/certificatControl.action";
 import { catchError, concatMap, exhaustMap, map, of, switchMap, tap } from "rxjs";
 import { Router } from "@angular/router";
 import { showToast } from "../actions/toast.action";
@@ -32,6 +32,32 @@ export class CertificatControlEffects {
       })
   ))
 
+  generateCertificate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(generateCertificatControl),
+      concatMap(({ certificatControlId }) =>
+        this.dataService.createReportWithNgrx("pdf", certificatControlId).pipe(
+          tap((blob: Blob) => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'inspectionFiche.pdf';
+            a.click();
+            window.URL.revokeObjectURL(url);
+          })
+        )
+      )
+    ),
+  );
+
+  deleteCertificatControl$ = createEffect(() => this.actions$.pipe(
+    ofType(deleteCertificatControl),
+    concatMap(({ certificatControlId }) =>
+      this.dataService.deleteCertificatControl(certificatControlId).pipe(
+        map((responseDAO) => deleteCertificatControlSuccess()),
+        catchError((error: string) => of(deleteCertificatControlFailure(error)))
+      ))
+  ))
   visualiserCertificatControl$ = createEffect(() => this.actions$.pipe(
     ofType(visualiserCertificatControl),
     concatMap(({ certificatControl }) =>

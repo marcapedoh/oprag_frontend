@@ -18,7 +18,7 @@ export class DataService {
     return this.httpClient.post<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/" + element + "/create", obj);
   }
 
-  createReport(reportFormat: string, certificatControl: string) {
+  createReport(reportFormat: string, certificatControl: number) {
     return this.httpClient.post<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Reports/exportReport/" + reportFormat + "/" + certificatControl, null, { responseType: 'blob' as 'json' })
       .subscribe((blob: Blob) => {
         const url = window.URL.createObjectURL(blob);
@@ -29,6 +29,15 @@ export class DataService {
         window.URL.revokeObjectURL(url);
       });
 
+  }
+  createReportWithNgrx(reportFormat: string, certificatControl: number) {
+    return this.httpClient.post<any>(this.baseUrl + ":8080/OPRAG/v0/endpoint/Reports/exportReport/" + reportFormat + "/" + certificatControl, null, { responseType: 'blob' as 'json' })
+
+
+  }
+
+  deleteCertificatControl(certificatControlId: number) {
+    return this.httpClient.delete(this.baseUrl + ":8080/OPRAG/v0/endpoint/CertificatControls/delete/" + certificatControlId)
   }
 
   createQrCodeImage(numero: string) {

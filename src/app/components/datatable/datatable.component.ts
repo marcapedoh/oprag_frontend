@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, map, interval, take, tap } from 'rxjs';
+import { deleteCertificatControl, generateCertificatControl } from 'src/app/store/actions/certificatControl.action';
+import { showToast } from 'src/app/store/actions/toast.action';
+import { CertificatControlState } from 'src/app/store/reducers/certificatControl.reducer';
 
 @Component({
   selector: 'app-datatable',
@@ -16,17 +20,21 @@ export class DatatableComponent {
   numberData: number = 10
   inputSubject = new Subject<string>();
   subscription!: Subscription;
+  showToastTest: boolean = false
   filteredElements: any = []
   testSubscription!: Subscription;
   totalPages: number = 0;
   itemsPerPage: any = 2;
   currentPage: number = 0;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private store: Store<CertificatControlState>) { }
 
   ngOnInit(): void {
+
     setTimeout(() => {
       if (this.data && this.data.length > 0) {
+        this.data = this.data.filter(data => data.deleted !== true)
+        console.log(this.data)
         this.updateNumber()
       }
 
@@ -117,7 +125,30 @@ export class DatatableComponent {
     }
   }
 
+  generateReportAction(certificatControlId: number) {
+    this.store.dispatch(generateCertificatControl(certificatControlId))
+  }
+
+  deleteCerticatControl(certificatControlId: number) {
+    this.store.dispatch(deleteCertificatControl(certificatControlId))
+    this.showToastTest = true;
+    this.data = this.data.filter(data => data.id != certificatControlId)
+    setTimeout(() => {
+      this.showToastTest = false
+    }, 1500)
+  }
+
+  updateBadge(certificatControlId: number) {
+    this.router.navigate(["badge/ajout", certificatControlId])
+  }
   navigateToCardForPrint(id: number) {
     this.router.navigate(["badge", id])
+  }
+  navigateToCerticatControlFormUpdate(id: number) {
+
+    this.router.navigate(["inspecter", id])
+  }
+  deleteBadge(badgeId: number) {
+
   }
 }

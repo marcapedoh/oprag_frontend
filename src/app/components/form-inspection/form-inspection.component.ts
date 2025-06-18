@@ -1,12 +1,15 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { createCertificatControl, visualiserCertificatControl } from 'src/app/store/actions/certificatControl.action';
 import { createChauffeur } from 'src/app/store/actions/chauffeur.action';
 import { hideToast } from 'src/app/store/actions/toast.action';
 import { createVehicule } from 'src/app/store/actions/vehicule.action';
+import { CertificatControlState } from 'src/app/store/reducers/certificatControl.reducer';
 import { ToastState } from 'src/app/store/reducers/toast.reducer';
 import { selectAuthError } from 'src/app/store/selector/auth.selector';
+import { selectAllCertificatControls } from 'src/app/store/selector/certificatControl.selector';
 import { selectToast } from 'src/app/store/selector/toast.selector';
 
 declare const Modal: any;
@@ -26,13 +29,15 @@ export class FormInspectionComponent implements OnInit {
       typeVehicules: []
     }
   }
+  inpectionsVehicule$: Observable<ReadonlyArray<any>>;
   chauffeurStored: any = {}
   vehiculeStored: any = {}
   selectedOption: string = '';
   selectedTypeVoitureOption: string = ''
   toast$: Observable<ToastState>;
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<any>, private storeCertificatControl: Store<CertificatControlState>, private activatedRoute: ActivatedRoute) {
     this.toast$ = this.store.select(selectToast);
+    this.inpectionsVehicule$ = this.storeCertificatControl.pipe(select(selectAllCertificatControls))
   }
   toast: any = {}
 
@@ -48,6 +53,23 @@ export class FormInspectionComponent implements OnInit {
     } else {
       sessionStorage.removeItem('alreadyReloaded'); // nettoyage pour les futures visites
     }
+    this.inpectionsVehicule$.subscribe((certificatControl: any) => {
+      console.log(certificatControl)
+      if (Array.isArray(certificatControl.certificatControls) && certificatControl.certificatControls.length > 0) {
+
+        this.activatedRoute.paramMap.subscribe((param) => {
+          const certificatControlId = Number(param.get('id'));
+
+          if (certificatControlId) {
+            this.certificatControl = certificatControl.certificatControls.find((certificatControl: any) => certificatControl.id === certificatControlId)
+            this.chauffeurStored = this.certificatControl.chauffeur
+            this.vehiculeStored = this.certificatControl.vehicule
+          }
+
+        })
+      }
+    });
+
   }
   nextStep() {
     if (this.currentStep < 2) {

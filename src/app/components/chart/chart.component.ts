@@ -189,7 +189,7 @@ export class ChartsComponent implements OnInit {
         };
 
         this.totalBadgesActive = this.badges.reduce((count: any, badge: any) => badge.active === true ? count + 1 : count, 0)
-        console.log(this.badges)
+
       } else {
         console.log('No badges found or still loading.');
       }
@@ -197,7 +197,7 @@ export class ChartsComponent implements OnInit {
 
     this.inpectionsVehicule$.subscribe((certificatControl: any) => {
       if (Array.isArray(certificatControl.certificatControls) && certificatControl.certificatControls.length > 0) {
-        this.certificatControls = certificatControl.certificatControls
+        this.certificatControls = certificatControl.certificatControls.filter((certificatControl: any) => certificatControl.deleted == false)
       } else {
         console.log('No certificatControl found or still loading.');
       }

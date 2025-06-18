@@ -29,6 +29,10 @@ const routes: Routes = [
         component: FormInspectionComponent
       },
       {
+        path: "inspecter/:id",
+        component: FormInspectionComponent
+      },
+      {
         path: "inspection/collection",
         component: InspectionsVehiculeListComponent
       },
@@ -38,6 +42,10 @@ const routes: Routes = [
       },
       {
         path: 'badge/ajout',
+        component: BadgeFormComponent
+      },
+      {
+        path: 'badge/ajout/:id',
         component: BadgeFormComponent
       },
       {
