@@ -138,6 +138,10 @@ export class DatatableComponent {
     }, 1500)
   }
 
+  navigate() {
+    this.router.navigate([this.routeNavigate])
+  }
+
   updateBadge(certificatControlId: number) {
     this.router.navigate(["badge/ajout", certificatControlId])
   }
