@@ -22,8 +22,14 @@ const routes: Routes = [
   {
     path: "",
     component: HomeComponent,
+
     canActivate: [guardGuard],
     children: [
+      {
+        path: '',
+        redirectTo: 'vueEnsemble',
+        pathMatch: 'full'
+      },
       {
         path: "inspecter",
         component: FormInspectionComponent

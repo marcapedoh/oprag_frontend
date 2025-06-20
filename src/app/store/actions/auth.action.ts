@@ -6,7 +6,7 @@ export const loginSuccess = createAction("[Auth] loginSuccess", (responseDAO: an
 export const loginFailure = createAction("[Auth] loginFailure", (error: string) => ({ error }))
 export const clearAuthError = createAction('[Auth] Clear Error');
 
-export const registerUser = createAction("[RegisterUser] Register User", (registerRequest: any) => (registerRequest));
+export const registerUser = createAction("[RegisterUser] Register User", (registerRequest: any) => ({ registerRequest }));
 export const registerUserSuccess = createAction("[RegisterUser] Register User Success", (authenticationResponse: any) => ({ authenticationResponse }))
 export const registerUserFailure = createAction("[RegisterUser] Register User Failure", (error: string) => ({ error }))
 

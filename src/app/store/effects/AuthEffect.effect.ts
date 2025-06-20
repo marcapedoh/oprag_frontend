@@ -22,6 +22,7 @@ export class AuthEffects {
           localStorage.setItem("UserROle", action.responseDAO.role)
           localStorage.setItem("OptNumber", action.responseDAO.otpNumber)
           localStorage.setItem("InspectionName", action.responseDAO.inspectionName)
+          localStorage.setItem("InspectionId", action.responseDAO.inspectionId)
           this.router.navigate(["/inspection/collection"])
         }
       })
@@ -30,13 +31,13 @@ export class AuthEffects {
 
   registerUser$ = createEffect(() => this.actions$.pipe(
     ofType(registerUser),
-    concatMap((registrationRequest) =>
-      this.authService.register(registrationRequest).pipe(
+    concatMap(({ registerRequest }) =>
+      this.authService.register(registerRequest).pipe(
         map((responseDAO) => registerUserSuccess(responseDAO)),
         catchError((error: string) => of(registerUserFailure(error)))
       )), tap((action) => {
         if (action.type === "[RegisterUser] Register User Success") {
-          this.router.navigate(["inpection/collection"])
+          this.router.navigate(["users"])
         }
       })
   ))

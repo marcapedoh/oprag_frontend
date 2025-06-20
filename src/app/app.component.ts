@@ -13,6 +13,7 @@ import { selectToast } from './store/selector/toast.selector';
 import { hideToast } from './store/actions/toast.action';
 import { getAllUserPerInspectionName } from './store/actions/user-per-inspection.action';
 import { UsersPerInspectionState } from './store/reducers/user-per-inspection.reducer';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
     this.authError$ = this.store.select(selectAuthError);
   }
   ngOnInit(): void {
+    initFlowbite();
     this.store.dispatch(getAllCertificatControl("CertificatControls"))
     this.store.dispatch(getAllBadge("Badges"))
     this.storeChart.dispatch(getAllChartObject())

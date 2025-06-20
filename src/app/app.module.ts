@@ -75,11 +75,7 @@ import { UserStatsComponent } from './components/user-stats/user-stats.component
 
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: InterceptInterceptor,
-    //   multi: true,
-    // },
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptInterceptor,

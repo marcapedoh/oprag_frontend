@@ -65,7 +65,7 @@ export class ChartsComponent implements OnInit {
       annotations: {
         points: [
           {
-            x: "Bananas",
+            x: "xaxis",
             seriesIndex: 0,
             label: {
               borderColor: "#775DD0",
@@ -74,7 +74,7 @@ export class ChartsComponent implements OnInit {
                 color: "#fff",
                 background: "#775DD0"
               },
-              text: "Bananas are good"
+              text: "yaxis"
             }
           }
         ]
