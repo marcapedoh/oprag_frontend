@@ -60,6 +60,9 @@ export class DataService {
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/findAllByInspectionNom/" + inspectionName)
   }
 
+  findUserById(userId: number) {
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/findById/" + userId)
+  }
   lastUpdateDate(userId: number) {
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/lastOperationDate/" + userId)
   }

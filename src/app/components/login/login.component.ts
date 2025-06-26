@@ -18,6 +18,17 @@ export class LoginComponent implements OnInit {
   constructor(private store: Store<AuthState>) {
     this.authError$ = this.store.select(selectAuthError);
   }
+  currentStep = 1; // 1 = formulaire de connexion, 2 = formulaire OTP
+  otpCode = ""
+  goToStep(step: number) {
+    this.currentStep = step;
+  }
+
+  verifyOtp() {
+    // Logique de vérification du code OTP
+    console.log('Code OTP saisi:', this.otpCode);
+    // Ajoutez votre logique de vérification ici
+  }
   ngOnInit(): void {
     localStorage.removeItem("token")
   }

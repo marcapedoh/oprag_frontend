@@ -14,6 +14,8 @@ import { hideToast } from './store/actions/toast.action';
 import { getAllUserPerInspectionName } from './store/actions/user-per-inspection.action';
 import { UsersPerInspectionState } from './store/reducers/user-per-inspection.reducer';
 import { initFlowbite } from 'flowbite';
+import { userProfil } from './store/reducers/user-profil.reducer';
+import { getUserProfilInfo } from './store/actions/user-profil.action';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +25,7 @@ import { initFlowbite } from 'flowbite';
 export class AppComponent implements OnInit {
 
   authError$: Observable<string | null>;
-  constructor(private store: Store<CertificatControlState>, private storeError: Store<AuthState>, private storeChart: Store<ChartBadgesObjectState>, private storeUsersPerInspection: Store<UsersPerInspectionState>) {
+  constructor(private store: Store<CertificatControlState>, private storeError: Store<AuthState>, private storeChart: Store<ChartBadgesObjectState>, private storeUsersPerInspection: Store<UsersPerInspectionState>, private storeUserProfil: Store<userProfil>) {
     this.authError$ = this.store.select(selectAuthError);
   }
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(getAllCertificatControl("CertificatControls"))
     this.store.dispatch(getAllBadge("Badges"))
     this.storeChart.dispatch(getAllChartObject())
+    this.storeUserProfil.dispatch(getUserProfilInfo(+localStorage.getItem("ConnectedUser")!))
     this.storeUsersPerInspection.dispatch(getAllUserPerInspectionName(localStorage.getItem("InspectionName")!))
   }
 

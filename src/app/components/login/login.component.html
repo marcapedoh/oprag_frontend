@@ -1,8 +1,12 @@
 
 <div
   class="flex items-center justify-center h-screen bg-gradient-to-br from-blue-400 via-green-300 to-yellow-200 dark:from-blue-700 dark:via-green-600 dark:to-yellow-400">
-  <form
+  <!-- <form
     class="w-full max-w-sm p-6 mx-auto shadow-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl">
+    <h2
+      class="mb-6 text-2xl font-bold text-center text-gray-900 dark:text-white">Se
+      connecter</h2>
+
     <div class="mb-5">
       <label for="username"
         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">Nom
@@ -21,9 +25,87 @@
         required />
     </div>
 
+    <div class="mb-5 text-right">
+      <a href="#"
+        class="text-sm text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300">
+        Mot de passe oublié ?
+      </a>
+    </div>
+
     <button type="submit" (click)="login()"
       class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">
       Soumettre
+    </button>
+  </form> -->
+  <!-- Formulaire principal de connexion -->
+  <form
+    [ngClass]="{'animate-slide-in-right': currentStep === 1, 'hidden': currentStep !== 1}"
+    class="w-full max-w-sm p-6 mx-auto shadow-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl">
+
+    <h2
+      class="mb-6 text-2xl font-bold text-center text-gray-900 dark:text-white">Se
+      connecter</h2>
+
+    <div class="mb-5">
+      <label for="username"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">Nom
+        d'utilisateur</label>
+      <input type="text" id="username" name="username" [(ngModel)]="username"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+        placeholder="username" required />
+    </div>
+
+    <div class="mb-5">
+      <label for="password"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">Mot
+        de passe</label>
+      <input type="password" id="password" name="password"
+        [(ngModel)]="motDePasse" placeholder="password"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+        required />
+    </div>
+
+    <div class="mb-5 text-right">
+      <button type="button" (click)="goToStep(2)"
+        class="text-sm text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300">
+        Mot de passe oublié ?
+      </button>
+    </div>
+
+    <button type="submit" (click)="login()"
+      class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">
+      Soumettre
+    </button>
+  </form>
+
+  <!-- Formulaire OTP -->
+  <form
+    [ngClass]="{'animate-slide-in-right': currentStep === 2, 'hidden': currentStep !== 2}"
+    class="w-full max-w-sm p-6 mx-auto shadow-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl">
+
+    <h2
+      class="mb-6 text-2xl font-bold text-center text-gray-900 dark:text-white">Code
+      de vérification</h2>
+
+    <div class="mb-5">
+      <label for="otp"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">Code
+        OTP</label>
+      <input type="text" id="otp" name="otp" [(ngModel)]="otpCode"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+        placeholder="Entrez le code reçu" required />
+    </div>
+
+    <div class="mb-5 text-right">
+      <button type="button" (click)="goToStep(1)"
+        class="text-sm text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300">
+        Retour à la connexion
+      </button>
+    </div>
+
+    <button type="button" (click)="verifyOtp()"
+      class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">
+      Vérifier
     </button>
   </form>
 </div>
