@@ -65,6 +65,13 @@ export class DatatableComponent {
             item.inspecteur.nom.toString().includes(lowerSearch) ||
             item.codeQrString.toString().includes(lowerSearch)
           );
+        } else if (this.dataType === "Utilisateur") {
+          this.filteredElements = this.filteredData.filter((item: any) =>
+            item.nom.toLowerCase().includes(lowerSearch) ||
+            item.prenom.toLowerCase().includes(lowerSearch) ||
+            item.userName.toLowerCase().includes(lowerSearch) ||
+            item.email.includes(lowerSearch)
+          );
         }
 
         return this.filteredElements
@@ -110,7 +117,7 @@ export class DatatableComponent {
 
   updatePagination(): void {
     this.totalPages = Math.ceil(this.data.length / +this.itemsPerPage);
-
+    console.log("Total pages: ", this.totalPages)
     this.data = this.data.slice(
       (this.currentPage - 1) * +this.itemsPerPage,
       this.currentPage * +this.itemsPerPage
