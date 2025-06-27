@@ -73,11 +73,7 @@ export class DatatableComponent {
       this.filteredData = filtered;
     });
 
-    this.store.select((state: CertificatControlState) => state.certificatControls)
-      .subscribe((data: any) => {
-        console.log(data.certificatControls)
-        this.data = [...data.certificatControls];
-      });
+
   }
   getNestedValue(obj: any, path: string): any {
     const value = path.split('.').reduce((acc, part) => acc?.[part], obj);

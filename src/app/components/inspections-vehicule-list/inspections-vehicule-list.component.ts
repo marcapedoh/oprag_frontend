@@ -23,6 +23,7 @@ export class InspectionsVehiculeListComponent implements OnInit {
     }
   certificatControls = []
   ngOnInit(): void {
+
     this.inpectionsVehicule$.subscribe((certificatControl: any) => {
       console.log(certificatControl.certificatControls)
       if (Array.isArray(certificatControl.certificatControls) && certificatControl.certificatControls.length > 0) {
@@ -31,5 +32,7 @@ export class InspectionsVehiculeListComponent implements OnInit {
         console.log('No certificatControl found or still loading.');
       }
     });
+
+
   }
 }
