@@ -63,6 +63,9 @@ export class DataService {
   findUserById(userId: number) {
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/findById/" + userId)
   }
+  updateUser(user: any) {
+    return this.httpClient.post<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/auth/update", user)
+  }
   lastUpdateDate(userId: number) {
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/lastOperationDate/" + userId)
   }

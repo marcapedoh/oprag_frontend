@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { updateUserProfilInfo } from 'src/app/store/actions/user-profil.action';
 import { selectUserProfil } from 'src/app/store/selector/user-profil.selector';
 
 @Component({
@@ -10,23 +11,41 @@ import { selectUserProfil } from 'src/app/store/selector/user-profil.selector';
 })
 export class ProfilComponent implements OnInit {
   utilisateur$: Observable<any>;
+  currentStep = 1
   utilisateur: any = {
-    nom: "john",
-    prenom: "Doe",
-    userName: "john@Doe548",
-    email: "johndoe@mail.gb",
-    signature: "Signature",
-    role: "INSPECTEUR",
-    inspection: {
-      nom: "HP Services"
-    }
   }
   constructor(private store: Store<any>) {
     this.utilisateur$ = this.store.pipe(select(selectUserProfil))
   }
   ngOnInit(): void {
-    this.utilisateur$.subscribe((user: any) => {
-      console.log(user)
+    this.utilisateur$.subscribe((profil: any) => {
+      this.utilisateur = { ...profil.responseDAO }
     })
+  }
+  onSubmit() {
+    this.store.dispatch(updateUserProfilInfo(this.utilisateur))
+  }
+  fileSelected = false;
+  selectedFileName = '';
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      // Vérification de la taille (max 30MB)
+      if (file.size > 10 * 1024 * 1024) {
+        alert('Le fichier est trop volumineux (max 30MB)');
+        return;
+      }
+
+      this.selectedFileName = file.name;
+      this.fileSelected = true;
+
+      // Conversion en URL de données
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.utilisateur.signature = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 }

@@ -6,22 +6,83 @@ export interface CertificatControlState {
   error: string | null
 }
 
-export const initialCertificatControl: ReadonlyArray<any> = []
+export const initialCertificatControl: CertificatControlState = {
+  certificatControls: [],
+  error: null
+};
 export const certificatControlReducer = createReducer(
   initialCertificatControl,
   on(getAllCertificatControl, (state) => ({ ...state })),
-  on(getAllCertificatControlSuccess, (state, { certificatControls }) => ({ ...state, certificatControls })),
-  on(getAllCertificatControlFailure, (state, { error }) => ({ ...state, error })),
+  //   on(getAllCertificatControlSuccess, (state, { certificatControls }) => ({ ...state, certificatControls })),
+  on(getAllCertificatControlSuccess, (state, { certificatControls }) => ({
+    ...state,
+    certificatControls
+  })),
+  //   on(getAllCertificatControlFailure, (state, { error }) => ({ ...state, error })),
+  on(getAllCertificatControlFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),
   on(createCertificatControl, (state) => ({ ...state })),
-  on(createCertificatControlSuccess, (state, { responseDAO }) => ({ ...state, responseDAO })),
-  on(createCertificatControlFailure, (state, { error }) => ({ ...state, error })),
+  //   on(createCertificatControlSuccess, (state, { responseDAO }) => ({ ...state, responseDAO })),
+  on(createCertificatControlSuccess, (state, { responseDAO }) => ({
+    ...state,
+    certificatControls: [...state.certificatControls, responseDAO]
+  })),
+  //   on(createCertificatControlFailure, (state, { error }) => ({ ...state, error })),
   on(visualiserCertificatControl, (state) => ({ ...state })),
   on(visualiserCertificatControlSuccess, (state, { responseDAO }) => ({ ...state, responseDAO })),
   on(visualiserCertificatControlFailure, (state, { error }) => ({ ...state, error })),
+  on(createCertificatControlFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),
   on(generateCertificatControl, (state) => ({ ...state })),
   on(generateCertificatControlSuccess, (state) => ({ ...state })),
   on(generateCertificatControlFailure, (state, { error }) => ({ ...state, error })),
   on(deleteCertificatControl, (state) => ({ ...state })),
-  on(deleteCertificatControlSuccess, (state) => ({ ...state })),
-  on(deleteCertificatControlFailure, (state, { error }) => ({ ...state, error }))
+  //   on(deleteCertificatControlSuccess, (state) => ({ ...state })),
+  on(deleteCertificatControlSuccess, (state, { id }) => ({
+    ...state,
+    certificatControls: state.certificatControls.filter(c => c.id !== id)
+  })),
+  //   on(deleteCertificatControlFailure, (state, { error }) => ({ ...state, error }))
+  on(deleteCertificatControlFailure, (state, { error }) => ({
+    ...state,
+    error
+  }))
 )
+
+// export const certificatControlReducer = createReducer(
+//   initialCertificatControl,
+
+//   on(getAllCertificatControlSuccess, (state, { certificatControls }) => ({
+//     ...state,
+//     certificatControls
+//   })),
+
+//   on(getAllCertificatControlFailure, (state, { error }) => ({
+//     ...state,
+//     error
+//   })),
+
+//   on(createCertificatControlSuccess, (state, { responseDAO }) => ({
+//     ...state,
+//     certificatControls: [...state.certificatControls, responseDAO]
+//   })),
+
+//   on(createCertificatControlFailure, (state, { error }) => ({
+//     ...state,
+//     error
+//   })),
+
+//   on(deleteCertificatControlSuccess, (state, { id }) => ({
+//     ...state,
+//     certificatControls: state.certificatControls.filter(c => c.id !== id)
+//   })),
+
+//   on(deleteCertificatControlFailure, (state, { error }) => ({
+//     ...state,
+//     error
+//   }))
+// );

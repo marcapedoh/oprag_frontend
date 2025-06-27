@@ -54,7 +54,7 @@ export class CertificatControlEffects {
     ofType(deleteCertificatControl),
     concatMap(({ certificatControlId }) =>
       this.dataService.deleteCertificatControl(certificatControlId).pipe(
-        map((responseDAO) => deleteCertificatControlSuccess()),
+        map((responseDAO) => deleteCertificatControlSuccess(certificatControlId)),
         catchError((error: string) => of(deleteCertificatControlFailure(error)))
       ))
   ))

@@ -34,7 +34,7 @@ export class DatatableComponent {
     setTimeout(() => {
       if (this.data && this.data.length > 0) {
         this.data = this.data.filter(data => data.deleted !== true)
-        console.log(this.data)
+
         this.updateNumber()
       }
 
@@ -73,6 +73,11 @@ export class DatatableComponent {
       this.filteredData = filtered;
     });
 
+    this.store.select((state: CertificatControlState) => state.certificatControls)
+      .subscribe((data: any) => {
+        console.log(data.certificatControls)
+        this.data = [...data.certificatControls];
+      });
   }
   getNestedValue(obj: any, path: string): any {
     const value = path.split('.').reduce((acc, part) => acc?.[part], obj);
@@ -132,10 +137,7 @@ export class DatatableComponent {
   deleteCerticatControl(certificatControlId: number) {
     this.store.dispatch(deleteCertificatControl(certificatControlId))
     this.showToastTest = true;
-    this.data = this.data.filter(data => data.id != certificatControlId)
-    setTimeout(() => {
-      this.showToastTest = false
-    }, 1500)
+
   }
 
   navigate() {

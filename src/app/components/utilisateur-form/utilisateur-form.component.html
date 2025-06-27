@@ -60,15 +60,15 @@
         Les mots de passe ne correspondent pas.
       </div>
       <div>
-        <label for="fonctionnementEtat"
+        <label for="role"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
         <select
-          id="fonctionnementEtat" name="etatFonctionnement"
-          [(ngModel)]="userRoleSelected"
+          id="role" name="roleUser"
+          [(ngModel)]="user.role"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
           required>
           <option value>Sélectionnez un role</option>
-          <option value="userRole"
+          <option [value]="userRole"
             *ngFor="let userRole of roleAddable">{{ userRole }}</option>
         </select>
 
