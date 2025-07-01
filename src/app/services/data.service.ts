@@ -52,6 +52,11 @@ export class DataService {
       });
   }
 
+  createQrCodeImageWithNgRx(numero: string) {
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/getQrCode/" + numero, { responseType: 'blob' as 'json' })
+
+  }
+
   countAllPerDay() {
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/countAllPerDay")
   }
@@ -75,6 +80,13 @@ export class DataService {
   }
   loadCertificatReport(userId: number) {
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/CertificatControls/findCertificatControlByUtilisateurId/" + userId)
+  }
+  loadInspections() {
+    // this.baseUrl +
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Inspections/all")
+  }
+  createInspection(inspection: any) {
+    return this.httpClient.post<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Inspections/create", inspection)
   }
   countAllPerInterval(dateDebut: string, dateFin: string) {
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/countAllPerIntervalDays/" + dateDebut + "/" + dateFin)

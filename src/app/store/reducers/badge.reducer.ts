@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { createBadge, createBadgeFailure, createBadgeSuccess, getAllBadge, getAllBadgeFailure, getAllBadgeSuccess } from "../actions/badge.action";
+import { createBadge, createBadgeFailure, createBadgeSuccess, createQrCodeImage, createQrCodeImageFailure, createQrCodeImageSuccess, getAllBadge, getAllBadgeFailure, getAllBadgeSuccess } from "../actions/badge.action";
 import { getAllChartObject, getAllChartObjectFailure, getAllChartObjectPerDate, getAllChartObjectPerDateFailure, getAllChartObjectPerDateSuccess, getAllChartObjectSuccess } from "../actions/chartObject.action";
 
 export interface BadgeState {
@@ -29,5 +29,8 @@ export const badgeReducer = createReducer(
   on(getAllChartObjectPerDateFailure, (state, { error }) => ({ ...state, error })),
   on(createBadge, (state) => ({ ...state })),
   on(createBadgeSuccess, (state, { responseDAO }) => ({ ...state, responseDAO })),
-  on(createBadgeFailure, (state, { error }) => ({ ...state, error }))
+  on(createBadgeFailure, (state, { error }) => ({ ...state, error })),
+  on(createQrCodeImage, (state) => ({ ...state })),
+  on(createQrCodeImageSuccess, (state) => ({ ...state })),
+  on(createQrCodeImageFailure, (state) => ({ ...state }))
 )

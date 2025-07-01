@@ -16,6 +16,8 @@ import { UsersPerInspectionState } from './store/reducers/user-per-inspection.re
 import { initFlowbite } from 'flowbite';
 import { userProfil } from './store/reducers/user-profil.reducer';
 import { getUserProfilInfo } from './store/actions/user-profil.action';
+import { InspectionState } from './store/reducers/inspection.reducer';
+import { getAllInspection } from './store/actions/inspection.action';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +27,7 @@ import { getUserProfilInfo } from './store/actions/user-profil.action';
 export class AppComponent implements OnInit {
 
   authError$: Observable<string | null>;
-  constructor(private store: Store<CertificatControlState>, private storeError: Store<AuthState>, private storeChart: Store<ChartBadgesObjectState>, private storeUsersPerInspection: Store<UsersPerInspectionState>, private storeUserProfil: Store<userProfil>) {
+  constructor(private store: Store<CertificatControlState>, private storeError: Store<AuthState>, private storeChart: Store<ChartBadgesObjectState>, private storeUsersPerInspection: Store<UsersPerInspectionState>, private storeUserProfil: Store<userProfil>, private storeInspections: Store<InspectionState>) {
     this.authError$ = this.store.select(selectAuthError);
   }
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(getAllCertificatControl("CertificatControls"))
     this.store.dispatch(getAllBadge("Badges"))
     this.storeChart.dispatch(getAllChartObject())
+    this.storeInspections.dispatch(getAllInspection())
     this.storeUserProfil.dispatch(getUserProfilInfo(+localStorage.getItem("ConnectedUser")!))
     this.storeUsersPerInspection.dispatch(getAllUserPerInspectionName(localStorage.getItem("InspectionName")!))
   }

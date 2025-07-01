@@ -25,7 +25,13 @@ export class AuthEffects {
           localStorage.setItem("InspectionId", action.responseDAO.inspectionId)
           localStorage.setItem("Nom", action.responseDAO.nom)
           localStorage.setItem("Prenom", action.responseDAO.prenom)
-          this.router.navigate(["/inspection/collection"])
+          if (action.responseDAO.role == "INSPECTEUR") {
+            this.router.navigate(["/inspection/collection"])
+          } else if (action.responseDAO.role == "SUPER_ADMIN") {
+            this.router.navigate(["/dashboard"])
+          } else if (action.responseDAO.role == "DGMG") {
+            this.router.navigate(["/dashboard"])
+          }
         }
       })
   ))

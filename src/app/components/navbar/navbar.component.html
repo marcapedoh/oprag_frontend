@@ -38,13 +38,14 @@
             <div
               class="flex items-center justify-center w-10 h-10 text-lg font-bold text-white rounded-full"
               [style.background]="user.profileColor">
-              {{ user.firstName.charAt(0).toUpperCase() }}{{
-              user.lastName.charAt(0).toUpperCase() }}
+              {{
+              user.lastName.charAt(0).toUpperCase() }} {{
+              user.firstName.charAt(0).toUpperCase() }}
             </div>
           </div>
           <div class="hidden sm:block">
             <p class="text-sm font-medium text-gray-900 dark:text-white">
-              {{ user.firstName }} {{ user.lastName }}
+              {{ user.lastName.charAt(0).toUpperCase() }} {{ user.firstName }}
             </p>
           </div>
         </div>

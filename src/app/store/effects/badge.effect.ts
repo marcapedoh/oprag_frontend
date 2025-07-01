@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { DataService } from "src/app/services/data.service";
-import { createBadge, createBadgeFailure, createBadgeSuccess, getAllBadge, getAllBadgeFailure, getAllBadgeSuccess } from "../actions/badge.action";
+import { createBadge, createBadgeFailure, createBadgeSuccess, createQrCodeImage, getAllBadge, getAllBadgeFailure, getAllBadgeSuccess } from "../actions/badge.action";
 import { catchError, concatMap, exhaustMap, map, of, tap } from "rxjs";
 import { Router } from "@angular/router";
 import { getAllChartObject, getAllChartObjectFailure, getAllChartObjectPerDate, getAllChartObjectPerDateFailure, getAllChartObjectPerDateSuccess, getAllChartObjectSuccess } from "../actions/chartObject.action";
@@ -48,6 +48,22 @@ export class BadgeEffect {
         map((responseDAO) => getAllChartObjectPerDateSuccess(responseDAO)),
         catchError((error: string) => of(getAllChartObjectPerDateFailure(error)))
       ))
+  ))
+
+  createBadgeQrCode$ = createEffect(() => this.actions$.pipe(
+    ofType(createQrCodeImage),
+    concatMap(({ numero }) =>
+      this.dataService.createQrCodeImageWithNgRx(numero).pipe(
+        tap((blob: Blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'qrCodeImage.png';
+          a.click();
+          window.URL.revokeObjectURL(url);
+        })
+      )
+    )
   ))
   constructor(private actions$: Actions, private dataService: DataService, private router: Router) { }
 }

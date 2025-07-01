@@ -2,8 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, map, interval, take, tap } from 'rxjs';
+import { createQrCodeImage } from 'src/app/store/actions/badge.action';
 import { deleteCertificatControl, generateCertificatControl } from 'src/app/store/actions/certificatControl.action';
 import { showToast } from 'src/app/store/actions/toast.action';
+import { BadgeState } from 'src/app/store/reducers/badge.reducer';
 import { CertificatControlState } from 'src/app/store/reducers/certificatControl.reducer';
 
 @Component({
@@ -27,7 +29,7 @@ export class DatatableComponent {
   itemsPerPage: any = 2;
   currentPage: number = 0;
 
-  constructor(private router: Router, private store: Store<CertificatControlState>) { }
+  constructor(private router: Router, private store: Store<CertificatControlState>, private storeQrCode: Store<BadgeState>) { }
 
   ngOnInit(): void {
 
@@ -103,6 +105,10 @@ export class DatatableComponent {
     }
   }
 
+  generateQrCode(numeroCarte: string) {
+    this.storeQrCode.dispatch(createQrCodeImage(numeroCarte))
+  }
+
   onInputChange(event: any) {
     this.inputSubject.next(event.target.value);
   }
@@ -141,6 +147,30 @@ export class DatatableComponent {
     this.store.dispatch(deleteCertificatControl(certificatControlId))
     this.showToastTest = true;
 
+  }
+  confirmDelete() {
+    if (this.certificatControlIdToDelete !== null && this.dataType == "CertificatControls") {
+      this.store.dispatch(deleteCertificatControl(this.certificatControlIdToDelete));
+      this.showToastTest = true;
+      this.closeDeleteModal();
+    } else if (this.certificatControlIdToDelete !== null && this.dataType == "Badges") {
+      console.log("hiiii")
+
+      this.closeDeleteModal();
+    }
+  }
+
+  certificatControlIdToDelete: number | null = null;
+  showDeleteModal = false;
+
+  openDeleteModal(certificatControlId: number) {
+    this.certificatControlIdToDelete = certificatControlId;
+    this.showDeleteModal = true;
+  }
+
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+    this.certificatControlIdToDelete = null;
   }
 
   navigate() {
