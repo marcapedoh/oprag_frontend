@@ -1,89 +1,63 @@
-
-
-<div
-  class="max-w-screen-xl p-6 mx-auto shadow-lg animate-slide-in-left bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl">
-  <h2
-    class="inline-flex items-center justify-center px-1 py-1 text-2xl font-medium text-gray-900 bg-white cursor-pointer me-2 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:text-white">
-    Créer un Badge</h2>
+<div class="max-w-screen-xl p-6 mx-auto bg-white shadow-md rounded-xl">
+  <h2 class="mb-6 text-2xl font-medium text-gray-800">
+    Créer un Badge
+  </h2>
 
   <div class="grid grid-cols-3 gap-8">
-
     <form class="grid grid-cols-3 col-span-3 gap-6">
-
-      <!-- Champ 1 -->
+      <!-- Champ Validité -->
       <div>
         <label for="validite"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Validite</label>
-        <select
-          id="validite" name="validite"
-          [(ngModel)]="badge.validite"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+          class="block mb-2 text-sm font-medium text-gray-800">
+          Validité
+        </label>
+        <select id="validite" name="validite" [(ngModel)]="badge.validite"
+          class="bg-gray-50 border border-gray-800 text-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
           required>
-          <option value>Sélectionnez une Validite</option>
-          <option value="UN_MOIS">1 MOIS</option>
-          <option value="DEUX_MOIS">2 MOIS</option>
-          <option value="TROIS_MOIS">3 MOIS</option>
-          <option value="QUATRE_MOIS">4 MOIS</option>
-          <option value="CINQ_MOIS">5 MOIS</option>
-          <option value="SIX_MOIS">6 MOIS</option>
-          <option value="SEPT_MOIS">7 MOIS</option>
-          <option value="HUIT_MOIS">8 MOIS</option>
-          <option value="NEUF_MOIS">9 MOIS</option>
-          <option value="DIX_MOIS">10 MOIS</option>
-          <option value="ONZE_MOIS">11 MOIS</option>
-          <option value="DOUZE_MOIS">12 MOIS</option>
-          <option value="TREIZE_MOIS">13 MOIS</option>
-          <option value="QUATORZE_MOIS">14 MOIS</option>
-          <option value="QUINZE_MOIS">15 MOIS</option>
-          <option value="SEIZE_MOIS">16 MOIS</option>
-          <option value="DIX_SEPT_MOIS">17 MOIS</option>
-          <option value="DIX_HUIT_MOIS">18 MOIS</option>
-          <option value="DIX_NEUF_MOIS">19 MOIS</option>
-          <option value="VINGT_MOIS">20 MOIS</option>
-          <option value="VINGT_MOIS">21 MOIS</option>
-          <option value="VINGT_MOIS">22 MOIS</option>
-          <option value="VINGT_MOIS">23 MOIS</option>
-          <option value="VINGT_MOIS">24 MOIS</option>
+          <option value>Sélectionnez une Validité</option>
+          <option *ngFor="let mois of moisOptions" [value]="mois.value">
+            {{ mois.label }}
+          </option>
         </select>
       </div>
 
-      <!-- Champ 3 -->
+      <!-- Champ Numéro du Parc -->
       <div>
         <label for="numeroRapport"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
-          du Parc</label>
-        <input type="text" id="numeroRapport"
-          placeholder="numero Rapport" name="numeroDuRapport"
-          [(ngModel)]="badge.numeroParc"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+          class="block mb-2 text-sm font-medium text-gray-800">
+          Numéro du Parc
+        </label>
+        <input type="text" id="numeroRapport" placeholder="Numéro du Parc"
+          name="numeroDuRapport" [(ngModel)]="badge.numeroParc"
+          class="bg-gray-50 border border-gray-800 text-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5" />
       </div>
+
+      <!-- Champ Rapport Inspection -->
       <div>
         <label for="fonctionnementEtat"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rapport
-          Inspection
+          class="block mb-2 text-sm font-medium text-gray-800">
+          Rapport Inspection
         </label>
-        <select
-          id="fonctionnementEtat" name="etatFonctionnement"
+        <select id="fonctionnementEtat" name="etatFonctionnement"
           [(ngModel)]="badge.certificatControl.id"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+          class="bg-gray-50 border border-gray-800 text-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
           required>
-          <option>Sélectionnez un Rapport d'inspection
-          </option>
+          <option>Sélectionnez un Rapport d'inspection</option>
           <option [value]="rapport.id"
-            *ngFor="let rapport of certificatControls">{{rapport.numeroRapport}}</option>
+            *ngFor="let rapport of certificatControls">
+            {{ rapport.numeroRapport }}
+          </option>
         </select>
       </div>
 
-      <div class="col-start-3">
+      <!-- Bouton Enregistrer -->
+      <div class="flex justify-end col-start-3">
         <button type="button" (click)="save()"
-          class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">
-
+          class="mt-4 flex items-center gap-2 text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
           Enregistrer
         </button>
       </div>
-
     </form>
-
   </div>
 </div>
 

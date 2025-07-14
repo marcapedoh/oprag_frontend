@@ -96,16 +96,16 @@ export class ChartsComponent implements OnInit {
         width: 2
       },
 
-      grid: {
-        row: {
-          colors: ["#1f2937cc", "#1f2937cc"]
-        }
-      },
+      // grid: {
+      //   row: {
+      //     colors: ["#1f2937cc", "#1f2937cc"]
+      //   }
+      // },
       xaxis: {
         labels: {
           rotate: -45,
           style: {
-            colors: '#ffffff'
+            colors: '#1f2937'
           }
         },
         categories: [
@@ -130,12 +130,12 @@ export class ChartsComponent implements OnInit {
         title: {
           text: "Cartes créé",
           style: {
-            color: "#fff"
+            color: "#1f2937"
           }
         },
         labels: {
           style: {
-            colors: "#fff"
+            colors: "#1f2937"
           }
         }
       },

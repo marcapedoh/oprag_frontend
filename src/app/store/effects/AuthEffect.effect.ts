@@ -28,7 +28,7 @@ export class AuthEffects {
           if (action.responseDAO.role == "INSPECTEUR") {
             this.router.navigate(["/inspection/collection"])
           } else if (action.responseDAO.role == "SUPER_ADMIN") {
-            this.router.navigate(["/dashboard"])
+            this.router.navigate(["/vueEnsemble"])
           } else if (action.responseDAO.role == "DGMG") {
             this.router.navigate(["/dashboard"])
           }

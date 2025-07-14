@@ -1,82 +1,75 @@
-<div
-  class="max-w-screen-xl p-6 mx-auto shadow-lg animate-slide-in-left bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl">
+<div class="max-w-screen-xl p-6 mx-auto bg-white shadow-md rounded-xl">
+  <h2 class="mb-6 text-2xl font-medium text-gray-800">Tableau de Bord</h2>
 
+  <!-- Statistiques -->
   <div class="max-w-6xl p-4 mx-auto">
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-
       <!-- Statistique 1 : Cartes d'inspection -->
       <div
-        class="p-6 text-center shadow-md bg-white/80 dark:bg-gray-700/80 backdrop-blur-md rounded-xl">
-        <h3
-          class="mb-2 text-xl font-semibold text-gray-800 dark:text-white">Cartes
+        class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
+        <h3 class="mb-2 text-xl font-semibold text-gray-800">Cartes
           d'inspection</h3>
-        <p class="text-3xl font-bold text-blue-600 dark:text-blue-400"> {{
-          badges.length }}</p>
+        <p class="text-3xl font-bold text-gray-800">{{ badges.length }}</p>
       </div>
 
       <!-- Statistique 2 : Rapports d'inspection -->
       <div
-        class="p-6 text-center shadow-md bg-white/80 dark:bg-gray-700/80 backdrop-blur-md rounded-xl">
-        <h3
-          class="mb-2 text-xl font-semibold text-gray-800 dark:text-white">Rapports
+        class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
+        <h3 class="mb-2 text-xl font-semibold text-gray-800">Rapports
           d'inspection</h3>
-        <p class="text-3xl font-bold text-green-600 dark:text-green-400">{{
-          certificatControls.length }}</p>
+        <p class="text-3xl font-bold text-gray-800">{{ certificatControls.length
+          }}</p>
       </div>
 
       <!-- Statistique 3 : Cartes actives -->
       <div
-        class="p-6 text-center shadow-md bg-white/80 dark:bg-gray-700/80 backdrop-blur-md rounded-xl">
-        <h3
-          class="mb-2 text-xl font-semibold text-gray-800 dark:text-white">Cartes
-          actives</h3>
-        <p
-          class="text-3xl font-bold text-purple-600 dark:text-purple-400">{{
-          totalBadgesActive?totalBadgesActive:0 }}</p>
+        class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
+        <h3 class="mb-2 text-xl font-semibold text-gray-800">Cartes actives</h3>
+        <p class="text-3xl font-bold text-gray-800">{{ totalBadgesActive ?
+          totalBadgesActive : 0 }}</p>
       </div>
-
     </div>
   </div>
 
-  <div id="chart" class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md">
-    <div class="grid grid-cols-4 col-span-3 gap-6 mb-4">
-
+  <!-- Filtres et Graphique -->
+  <div class="mt-8 bg-white border border-blue-200 shadow-sm rounded-xl">
+    <div class="grid grid-cols-4 gap-6 p-6">
       <div>
-        <label for="numeroRapport"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">date
+        <label for="dateDebut"
+          class="block mb-2 text-sm font-medium text-blue-800">Date
           Début</label>
-        <input type="date" id="numeroRapport"
-          placeholder="Date de Debut" name="dateDebut" [(ngModel)]="dateDebut"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+        <input type="date" id="dateDebut" name="dateDebut"
+          [(ngModel)]="dateDebut"
+          class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
       </div>
       <div>
-        <label for="numeroRapport"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date
-          de Fin</label>
-        <input type="date" id="numeroRapport"
-          placeholder="date de fin" name="date de fin"
-          [(ngModel)]="dateFin"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+        <label for="dateFin"
+          class="block mb-2 text-sm font-medium text-blue-800">Date de
+          Fin</label>
+        <input type="date" id="dateFin" name="dateFin" [(ngModel)]="dateFin"
+          class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
       </div>
       <div>
-        <button type="button"
-          class="mt-7 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700"
-          (click)="searchDataPerDate()">
+        <button type="button" (click)="searchDataPerDate()"
+          class="mt-7 flex items-center gap-2 text-white bg-gray-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">
           Rechercher
         </button>
       </div>
     </div>
-    <apx-chart
-      [series]="chartOptions.series!"
-      [chart]="chartOptions.chart!"
-      [dataLabels]="chartOptions.dataLabels!"
-      [plotOptions]="chartOptions.plotOptions!"
-      [yaxis]="chartOptions.yaxis!"
-      [xaxis]="chartOptions.xaxis!"
-      [stroke]="chartOptions.stroke!"
-      [grid]="chartOptions.grid!"
-      [fill]="chartOptions.fill!"
-      [annotations]="chartOptions.annotations!"></apx-chart>
-  </div>
 
+    <!-- Graphique -->
+    <div class="p-4">
+      <apx-chart
+        [series]="chartOptions.series!"
+        [chart]="chartOptions.chart!"
+        [dataLabels]="chartOptions.dataLabels!"
+        [plotOptions]="chartOptions.plotOptions!"
+        [yaxis]="chartOptions.yaxis!"
+        [xaxis]="chartOptions.xaxis!"
+        [stroke]="chartOptions.stroke!"
+        [grid]="chartOptions.grid!"
+        [fill]="chartOptions.fill!"
+        [annotations]="chartOptions.annotations!"></apx-chart>
+    </div>
+  </div>
 </div>

@@ -1,19 +1,19 @@
 <div
-  class="max-w-screen-xl p-6 mx-auto shadow-lg animate-slide-in-left bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl">
+  class="max-w-screen-xl p-6 mx-auto shadow-lg animate-slide-in-left bg-white/80 backdrop-blur-md rounded-xl">
   <!-- En-tête -->
   <div class="flex items-center justify-between mb-8">
     <h1
-      class="inline-flex items-center justify-center px-5 py-1 text-2xl font-medium text-gray-900 bg-white cursor-pointer me-2 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:text-white">Gestion
+      class="inline-flex items-center justify-center px-5 py-1 text-2xl font-medium text-gray-800 cursor-pointer me-2 focus:text-blue-700 hover:text-gray-600">Gestion
       des
       Utilisateurs</h1>
     <div class="flex items-center space-x-4">
       <div class="px-4 py-2 bg-green-100 rounded-lg dark:bg-green-900">
         <span
-          class="font-medium text-green-800 dark:text-green-200">Utilisateurs
+          class="font-medium text-green-200 ">Utilisateurs
           actifs: {{ usersActif }}</span>
       </div>
       <button
-        class="px-4 py-2 text-white transition bg-blue-600 rounded-lg hover:bg-blue-700"
+        class="px-4 py-2 text-white transition bg-gray-600 rounded-lg hover:bg-gray-800"
         routerLink="/utilisateurs/ajout">
         Ajouter un utilisateur
       </button>
@@ -23,15 +23,15 @@
   <div class="flex flex-col gap-6 md:flex-row">
     <!-- Colonne 1 - Liste des utilisateurs -->
     <div class="flex-1">
-      <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+      <div class="p-4 bg-white rounded-lg shadow ">
         <h2
-          class="mb-4 text-lg font-semibold text-gray-800 dark:text-white">Liste
+          class="mb-4 text-lg font-semibold text-gray-800 ">Liste
           des utilisateurs</h2>
 
         <div class="overflow-x-auto">
           <table
             class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-            <thead class="bg-gray-50 dark:bg-gray-600">
+            <thead class="bg-gray-400 ">
               <tr>
                 <th
                   class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-200">Nom</th>
@@ -47,7 +47,7 @@
               class="bg-white divide-y divide-gray-200 dark:bg-gray-700 dark:divide-gray-600">
               <!-- Exemple d'utilisateur -->
               <tr *ngFor="let user of paginatedUsers" (click)="selectUser(user)"
-                class="cursor-pointer dark:hover:bg-gray-800/80 backdrop-blur-md">
+                class="cursor-pointer hover:bg-gray-800/80 backdrop-blur-md">
                 <td
                   class="px-4 py-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.nom}}
                   {{ user.prenom }}</td>
@@ -77,14 +77,14 @@
         </div>
 
         <div class="flex items-center justify-between mt-4">
-          <div class="text-sm text-gray-500 dark:text-gray-400">
+          <div class="text-sm text-gray-500 ">
             Affichage {{ (currentPage - 1) * itemsPerPage + 1 }} -
             {{ Math.min(currentPage * itemsPerPage, usersInspecteur.length) }}
             sur {{ usersInspecteur.length }} utilisateurs
           </div>
           <div class="flex space-x-1">
             <button
-              class="px-3 py-1 text-gray-700 bg-gray-200 rounded cursor-pointer dark:bg-gray-600 dark:text-gray-200"
+              class="px-3 py-1 text-gray-700 bg-gray-200 rounded cursor-pointer"
               [disabled]="currentPage === 1"
               (click)="currentPage = currentPage - 1">&lt;</button>
 
@@ -93,13 +93,13 @@
               class="px-3 py-1 rounded cursor-pointer"
               [ngClass]="{
                             'text-white bg-blue-600': currentPage === i + 1,
-                            'text-gray-700 bg-gray-200 dark:bg-gray-600 dark:text-gray-200': currentPage !== i + 1
+                            'text-gray-700  bg-gray-600 ': currentPage !== i + 1
                           }"
               (click)="currentPage = i + 1">
               {{ i + 1 }}
             </button>
             <button
-              class="px-3 py-1 text-gray-700 bg-gray-200 rounded cursor-pointer dark:bg-gray-600 dark:text-gray-200">&gt;</button>
+              class="px-3 py-1 text-gray-700 bg-gray-200 rounded cursor-pointer ">&gt;</button>
           </div>
         </div>
       </div>
@@ -107,39 +107,39 @@
 
     <!-- Ligne verticale séparatrice -->
     <div *ngIf="selectedUser"
-      class="hidden h-auto border-l border-gray-200 md:block dark:border-gray-600"></div>
+      class="hidden h-auto border-l border-gray-600 md:block"></div>
 
     <!-- Colonne 2 - Statistiques -->
     <div
-      class="w-full pt-6 border-t border-gray-200 md:w-1/3 md:pt-0 md:border-t-0 md:border-l dark:border-gray-600"
+      class="w-full pt-6 border-t border-gray-600 md:w-1/3 md:pt-0 md:border-t-0 md:border-l"
       *ngIf="selectedUser">
       <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-700">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+          <h2 class="text-lg font-semibold text-gray-800 ">
             Statistiques
           </h2>
           <button (click)="selectedUser = null"
-            class="mr-2  hover:text-white text-white bg-yellow-500  focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-700">
+            class="mr-2  hover:text-white text-white bg-yellow-500  focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  dark:focus:ring-yellow-700">
             Fermer les détails
           </button>
         </div>
         <!-- Carte Statistiques générales -->
         <div class="mb-6">
-          <h3 class="mb-2 font-medium text-gray-700 dark:text-gray-300">Activité
+          <h3 class="mb-2 font-medium text-gray-700">Activité
             globale</h3>
           <div class="grid grid-cols-2 gap-4">
-            <div class="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-              <p class="text-sm text-blue-800 dark:text-blue-200">Rapports
+            <div class="p-3 rounded-lg bg-blue-900/30">
+              <p class="text-sm text-blue-200">Rapports
                 créés</p>
               <p
-                class="text-2xl font-bold text-blue-600 dark:text-blue-300">{{
+                class="text-2xl font-bold text-blue-300">{{
                 nombreRapportInspectionCree }}</p>
             </div>
-            <div class="p-3 rounded-lg bg-green-50 dark:bg-green-900/30">
-              <p class="text-sm text-green-800 dark:text-green-200">Cartes
+            <div class="p-3 rounded-lg bg-green-900/30">
+              <p class="text-sm text-green-200">Cartes
                 générées</p>
               <p
-                class="text-2xl font-bold text-green-600 dark:text-green-300">{{
+                class="text-2xl font-bold text-green-300">{{
                 nombreBadgeCree }}</p>
             </div>
           </div>
@@ -147,20 +147,20 @@
 
         <!-- Carte Utilisateur sélectionné -->
         <div class="mb-6">
-          <h3 class="mb-2 font-medium text-gray-700 dark:text-gray-300">Détails
+          <h3 class="mb-2 font-medium text-gray-700">Détails
             utilisateur</h3>
-          <div class="p-4 rounded-lg bg-gray-50 dark:bg-gray-600">
+          <div class="p-4 bg-gray-600 rounded-lg">
             <div class="flex items-center mb-3">
               <div
-                class="flex items-center justify-center w-10 h-10 mr-3 bg-blue-100 rounded-full dark:bg-blue-900">
+                class="flex items-center justify-center w-10 h-10 mr-3 bg-blue-900 rounded-full">
                 <span
                   class="font-medium text-blue-600 dark:text-blue-300">{{
-                  selectedUser?.nom.substring(0, 1).toUpperCase() }} {{
+                  selectedUser?.nom.substring(0, 1).toUpperCase() }}{{
                   selectedUser?.prenom.substring(0, 1).toUpperCase()
                   }}</span>
               </div>
               <div>
-                <h4 class="font-medium text-gray-800 dark:text-white">{{
+                <h4 class="font-medium text-white ">{{
                   selectedUser?.nom }} {{ selectedUser?.prenom }} |</h4>
                 <p
                   class="text-xs text-gray-500 dark:text-gray-300">{{
@@ -170,9 +170,9 @@
 
             <div class="space-y-3">
               <div>
-                <p class="text-sm text-gray-600 dark:text-gray-300">Rapports
+                <p class="text-sm text-gray-400 ">Rapports
                   créés: <span
-                    class="font-medium text-blue-600 dark:text-blue-300">{{
+                    class="font-medium text-blue-600 ">{{
                     nombreRapportInspectionCree }}</span></p>
                 <div
                   class="w-full h-2 mt-1 bg-gray-200 rounded-full dark:bg-gray-500">
@@ -184,7 +184,7 @@
                 </span>
               </div>
               <div>
-                <p class="text-sm text-gray-600 dark:text-gray-300">Cartes
+                <p class="text-sm text-gray-400">Cartes
                   générées: <span
                     class="font-medium text-green-600 dark:text-green-300">{{
                     nombreBadgeCree }}</span></p>

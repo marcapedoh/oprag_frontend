@@ -1,529 +1,513 @@
+<div class="max-w-screen-xl p-6 mx-auto bg-white shadow-md rounded-xl">
+  <!-- 🧾 Form Step 1 -->
+  <div
+    [ngClass]="{'animate-slide-in-left': currentStep === 1, 'hidden': currentStep !== 1}">
+    <h2 class="mb-6 text-2xl font-medium text-gray-800">
+      Créer un Rapport d'Inspection
+    </h2>
 
-
-<!-- 🧾 Form Step 1 -->
-<div
-  [ngClass]="{'animate-slide-in-left': currentStep === 1, 'hidden': currentStep !== 1}"
-  class="max-w-screen-xl p-6 mx-auto shadow-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl">
-  <h2
-    class="inline-flex items-center justify-center px-5 py-1 text-2xl font-medium text-gray-900 bg-white cursor-pointer me-2 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:text-white">
-    Créer un Rapport d'Inspection</h2>
-
-  <div class="grid grid-cols-4 gap-8">
-
-    <!-- 🟢 Timeline avec binding dynamique -->
-    <ol
-      class="relative m-4 text-white border-gray-200 border-s dark:border-gray-700">
-      <li class="mb-10 ms-6">
-        <span
-          [ngClass]="currentStep >= 1 ? 'bg-green-200 dark:bg-green-900' : 'bg-gray-100 dark:bg-gray-700'"
-          class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white dark:ring-gray-800/80">
-          <svg class="w-3.5 h-3.5"
-            [ngClass]="currentStep >= 1 ? 'text-green-500 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'"
-            xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 16 12">
-            <path stroke="currentColor" stroke-linecap="round"
-              stroke-linejoin="round" stroke-width="2"
-              d="M1 5.917 5.724 10.5 15 1.5" />
-          </svg>
-        </span>
-        <h3 class="font-medium leading-tight dark:text-white">Etape 1</h3>
-      </li>
-      <li class="mb-10 ms-6">
-        <span
-          [ngClass]="currentStep >= 2 ? 'bg-green-200 dark:bg-green-900' : 'bg-gray-100 dark:bg-gray-700'"
-          class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white dark:ring-gray-800/80">
-          <svg class="w-3.5 h-3.5"
-            [ngClass]="currentStep >= 2 ? 'text-green-500 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'"
-            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-            viewBox="0 0 20 16">
-            <path
-              d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z" />
-          </svg>
-        </span>
-        <h3 class="font-medium leading-tight dark:text-white">Etape 2</h3>
-      </li>
-    </ol>
-    <form class="grid grid-cols-3 col-span-3 gap-6">
-
-      <!-- Champ 1 -->
-      <div>
-        <label for="site"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Site</label>
-        <input type="text" id="site" placeholder="site" name="site"
-          [(ngModel)]="certificatControl.site"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
-          required />
-      </div>
-
-      <!-- Champ 2 -->
-      <div>
-        <label for="societe"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Societe</label>
-        <input type="text" id="societe" placeholder="societe"
-          name="societe" [(ngModel)]="certificatControl.societe"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
-          required />
-      </div>
-
-      <!-- Champ 3 -->
-      <div>
-        <label for="numeroRapport"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
-          du Rapport</label>
-        <input type="text" id="numeroRapport"
-          placeholder="numero Rapport" name="numeroDuRapport"
-          [(ngModel)]="certificatControl.numeroRapport"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
-      </div>
-      <div>
-        <label for="localisation"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Localisation</label>
-        <input type="text" id="localisation" placeholder="localisation"
-          name="localisation"
-          [(ngModel)]="certificatControl.localisationCertificationFait"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
-      </div>
-      <div>
-        <label for="description"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-        <input type="email" id="description" placeholder="description"
-          name="description"
-          [(ngModel)]="certificatControl.description"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
-          required />
-      </div>
-      <div>
-        <label for="noticeInstruction"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notice
-          Instruction</label>
-        <input
-          type="checkbox"
-          id="noticeInstruction" name="noticeInstruction"
-          [(ngModel)]="certificatControl.noticeInstruction"
-          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-      <div>
-        <label for="livretMaintenance"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Livret
-          Maintenance</label>
-        <input
-          type="checkbox"
-          id="livretMaintenance" name="livretMaintenance"
-          [(ngModel)]="certificatControl.livretMaintenance"
-          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-      <div>
-        <label for="declarationConformite"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Déclaration
-          Conformité</label>
-        <input
-          type="checkbox"
-          id="declarationConformite" name="declarationConformite"
-          [(ngModel)]="certificatControl.declarationConformite"
-          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-      <div>
-        <label for="rapportControlPrecedent"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rapport
-          Control Précednt</label>
-        <input
-          type="checkbox"
-          id="rapportControlPrecedent" name="rapportControlPrecedent"
-          [(ngModel)]="certificatControl.rapportControlePrecedent"
-          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-      <div>
-        <label for="declarationEcrite"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Déclaration
-          Ecrite</label>
-        <input
-          type="checkbox"
-          id="declarationEcrite" name="declarationEcrite"
-          [(ngModel)]="certificatControl.declarationEcrite"
-          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-      <div>
-        <label for="moyenAccess"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Moyen
-          Access</label>
-        <input
-          type="checkbox"
-          id="moyenAccess" name="moyenAccess"
-          [(ngModel)]="certificatControl.moyenAccess"
-          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-      <div>
-        <label for="moyenAccessPartiel"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Moyen
-          Access Partiel</label>
-        <input
-          type="checkbox"
-          id="moyenAccessPartiel" name="moyenAccessPartiel"
-          [(ngModel)]="certificatControl.moyenAccessPartiel"
-          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-      <div>
-        <label for="moyenAccessConducteur"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Moyen
-          Acces Conducteur</label>
-        <input
-          type="checkbox"
-          id="moyenAccessConducteur" name="moyenAccessConducteur"
-          [(ngModel)]="certificatControl.moyenAccessConducteur"
-          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-      <div>
-        <label for="fonctionnementEtat"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Etats
-          de fonctionnement</label>
-        <select
-          id="fonctionnementEtat" name="etatFonctionnement"
-          [(ngModel)]="selectedOption"
-          (change)="onSelectChange($event)"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
-          required>
-          <option value>Sélectionnez une catégorie</option>
-          <option value="Marche_AV_AR">Marche AVANT ARRIERE</option>
-          <option value="Pictogrammes_securite">Pictogrammes
-            sécurité</option>
-          <option value="Vibration">Vibration</option>
-          <option value="Gyrophare">Gyrophare</option>
-          <option value="Clignotants_AV">Clignotants AVANT</option>
-          <option value="Clignotants_AR">Clignotants ARRIERE</option>
-          <option value="Changement_de_direction">Changement de
-            Direction</option>
-          <option value="Trou_d_homme">Trou d'homme</option>
-          <option value="Freinage">Freinage</option>
-          <option value="Arret_d_urgence">Arret d'urgence</option>
-          <option value="Etancheite_cuve">Etancheite cuve</option>
-          <option value="SYSTEME_DE_FREINAGE">Systeme de freinage</option>
-          <option value="SYSTEME_HYDRAULIQUE">Systeme hydraulique</option>
-          <option value="CARTE_GRISE">Carte grise</option>
-          <option value="ASSURANCE">Assurance</option>
-          <option value="VISITE_TECHNIQUE">Visite Technique</option>
-          <option value="EXTINCTEUR">Extincteur</option>
-          <option value="TROUSSE_A_PHARMACIE"></option>
-          <option value="BOMBONNE_D_AIR">Bombonne d'air</option>
-          <option value="TUYAUTERIE_DU_SYSTEME_DES_REMORQUES">Tuyau de système
-            des remorques</option>
-          <option value="SANGLE">Sangle</option>
-          <option value="ELINGUES">Elingues</option>
-          <option value="MANILLES">Manilles</option>
-          <option value="MANOMETRE_DE_PRESSION">Manometre de pression</option>
-          <option value="TOLERANCE_USURE_DES_PNEUS">Tolérance usure des
-            pneus</option>
-          <option value="INDICE_DE_VITESSE_ET_DATE_PEREMPTION">Indice de vitesse
-            et date peremption</option>
-        </select>
-
-        <div class="mt-4">
-          <p
-            *ngFor="let item of certificatControl.essaiFonctionnementList"
-            class="text-sm text-gray-800 dark:text-gray-200">
-            ✔️ {{ item }}
-          </p>
-        </div>
-      </div>
-
-      <div>
-        <label for="conformeReglement"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conforme
-          Reglement</label>
-        <input
-          type="checkbox"
-          id="conformeReglement" name="conformeReglement"
-          [(ngModel)]="certificatControl.conformeReglement"
-          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-
-      <div class="col-start-3">
-        <button type="button" (click)="nextStep()"
-          class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="w-5 h-5">
-            <path fill-rule="evenodd"
-              d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z"
-              clip-rule="evenodd" />
-          </svg>
-          Suivant
-        </button>
-      </div>
-
-    </form>
-
-  </div>
-</div>
-
-<!-- 🧾 Form Step 2 -->
-<div
-  [ngClass]="{'animate-slide-in-right': currentStep === 2, 'hidden': currentStep !== 2}"
-  class="max-w-screen-xl p-6 mx-auto shadow-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl">
-  <div class="grid grid-cols-4 gap-8">
-    <ol
-      class="relative m-4 text-white border-gray-200 border-s dark:border-gray-700">
-      <li class="mb-10 ms-6">
-        <span
-          [ngClass]="currentStep >= 1 ? 'bg-green-200 dark:bg-green-900' : 'bg-gray-100 dark:bg-gray-700'"
-          class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white dark:ring-gray-800/80">
-          <svg class="w-3.5 h-3.5"
-            [ngClass]="currentStep >= 1 ? 'text-green-500 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'"
-            xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 16 12">
-            <path stroke="currentColor" stroke-linecap="round"
-              stroke-linejoin="round" stroke-width="2"
-              d="M1 5.917 5.724 10.5 15 1.5" />
-          </svg>
-        </span>
-        <h3 class="font-medium leading-tight">Etape 1</h3>
-      </li>
-      <li class="mb-10 ms-6">
-        <span
-          [ngClass]="currentStep >= 2 ? 'bg-green-200 dark:bg-green-900' : 'bg-gray-100 dark:bg-gray-700'"
-          class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white dark:ring-gray-800/80">
-          <svg class="w-3.5 h-3.5"
-            [ngClass]="currentStep >= 2 ? 'text-green-500 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'"
-            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-            viewBox="0 0 20 16">
-            <path
-              d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z" />
-          </svg>
-        </span>
-        <h3 class="font-medium leading-tight">Etape 2</h3>
-      </li>
-    </ol>
-    <form class="grid grid-cols-3 col-span-3 gap-6">
-
-      <!-- Champ 1 -->
-      <div>
-        <label for="motifControl"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Motif
-          de Control</label>
-        <input type="text" id="motifControl"
-          placeholder="Motif de Control" name="motifControl"
-          [(ngModel)]="certificatControl.motifControle"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
-          required />
-      </div>
-
-      <!-- Champ 2 -->
-      <div>
-        <label for="recommandationsObservations"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observations
-          & Recommandations</label>
-        <textarea type="text" id="recommandationsObservations"
-          placeholder="Observations & Recommandations"
-          name="observationEtRecommandations"
-          [(ngModel)]="certificatControl.observationRecommendation"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
-          required></textarea>
-      </div>
-
-      <!-- Champ 3 -->
-      <div>
-        <label for="validite"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Validite</label>
-        <select
-          id="validite" name="validite"
-          [(ngModel)]="certificatControl.validite"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
-          required>
-          <option value>Sélectionnez une Validite</option>
-          <option value="UN_MOIS">1 MOIS</option>
-          <option value="DEUX_MOIS">2 MOIS</option>
-          <option value="TROIS_MOIS">3 MOIS</option>
-          <option value="QUATRE_MOIS">4 MOIS</option>
-          <option value="CINQ_MOIS">5 MOIS</option>
-          <option value="SIX_MOIS">6 MOIS</option>
-          <option value="SEPT_MOIS">7 MOIS</option>
-          <option value="HUIT_MOIS">8 MOIS</option>
-          <option value="NEUF_MOIS">9 MOIS</option>
-          <option value="DIX_MOIS">10 MOIS</option>
-          <option value="ONZE_MOIS">11 MOIS</option>
-          <option value="DOUZE_MOIS">12 MOIS</option>
-          <option value="TREIZE_MOIS">13 MOIS</option>
-          <option value="QUATORZE_MOIS">14 MOIS</option>
-          <option value="QUINZE_MOIS">15 MOIS</option>
-          <option value="SEIZE_MOIS">16 MOIS</option>
-          <option value="DIX_SEPT_MOIS">17 MOIS</option>
-          <option value="DIX_HUIT_MOIS">18 MOIS</option>
-          <option value="DIX_NEUF_MOIS">19 MOIS</option>
-          <option value="VINGT_MOIS">20 MOIS</option>
-          <option value="VINGT_MOIS">21 MOIS</option>
-          <option value="VINGT_MOIS">22 MOIS</option>
-          <option value="VINGT_MOIS">23 MOIS</option>
-          <option value="VINGT_MOIS">24 MOIS</option>
-        </select>
-      </div>
-      <div>
-        <label for="normeFabrication"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Norme
-          de Fabrication</label>
-        <input type="text" id="normeFabrication"
-          placeholder="Norme de fabrication" name="normeFabrication"
-          [(ngModel)]="certificatControl.normeFabrication"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
-      </div>
-      <div>
-        <label for="paye"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payé</label>
-        <input
-          type="checkbox"
-          id="paye" name="paye" [(ngModel)]="certificatControl.paye"
-          class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      </div>
-      <div>
-        <label for="montant"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Montant</label>
-        <input type="number" id="normeFabrication" placeholder="Montant"
-          name="montant" [(ngModel)]="certificatControl.montant"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
-      </div>
-
-      <div>
-        <!-- Modal toggle -->
-        <button (click)="openChauffeurModal()"
-          data-modal-target="chauffeur-modal"
-          data-modal-toggle="chauffeur-modal"
-          class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700"
-          type="button">
-          Ajouter chauffeur
-        </button>
-      </div>
-
-      <div>
-        <!-- Modal toggle -->
-        <button (click)="openChauffeurModal()"
-          data-modal-target="vehicule-modal"
-          data-modal-toggle="vehicule-modal"
-          class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700"
-          type="button">
-          Ajouter Véhicule
-        </button>
-
-      </div>
-
-      <!-- Bouton en fin de ligne -->
-      <div class="flex col-start-1 gap-4 mt-4">
-        <button type="button" (click)="prevStep()"
-          class="mt-4 flex items-center gap-2 text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="size-6">
-            <path fill-rule="evenodd"
-              d="M7.28 7.72a.75.75 0 0 1 0 1.06l-2.47 2.47H21a.75.75 0 0 1 0 1.5H4.81l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3.75-3.75a.75.75 0 0 1 0-1.06l3.75-3.75a.75.75 0 0 1 1.06 0Z"
-              clip-rule="evenodd" />
-          </svg>
-          Retour
-        </button> &nbsp;
-        <button type="button" (click)="visualiser()"
-          class="mt-4 flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="size-6">
-            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-            <path fill-rule="evenodd"
-              d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
-              clip-rule="evenodd" />
-          </svg>
-
-          Visualiser
-        </button> &nbsp;
-        <button type="submit" (click)="save()"
-          class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">
-          Enregistrer
-        </button>
-      </div>
-
-    </form>
-  </div>
-
-  <div class="grid grid-cols-4 gap-4 p-4 m-4">
-    <!-- Colonne 1 vide -->
-    <div></div>
-
-    <!-- Colonne 2 : Card chauffeur -->
-    <div *ngIf="chauffeurStored.nom"
-      class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <h5
-        class="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Informations du Chauffeur
-      </h5>
-      <div class="space-y-2 text-gray-700 dark:text-gray-300">
-        <p><span class="font-semibold">Nom :</span> {{
-          chauffeurStored.nom }}</p>
-        <p><span class="font-semibold">Prénom :</span> {{
-          chauffeurStored.prenom }}</p>
-        <p><span class="font-semibold">N° Permis :</span> {{
-          chauffeurStored.numeroPermis }}</p>
-        <p><span class="font-semibold">Certificat Médical :</span> {{
-          chauffeurStored.numeroCertificatMedicalValide }}</p>
-        <p><span class="font-semibold">Visite Technique :</span> {{
-          chauffeurStored.numeroVisiteTechnique }}</p>
-        <p><span class="font-semibold">CAP Poids Lourd :</span> {{
-          chauffeurStored.attestionCapPoidsLourd }}</p>
-        <p><span class="font-semibold">Conduite Défensive :</span> {{
-          chauffeurStored.attestationDeConduiteDefensive }}</p>
-      </div>
-    </div>
-
-    <!-- Colonne 3 : Card véhicule -->
-    <div *ngIf="vehiculeStored.numeroCarteGrise"
-      class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <h5
-        class="mb-4 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Informations du Véhicule
-      </h5>
-      <div class="space-y-2 text-gray-700 dark:text-gray-300">
-        <p><span class="font-semibold">Carte Grise :</span> {{
-          vehiculeStored.numeroCarteGrise }}</p>
-        <!-- <p><span class="font-semibold">Type :</span> {{
-                    vehiculeStored.typeVehicules }}</p> -->
-        <p><span class="font-semibold">Numéro d'assurance :</span> {{
-          vehiculeStored.numeroAssurance }}</p>
-        <p><span class="font-semibold">Visite Technique :</span> {{
-          vehiculeStored.numeroVisiteTechnique }}</p>
-        <p><span class="font-semibold">VGP Remorque :</span> {{
-          vehiculeStored.vgpRemorque }}</p>
-        <p>
-          <span class="font-semibold">Équipement obligatoire :</span>
-          <span
-            *ngIf="vehiculeStored.controleEquipementObligatoirel; else non">
-            ✅ Oui
+    <div class="grid grid-cols-4 gap-8">
+      <!-- Timeline -->
+      <ol class="relative m-4 border-gray-300 border-s">
+        <li class="mb-10 ms-6">
+          <span [ngClass]="currentStep >= 1 ? 'bg-blue-400' : 'bg-gray-100'"
+            class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white">
+            <svg class="w-3.5 h-3.5"
+              [ngClass]="currentStep >= 1 ? 'text-blue-600' : 'text-gray-500'"
+              xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 16 12">
+              <path stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="2"
+                d="M1 5.917 5.724 10.5 15 1.5" />
+            </svg>
           </span>
-          <ng-template #non>❌ Non</ng-template>
-        </p>
-        <div *ngIf="vehiculeStored.typeVehicules?.length">
-          <p class="font-semibold">Types associés :</p>
-          <ul class="pl-5 list-disc">
-            <li
-              *ngFor="let type of vehiculeStored.typeVehicules">{{
-              type }}</li>
-          </ul>
-        </div>
-      </div>
+          <h3 class="font-medium leading-tight text-gray-800">Etape 1</h3>
+        </li>
+        <li class="mb-10 ms-6">
+          <span [ngClass]="currentStep >= 2 ? 'bg-blue-400' : 'bg-gray-100'"
+            class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white">
+            <svg class="w-3.5 h-3.5"
+              [ngClass]="currentStep >= 2 ? 'text-blue-600' : 'text-gray-500'"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+              viewBox="0 0 20 16">
+              <path
+                d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z" />
+            </svg>
+          </span>
+          <h3 class="font-medium leading-tight text-gray-800">Etape 2</h3>
+        </li>
+      </ol>
 
-      <div></div>
+      <!-- Formulaire -->
+      <form class="grid grid-cols-3 col-span-3 gap-6">
+        <!-- Champ 1 -->
+        <div>
+          <label for="site"
+            class="block mb-2 text-sm font-medium text-gray-800">Site</label>
+          <input type="text" id="site" placeholder="Site" name="site"
+            [(ngModel)]="certificatControl.site"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
+            required />
+        </div>
+
+        <!-- Champ 2 -->
+        <div>
+          <label for="societe"
+            class="block mb-2 text-sm font-medium text-gray-800">Société</label>
+          <input type="text" id="societe" placeholder="Société" name="societe"
+            [(ngModel)]="certificatControl.societe"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
+            required />
+        </div>
+
+        <!-- Champ 3 -->
+        <div>
+          <label for="numeroRapport"
+            class="block mb-2 text-sm font-medium text-gray-800">Numéro du
+            Rapport</label>
+          <input type="text" id="numeroRapport" placeholder="Numéro Rapport"
+            name="numeroDuRapport"
+            [(ngModel)]="certificatControl.numeroRapport"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5" />
+        </div>
+
+        <!-- Champ 4 -->
+        <div>
+          <label for="localisation"
+            class="block mb-2 text-sm font-medium text-gray-800">Localisation</label>
+          <input type="text" id="localisation" placeholder="Localisation"
+            name="localisation"
+            [(ngModel)]="certificatControl.localisationCertificationFait"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5" />
+        </div>
+
+        <!-- Champ 5 -->
+        <div>
+          <label for="description"
+            class="block mb-2 text-sm font-medium text-gray-800">Description</label>
+          <input type="text" id="description" placeholder="Description"
+            name="description"
+            [(ngModel)]="certificatControl.description"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
+            required />
+        </div>
+
+        <!-- Checkbox 1 -->
+        <div>
+          <label for="noticeInstruction"
+            class="block mb-2 text-sm font-medium text-gray-800">Notice
+            Instruction</label>
+          <input type="checkbox" id="noticeInstruction" name="noticeInstruction"
+            [(ngModel)]="certificatControl.noticeInstruction"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Checkbox 2 -->
+        <div>
+          <label for="livretMaintenance"
+            class="block mb-2 text-sm font-medium text-gray-800">Livret
+            Maintenance</label>
+          <input type="checkbox" id="livretMaintenance" name="livretMaintenance"
+            [(ngModel)]="certificatControl.livretMaintenance"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Checkbox 3 -->
+        <div>
+          <label for="declarationConformite"
+            class="block mb-2 text-sm font-medium text-gray-800">Déclaration
+            Conformité</label>
+          <input type="checkbox" id="declarationConformite"
+            name="declarationConformite"
+            [(ngModel)]="certificatControl.declarationConformite"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Checkbox 4 -->
+        <div>
+          <label for="rapportControlPrecedent"
+            class="block mb-2 text-sm font-medium text-gray-800">Rapport
+            Contrôle Précédent</label>
+          <input type="checkbox" id="rapportControlPrecedent"
+            name="rapportControlPrecedent"
+            [(ngModel)]="certificatControl.rapportControlePrecedent"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Checkbox 5 -->
+        <div>
+          <label for="declarationEcrite"
+            class="block mb-2 text-sm font-medium text-gray-800">Déclaration
+            Écrite</label>
+          <input type="checkbox" id="declarationEcrite" name="declarationEcrite"
+            [(ngModel)]="certificatControl.declarationEcrite"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Checkbox 6 -->
+        <div>
+          <label for="moyenAccess"
+            class="block mb-2 text-sm font-medium text-gray-800">Moyen
+            Accès</label>
+          <input type="checkbox" id="moyenAccess" name="moyenAccess"
+            [(ngModel)]="certificatControl.moyenAccess"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Checkbox 7 -->
+        <div>
+          <label for="moyenAccessPartiel"
+            class="block mb-2 text-sm font-medium text-gray-800">Moyen Accès
+            Partiel</label>
+          <input type="checkbox" id="moyenAccessPartiel"
+            name="moyenAccessPartiel"
+            [(ngModel)]="certificatControl.moyenAccessPartiel"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Checkbox 8 -->
+        <div>
+          <label for="moyenAccessConducteur"
+            class="block mb-2 text-sm font-medium text-gray-800">Moyen Accès
+            Conducteur</label>
+          <input type="checkbox" id="moyenAccessConducteur"
+            name="moyenAccessConducteur"
+            [(ngModel)]="certificatControl.moyenAccessConducteur"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Select Etat de fonctionnement -->
+        <div>
+          <label for="fonctionnementEtat"
+            class="block mb-2 text-sm font-medium text-gray-800">État de
+            fonctionnement</label>
+          <select id="fonctionnementEtat" name="etatFonctionnement"
+            [(ngModel)]="selectedOption"
+            (change)="onSelectChange($event)"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
+            required>
+            <option value>Sélectionnez une catégorie</option>
+            <option value="Marche_AV_AR">Marche AVANT ARRIERE</option>
+            <option value="Pictogrammes_securite">Pictogrammes sécurité</option>
+            <option value="Vibration">Vibration</option>
+            <option value="Gyrophare">Gyrophare</option>
+            <option value="Clignotants_AV">Clignotants AVANT</option>
+            <option value="Clignotants_AR">Clignotants ARRIERE</option>
+            <option value="Changement_de_direction">Changement de
+              Direction</option>
+            <option value="Trou_d_homme">Trou d'homme</option>
+            <option value="Freinage">Freinage</option>
+            <option value="Arret_d_urgence">Arrêt d'urgence</option>
+            <option value="Etancheite_cuve">Étanchéité cuve</option>
+            <option value="SYSTEME_DE_FREINAGE">Système de freinage</option>
+            <option value="SYSTEME_HYDRAULIQUE">Système hydraulique</option>
+            <option value="CARTE_GRISE">Carte grise</option>
+            <option value="ASSURANCE">Assurance</option>
+            <option value="VISITE_TECHNIQUE">Visite Technique</option>
+            <option value="EXTINCTEUR">Extincteur</option>
+            <option value="BOMBONNE_D_AIR">Bombonne d'air</option>
+            <option value="TUYAUTERIE_DU_SYSTEME_DES_REMORQUES">Tuyau de système
+              des remorques</option>
+            <option value="SANGLE">Sangle</option>
+            <option value="ELINGUES">Élingues</option>
+            <option value="MANILLES">Manilles</option>
+            <option value="MANOMETRE_DE_PRESSION">Manomètre de pression</option>
+            <option value="TOLERANCE_USURE_DES_PNEUS">Tolérance usure des
+              pneus</option>
+            <option value="INDICE_DE_VITESSE_ET_DATE_PEREMPTION">Indice de
+              vitesse et date péremption</option>
+          </select>
+
+          <div class="mt-4">
+            <p *ngFor="let item of certificatControl.essaiFonctionnementList"
+              class="text-sm text-gray-800">
+              ✔️ {{ item }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Checkbox 9 -->
+        <div>
+          <label for="conformeReglement"
+            class="block mb-2 text-sm font-medium text-gray-800">Conforme
+            Règlement</label>
+          <input type="checkbox" id="conformeReglement" name="conformeReglement"
+            [(ngModel)]="certificatControl.conformeReglement"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Bouton Suivant -->
+        <div class="col-start-3">
+          <button type="button" (click)="nextStep()"
+            class="mt-4 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+              fill="currentColor" class="w-5 h-5">
+              <path fill-rule="evenodd"
+                d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z"
+                clip-rule="evenodd" />
+            </svg>
+            Suivant
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
+  <!-- 🧾 Form Step 2 -->
+  <div
+    [ngClass]="{'animate-slide-in-right': currentStep === 2, 'hidden': currentStep !== 2}">
+    <h2 class="mb-6 text-2xl font-medium text-gray-800">Compléter le
+      Rapport</h2>
+
+    <div class="grid grid-cols-4 gap-8">
+      <!-- Timeline -->
+      <ol class="relative m-4 border-gray-300 border-s">
+        <li class="mb-10 ms-6">
+          <span [ngClass]="currentStep >= 1 ? 'bg-blue-400' : 'bg-gray-100'"
+            class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white">
+            <svg class="w-3.5 h-3.5"
+              [ngClass]="currentStep >= 1 ? 'text-blue-600' : 'text-gray-500'"
+              xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 16 12">
+              <path stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="2"
+                d="M1 5.917 5.724 10.5 15 1.5" />
+            </svg>
+          </span>
+          <h3 class="font-medium leading-tight text-gray-800">Etape 1</h3>
+        </li>
+        <li class="mb-10 ms-6">
+          <span [ngClass]="currentStep >= 2 ? 'bg-blue-400' : 'bg-gray-100'"
+            class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white">
+            <svg class="w-3.5 h-3.5"
+              [ngClass]="currentStep >= 2 ? 'text-blue-600' : 'text-gray-500'"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+              viewBox="0 0 20 16">
+              <path
+                d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z" />
+            </svg>
+          </span>
+          <h3 class="font-medium leading-tight text-gray-800">Etape 2</h3>
+        </li>
+      </ol>
+
+      <form class="grid grid-cols-3 col-span-3 gap-6">
+        <!-- Champ Motif de Contrôle -->
+        <div>
+          <label for="motifControl"
+            class="block mb-2 text-sm font-medium text-gray-800">Motif de
+            Contrôle</label>
+          <input type="text" id="motifControl" placeholder="Motif de Contrôle"
+            name="motifControl"
+            [(ngModel)]="certificatControl.motifControle"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
+            required />
+        </div>
+
+        <!-- Champ Observations & Recommandations -->
+        <div>
+          <label for="recommandationsObservations"
+            class="block mb-2 text-sm font-medium text-gray-800">Observations &
+            Recommandations</label>
+          <textarea id="recommandationsObservations"
+            placeholder="Observations & Recommandations"
+            name="observationEtRecommandations"
+            [(ngModel)]="certificatControl.observationRecommendation"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
+            required></textarea>
+        </div>
+
+        <!-- Champ Validité -->
+        <div>
+          <label for="validite"
+            class="block mb-2 text-sm font-medium text-gray-800">Validité</label>
+          <select id="validite" name="validite"
+            [(ngModel)]="certificatControl.validite"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
+            required>
+            <option value>Sélectionnez une Validité</option>
+            <option value="UN_MOIS">1 MOIS</option>
+            <option value="DEUX_MOIS">2 MOIS</option>
+            <option value="TROIS_MOIS">3 MOIS</option>
+            <option value="QUATRE_MOIS">4 MOIS</option>
+            <option value="CINQ_MOIS">5 MOIS</option>
+            <option value="SIX_MOIS">6 MOIS</option>
+            <option value="SEPT_MOIS">7 MOIS</option>
+            <option value="HUIT_MOIS">8 MOIS</option>
+            <option value="NEUF_MOIS">9 MOIS</option>
+            <option value="DIX_MOIS">10 MOIS</option>
+            <option value="ONZE_MOIS">11 MOIS</option>
+            <option value="DOUZE_MOIS">12 MOIS</option>
+            <option value="TREIZE_MOIS">13 MOIS</option>
+            <option value="QUATORZE_MOIS">14 MOIS</option>
+            <option value="QUINZE_MOIS">15 MOIS</option>
+            <option value="SEIZE_MOIS">16 MOIS</option>
+            <option value="DIX_SEPT_MOIS">17 MOIS</option>
+            <option value="DIX_HUIT_MOIS">18 MOIS</option>
+            <option value="DIX_NEUF_MOIS">19 MOIS</option>
+            <option value="VINGT_MOIS">20 MOIS</option>
+            <option value="VINGT_MOIS">21 MOIS</option>
+            <option value="VINGT_MOIS">22 MOIS</option>
+            <option value="VINGT_MOIS">23 MOIS</option>
+            <option value="VINGT_MOIS">24 MOIS</option>
+          </select>
+        </div>
+
+        <!-- Champ Norme de Fabrication -->
+        <div>
+          <label for="normeFabrication"
+            class="block mb-2 text-sm font-medium text-gray-800">Norme de
+            Fabrication</label>
+          <input type="text" id="normeFabrication"
+            placeholder="Norme de fabrication" name="normeFabrication"
+            [(ngModel)]="certificatControl.normeFabrication"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5" />
+        </div>
+
+        <!-- Checkbox Payé -->
+        <div>
+          <label for="paye"
+            class="block mb-2 text-sm font-medium text-gray-800">Payé</label>
+          <input type="checkbox" id="paye" name="paye"
+            [(ngModel)]="certificatControl.paye"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Champ Montant -->
+        <div>
+          <label for="montant"
+            class="block mb-2 text-sm font-medium text-gray-800">Montant</label>
+          <input type="number" id="montant" placeholder="Montant" name="montant"
+            [(ngModel)]="certificatControl.montant"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5" />
+        </div>
+
+        <!-- Bouton Ajouter chauffeur -->
+        <div>
+          <button (click)="openChauffeurModal()" type="button"
+            data-modal-target="chauffeur-modal"
+            data-modal-toggle="chauffeur-modal"
+            class="mt-4 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+            Ajouter chauffeur
+          </button>
+        </div>
+
+        <!-- Bouton Ajouter Véhicule -->
+        <div>
+          <button (click)="openChauffeurModal()" type="button"
+            data-modal-target="vehicule-modal"
+            data-modal-toggle="vehicule-modal"
+            class="mt-4 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+            Ajouter Véhicule
+          </button>
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="flex col-start-1 gap-4 mt-4">
+          <button type="button" (click)="prevStep()"
+            class="mt-4 flex items-center gap-2 text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+              fill="currentColor" class="size-6">
+              <path fill-rule="evenodd"
+                d="M7.28 7.72a.75.75 0 0 1 0 1.06l-2.47 2.47H21a.75.75 0 0 1 0 1.5H4.81l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3.75-3.75a.75.75 0 0 1 0-1.06l3.75-3.75a.75.75 0 0 1 1.06 0Z"
+                clip-rule="evenodd" />
+            </svg>
+            Retour
+          </button>
+          <!-- <button type="button" (click)="visualiser()"
+            class="mt-4 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+              fill="currentColor" class="size-6">
+              <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+              <path fill-rule="evenodd"
+                d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
+                clip-rule="evenodd" />
+            </svg>
+            Visualiser
+          </button> -->
+          <button type="submit" (click)="save()"
+            class="mt-4 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
+            Enregistrer
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Cartes Informations -->
+    <div class="grid grid-cols-4 gap-4 p-4 m-4">
+      <!-- Colonne vide -->
+      <div></div>
+
+      <!-- Carte Chauffeur -->
+      <div *ngIf="chauffeurStored.nom"
+        class="w-full p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
+        <h5 class="mb-4 text-xl font-bold text-gray-800">Informations du
+          Chauffeur</h5>
+        <div class="space-y-2 text-gray-800">
+          <p><span class="font-semibold">Nom :</span> {{ chauffeurStored.nom
+            }}</p>
+          <p><span class="font-semibold">Prénom :</span> {{
+            chauffeurStored.prenom }}</p>
+          <p><span class="font-semibold">N° Permis :</span> {{
+            chauffeurStored.numeroPermis }}</p>
+          <p><span class="font-semibold">Certificat Médical :</span> {{
+            chauffeurStored.numeroCertificatMedicalValide }}</p>
+          <p><span class="font-semibold">Visite Technique :</span> {{
+            chauffeurStored.numeroVisiteTechnique }}</p>
+          <p><span class="font-semibold">CAP Poids Lourd :</span> {{
+            chauffeurStored.attestionCapPoidsLourd }}</p>
+          <p><span class="font-semibold">Conduite Défensive :</span> {{
+            chauffeurStored.attestationDeConduiteDefensive }}</p>
+        </div>
+      </div>
+
+      <!-- Carte Véhicule -->
+      <div *ngIf="vehiculeStored.numeroCarteGrise"
+        class="w-full p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
+        <h5 class="mb-4 text-xl font-bold text-gray-800">Informations du
+          Véhicule</h5>
+        <div class="space-y-2 text-gray-800">
+          <p><span class="font-semibold">Carte Grise :</span> {{
+            vehiculeStored.numeroCarteGrise }}</p>
+          <p><span class="font-semibold">Numéro d'assurance :</span> {{
+            vehiculeStored.numeroAssurance }}</p>
+          <p><span class="font-semibold">Visite Technique :</span> {{
+            vehiculeStored.numeroVisiteTechnique }}</p>
+          <p><span class="font-semibold">VGP Remorque :</span> {{
+            vehiculeStored.vgpRemorque }}</p>
+          <p>
+            <span class="font-semibold">Équipement obligatoire :</span>
+            <span
+              *ngIf="vehiculeStored.controleEquipementObligatoirel; else non">✅
+              Oui</span>
+            <ng-template #non>❌ Non</ng-template>
+          </p>
+          <div *ngIf="vehiculeStored.typeVehicules?.length">
+            <p class="font-semibold">Types associés :</p>
+            <ul class="pl-5 list-disc">
+              <li *ngFor="let type of vehiculeStored.typeVehicules">{{ type
+                }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Main modal -->
+<!-- Modal Chauffeur -->
 <div id="chauffeur-modal" tabindex="-1" aria-hidden="true"
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
   <div class="relative w-full max-w-2xl max-h-full p-4">
-    <!-- Modal content -->
-    <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-      <!-- Modal header -->
+    <div class="relative bg-white border border-gray-300 rounded-lg shadow-sm">
       <div
-        class="flex items-center justify-between p-4 border-b border-gray-200 rounded-t md:p-5 dark:border-gray-600">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-          Ajout Chauffeur
-        </h3>
+        class="flex items-center justify-between p-4 border-b border-gray-300 rounded-t">
+        <h3 class="text-xl font-semibold text-gray-800">Ajout Chauffeur</h3>
         <button type="button"
-          class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
+          class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto"
           data-modal-hide="chauffeur-modal">
           <svg class="w-3 h-3" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 14 14">
+            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round"
               stroke-linejoin="round" stroke-width="2"
               d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -531,109 +515,99 @@
           <span class="sr-only">Close modal</span>
         </button>
       </div>
-      <!-- Modal body -->
-      <div class="grid grid-cols-2 gap-8 p-4 space-y-4 md:p-5">
+      <div class="grid grid-cols-2 gap-8 p-4 space-y-4">
         <form class="grid grid-cols-2 col-span-3 gap-6">
-
           <!-- Champ 1 -->
           <div>
             <label for="numeroDePermis"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
-              de Permis</label>
+              class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+              Permis</label>
             <input type="text" id="numeroDePermis"
               placeholder="Numéro de Permis" name="numeroDePermis"
               [(ngModel)]="certificatControl.chauffeur.numeroPermis"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
             <label for="nomChauffeur"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom
+              class="block mb-2 text-sm font-medium text-gray-800">Nom
               Chauffeur</label>
-            <input type="text" id="nomChauffeur"
-              placeholder="Nom Chauffeur" name="nomChauffeur"
+            <input type="text" id="nomChauffeur" placeholder="Nom Chauffeur"
+              name="nomChauffeur"
               [(ngModel)]="certificatControl.chauffeur.nom"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
             <label for="prenomChauffeur"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prenom</label>
+              class="block mb-2 text-sm font-medium text-gray-800">Prénom</label>
             <input type="text" id="prenomChauffeur"
-              placeholder="Prenom Chauffeur" name="prenom"
+              placeholder="Prénom Chauffeur" name="prenom"
               [(ngModel)]="certificatControl.chauffeur.prenom"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
             <label for="numeroDeCertificatMedicalValide"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
-              de Certificat Medical Valide</label>
+              class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+              Certificat Médical Valide</label>
             <input type="text" id="numeroDeCertificatMedicalValide"
-              placeholder="numero de Certificat Medical Valide"
+              placeholder="Numéro de Certificat Médical Valide"
               name="numeroCertificatMedical"
               [(ngModel)]="certificatControl.chauffeur.numeroCertificatMedicalValide"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
-
           <div>
             <label for="attestationPoidsLourd"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
+              class="block mb-2 text-sm font-medium text-gray-800">Numéro
               Attestation Poids lourd</label>
             <input type="text" id="numeroVisiteTechnique"
               placeholder="Attestation Poids lourds"
               name="numeroAttestationPoidsLourd"
               [(ngModel)]="certificatControl.chauffeur.attestionCapPoidsLourd"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
             <label for="attestationDeConduiteDefensive"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numéro
-              Attestation de conduite defensive</label>
+              class="block mb-2 text-sm font-medium text-gray-800">Numéro
+              Attestation de conduite défensive</label>
             <input type="text" id="attestationDeConduiteDefensive"
-              placeholder="Attestation conduite defensive"
+              placeholder="Attestation conduite défensive"
               name="attestationconduiteDefensive"
               [(ngModel)]="certificatControl.chauffeur.attestationDeConduiteDefensive"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
-
         </form>
-
       </div>
-      <!-- Modal footer -->
-      <div
-        class="flex items-center p-4 border-t border-gray-200 rounded-b md:p-5 dark:border-gray-600">
+      <div class="flex items-center p-4 border-t border-gray-300 rounded-b">
         <button data-modal-hide="chauffeur-modal" type="button"
-          class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700"
+          class="mt-4 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center"
           (click)="createChauffeur()">Enregistrer</button>
         <button data-modal-hide="chauffeur-modal" type="button"
-          class="py-2.5 px-5 ms-3  text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Annuler</button>
+          class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-800 focus:z-10 focus:ring-4 focus:ring-gray-100">
+          Annuler
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Main modal -->
+<!-- Modal Véhicule -->
 <div id="vehicule-modal" tabindex="-1" aria-hidden="true"
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
   <div class="relative w-full max-w-2xl max-h-full p-4">
-    <!-- Modal content -->
-    <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-      <!-- Modal header -->
+    <div class="relative bg-white border border-gray-300 rounded-lg shadow-sm">
       <div
-        class="flex items-center justify-between p-4 border-b border-gray-200 rounded-t md:p-5 dark:border-gray-600">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-          Ajout Vehicule
-        </h3>
+        class="flex items-center justify-between p-4 border-b border-gray-300 rounded-t">
+        <h3 class="text-xl font-semibold text-gray-800">Ajout Véhicule</h3>
         <button type="button"
-          class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
+          class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto"
           data-modal-hide="vehicule-modal">
           <svg class="w-3 h-3" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 14 14">
+            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round"
               stroke-linejoin="round" stroke-width="2"
               d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -641,32 +615,27 @@
           <span class="sr-only">Close modal</span>
         </button>
       </div>
-      <!-- Modal body -->
-      <div class="grid grid-cols-2 gap-8 p-4 space-y-4 md:p-5">
-
+      <div class="grid grid-cols-2 gap-8 p-4 space-y-4">
         <form class="grid grid-cols-2 col-span-3 gap-6">
-
           <!-- Champ 1 -->
           <div>
             <label for="numeroDeCarteGrise"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
-              de Carte Grise</label>
+              class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+              Carte Grise</label>
             <input type="text" id="numeroDeCarteGrise"
-              placeholder="Numéro de carte grise"
-              name="numeroCarteGrise"
+              placeholder="Numéro de carte grise" name="numeroCarteGrise"
               [(ngModel)]="certificatControl.vehicule.numeroCarteGrise"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
             <label for="validite"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type
-              de voiture</label>
-            <select
-              id="validite" name="typeVoiture"
+              class="block mb-2 text-sm font-medium text-gray-800">Type de
+              voiture</label>
+            <select id="validite" name="typeVoiture"
               [(ngModel)]="selectedTypeVoitureOption"
               (change)="onSelectTypeVehiculeChange($event)"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required>
               <option value>Sélectionnez un type</option>
               <option value="POIDS_LOURD">POIDS LOURDS</option>
@@ -674,67 +643,62 @@
               <option value="PICKUP">PICK UP</option>
             </select>
             <div class="mt-4">
-              <p
-                *ngFor="let item of certificatControl.vehicule.typeVehicules"
-                class="text-sm text-gray-800 dark:text-gray-200">
+              <p *ngFor="let item of certificatControl.vehicule.typeVehicules"
+                class="text-sm text-gray-800">
                 ✔️ {{ item }}
               </p>
             </div>
           </div>
           <div>
             <label for="numeroAssurance"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero
+              class="block mb-2 text-sm font-medium text-gray-800">Numéro
               d'Assurance</label>
             <input type="text" id="numeroAssurance"
-              placeholder="Numero Assurance"
-              name="numeroAssurance"
+              placeholder="Numéro Assurance" name="numeroAssurance"
               [(ngModel)]="certificatControl.vehicule.numeroAssurance"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
             <label for="numeroVisiteTechnique"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numéro
-              de visite Technique</label>
+              class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+              visite Technique</label>
             <input type="text" id="numeroVisiteTechnique"
               placeholder="Numéro de visite Technique"
               name="numeroVisiteTechnique"
               [(ngModel)]="certificatControl.vehicule.numeroVisiteTechnique"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
-
           <div>
             <label for="VGPRemorque"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">numero
-              VGP Remorque</label>
-            <input type="text" id="VGPRemorque"
-              placeholder="VGP Remorque" name="vgpRemorque"
+              class="block mb-2 text-sm font-medium text-gray-800">Numéro VGP
+              Remorque</label>
+            <input type="text" id="VGPRemorque" placeholder="VGP Remorque"
+              name="vgpRemorque"
               [(ngModel)]="certificatControl.vehicule.vgpRemorque"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
+              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
             <label for="controlEquipementObligatoire"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Controle
-              Equipement obligatoire</label>
-            <input
-              type="checkbox"
-              id="paye" name="controleEquipementObligatoirel"
+              class="block mb-2 text-sm font-medium text-gray-800">Contrôle
+              Équipement obligatoire</label>
+            <input type="checkbox" id="paye"
+              name="controleEquipementObligatoirel"
               [(ngModel)]="certificatControl.vehicule.controleEquipementObligatoirel"
-              class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-400 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+              class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
           </div>
-
         </form>
       </div>
-      <!-- Modal footer -->
-      <div
-        class="flex items-center p-4 border-t border-gray-200 rounded-b md:p-5 dark:border-gray-600">
+      <div class="flex items-center p-4 border-t border-gray-300 rounded-b">
         <button data-modal-hide="vehicule-modal" type="button"
-          class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700"
+          class="mt-4 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center"
           (click)="createVehicule()">Enregistrer</button>
         <button data-modal-hide="vehicule-modal" type="button"
-          class="py-2.5 px-5 ms-3  text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Annuler</button>
+          class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-800 focus:z-10 focus:ring-4 focus:ring-gray-100">
+          Annuler
+        </button>
       </div>
     </div>
   </div>
