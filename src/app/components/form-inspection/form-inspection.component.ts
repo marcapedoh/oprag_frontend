@@ -41,11 +41,14 @@ export class FormInspectionComponent implements OnInit {
   }
   toast: any = {}
 
-
+  eligibleforInspection: boolean = false
   ngOnInit(): void {
 
     localStorage.removeItem("chauffeur");
     localStorage.removeItem("vehicule");
+    const signaturePresence = localStorage.getItem("SignaturePresence")!
+    console.log(signaturePresence)
+    this.eligibleforInspection = signaturePresence ? true : false
     const reloaded = sessionStorage.getItem('alreadyReloaded');
     if (!reloaded) {
       sessionStorage.setItem('alreadyReloaded', 'true');
