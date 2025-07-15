@@ -1,94 +1,111 @@
-
-
 <div
   [ngClass]="{'animate-slide-in-left': currentStep === 1, 'hidden': currentStep !== 1}"
-  class="max-w-screen-xl p-6 mx-auto shadow-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl">
+  class="max-w-screen-xl p-6 mx-auto border border-gray-200 shadow-lg bg-white/90 backdrop-blur-md rounded-xl">
   <div class="grid grid-cols-3 gap-8">
-
     <form class="grid grid-cols-3 col-span-3 gap-6">
-
+      <!-- Nom -->
       <div>
         <label for="nom"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
-        <input type="text" id="nom"
-          placeholder="nom" name="nom" [(ngModel)]="user.nom"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+          class="block mb-2 text-sm font-medium text-gray-800">Nom</label>
+        <input type="text" id="nom" placeholder="Nom" name="nom"
+          [(ngModel)]="user.nom"
+          class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       </div>
+
+      <!-- Prénom -->
       <div>
         <label for="prenom"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prenom</label>
-        <input type="text" id="prenom"
-          placeholder="prenom" name="nom" [(ngModel)]="user.prenom"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+          class="block mb-2 text-sm font-medium text-gray-800">Prénom</label>
+        <input type="text" id="prenom" placeholder="Prénom" name="prenom"
+          [(ngModel)]="user.prenom"
+          class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       </div>
 
+      <!-- Username -->
       <div>
         <label for="userName"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">UserName</label>
-        <input type="text" id="userName"
-          placeholder="username" name="username" [(ngModel)]="user.userName"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+          class="block mb-2 text-sm font-medium text-gray-800">Nom
+          d'utilisateur</label>
+        <input type="text" id="userName" placeholder="Nom d'utilisateur"
+          name="username" [(ngModel)]="user.userName"
+          class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       </div>
+
+      <!-- Email -->
       <div>
         <label for="emailInput"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-        <input type="email" id="emailInput"
-          placeholder="email" name="username" [(ngModel)]="user.email"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+          class="block mb-2 text-sm font-medium text-gray-800">Email</label>
+        <input type="email" id="emailInput" placeholder="email@exemple.com"
+          name="email" [(ngModel)]="user.email"
+          class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       </div>
 
+      <!-- Mot de passe -->
       <div>
         <label for="motDePasse"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot
-          de Passe</label>
-        <input type="password" id="motDePasse"
-          placeholder="mot de passe" name="passWord"
-          [(ngModel)]="user.motDePasse"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+          class="block mb-2 text-sm font-medium text-gray-800">Mot de
+          passe</label>
+        <input type="password" id="motDePasse" placeholder="••••••••"
+          name="passWord" [(ngModel)]="user.motDePasse"
+          class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       </div>
+
+      <!-- Confirmation mot de passe -->
       <div>
-        <label for="motDePasse"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmer
-          Mot de passe</label>
-        <input type="password" id="motDePasse"
-          placeholder="mot de passe" name="passWord"
-          [(ngModel)]="confirmMotDePasse"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400" />
+        <label for="confirmMotDePasse"
+          class="block mb-2 text-sm font-medium text-gray-800">Confirmer mot de
+          passe</label>
+        <input type="password" id="confirmMotDePasse" placeholder="••••••••"
+          name="confirmPassWord" [(ngModel)]="confirmMotDePasse"
+          class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       </div>
+
+      <!-- Message d'erreur mot de passe -->
       <div *ngIf="confirmMotDePasse && confirmMotDePasse !== user.motDePasse"
-        class="mt-1 text-sm text-red-600">
+        class="col-span-3 mt-1 text-sm text-red-600">
         Les mots de passe ne correspondent pas.
       </div>
+
+      <!-- Rôle -->
       <div>
         <label for="role"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-        <select
-          id="role" name="roleUser"
-          [(ngModel)]="user.role"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-400 dark:focus:border-green-400"
-          required>
-          <option value>Sélectionnez un role</option>
-          <option [value]="userRole"
-            *ngFor="let userRole of roleAddable">{{ userRole }}</option>
+          class="block mb-2 text-sm font-medium text-gray-800">Rôle</label>
+        <select id="role" name="roleUser" [(ngModel)]="user.role"
+          class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+          <option value>Sélectionnez un rôle</option>
+          <option [value]="userRole" *ngFor="let userRole of roleAddable">{{
+            userRole }}</option>
         </select>
-
       </div>
-      <div class="col-start-3">
-        <button type="button"
-          class="mt-4 flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700"
-          (click)="save()">
 
+      <!-- Inspection (conditionnel) -->
+      <div *ngIf="inspectionFieldActive">
+        <label for="inspection"
+          class="block mb-2 text-sm font-medium text-gray-800">Inspection</label>
+        <select id="inspection" name="inspectionId"
+          [(ngModel)]="selectedInspection"
+          class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+          <option value>Sélectionnez une inspection</option>
+          <option [value]="inspection.id"
+            *ngFor="let inspection of inspections">{{ inspection.code
+            }}</option>
+        </select>
+      </div>
+
+      <!-- Bouton Enregistrer -->
+      <div class="flex justify-end col-start-3">
+        <button type="button" (click)="save()"
+          class="mt-6 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
           Enregistrer
         </button>
       </div>
-
     </form>
-
   </div>
 </div>
 
+<!-- Tableau des utilisateurs -->
 <div
-  class="max-w-screen-xl p-6 mx-auto mt-4 shadow-lg animate-slide-in-left bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl">
+  class="max-w-screen-xl p-6 mx-auto mt-6 border border-gray-200 shadow-lg bg-white/90 backdrop-blur-md rounded-xl">
   <app-datatable [data]="usersInspecteur" [columns]="columns"
     dataType="Utilisateur" routeNavigate="utilisateurs/ajout"></app-datatable>
 </div>
