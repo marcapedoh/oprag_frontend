@@ -17,6 +17,7 @@ export class DatatableComponent {
   @Input() data!: Array<any>;
   @Input() columns!: any
   @Input() dataType!: string;
+  @Input() boutonDataType!: string;
   @Input() routeNavigate!: string;
   filteredData: any = []
   numberData: number = 10

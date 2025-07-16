@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
   role: string = ''
+  showConfirmationModal = false;
   ngOnInit(): void {
     this.role = localStorage.getItem("UserROle")!
   }
