@@ -86,7 +86,7 @@
           [(ngModel)]="selectedInspection"
           class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
           <option value>Sélectionnez une inspection</option>
-          <option [value]="inspection.id"
+          <option [value]="inspection.code"
             *ngFor="let inspection of inspections">{{ inspection.code
             }}</option>
         </select>
