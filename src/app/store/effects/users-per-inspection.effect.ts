@@ -9,8 +9,8 @@ export class UsersPerInspectionEffect {
 
   loadUserPerInspection$ = createEffect(() => this.actions$.pipe(
     ofType(getAllUserPerInspectionName),
-    exhaustMap(({ inspectionName }) =>
-      this.dataService.usersPerInspectionName(inspectionName).pipe(
+    exhaustMap(() =>
+      this.dataService.usersPerInspectionName().pipe(
         map((responseDAO) => getAllUserPerInspectionNameSuccess(responseDAO)),
         catchError((error) => of(getAllUserPerInspectionNameFailure(error)))
       ))

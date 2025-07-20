@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
     this.storeChart.dispatch(getAllChartObject())
     this.storeInspections.dispatch(getAllInspection())
     this.storeUserProfil.dispatch(getUserProfilInfo(+localStorage.getItem("ConnectedUser")!))
-    this.storeUsersPerInspection.dispatch(getAllUserPerInspectionName(localStorage.getItem("InspectionName")!))
+    this.storeUsersPerInspection.dispatch(getAllUserPerInspectionName())
   }
 
 

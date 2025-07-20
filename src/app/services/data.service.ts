@@ -61,8 +61,8 @@ export class DataService {
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/countAllPerDay")
   }
 
-  usersPerInspectionName(inspectionName: string) {
-    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/findAllByInspectionNom/" + inspectionName)
+  usersPerInspectionName() {
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/findAllByInspectionNom")
   }
 
   findUserById(userId: number) {
