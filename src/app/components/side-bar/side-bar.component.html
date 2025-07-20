@@ -26,7 +26,8 @@
         </a>
       </li>
 
-      <li *ngIf="role === 'INSPECTEUR' || role === 'SUPER_ADMIN'">
+      <li
+        *ngIf="role === 'INSPECTEUR' || role === 'SUPER_ADMIN' || role === 'DGMG'">
         <a routerLink="inspection/collection"
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
@@ -43,7 +44,8 @@
         </a>
       </li>
 
-      <li *ngIf="role === 'INSPECTEUR' || role === 'SUPER_ADMIN'">
+      <li
+        *ngIf="role === 'INSPECTEUR' || role === 'SUPER_ADMIN' || role === 'DGMG'">
         <a routerLink="badge/collection"
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
@@ -107,7 +109,7 @@
         </a>
       </li>
 
-      <li *ngIf="role=='DGMG'">
+      <!-- <li *ngIf="role=='DGMG'">
         <a routerLink="utilisateurs/ajout"
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
@@ -120,7 +122,7 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Gérer les
             Inspecteurs</span>
         </a>
-      </li>
+      </li> -->
 
       <li>
         <a (click)="showConfirmationModal = true"
