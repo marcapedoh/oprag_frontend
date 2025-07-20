@@ -426,10 +426,16 @@
             Visualiser
           </button> -->
           <button type="submit" (click)="save()"
-            [disabled]="eligibleforInspection"
+            *ngIf="eligibleforInspection"
             class="mt-4 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
             Enregistrer
           </button>
+          <div *ngIf="!eligibleforInspection"
+            class="w-full p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
+            <h5 class="mb-4 text-xl font-bold text-gray-800">❌ Rendez-vous dans
+              votre fenetre pour ajouté votre signature Avant de créer des
+              rapport</h5>
+          </div>
         </div>
       </form>
     </div>
@@ -704,7 +710,3 @@
     </div>
   </div>
 </div>
-
-<app-toast type="danger"
-  message="Vous ne pouvez pas faire d'opération si vous n'avez pas de signature"
-  *ngIf="eligibleforInspection"></app-toast>

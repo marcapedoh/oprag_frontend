@@ -36,7 +36,7 @@
       <div>
         <label class="block text-gray-700">Signature</label>
         <p class="mt-1 font-medium text-gray-800">
-          {{ utilisateur.signature ?? 'Non définie' }}
+          {{ utilisateur.signature ? "✅ Ajouté": '❌ Non définie' }}
         </p>
       </div>
       <div class="md:col-span-2">

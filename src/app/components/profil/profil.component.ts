@@ -23,6 +23,11 @@ export class ProfilComponent implements OnInit {
     })
   }
   onSubmit() {
+    //console.log(this.utilisateur)
+    this.utilisateur = {
+      ...this.utilisateur,
+      motDePasse: this.utilisateur.motDePasse
+    }
     this.store.dispatch(updateUserProfilInfo(this.utilisateur))
   }
   fileSelected = false;

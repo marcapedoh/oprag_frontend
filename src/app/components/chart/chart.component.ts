@@ -181,9 +181,9 @@ export class ChartsComponent implements OnInit {
             categories: dates,
             labels: {
               rotate: -45,
-              style: {
-                colors: '#ffffff'
-              }
+              // style: {
+              //   colors: '#ffffff'
+              // }
             }
           }
         };

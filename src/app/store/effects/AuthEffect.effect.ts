@@ -25,7 +25,7 @@ export class AuthEffects {
           localStorage.setItem("InspectionId", action.responseDAO.inspectionId)
           localStorage.setItem("Nom", action.responseDAO.nom)
           localStorage.setItem("Prenom", action.responseDAO.prenom)
-          localStorage.setItem("SignaturePresence", action.responseDAO.signaturePresence)
+          localStorage.setItem("SignaturePresence", JSON.stringify(action.responseDAO.signaturePresence))
           if (action.responseDAO.role == "INSPECTEUR") {
             this.router.navigate(["/inspection/collection"])
           } else if (action.responseDAO.role == "SUPER_ADMIN") {

@@ -11,6 +11,7 @@ import { ToastState } from 'src/app/store/reducers/toast.reducer';
 import { selectAuthError } from 'src/app/store/selector/auth.selector';
 import { selectAllCertificatControls } from 'src/app/store/selector/certificatControl.selector';
 import { selectToast } from 'src/app/store/selector/toast.selector';
+import { selectUserProfil } from 'src/app/store/selector/user-profil.selector';
 
 declare const Modal: any;
 @Component({
@@ -34,21 +35,29 @@ export class FormInspectionComponent implements OnInit {
   vehiculeStored: any = {}
   selectedOption: string = '';
   selectedTypeVoitureOption: string = ''
+  utilisateur$: Observable<any>;
   toast$: Observable<ToastState>;
   constructor(private store: Store<any>, private storeCertificatControl: Store<CertificatControlState>, private activatedRoute: ActivatedRoute) {
     this.toast$ = this.store.select(selectToast);
     this.inpectionsVehicule$ = this.storeCertificatControl.pipe(select(selectAllCertificatControls))
+    this.utilisateur$ = this.store.pipe(select(selectUserProfil))
   }
   toast: any = {}
 
   eligibleforInspection: boolean = false
+  loaded = false;
+  utilisateur: any = {}
   ngOnInit(): void {
 
     localStorage.removeItem("chauffeur");
     localStorage.removeItem("vehicule");
-    const signaturePresence = localStorage.getItem("SignaturePresence")!
-    console.log(signaturePresence)
-    this.eligibleforInspection = signaturePresence ? true : false
+
+    this.utilisateur$.subscribe((profil: any) => {
+      this.utilisateur = { ...profil.responseDAO }
+      this.eligibleforInspection = !!this.utilisateur.signature
+      this.loaded = true;
+    })
+
     const reloaded = sessionStorage.getItem('alreadyReloaded');
     if (!reloaded) {
       sessionStorage.setItem('alreadyReloaded', 'true');

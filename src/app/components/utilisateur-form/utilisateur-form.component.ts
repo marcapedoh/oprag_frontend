@@ -38,9 +38,8 @@ export class UtilisateurFormComponent implements OnInit {
     const userRole = localStorage.getItem("UserROle") as string
     this.roleAddable = userRole == "DGMG" ? [
       "INSPECTEUR",
-      "INSPECTEUR_ADMIN"
     ] : [
-      "INSPECTEUR"
+      "DGMG"
     ]
 
     this.usersPerInspection$.subscribe((usersInspection: any) => {
