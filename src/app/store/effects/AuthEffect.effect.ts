@@ -31,7 +31,7 @@ export class AuthEffects {
           } else if (action.responseDAO.role == "SUPER_ADMIN") {
             this.router.navigate(["/vueEnsemble"])
           } else if (action.responseDAO.role == "DGMG") {
-            this.router.navigate(["/dashboard"])
+            this.router.navigate(["/vueEnsemble"])
           }
         }
       })
