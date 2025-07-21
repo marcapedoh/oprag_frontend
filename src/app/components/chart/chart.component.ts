@@ -59,7 +59,7 @@ export class ChartsComponent implements OnInit {
       series: [
         {
           name: "Cartes créé",
-          data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35]
+          data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65]
         }
       ],
       annotations: {
@@ -109,19 +109,19 @@ export class ChartsComponent implements OnInit {
           }
         },
         categories: [
-          "Apples",
-          "Oranges",
-          "Strawberries",
-          "Pineapples",
-          "Mangoes",
-          "Bananas",
-          "Blackberries",
-          "Pears",
-          "Watermelons",
-          "Cherries",
-          "Pomegranates",
-          "Tangerines",
-          "Papayas"
+          "Janvier",
+          "Février",
+          "Mars",
+          "Avril",
+          "Mai",
+          "Juin",
+          "Juillet",
+          "Août",
+          "Septembre",
+          "Octobre",
+          "Novembre",
+          "Decembre",
+
         ],
         tickPlacement: "on",
 
