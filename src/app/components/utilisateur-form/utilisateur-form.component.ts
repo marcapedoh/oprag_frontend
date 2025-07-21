@@ -36,10 +36,10 @@ export class UtilisateurFormComponent implements OnInit {
   selectedInspection = ""
   ngOnInit(): void {
     const userRole = localStorage.getItem("UserROle") as string
-    this.roleAddable = userRole == "DGMG" ? [
-      "INSPECTEUR",
+    this.roleAddable = userRole == "INSPECTEUR_PRINCIPAL" ? [
+      "CONTROLLEUR",
     ] : [
-      "DGMG"
+      "INSPECTEUR_PRINCIPAL"
     ]
 
     this.usersPerInspection$.subscribe((usersInspection: any) => {
