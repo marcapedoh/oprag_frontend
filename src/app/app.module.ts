@@ -45,6 +45,8 @@ import { userProfilReducer } from './store/reducers/user-profil.reducer';
 import { UserProfilEffect } from './store/effects/user-profil.effect';
 import { inspectionReducer } from './store/reducers/inspection.reducer';
 import { InspectionEffect } from './store/effects/inspectionEffect.effect';
+import { utilisateurReducer } from './store/reducers/utilisateur.action';
+import { UtilisateurEffect } from './store/effects/utilisateur.effect';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,9 +75,9 @@ import { InspectionEffect } from './store/effects/inspectionEffect.effect';
     FormsModule,
     NgApexchartsModule,
     HttpClientModule,
-    StoreModule.forRoot({ auth: authReducer, certificatControls: certificatControlReducer, badges: badgeReducer, chauffeurs: chauffeurReducer, vehicules: vehiculeReducer, toast: toastReducer, usersInspection: userPerInspectionReducer, profil: userProfilReducer, inspections: inspectionReducer }, {}),
+    StoreModule.forRoot({ auth: authReducer, certificatControls: certificatControlReducer, badges: badgeReducer, chauffeurs: chauffeurReducer, vehicules: vehiculeReducer, toast: toastReducer, usersInspection: userPerInspectionReducer, profil: userProfilReducer, inspections: inspectionReducer, utilisateurs: utilisateurReducer }, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([AuthEffects, CertificatControlEffects, BadgeEffect, ChauffeurEffect, VehiculeEffect, UsersPerInspectionEffect, UserProfilEffect, InspectionEffect])
+    EffectsModule.forRoot([AuthEffects, CertificatControlEffects, BadgeEffect, ChauffeurEffect, VehiculeEffect, UsersPerInspectionEffect, UserProfilEffect, InspectionEffect, UtilisateurEffect])
 
   ],
   providers: [

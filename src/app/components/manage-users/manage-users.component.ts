@@ -5,6 +5,7 @@ import { getAllUserPerInspectionName, getLastOperationDate, getUserRapport, getU
 import { selectAllBadges } from 'src/app/store/selector/badge.selector';
 import { selectAllCertificatControls } from 'src/app/store/selector/certificatControl.selector';
 import { selectAllUserPerInspection } from 'src/app/store/selector/user-per-inspection.selector';
+import { selectAllUtilisateur } from 'src/app/store/selector/utilisateur.selector';
 
 @Component({
   selector: 'app-manage-users',
@@ -16,6 +17,7 @@ export class ManageUsersComponent implements OnInit {
   usersPerInspection$: Observable<ReadonlyArray<any>>;
   inpectionsVehicule$: Observable<ReadonlyArray<any>>;
   badges$: Observable<ReadonlyArray<any>>;
+
   usersInspecteur: any[] = []
   badges: any[] = []
   certificatControls: any[] = []
@@ -30,8 +32,8 @@ export class ManageUsersComponent implements OnInit {
     this.usersPerInspection$ = this.store.pipe(select(selectAllUserPerInspection))
     this.badges$ = this.store.pipe(select(selectAllBadges))
     this.inpectionsVehicule$ = this.store.pipe(select(selectAllCertificatControls))
-  }
 
+  }
   ngOnInit(): void {
     this.badges$.subscribe((badges: any) => {
       console.log(badges.badges)
@@ -62,6 +64,8 @@ export class ManageUsersComponent implements OnInit {
         console.log('No userPerInspection found or still loading.');
       }
     })
+
+
   }
 
   get paginatedUsers(): any[] {

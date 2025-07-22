@@ -20,6 +20,7 @@ import {
   ApexDataLabels,
   ApexTooltip
 } from "ng-apexcharts";
+import { selectAllUtilisateur } from 'src/app/store/selector/utilisateur.selector';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -41,10 +42,10 @@ export class TechnicalPartenersComponent implements OnInit {
   inpections$: Observable<ReadonlyArray<any>>;
   inspectionStatusChart: any;
   isDarkMode = false;
-
-  constructor(private store: Store<InspectionState>) {
+  utilisateurs$: Observable<ReadonlyArray<any>>;
+  constructor(private store: Store<any>) {
     this.inpections$ = this.store.pipe(select(selectAllInspections))
-
+    this.utilisateurs$ = this.store.pipe(select(selectAllUtilisateur))
   }
   isStatsCardCollapsed = false;
 
@@ -84,6 +85,7 @@ export class TechnicalPartenersComponent implements OnInit {
   };
 
 
+  utilisateurs: any[] = []
   inspections: any = []
   ngOnInit(): void {
     this.initializeChart();
@@ -93,6 +95,15 @@ export class TechnicalPartenersComponent implements OnInit {
         this.inspections = inspections.inspections
       } else {
         console.log('No inspections found or still loading.');
+      }
+    });
+
+    this.utilisateurs$.subscribe((utilisateurs: any) => {
+      console.log(utilisateurs)
+      if (Array.isArray(utilisateurs.utilisateurs) && utilisateurs.utilisateurs.length > 0) {
+        this.utilisateurs = utilisateurs.utilisateurs
+      } else {
+        console.log('No utilisateurs found or still loading.');
       }
     });
 
@@ -232,6 +243,10 @@ export class TechnicalPartenersComponent implements OnInit {
 
     this.showConfirmationModal = false;
     this.selectedPartner = null;
+  }
+  openEditModal(inspectionData: any) {
+    this.newInspection = { ...inspectionData };
+    this.showNewInspectionModal = true;
   }
   showNewInspectionModal = false;
   selectedFile: File | null = null;

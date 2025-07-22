@@ -10,15 +10,16 @@
 
       <div class="content">
         <div class="info">
-          <div><label>N° :</label> {{badge.numero}}</div>
+          <div><label>N° :</label> <strong>{{badge.numero}}</strong> </div>
           <div><label>VALIDITÉ :</label>
-            {{badge.validite}}</div>
-          <div><label>ID PARC :</label> {{badge.numeroParc}}</div>
+            <strong>{{badge.validite}}</strong></div>
+          <div><label>ID PARC :</label>
+            <strong>{{badge.numeroParc}}</strong></div>
           <div><label>ENTREPRISE :</label>
-            {{badge.certificatControl.societe}}</div>
-          <div><label>CODE INSPECTION :</label> {{
-            badge.inspecteur.inspection.codeInspection?badge.inspecteur.inspection.codeInspection:""
-            }}</div>
+            <strong>{{badge.certificatControl.societe}}</strong></div>
+          <div><label>CODE INSPECTION :</label> <strong>{{
+              badge.inspecteur.inspection.codeInspection?badge.inspecteur.inspection.codeInspection:""
+              }}</strong></div>
         </div>
 
         <div class="partners">

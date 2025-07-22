@@ -26,11 +26,11 @@
       <div class="p-4 bg-white rounded-lg shadow ">
         <h2
           class="mb-4 text-lg font-semibold text-gray-800 ">Liste
-          des utilisateurs</h2>
+          des Inspecteurs</h2>
 
         <div class="overflow-x-auto">
           <table
-            class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+            class="min-w-full divide-y divide-gray-400">
             <thead class="bg-gray-400 ">
               <tr>
                 <th
@@ -44,15 +44,15 @@
               </tr>
             </thead>
             <tbody
-              class="bg-white divide-y divide-gray-200 dark:bg-gray-700 dark:divide-gray-600">
+              class="bg-white divide-y divide-gray-400 ">
               <!-- Exemple d'utilisateur -->
               <tr *ngFor="let user of paginatedUsers" (click)="selectUser(user)"
-                class="cursor-pointer hover:bg-gray-800/80 backdrop-blur-md">
+                class="cursor-pointer hover:bg-gray-400/80 backdrop-blur-md">
                 <td
-                  class="px-4 py-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.nom}}
+                  class="px-4 py-3 text-sm font-medium text-gray-900 whitespace-nowrap ">{{user.nom}}
                   {{ user.prenom }}</td>
                 <td
-                  class="px-4 py-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-300">{{
+                  class="px-4 py-3 text-sm text-gray-500 whitespace-nowrap ">{{
                   user.role }}</td>
                 <td class="px-4 py-3 whitespace-nowrap">
                   <span
@@ -64,9 +64,9 @@
                   </span>
                 </td>
                 <td
-                  class="px-4 py-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-300">
+                  class="px-4 py-3 text-sm text-gray-500 whitespace-nowrap ">
                   <button
-                    class="mr-2  hover:text-white text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700">Éditer</button>
+                    class="mr-2  hover:text-white text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-gray-800 hover:bg-gray-600 focus:ring-gray-700">Éditer</button>
                   <button
                     class=" hover:text-white mr-2 text-white  focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-700">Désactiver</button>
                 </td>
@@ -92,7 +92,7 @@
               *ngFor="let page of [].constructor(totalPages); let i = index"
               class="px-3 py-1 rounded cursor-pointer"
               [ngClass]="{
-                            'text-white bg-blue-600': currentPage === i + 1,
+                            'text-white bg-gray-800': currentPage === i + 1,
                             'text-gray-700  bg-gray-600 ': currentPage !== i + 1
                           }"
               (click)="currentPage = i + 1">
@@ -113,9 +113,9 @@
     <div
       class="w-full pt-6 border-t border-gray-600 md:w-1/3 md:pt-0 md:border-t-0 md:border-l"
       *ngIf="selectedUser">
-      <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+      <div class="p-4 bg-gray-400 rounded-lg shadow ">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold text-gray-800 ">
+          <h2 class="text-lg font-semibold text-white">
             Statistiques
           </h2>
           <button (click)="selectedUser = null"
@@ -125,7 +125,7 @@
         </div>
         <!-- Carte Statistiques générales -->
         <div class="mb-6">
-          <h3 class="mb-2 font-medium text-gray-700">Activité
+          <h3 class="mb-2 font-medium text-white">Activité
             globale</h3>
           <div class="grid grid-cols-2 gap-4">
             <div class="p-3 rounded-lg bg-blue-900/30">
@@ -147,7 +147,7 @@
 
         <!-- Carte Utilisateur sélectionné -->
         <div class="mb-6">
-          <h3 class="mb-2 font-medium text-gray-700">Détails
+          <h3 class="mb-2 font-medium text-white">Détails
             utilisateur</h3>
           <div class="p-4 bg-gray-600 rounded-lg">
             <div class="flex items-center mb-3">
@@ -170,7 +170,7 @@
 
             <div class="space-y-3">
               <div>
-                <p class="text-sm text-gray-400 ">Rapports
+                <p class="text-sm text-white ">Rapports
                   créés: <span
                     class="font-medium text-blue-600 ">{{
                     nombreRapportInspectionCree }}</span></p>
@@ -184,7 +184,7 @@
                 </span>
               </div>
               <div>
-                <p class="text-sm text-gray-400">Cartes
+                <p class="text-sm text-white">Cartes
                   générées: <span
                     class="font-medium text-green-600 dark:text-green-300">{{
                     nombreBadgeCree }}</span></p>
@@ -198,7 +198,7 @@
                 </span>
               </div>
               <div>
-                <p class="text-sm text-gray-600 dark:text-gray-300">dernière
+                <p class="text-sm text-white">dernière
                   Activité: {{ lastHour ? (lastHour | date:'short') : 'Dormant!'
                   }}
                 </p>
