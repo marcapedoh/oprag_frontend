@@ -11,7 +11,7 @@
 
   <div class="h-full px-3 py-4 overflow-y-auto">
     <ul class="mt-8 space-y-2 font-medium">
-      <li *ngIf="role === 'DGMG' || role === 'SUPER_ADMIN'">
+      <li *ngIf="role === 'INSPECTEUR_PRINCIPAL' || role === 'SUPER_ADMIN'">
         <a routerLink="vueEnsemble"
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
@@ -27,7 +27,7 @@
       </li>
 
       <li
-        *ngIf="role === 'INSPECTEUR' || role === 'SUPER_ADMIN' || role === 'DGMG'">
+        *ngIf="role === 'INSPECTEUR' || role === 'SUPER_ADMIN' || role === 'INSPECTEUR_PRINCIPAL'">
         <a routerLink="inspection/collection"
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
@@ -45,7 +45,7 @@
       </li>
 
       <li
-        *ngIf="role === 'INSPECTEUR' || role === 'SUPER_ADMIN' || role === 'DGMG'">
+        *ngIf="role === 'INSPECTEUR' || role === 'SUPER_ADMIN' || role === 'INSPECTEUR_PRINCIPAL'">
         <a routerLink="badge/collection"
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
@@ -61,7 +61,7 @@
         </a>
       </li>
 
-      <li *ngIf="role === 'DGMG' || role === 'SUPER_ADMIN'">
+      <li *ngIf="role === 'INSPECTEUR_PRINCIPAL' || role === 'SUPER_ADMIN'">
         <a routerLink="users"
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
