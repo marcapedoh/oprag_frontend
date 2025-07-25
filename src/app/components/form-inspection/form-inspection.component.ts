@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -37,7 +38,7 @@ export class FormInspectionComponent implements OnInit {
   selectedTypeVoitureOption: string = ''
   utilisateur$: Observable<any>;
   toast$: Observable<ToastState>;
-  constructor(private store: Store<any>, private storeCertificatControl: Store<CertificatControlState>, private activatedRoute: ActivatedRoute) {
+  constructor(private store: Store<any>, private storeCertificatControl: Store<CertificatControlState>, private activatedRoute: ActivatedRoute, private currencyPipe: CurrencyPipe) {
     this.toast$ = this.store.select(selectToast);
     this.inpectionsVehicule$ = this.storeCertificatControl.pipe(select(selectAllCertificatControls))
     this.utilisateur$ = this.store.pipe(select(selectUserProfil))
@@ -49,6 +50,10 @@ export class FormInspectionComponent implements OnInit {
   utilisateur: any = {}
   ngOnInit(): void {
 
+    const savedData = localStorage.getItem('cetificatControl');
+    if (savedData) {
+      this.certificatControl = JSON.parse(savedData);
+    }
     localStorage.removeItem("chauffeur");
     localStorage.removeItem("vehicule");
 
@@ -83,6 +88,15 @@ export class FormInspectionComponent implements OnInit {
     });
 
   }
+  formatMontant() {
+    if (this.certificatControl.montant) {
+      this.certificatControl.montant = this.currencyPipe.transform(this.certificatControl.montant, 'XAF', 'symbol', '1.0-0'); // pour FCFA
+    }
+  }
+  saveForm() {
+    localStorage.setItem('cetificatControl', JSON.stringify(this.certificatControl));
+  }
+
   nextStep() {
     if (this.currentStep < 2) {
       this.currentStep++;

@@ -51,7 +51,16 @@ export class BadgeFormComponent {
   }
 
 
+  saveForm() {
+    localStorage.setItem('badge', JSON.stringify(this.badge));
+  }
+
   ngOnInit(): void {
+    const savedData = localStorage.getItem('badge');
+    if (savedData) {
+      this.badge = JSON.parse(savedData);
+    }
+
     this.inpectionsVehicule$.subscribe((certificatControl: any) => {
       console.log(certificatControl.certificatControls)
       if (Array.isArray(certificatControl.certificatControls) && certificatControl.certificatControls.length > 0) {

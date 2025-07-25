@@ -23,6 +23,8 @@ export class CardComponent implements OnInit {
   }
   badge: any = {}
 
+  creationDate!: Date;
+  expirationDate!: Date;
   ngOnInit(): void {
     this.badges$.subscribe((badges: any) => {
       console.log(badges)
@@ -38,6 +40,37 @@ export class CardComponent implements OnInit {
         })
       }
     });
+    this.creationDate = new Date(this.badge.certificatControl.creationDate);
+    console.log("creation Date: ", this.creationDate)
+    const validiteMap: { [key: string]: number } = {
+      'UN_MOIS': 1,
+      'DEUX_MOIS': 2,
+      'TROIS_MOIS': 3,
+      'QUATRE_MOIS': 4,
+      'CINQ_MOIS': 5,
+      'SIX_MOIS': 6,
+      'SEPT_MOIS': 7,
+      'HUIT_MOIS': 8,
+      'NEUF_MOIS': 9,
+      'DIX_MOIS': 10,
+      'ONZE_MOIS': 11,
+      'DOUZE_MOIS': 12,
+      'TREIZE_MOIS': 13,
+      'QUATORZE_MOIS': 14,
+      'QUINZE_MOIS': 15,
+      'SEIZE_MOIS': 16,
+      'DIX_SEPT_MOIS': 17,
+      'DIX_HUIT_MOIS': 18,
+      'DIX_NEUF_MOIS': 19,
+      'VINGT_MOIS': 20
+    };
+
+    const mois = validiteMap[this.badge.validite] || 0;
+
+
+    // Calculer la date d'expiration
+    this.expirationDate = new Date(this.creationDate);
+    this.expirationDate.setMonth(this.expirationDate.getMonth() + mois);
 
   }
 

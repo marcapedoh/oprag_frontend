@@ -47,6 +47,7 @@ import { inspectionReducer } from './store/reducers/inspection.reducer';
 import { InspectionEffect } from './store/effects/inspectionEffect.effect';
 import { utilisateurReducer } from './store/reducers/utilisateur.action';
 import { UtilisateurEffect } from './store/effects/utilisateur.effect';
+import { CurrencyPipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,7 +82,7 @@ import { UtilisateurEffect } from './store/effects/utilisateur.effect';
 
   ],
   providers: [
-
+    CurrencyPipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptInterceptor,

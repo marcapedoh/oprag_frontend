@@ -12,7 +12,9 @@
         <div class="info">
           <div><label>N° :</label> <strong>{{badge.numero}}</strong> </div>
           <div><label>VALIDITÉ :</label>
-            <strong>{{badge.validite}}</strong></div>
+            <strong>{{ creationDate ? (creationDate | date: 'dd/MM/yyyy') : ''
+              }} - {{ expirationDate
+              | date: 'dd/MM/yyyy' }}</strong></div>
           <div><label>ID PARC :</label>
             <strong>{{badge.numeroParc}}</strong></div>
           <div><label>ENTREPRISE :</label>
