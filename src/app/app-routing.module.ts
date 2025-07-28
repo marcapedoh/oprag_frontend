@@ -67,6 +67,10 @@ const routes: Routes = [
         component: UtilisateurFormComponent
       },
       {
+        path: 'utilisateurs/ajout/:id',
+        component: UtilisateurFormComponent
+      },
+      {
         path: 'vueEnsemble',
         component: ChartsComponent
       },

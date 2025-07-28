@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getAllUserPerInspectionName, getLastOperationDate, getUserRapport, getUserRapportCertificat } from 'src/app/store/actions/user-per-inspection.action';
@@ -28,7 +29,7 @@ export class ManageUsersComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 20;
   lastHour: any
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<any>, private router: Router) {
     this.usersPerInspection$ = this.store.pipe(select(selectAllUserPerInspection))
     this.badges$ = this.store.pipe(select(selectAllBadges))
     this.inpectionsVehicule$ = this.store.pipe(select(selectAllCertificatControls))
@@ -79,12 +80,21 @@ export class ManageUsersComponent implements OnInit {
     this.store.dispatch(getLastOperationDate(user.id))
     this.store.dispatch(getUserRapport(user.id))
     this.store.dispatch(getUserRapportCertificat(user.id))
-
   }
 
 
   get totalPages(): number {
     return Math.ceil(this.usersInspecteur.length / this.itemsPerPage);
+  }
+
+  showConfirmationModal: boolean = false
+  editUser(user: any) {
+    localStorage.setItem("EditableUser", JSON.stringify(user));
+    this.router.navigate(["utilisateurs/ajout", user.id])
+  }
+
+  changeUserStatut() {
+    //this.store.dispatch(changeUserStatut(this.selectedUser.id))
   }
 
   get rapportPourcentage(): number {

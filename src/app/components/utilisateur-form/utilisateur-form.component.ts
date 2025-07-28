@@ -35,6 +35,7 @@ export class UtilisateurFormComponent implements OnInit {
   inspectionFieldActive = false
   selectedInspection = ""
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem("EditableUser")!)
     const userRole = localStorage.getItem("UserROle") as string
     this.roleAddable = userRole == "INSPECTEUR_PRINCIPAL" ? [
       "CONTROLLEUR",

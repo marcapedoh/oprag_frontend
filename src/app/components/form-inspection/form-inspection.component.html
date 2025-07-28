@@ -309,12 +309,13 @@
           <label for="motifControl"
             class="block mb-2 text-sm font-medium text-gray-800">Motif de
             Contrôle</label>
-          <input type="text" id="motifControl" placeholder="Motif de Contrôle"
+          <textarea type="text" id="motifControl"
+            placeholder="Motif de Contrôle"
             name="motifControl"
             [(ngModel)]="certificatControl.motifControle"
             (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
-            required />
+            required></textarea>
         </div>
 
         <!-- Champ Observations & Recommandations -->
@@ -455,9 +456,9 @@
         </div>
         <div *ngIf="!eligibleforInspection"
           class="flex w-full col-start-2 p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
-          <h5 class="mb-4 text-xl font-bold text-gray-800">❌ Rendez-vous dans
-            votre profil pour ajouté votre signature Avant de créer des
-            rapport</h5>
+          <h5 class="mb-4 text-xl font-bold text-gray-800">❌ Veuillez ajouter
+            votre signature dans votre profil avant de créer un rapport
+            d'inspection</h5>
         </div>
       </form>
     </div>

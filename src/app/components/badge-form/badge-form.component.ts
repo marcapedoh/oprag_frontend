@@ -97,6 +97,7 @@ export class BadgeFormComponent {
     }
     this.showToastTest = true;
     this.store.dispatch(createBadge(this.badge))
+    localStorage.removeItem("badge")
   }
 
 }

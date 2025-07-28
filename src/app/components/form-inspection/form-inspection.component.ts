@@ -64,13 +64,13 @@ export class FormInspectionComponent implements OnInit {
       this.loaded = true;
     })
 
-    const reloaded = sessionStorage.getItem('alreadyReloaded');
-    if (!reloaded) {
-      sessionStorage.setItem('alreadyReloaded', 'true');
-      location.reload();
-    } else {
-      sessionStorage.removeItem('alreadyReloaded'); // nettoyage pour les futures visites
-    }
+    // const reloaded = sessionStorage.getItem('alreadyReloaded');
+    // if (!reloaded) {
+    //   sessionStorage.setItem('alreadyReloaded', 'true');
+    //   location.reload();
+    // } else {
+    //   sessionStorage.removeItem('alreadyReloaded'); // nettoyage pour les futures visites
+    // }
     this.inpectionsVehicule$.subscribe((certificatControl: any) => {
       console.log(certificatControl)
       if (Array.isArray(certificatControl.certificatControls) && certificatControl.certificatControls.length > 0) {
