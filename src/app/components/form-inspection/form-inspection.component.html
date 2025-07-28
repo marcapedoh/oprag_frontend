@@ -397,8 +397,6 @@
             class="block mb-2 text-sm font-medium text-gray-800">Montant</label>
           <input type="number" id="montant" placeholder="Montant" name="montant"
             [(ngModel)]="certificatControl.montant" (ngModelChange)="saveForm()"
-            (blur)="formatMontant()"
-            step="0.01"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5" />
         </div>
 
