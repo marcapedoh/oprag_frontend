@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CertificatControlState } from './store/reducers/certificatControl.reducer';
 import { getAllCertificatControl } from './store/actions/certificatControl.action';
@@ -26,7 +26,7 @@ import { UtilisateurState } from './store/reducers/utilisateur.action';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
   authError$: Observable<string | null>;
   constructor(private store: Store<CertificatControlState>,
@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
     this.authError$ = this.store.select(selectAuthError);
   }
   ngOnInit(): void {
-    initFlowbite();
     this.store.dispatch(getAllCertificatControl("CertificatControls"))
     this.store.dispatch(getAllBadge("Badges"))
     this.storeUtilisateurs.dispatch(getAllUtilisateur("Utilisateurs"))
@@ -49,6 +48,9 @@ export class AppComponent implements OnInit {
     this.storeUsersPerInspection.dispatch(getAllUserPerInspectionName())
   }
 
+  ngAfterViewInit(): void {
+    initFlowbite();
+  }
 
 
 }

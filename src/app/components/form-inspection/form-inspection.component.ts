@@ -2,6 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { initFlowbite } from 'flowbite';
 import { Observable } from 'rxjs';
 import { createCertificatControl, visualiserCertificatControl } from 'src/app/store/actions/certificatControl.action';
 import { createChauffeur } from 'src/app/store/actions/chauffeur.action';
@@ -112,6 +113,7 @@ export class FormInspectionComponent implements OnInit {
   openChauffeurModal() {
     console.log(this.isChauffeurModal)
     this.isChauffeurModal = !this.isChauffeurModal;
+    setTimeout(() => initFlowbite(), 0);
   }
 
   onSelectChange(event: Event) {
@@ -142,6 +144,7 @@ export class FormInspectionComponent implements OnInit {
 
   createRapportInspection() {
     this.store.dispatch(createCertificatControl(this.certificatControl))
+    localStorage.removeItem("cetificatControl")
   }
 
 
