@@ -94,4 +94,23 @@ export class DataService {
   registerChauffeur(chauffeurRequest: any) {
     return this.httpClient.post<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Chauffeurs/register", chauffeurRequest)
   }
+
+  CountBadgeCreated() {
+    return this.httpClient.get<any>("https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/Badges/numberOfBadges")
+  }
+
+  countBadgePerInspecton() {
+    return this.httpClient.get<any>("https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/Badges/numberOfBadgePerInspection")
+  }
+  countRapportCreated() {
+    return this.httpClient.get<any>("https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/CertificatControls/numberOfCertificatControls")
+  }
+
+  certificatControlsStatsByInspection() {
+    return this.httpClient.get<any>("https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/CertificatControls/getCertificatControlsStatsByInspection")
+  }
+
+  pieChartData() {
+    return this.httpClient.get<any>("https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/Inspections/pieChartStatsData")
+  }
 }

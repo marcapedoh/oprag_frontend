@@ -21,6 +21,7 @@ import {
   ApexTooltip
 } from "ng-apexcharts";
 import { selectAllUtilisateur } from 'src/app/store/selector/utilisateur.selector';
+import { DataService } from 'src/app/services/data.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -43,7 +44,7 @@ export class TechnicalPartenersComponent implements OnInit {
   inspectionStatusChart: any;
   isDarkMode = false;
   utilisateurs$: Observable<ReadonlyArray<any>>;
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<any>, private dataService: DataService) {
     this.inpections$ = this.store.pipe(select(selectAllInspections))
     this.utilisateurs$ = this.store.pipe(select(selectAllUtilisateur))
   }
@@ -55,7 +56,7 @@ export class TechnicalPartenersComponent implements OnInit {
   // Exemple TypeScript (dans ton composant)
   usersByPartyChart: ChartOptions = {
     series: [{
-      name: 'Utilisateurs',
+      name: 'Cartes Créés',
       data: [25, 40, 15, 20] // Tes vraies données ici
     }],
     chart: {
@@ -78,7 +79,7 @@ export class TechnicalPartenersComponent implements OnInit {
     tooltip: {
       y: {
         formatter: function (val: number) {
-          return `${val} utilisateurs`;
+          return `${val} Cartes Créés`;
         }
       }
     }
@@ -87,6 +88,9 @@ export class TechnicalPartenersComponent implements OnInit {
 
   utilisateurs: any[] = []
   inspections: any = []
+  cardCreated: number = 0
+  rapportCreated: number = 0
+  pieChartData: any[] = []
   ngOnInit(): void {
     this.initializeChart();
     this.inpections$.subscribe((inspections: any) => {
@@ -107,6 +111,41 @@ export class TechnicalPartenersComponent implements OnInit {
       }
     });
 
+    this.dataService.CountBadgeCreated().subscribe(res => {
+      this.cardCreated = res
+
+    })
+
+    this.dataService.countRapportCreated().subscribe(res => {
+      this.rapportCreated = res
+    })
+    this.dataService.pieChartData().subscribe(res => {
+      this.pieChartData = [...res]
+      this.inspectionStatusChart = {
+        ...this.inspectionStatusChart,
+        series: [...res]
+      }
+    })
+
+    this.dataService.countBadgePerInspecton().subscribe(res => {
+      this.usersByPartyChart = {
+        ...this.usersByPartyChart,
+        series: [{
+          name: "Cartes d'inspection créés",
+          data: res.yaxis
+        }],
+        xaxis: {
+          categories: res.xaxis
+        },
+      }
+    })
+
+    this.dataService.certificatControlsStatsByInspection().subscribe(res => {
+      this.inspectionTrendChart = {
+        ...this.inspectionTrendChart,
+        series: [...res]
+      }
+    })
   }
   initializeChart(): void {
     this.inspectionStatusChart = {

@@ -50,18 +50,20 @@
           <div class="mt-4 space-y-2">
             <div class="flex items-center">
               <div class="w-3 h-3 mr-2 bg-green-500 rounded-full"></div>
-              <span class="text-sm text-gray-600">Active: 65%</span>
+              <span class="text-sm text-gray-600">Active: {{ pieChartData[0]
+                }}%</span>
             </div>
             <div class="flex items-center">
               <div class="w-3 h-3 mr-2 bg-red-500 rounded-full"></div>
-              <span class="text-sm text-gray-600">Désactivée: 35%</span>
+              <span class="text-sm text-gray-600">Désactivée: {{ pieChartData[1]
+                }}%</span>
             </div>
           </div>
         </div>
 
         <!-- Graphique 2 -->
         <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
-          <h3 class="mb-3 font-medium text-gray-800">Nombre d'utilisateurs par
+          <h3 class="mb-3 font-medium text-gray-800">Nombre de carte créés par
             Inspection</h3>
           <div class="flex justify-center">
             <apx-chart
@@ -79,8 +81,8 @@
 
       <!-- Deuxième ligne - Graphique en ligne -->
       <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
-        <h3 class="mb-3 font-medium text-gray-800">Évolution des
-          Inspections</h3>
+        <h3 class="mb-3 font-medium text-gray-800">Cartes générés par
+          inspection</h3>
         <div>
           <apx-chart
             [series]="inspectionTrendChart.series"
@@ -144,12 +146,16 @@
                   {{ utilisateurs.length-1 }}</p>
               </div>
               <div class="p-3 border border-green-100 rounded-lg bg-green-50">
-                <p class="text-sm text-green-800">Rapports générés</p>
-                <p class="text-2xl font-bold text-green-600">24</p>
+                <p class="text-sm text-green-800"> Cartes d'inspections
+                  générés</p>
+                <p class="text-2xl font-bold text-green-600">{{ cardCreated
+                  }}</p>
               </div>
               <div class="p-3 border border-purple-100 rounded-lg bg-purple-50">
-                <p class="text-sm text-purple-800">Inspections totales</p>
-                <p class="text-2xl font-bold text-purple-600">128</p>
+                <p class="text-sm text-purple-800">Rapport d'inspection
+                  totales</p>
+                <p class="text-2xl font-bold text-purple-600">{{ rapportCreated
+                  }}</p>
               </div>
             </div>
           </div>
