@@ -7,3 +7,7 @@ export const getAllInspectionFailure = createAction("[Inspection] Get all Inspec
 export const createInspection = createAction("[Inspection] Create Inspection", (inspection: any) => ({ inspection }))
 export const createInspectionSuccess = createAction("[Inspection] Create Inspection Success", (responseDAO: any) => ({ responseDAO }))
 export const createInspectionFailure = createAction("[Inspection] Create Inspection Failure", (error: any) => ({ error }))
+
+export const deleteInspection = createAction("[Inspection] delete Inspection", (inspectionId: number) => ({ inspectionId }))
+export const deleteInspectionSuccess = createAction("[Inspection] delete Inspection Sucess")
+export const deleteInspectionFailure = createAction("[Inspection] delete Inspection failure")

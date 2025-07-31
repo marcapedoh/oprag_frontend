@@ -85,6 +85,10 @@ export class DataService {
     // this.baseUrl +
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Inspections/all")
   }
+
+  deleteInspection(inspectionId: number) {
+    return this.httpClient.delete<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Inspections/delete/" + inspectionId)
+  }
   createInspection(inspection: any) {
     return this.httpClient.post<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Inspections/create", inspection)
   }
@@ -96,21 +100,28 @@ export class DataService {
   }
 
   CountBadgeCreated() {
-    return this.httpClient.get<any>("https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/Badges/numberOfBadges")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/numberOfBadges")
   }
 
   countBadgePerInspecton() {
-    return this.httpClient.get<any>("https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/Badges/numberOfBadgePerInspection")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/numberOfBadgePerInspection")
   }
   countRapportCreated() {
-    return this.httpClient.get<any>("https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/CertificatControls/numberOfCertificatControls")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/CertificatControls/numberOfCertificatControls")
   }
 
   certificatControlsStatsByInspection() {
-    return this.httpClient.get<any>("https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/CertificatControls/getCertificatControlsStatsByInspection")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/CertificatControls/getCertificatControlsStatsByInspection")
   }
 
   pieChartData() {
-    return this.httpClient.get<any>("https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/Inspections/pieChartStatsData")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Inspections/pieChartStatsData")
+  }
+  totalCertificatControlsAmount() {
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/CertificatControls/certificatControlsAmount")
+  }
+
+  changeState(userId: number) {
+    return this.httpClient.delete<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/changeState/" + userId)
   }
 }

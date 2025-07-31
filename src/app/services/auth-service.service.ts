@@ -21,4 +21,8 @@ export class AuthServiceService {
     return this.httpClient.post(this.baseUrl + ":1020/OPRAG/v0/endpoint/auth/register", registerRequest)
   }
 
+  update(user: any) {
+    return this.httpClient.post(this.baseUrl + ":1020/OPRAG/v0/endpoint/auth/update", user)
+  }
+
 }

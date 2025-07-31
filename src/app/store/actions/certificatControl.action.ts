@@ -19,3 +19,7 @@ export const generateCertificatControlFailure = createAction("[CertificatControl
 export const deleteCertificatControl = createAction("[CertificatControl] delete CertificatControl", (certificatControlId: number) => ({ certificatControlId }))
 export const deleteCertificatControlSuccess = createAction("[CertificatControl] delete CertificatControl Success", (id: number) => ({ id }))
 export const deleteCertificatControlFailure = createAction("[CertificatControl] delete CertificatControl failure", (error: string) => ({ error }))
+
+export const getCertificatControlsAmount = createAction("[CertificatControl] get CertificatControls Amount")
+export const getCertificatControlsAmountSuccess = createAction("[CertificatControl] get CertificatControls Amount success", (totalAmount: number) => ({ totalAmount }));
+export const getCertificatControlsAmountFailure = createAction("[CertificatControl] get certificatControl Amount Failure")

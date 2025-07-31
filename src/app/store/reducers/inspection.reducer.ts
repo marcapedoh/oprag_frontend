@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { createInspection, createInspectionFailure, createInspectionSuccess, getAllInspection, getAllInspectionFailure, getAllInspectionSuccess } from "../actions/inspection.action";
+import { createInspection, createInspectionFailure, createInspectionSuccess, deleteInspection, deleteInspectionFailure, deleteInspectionSuccess, getAllInspection, getAllInspectionFailure, getAllInspectionSuccess } from "../actions/inspection.action";
 
 export interface InspectionState {
   inspections: any;
@@ -14,5 +14,8 @@ export const inspectionReducer = createReducer(
   on(createInspectionFailure, (state, { error }) => ({ ...state, error })),
   on(getAllInspection, (state) => ({ ...state })),
   on(getAllInspectionSuccess, (state, { inspections }) => ({ ...state, inspections })),
-  on(getAllInspectionFailure, (state, { error }) => ({ ...state, error }))
+  on(getAllInspectionFailure, (state, { error }) => ({ ...state, error })),
+  on(deleteInspection, (state) => ({ ...state })),
+  on(deleteInspectionSuccess, (state) => ({ ...state })),
+  on(deleteInspectionFailure, (state, error) => ({ ...state, error }))
 )

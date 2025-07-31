@@ -47,6 +47,7 @@
           passe</label>
         <input type="password" id="motDePasse" placeholder="••••••••"
           name="passWord" [(ngModel)]="user.motDePasse"
+          [disabled]="origin=='Modification'"
           class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       </div>
 
@@ -57,6 +58,7 @@
           passe</label>
         <input type="password" id="confirmMotDePasse" placeholder="••••••••"
           name="confirmPassWord" [(ngModel)]="confirmMotDePasse"
+          [disabled]="origin=='Modification'"
           class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       </div>
 
@@ -94,9 +96,9 @@
 
       <!-- Bouton Enregistrer -->
       <div class="flex justify-end col-start-3">
-        <button type="button" (click)="save()"
+        <button type="button" (click)="handleSaveMethod()"
           class="mt-6 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
-          Enregistrer
+          {{ origin=="Modification"?"Modifier":"Enregistrer" }}
         </button>
       </div>
     </form>

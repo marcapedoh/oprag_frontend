@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { DataService } from "src/app/services/data.service";
-import { createCertificatControl, createCertificatControlFailure, createCertificatControlSuccess, deleteCertificatControl, deleteCertificatControlFailure, deleteCertificatControlSuccess, generateCertificatControl, getAllCertificatControl, getAllCertificatControlFailure, getAllCertificatControlSuccess, visualiserCertificatControl, visualiserCertificatControlFailure, visualiserCertificatControlSuccess } from "../actions/certificatControl.action";
+import { createCertificatControl, createCertificatControlFailure, createCertificatControlSuccess, deleteCertificatControl, deleteCertificatControlFailure, deleteCertificatControlSuccess, generateCertificatControl, getAllCertificatControl, getAllCertificatControlFailure, getAllCertificatControlSuccess, getCertificatControlsAmount, getCertificatControlsAmountFailure, getCertificatControlsAmountSuccess, visualiserCertificatControl, visualiserCertificatControlFailure, visualiserCertificatControlSuccess } from "../actions/certificatControl.action";
 import { catchError, concatMap, exhaustMap, map, of, switchMap, tap } from "rxjs";
 import { Router } from "@angular/router";
 import { showToast } from "../actions/toast.action";
@@ -92,5 +92,15 @@ export class CertificatControlEffects {
     )
   );
 
+  totalAmountCertificatControls$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getCertificatControlsAmount),
+      concatMap(() =>
+        this.dataService.totalCertificatControlsAmount().pipe(
+          map((totalAMount) => getCertificatControlsAmountSuccess(totalAMount)),
+          catchError(() => of(getCertificatControlsAmountFailure()))
+        )
+      )
+    ))
   constructor(private actions$: Actions, private dataService: DataService, private router: Router) { }
 }

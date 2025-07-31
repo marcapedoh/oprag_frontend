@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store"
-import { getAllUtilisateur, getAllUtilisateurFailure, getAllUtilisateurSuccess } from "../actions/utilisateur.action"
+import { changeUserState, changeUserStateFailure, changeUserStateSuccess, getAllUtilisateur, getAllUtilisateurFailure, getAllUtilisateurSuccess } from "../actions/utilisateur.action"
 
 export interface UtilisateurState {
   utilisateurs: ReadonlyArray<any>
@@ -11,5 +11,8 @@ export const utilisateurReducer = createReducer(
   initialState,
   on(getAllUtilisateur, (state) => ({ ...state })),
   on(getAllUtilisateurSuccess, (state, { utilisateurs }) => ({ ...state, utilisateurs })),
-  on(getAllUtilisateurFailure, (state, { error }) => ({ ...state, error }))
+  on(getAllUtilisateurFailure, (state, { error }) => ({ ...state, error })),
+  on(changeUserState, (state) => ({ ...state })),
+  on(changeUserStateSuccess, (state) => ({ ...state })),
+  on(changeUserStateFailure, (state) => ({ ...state }))
 )

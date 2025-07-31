@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { registerUser } from 'src/app/store/actions/auth.action';
+import { registerUser, updateUser } from 'src/app/store/actions/auth.action';
 import { AuthState } from 'src/app/store/reducers/auth.reducer';
 import { InspectionState } from 'src/app/store/reducers/inspection.reducer';
 import { UsersPerInspectionState } from 'src/app/store/reducers/user-per-inspection.reducer';
@@ -26,7 +27,7 @@ export class UtilisateurFormComponent implements OnInit {
       columnsName: ["id", "nom", "prenom", "email", "role", "userName", "active"],
       field: ["#", "Nom", "Prenom", "Email", "UserRole", "UserName", "Status"]
     }
-  constructor(private store: Store<AuthState>, private storeUsers: Store<UsersPerInspectionState>, private storeInspection: Store<InspectionState>) {
+  constructor(private store: Store<AuthState>, private storeUsers: Store<UsersPerInspectionState>, private storeInspection: Store<InspectionState>, private router: Router) {
     this.usersPerInspection$ = this.storeUsers.pipe(select(selectAllUserPerInspection))
     this.inpections$ = this.storeInspection.pipe(select(selectAllInspections))
   }
@@ -34,7 +35,11 @@ export class UtilisateurFormComponent implements OnInit {
   inspections: any = []
   inspectionFieldActive = false
   selectedInspection = ""
+  origin = ""
   ngOnInit(): void {
+    if (this.router.url.includes('/utilisateurs/ajout/')) {
+      this.origin = "Modification"
+    }
     this.user = JSON.parse(localStorage.getItem("EditableUser")!)
     const userRole = localStorage.getItem("UserROle") as string
     this.roleAddable = userRole == "INSPECTEUR_PRINCIPAL" ? [
@@ -72,7 +77,15 @@ export class UtilisateurFormComponent implements OnInit {
       this.currentStep--;
     }
   }
+  handleSaveMethod() {
+    if (this.router.url.includes('/utilisateurs/ajout/')) {
+      this.store.dispatch(updateUser(this.user))
+      this.user = {}
+    } else {
+      this.save()
+    }
 
+  }
   save() {
     if (this.inspectionFieldActive) {
       this.user = {

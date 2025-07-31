@@ -4,6 +4,12 @@ import { CertificatControlState } from "../reducers/certificatControl.reducer";
 
 export const selectAllCertificatControls = createSelector(
   (state: CertificatControlState) => state.certificatControls,
-  (certificatControls: ReadonlyArray<any>) => certificatControls
+  (certificatControls: ReadonlyArray<any>) => certificatControls,
+
 )
+export const selectCertificatsControlsAmount = createSelector(
+  (state: CertificatControlState) => state.totalAmount,
+  (totalAmount: number) => totalAmount
+)
+
 

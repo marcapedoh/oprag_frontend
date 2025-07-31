@@ -13,3 +13,8 @@ export const registerUserFailure = createAction("[RegisterUser] Register User Fa
 export const registerChauffeur = createAction("[RegisterChauffeur] Register Chauffeur", (chauffeurDAO: any) => ({ chauffeurDAO }));
 export const registerChauffeurSuccess = createAction("[RegisterChauffeur] Register Chauffeur Success", (authenticationResponse: any) => ({ authenticationResponse }))
 export const registerChauffeurFailure = createAction("[Register Chauffeur] Register Chauffeur Failure", (error: string) => ({ error }));
+
+
+export const updateUser = createAction("[User] update user", (user: any) => ({ user }))
+export const updateUserSuccess = createAction("[User] update user success", (responseDAO: any) => ({ responseDAO }))
+export const updateUserFailure = createAction("[User] update User failure", (error: any) => ({ error }))

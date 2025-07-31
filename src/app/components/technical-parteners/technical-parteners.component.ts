@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { createInspection } from 'src/app/store/actions/inspection.action';
+import { createInspection, deleteInspection } from 'src/app/store/actions/inspection.action';
 import { InspectionState } from 'src/app/store/reducers/inspection.reducer';
 import { selectAllInspections } from 'src/app/store/selector/inspection.selector';
 
@@ -22,6 +22,7 @@ import {
 } from "ng-apexcharts";
 import { selectAllUtilisateur } from 'src/app/store/selector/utilisateur.selector';
 import { DataService } from 'src/app/services/data.service';
+import { selectAllCertificatControls, selectCertificatsControlsAmount } from 'src/app/store/selector/certificatControl.selector';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -44,9 +45,11 @@ export class TechnicalPartenersComponent implements OnInit {
   inspectionStatusChart: any;
   isDarkMode = false;
   utilisateurs$: Observable<ReadonlyArray<any>>;
+  certificatControls$: Observable<any>;
   constructor(private store: Store<any>, private dataService: DataService) {
     this.inpections$ = this.store.pipe(select(selectAllInspections))
     this.utilisateurs$ = this.store.pipe(select(selectAllUtilisateur))
+    this.certificatControls$ = this.store.pipe(select(selectAllCertificatControls))
   }
   isStatsCardCollapsed = false;
 
@@ -90,6 +93,7 @@ export class TechnicalPartenersComponent implements OnInit {
   inspections: any = []
   cardCreated: number = 0
   rapportCreated: number = 0
+  amountCard: number = 0
   pieChartData: any[] = []
   ngOnInit(): void {
     this.initializeChart();
@@ -102,6 +106,9 @@ export class TechnicalPartenersComponent implements OnInit {
       }
     });
 
+    this.certificatControls$.subscribe((certificatControls: any) => {
+      this.amountCard = certificatControls.totalAmount
+    })
     this.utilisateurs$.subscribe((utilisateurs: any) => {
       console.log(utilisateurs)
       if (Array.isArray(utilisateurs.utilisateurs) && utilisateurs.utilisateurs.length > 0) {
@@ -267,17 +274,32 @@ export class TechnicalPartenersComponent implements OnInit {
   }
 
   // Méthode pour ouvrir le modal de confirmation
-  openConfirmationModal() {
+  openConfirmationModal(param: string) {
     this.showDetailsModal = false;
+    this.origin = param
     this.showConfirmationModal = true;
   }
+
+  deleteInspection() {
+    this.store.dispatch(deleteInspection(this.selectedPartner.id))
+  }
+  handleClick() {
+    if (this.origin === 'Suppression') {
+      this.deleteInspection();
+      this.showConfirmationModal = false
+    } else {
+      this.togglePartnerStatus();
+      this.showConfirmationModal = false
+    }
+  }
+
 
   // Méthode pour basculer le statut
   togglePartnerStatus() {
     if (this.selectedPartner) {
       // Ici vous devriez appeler votre service pour mettre à jour le statut
-      this.selectedPartner.status = !this.selectedPartner.status;
-      this.store.dispatch(createInspection(this.selectedPartner))
+      const updatedPartner = { ...this.selectedPartner };
+      this.store.dispatch(createInspection(updatedPartner))
     }
 
     this.showConfirmationModal = false;
@@ -333,6 +355,7 @@ export class TechnicalPartenersComponent implements OnInit {
       !!this.newInspection.type;
   }
 
+  origin: string = ""
 
   submitInspection(): void {
     if (!this.isFormValid()) return;

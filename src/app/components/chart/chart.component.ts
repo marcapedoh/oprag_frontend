@@ -58,7 +58,7 @@ export class ChartsComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-          name: "Cartes créé",
+          name: "Cartes créés",
           data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65]
         }
       ],
@@ -128,7 +128,7 @@ export class ChartsComponent implements OnInit {
       },
       yaxis: {
         title: {
-          text: "Cartes créé",
+          text: "Cartes créés",
           style: {
             color: "#1f2937"
           }
@@ -172,7 +172,7 @@ export class ChartsComponent implements OnInit {
           ...this.chartOptions,
           series: [
             {
-              name: "Badges Créé",
+              name: "Badges Créés",
               data: counts
             }
           ],

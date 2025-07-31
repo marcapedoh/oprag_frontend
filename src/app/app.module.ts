@@ -48,6 +48,8 @@ import { InspectionEffect } from './store/effects/inspectionEffect.effect';
 import { utilisateurReducer } from './store/reducers/utilisateur.action';
 import { UtilisateurEffect } from './store/effects/utilisateur.effect';
 import { CurrencyPipe } from '@angular/common';
+import { SettingComponent } from './components/setting/setting.component';
+import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +70,9 @@ import { CurrencyPipe } from '@angular/common';
     ChartsComponent,
     ManageUsersComponent,
     TechnicalPartenersComponent,
-    UserStatsComponent
+    UserStatsComponent,
+    SettingComponent,
+    ComingSoonComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { clearAuthError, login, loginFailure, loginSuccess, registerUser, registerUserFailure, registerUserSuccess } from "../actions/auth.action";
+import { clearAuthError, login, loginFailure, loginSuccess, registerUser, registerUserFailure, registerUserSuccess, updateUser, updateUserFailure, updateUserSuccess } from "../actions/auth.action";
 import { catchError, concatMap, delay, map, of, switchMap, tap } from "rxjs";
 import { AuthServiceService } from "src/app/services/auth-service.service";
 import { Router } from "@angular/router";
@@ -60,6 +60,14 @@ export class AuthEffects {
   );
 
 
+  updateUser$ = createEffect(() => this.actions$.pipe(
+    ofType(updateUser),
+    concatMap(({ user }) =>
+      this.authService.update(user).pipe(
+        map((responseDAO) => updateUserSuccess(responseDAO)),
+        catchError((error) => of(updateUserFailure(error)))
+      ))
+  ))
 
   constructor(private actions$: Actions, private authService: AuthServiceService, private router: Router) { }
 }

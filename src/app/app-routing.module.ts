@@ -13,6 +13,7 @@ import { guardGuard } from './guard/guard.guard';
 import { ChartsComponent } from './components/chart/chart.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { TechnicalPartenersComponent } from './components/technical-parteners/technical-parteners.component';
+import { SettingComponent } from './components/setting/setting.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,10 @@ const routes: Routes = [
       {
         path: 'vueEnsemble',
         component: ChartsComponent
+      },
+      {
+        path: 'parametre',
+        component: SettingComponent
       },
       {
         path: 'users',

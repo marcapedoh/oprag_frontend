@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { clearAuthError, login, loginFailure, loginSuccess } from "../actions/auth.action";
+import { clearAuthError, login, loginFailure, loginSuccess, updateUser, updateUserFailure, updateUserSuccess } from "../actions/auth.action";
 
 export interface AuthRequest {
   username: string;
@@ -25,5 +25,8 @@ export const authReducer = createReducer(
   on(login, (state) => ({ ...state })),
   on(loginSuccess, (state, responseDAO) => ({ ...state, responseDAO })),
   on(loginFailure, (state, { error }) => ({ ...state, error })),
-  on(clearAuthError, (state) => ({ ...state }))
+  on(clearAuthError, (state) => ({ ...state })),
+  on(updateUser, (state) => ({ ...state })),
+  on(updateUserSuccess, (state, { responseDAO }) => ({ ...state, responseDAO })),
+  on(updateUserFailure, (state, { error }) => ({ ...state, error }))
 )

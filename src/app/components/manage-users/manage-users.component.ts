@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getAllUserPerInspectionName, getLastOperationDate, getUserRapport, getUserRapportCertificat } from 'src/app/store/actions/user-per-inspection.action';
+import { changeUserState } from 'src/app/store/actions/utilisateur.action';
 import { selectAllBadges } from 'src/app/store/selector/badge.selector';
 import { selectAllCertificatControls } from 'src/app/store/selector/certificatControl.selector';
 import { selectAllUserPerInspection } from 'src/app/store/selector/user-per-inspection.selector';
@@ -69,6 +70,11 @@ export class ManageUsersComponent implements OnInit {
 
   }
 
+
+  changeState(userId: number) {
+    this.store.dispatch(changeUserState(userId))
+    this.showConfirmationModal = false
+  }
   get paginatedUsers(): any[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
