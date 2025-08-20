@@ -39,8 +39,9 @@ export class UtilisateurFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.router.url.includes('/utilisateurs/ajout/')) {
       this.origin = "Modification"
+      this.user = JSON.parse(localStorage.getItem("EditableUser")!)
     }
-    this.user = JSON.parse(localStorage.getItem("EditableUser")!)
+    this.user = {}
     const userRole = localStorage.getItem("UserROle") as string
     this.roleAddable = userRole == "INSPECTEUR_PRINCIPAL" ? [
       "CONTROLLEUR",

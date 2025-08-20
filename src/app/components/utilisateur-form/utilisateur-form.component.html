@@ -1,6 +1,10 @@
 <div
   [ngClass]="{'animate-slide-in-left': currentStep === 1, 'hidden': currentStep !== 1}"
   class="max-w-screen-xl p-6 mx-auto border border-gray-200 shadow-lg bg-white/90 backdrop-blur-md rounded-xl">
+  <h2 class="mb-6 text-2xl font-medium text-gray-800">
+    Utilisateur à ajouter
+  </h2>
+
   <div class="grid grid-cols-3 gap-8">
     <form class="grid grid-cols-3 col-span-3 gap-6">
       <!-- Nom -->
@@ -109,5 +113,6 @@
 <div
   class="max-w-screen-xl p-6 mx-auto mt-6 border border-gray-200 shadow-lg bg-white/90 backdrop-blur-md rounded-xl">
   <app-datatable [data]="usersInspecteur" [columns]="columns"
-    dataType="Utilisateur" routeNavigate="utilisateurs/ajout"></app-datatable>
+    dataType="Tableau des Utilisateurs"
+    routeNavigate="utilisateurs/ajout"></app-datatable>
 </div>
