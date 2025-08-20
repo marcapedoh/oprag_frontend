@@ -1,6 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { initFlowbite } from 'flowbite';
 import { Observable } from 'rxjs';
@@ -39,7 +39,7 @@ export class FormInspectionComponent implements OnInit {
   selectedTypeVoitureOption: string = ''
   utilisateur$: Observable<any>;
   toast$: Observable<ToastState>;
-  constructor(private store: Store<any>, private storeCertificatControl: Store<CertificatControlState>, private activatedRoute: ActivatedRoute, private currencyPipe: CurrencyPipe) {
+  constructor(private store: Store<any>, private storeCertificatControl: Store<CertificatControlState>, private activatedRoute: ActivatedRoute, private currencyPipe: CurrencyPipe, private router: Router) {
     this.toast$ = this.store.select(selectToast);
     this.inpectionsVehicule$ = this.storeCertificatControl.pipe(select(selectAllCertificatControls))
     this.utilisateur$ = this.store.pipe(select(selectUserProfil))
@@ -49,11 +49,18 @@ export class FormInspectionComponent implements OnInit {
   eligibleforInspection: boolean = false
   loaded = false;
   utilisateur: any = {}
+  origin = ""
   ngOnInit(): void {
 
-    const savedData = localStorage.getItem('cetificatControl');
-    if (savedData) {
-      this.certificatControl = JSON.parse(savedData);
+    if (this.router.url.includes('/inspecter/')) {
+      this.origin = "Modification"
+
+      const savedData = localStorage.getItem('cetificatControl');
+      if (savedData) {
+        this.certificatControl = JSON.parse(savedData);
+      }
+    } else {
+      this.origin = "Enregistrer"
     }
     localStorage.removeItem("chauffeur");
     localStorage.removeItem("vehicule");

@@ -3,7 +3,7 @@
   {{dataType}}
 </h2>
 
-<div class="flex mt-8" *ngIf!="routeNavigate=='utilisateurs/ajout'">
+<div class="flex mt-8" *ngIf="routeNavigate!='utilisateurs/ajout'">
   <button type="button" (click)="navigate()"
     class="cursor-pointer items-center justify-center py-2.5 px-5 me-2 text-sm font-medium text-gray-800 bg-white rounded-lg border border-gray-200 hover:bg-gray-50 focus:z-10 focus:ring-4 focus:ring-gray-200 focus:outline-none inline-flex">
     Créer un(e) {{boutonDataType}}
