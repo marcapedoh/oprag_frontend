@@ -25,11 +25,12 @@ export class CardComponent implements OnInit {
 
   creationDate!: Date;
   expirationDate!: Date;
+  countBadges: number = 0
   ngOnInit(): void {
     this.badges$.subscribe((badges: any) => {
       console.log(badges)
       if (Array.isArray(badges.badges) && badges.badges.length > 0) {
-
+        this.countBadges = badges.badges.length + 1
         this.activatedRoute.paramMap.subscribe((param) => {
           const badgeId = Number(param.get('id'));
 

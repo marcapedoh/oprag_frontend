@@ -21,8 +21,9 @@
           <div><label>ENTREPRISE :</label>
             <strong>{{badge.certificatControl.societe}}</strong></div>
           <div><label>CODE INSPECTION :</label> <strong>{{
-              badge.inspecteur.inspection.codeInspection?badge.inspecteur.inspection.codeInspection:""
-              }}</strong></div>
+              badge.inspecteur.inspection.codeInspection?badge.inspecteur.inspection.codeInspection:""}}-
+              {{ creationDate | date:'yyyyMMdd' }}-
+              {{ countBadges | number:'3.0' }}</strong></div>
         </div>
 
         <div class="partners">
