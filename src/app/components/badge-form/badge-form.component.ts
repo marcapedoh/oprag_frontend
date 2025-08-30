@@ -43,7 +43,11 @@ export class BadgeFormComponent {
     { value: 'DIX_SEPT_MOIS', label: '17 MOIS' },
     { value: 'DIX_HUIT_MOIS', label: '18 MOIS' },
     { value: 'DIX_NEUF_MOIS', label: '19 MOIS' },
-    { value: 'VINGT_MOIS', label: '20 MOIS' }
+    { value: 'VINGT_MOIS', label: '20 MOIS' },
+    { value: 'VINGT_UN_MOIS', label: '21 MOIS' },
+    { value: 'VINGT_DEUX_MOIS', label: '22 MOIS' },
+    { value: 'VINGT_TROIS_MOIS', label: '23 MOIS' },
+    { value: 'VINGT_QUATRE_MOIS', label: '24 MOIS' },
   ];
   constructor(private store: Store<CertificatControlState>, private storeBadge: Store<BadgeState>, private activatedRoute: ActivatedRoute) {
     this.inpectionsVehicule$ = this.store.pipe(select(selectAllCertificatControls))

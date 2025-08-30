@@ -96,11 +96,13 @@ export class UtilisateurFormComponent implements OnInit {
     } else {
       this.user = {
         ...this.user,
-        idInspection: localStorage.getItem("InspectionId")
+        idInspection: localStorage.getItem("InspectionCode")
       }
+
+
     }
 
-    this.store.dispatch(registerUser(this.user))
+    //this.store.dispatch(registerUser(this.user))
   }
 
 

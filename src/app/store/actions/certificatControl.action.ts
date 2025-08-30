@@ -23,3 +23,18 @@ export const deleteCertificatControlFailure = createAction("[CertificatControl] 
 export const getCertificatControlsAmount = createAction("[CertificatControl] get CertificatControls Amount")
 export const getCertificatControlsAmountSuccess = createAction("[CertificatControl] get CertificatControls Amount success", (totalAmount: number) => ({ totalAmount }));
 export const getCertificatControlsAmountFailure = createAction("[CertificatControl] get certificatControl Amount Failure")
+
+
+export const getInspectionMontant = createAction("[InspectionMontant] Get InspectionMontant", (element: string) => ({ element }))
+export const getInspectionMontantSuccess = createAction("[InspectionMontant] Get InspectionMontant success", (montant: ReadonlyArray<any>) => ({ montant }))
+export const getInspectionMontantFailure = createAction("[InspectionMontant] Get InspectionMontant failure", (error: any) => ({ error }))
+
+
+export const createInspectionMontant = createAction("[InspectionMontant] Create InspectionMontant", (inspectionMontant: any) => ({ inspectionMontant }))
+export const createInspectionMontantSuccess = createAction("[InspectionMontant] Create InspectionMontant success", (responseDAO: any) => ({ responseDAO }))
+export const createInspectionMontantFailure = createAction("[InspectionMontant] Create InspectionMontant failure", (error: any) => ({ error }))
+
+
+export const deleteInspectionMontant = createAction("[InspectionMontant] delete InspectionMontant", (id: number) => ({ id }))
+export const deleteInspectionMontantSuccess = createAction("[InspectionMontant] delete InspectionMontant sucess")
+export const deleteInspectionMontantFailure = createAction("[InspectionMontant] delete inspectionMontant failure", (error: string) => ({ error }))

@@ -53,17 +53,17 @@
         {{col}}
       </th>
       <th scope="col" class="px-6 py-3"
-        *ngIf!="routeNavigate=='utilisateurs/ajout'">
+        *ngIf="routeNavigate!=='utilisateurs/ajout'">
         Actions
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let line of filteredData"
+    <tr *ngFor="let line of filteredData; let i = index"
       class="bg-white border-b border-gray-200 hover:bg-gray-50">
       <th scope="row"
         class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
-        {{line[columns.columnsName[0]]}}
+        {{i+1}}
       </th>
       <td class="px-6 py-4 text-gray-800"
         *ngFor="let col of columns.columnsName.slice(1)">

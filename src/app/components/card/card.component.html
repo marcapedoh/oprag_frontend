@@ -1,34 +1,52 @@
 <div class="printable">
-
   <div class="card-wrapper">
-
     <!-- RECTO -->
     <div class="card" #recto>
-      <div class="title"><h2 class="text-xl"><strong>CARTE
+      <!-- Logo ajouté en haut à gauche -->
+      <div class="logo-container">
+        <img src="assets/oprag-logo.png" alt="Logo" class="logo">
+      </div>
+
+      <!-- Banderolle aux couleurs du Gabon - Version corrigée -->
+      <div class="gabon-flag">
+        <div class="flag-strip blue"></div>
+        <div class="flag-strip yellow"></div>
+        <div class="flag-strip green"></div>
+      </div>
+
+      <div class="subtitle"><h2 class="text-blue-900"><strong>CARTE
             D'INSPECTION</strong></h2></div>
-      <div class="subtitle"><strong class="text-sm">OPRAG /
-          CIMFEP</strong></div>
+      <div class="title"><strong>OPRAG / CIMFEP</strong></div>
 
       <div class="content">
-        <div class="info">
-          <div><label>N° :</label> <strong>{{badge.numero}}</strong> </div>
-          <div><label>VALIDITÉ :</label>
-            <strong>{{ creationDate ? (creationDate | date: 'dd/MM/yyyy') : ''
-              }} - {{ expirationDate
-              | date: 'dd/MM/yyyy' }}</strong></div>
-          <div><label>ID PARC :</label>
-            <strong>{{badge.numeroParc}}</strong></div>
-          <div><label>ENTREPRISE :</label>
-            <strong>{{badge.certificatControl.societe}}</strong></div>
-          <div><label>CODE INSPECTION :</label> <strong>{{
-              badge.inspecteur.inspection.codeInspection?badge.inspecteur.inspection.codeInspection:""}}-
-              {{ creationDate | date:'yyyyMMdd' }}-
-              {{ countBadges | number:'3.0' }}</strong></div>
+        <div class="info-container">
+          <div class="info">
+            <div><label>N° :</label> <strong>{{badge.numero}}</strong> </div>
+            <div><label>VALIDITÉ :</label>
+              <strong>{{ creationDate ? (creationDate | date: 'dd/MM/yyyy') : ''
+                }} - {{ expirationDate | date: 'dd/MM/yyyy' }}</strong></div>
+            <div><label>ID PARC :</label>
+              <strong>{{badge.numeroParc}}</strong></div>
+            <div><label>ENTREPRISE :</label>
+              <strong>{{badge.certificatControl.societe}}</strong></div>
+            <div><label>CODE INSPECTION :</label> <strong>{{
+                badge.inspecteur.inspection.codeInspection?badge.inspecteur.inspection.codeInspection:""}}-
+                {{ creationDate | date:'yyyyMMdd' }}-
+                {{ countBadges | number:'3.0' }}</strong></div>
+          </div>
+
+          <!-- Nouvelle image à droite des informations -->
+          <div class="info-image">
+            <img src="assets/Logo CIMFEP.png" alt="Information additionnelle">
+          </div>
         </div>
 
-        <div class="partners">
-          PARTENAIRES TECHNIQUES<br>
-          <strong>{{ badge.inspecteur.inspection.nom }}</strong><br>
+        <!-- Nouvelle structure pour étendre le bleu sur toute la largeur -->
+        <div class="full-width-partners">
+          <div class="partners">
+            PARTENAIRES TECHNIQUES<br>
+            <strong>{{ badge.inspecteur.inspection.nom }}</strong><br>
+          </div>
         </div>
       </div>
 
@@ -39,6 +57,16 @@
 
     <!-- VERSO -->
     <div class="card" #verso>
+      <!-- Logos des partenaires en haut -->
+      <div class="partners-logos">
+        <div class="partner-logo left">
+          <img src="assets/Logo HP.jpg" alt="Partenaire gauche">
+        </div>
+        <div class="partner-logo right">
+          <img src="assets/Logo BAJINN.png" alt="Partenaire droit">
+        </div>
+      </div>
+
       <div class="verso">
         <h4>CARTE ÉDITÉE PAR</h4>
         <b>© GDT - GABON DIGITAL TRANSPORTS<br>
@@ -48,11 +76,16 @@
           Ne pas plier. Ne pas exposer à une source magnétique.
         </p>
         <small>https://prolabafrik.com</small>
+
+        <!-- Logo en bas -->
+        <div class="bottom-logo">
+          <img src="assets/Logo Prolab Afrik entier.svg" alt="Logo bas">
+        </div>
       </div>
     </div>
-
   </div>
 </div>
+
 <input class="print-button" type="file" (change)="onFileSelected($event)"
   accept="image/*" /> <br>
 <button class="print-button" (click)="printCard()">Imprimer la carte</button>

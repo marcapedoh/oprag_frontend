@@ -23,6 +23,7 @@ export class AuthEffects {
           localStorage.setItem("OptNumber", action.responseDAO.otpNumber)
           localStorage.setItem("InspectionName", action.responseDAO.inspectionName)
           localStorage.setItem("InspectionId", action.responseDAO.inspectionId)
+          localStorage.setItem("InspectionCode", action.responseDAO.inspectionCode)
           localStorage.setItem("Nom", action.responseDAO.nom)
           localStorage.setItem("Prenom", action.responseDAO.prenom)
           localStorage.setItem("SignaturePresence", JSON.stringify(action.responseDAO.signaturePresence))

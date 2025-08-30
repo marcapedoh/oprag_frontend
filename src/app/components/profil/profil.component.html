@@ -5,8 +5,10 @@
     <div class="flex items-center gap-6">
       <div
         class="flex items-center justify-center w-24 h-24 text-3xl bg-gray-100 border border-gray-300 rounded-full">
-        {{ utilisateur.nom[0].toUpperCase() }}{{
-        utilisateur.prenom[0].toUpperCase() }}
+        {{ utilisateur.nom && utilisateur.nom[0] ?
+        utilisateur.nom[0].toUpperCase() : '' }}{{
+        utilisateur.prenom && utilisateur.prenom[0] ?
+        utilisateur.prenom[0].toUpperCase() : '' }}
       </div>
       <div>
         <h2 class="text-2xl font-bold text-gray-800">{{ utilisateur.nom }} {{
@@ -46,7 +48,7 @@
         </p>
       </div>
     </div>
-    <button type="button" (click)="currentStep = 2"
+    <button type="button" (click)="onStepChange(2)"
       class="mt-6 flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 focus:outline-none">
       Modifier
     </button>
@@ -59,8 +61,10 @@
     <div class="flex items-center gap-6 mb-6">
       <div
         class="flex items-center justify-center w-24 h-24 text-3xl bg-gray-100 border border-gray-300 rounded-full">
-        {{ utilisateur.nom[0].toUpperCase() }}{{
-        utilisateur.prenom[0].toUpperCase() }}
+        {{ utilisateur.nom && utilisateur.nom[0] ?
+        utilisateur.nom[0].toUpperCase() : '' }}{{
+        utilisateur.prenom && utilisateur.prenom[0] ?
+        utilisateur.prenom[0].toUpperCase() : '' }}
       </div>
       <h2 class="text-2xl font-bold text-gray-800">Modifier l'utilisateur</h2>
     </div>
@@ -95,15 +99,63 @@
             name="email"
             class="bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
         </div>
-        <div>
-          <label for="signature"
-            class="block mb-2 text-sm font-medium text-gray-700">Signature</label>
+
+        <!-- Sélection de la méthode de signature -->
+        <div class="md:col-span-2">
+          <label class="block mb-4 text-sm font-medium text-gray-700">Méthode de
+            signature</label>
+          <div class="flex gap-6">
+            <label class="flex items-center">
+              <input type="radio" name="signatureMethod" [value]="'draw'"
+                [(ngModel)]="signatureMethod" class="mr-2">
+              Dessiner la signature
+            </label>
+            <label class="flex items-center">
+              <input type="radio" name="signatureMethod" [value]="'upload'"
+                [(ngModel)]="signatureMethod" class="mr-2">
+              Importer une image
+            </label>
+          </div>
+        </div>
+
+        <!-- Zone de dessin de signature -->
+        <div class="md:col-span-2" *ngIf="signatureMethod === 'draw'">
+          <label class="block mb-2 text-sm font-medium text-gray-700">Dessiner
+            votre signature</label>
+          <canvas #canvas
+            class="w-full border border-gray-300 rounded-lg h-72"></canvas>
+
+          <div class="flex gap-2 mt-3">
+            <button type="button" (click)="clearSignature()"
+              class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">
+              Effacer
+            </button>
+            <button type="button" (click)="saveSignature()"
+              class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">
+              Sauvegarder
+            </button>
+          </div>
+
+          <!-- Aperçu signature dessinée -->
+          <div *ngIf="savedSignature" class="mt-4">
+            <p class="mb-2 text-sm text-gray-600">Aperçu de la signature:</p>
+            <img [src]="savedSignature"
+              class="h-20 border border-gray-300 rounded" />
+          </div>
+        </div>
+
+        <!-- Zone d'upload de signature -->
+        <div class="md:col-span-2" *ngIf="signatureMethod === 'upload'">
+          <label class="block mb-2 text-sm font-medium text-gray-700">Importer
+            une signature</label>
 
           <!-- Aperçu de l'image actuelle -->
           <div *ngIf="utilisateur.signature" class="mb-4">
+            <p class="mb-2 text-sm text-gray-600">Signature actuelle:</p>
             <img [src]="utilisateur.signature" alt="Signature actuelle"
               class="h-20 border border-gray-300 rounded">
-            <button type="button" (click)="utilisateur.signature = null"
+            <button type="button"
+              (click)="utilisateur.signature = null; savedSignature = null;"
               class="ml-2 text-sm text-red-600 hover:text-red-800">
               Supprimer
             </button>
@@ -112,7 +164,7 @@
           <!-- Champ d'upload -->
           <div class="flex items-center">
             <label for="signature-upload"
-              class="cursor-pointer bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+              class="cursor-pointer bg-white border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hover:bg-gray-50">
               <span *ngIf="!fileSelected">Choisir une image...</span>
               <span *ngIf="fileSelected" class="text-gray-800">{{
                 selectedFileName }}</span>
@@ -127,7 +179,7 @@
       </div>
 
       <div class="flex justify-end gap-4 mt-6">
-        <button type="button" (click)="currentStep = 1"
+        <button type="button" (click)="onStepChange(1)"
           class="px-6 py-2.5 text-sm font-medium text-gray-800 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200">
           Annuler
         </button>

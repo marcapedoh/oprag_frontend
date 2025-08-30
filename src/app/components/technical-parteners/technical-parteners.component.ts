@@ -23,6 +23,7 @@ import {
 import { selectAllUtilisateur } from 'src/app/store/selector/utilisateur.selector';
 import { DataService } from 'src/app/services/data.service';
 import { selectAllCertificatControls, selectCertificatsControlsAmount } from 'src/app/store/selector/certificatControl.selector';
+import { createInspectionMontant, deleteInspectionMontant } from 'src/app/store/actions/certificatControl.action';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -93,7 +94,9 @@ export class TechnicalPartenersComponent implements OnInit {
   inspections: any = []
   cardCreated: number = 0
   rapportCreated: number = 0
+  montant: number = 0
   amountCard: number = 0
+  rapportAmount: any = []
   pieChartData: any[] = []
   ngOnInit(): void {
     this.initializeChart();
@@ -108,6 +111,8 @@ export class TechnicalPartenersComponent implements OnInit {
 
     this.certificatControls$.subscribe((certificatControls: any) => {
       this.amountCard = certificatControls.totalAmount
+      this.rapportAmount = certificatControls.inspectionMontant
+
     })
     this.utilisateurs$.subscribe((utilisateurs: any) => {
       console.log(utilisateurs)
@@ -175,7 +180,7 @@ export class TechnicalPartenersComponent implements OnInit {
         },
         foreColor: this.isDarkMode ? '#FFFFFF' : '#000000'
       },
-      labels: ['Active', 'Désactivée'],
+      labels: ['Activée', 'Désactivée'],
       colors: ['#10B981', '#EF4444'], // Vert pour Active, Rouge pour Désactivée
       responsive: [{
         breakpoint: 480,
@@ -263,14 +268,20 @@ export class TechnicalPartenersComponent implements OnInit {
 
   // Dans votre composant.ts
   showDetailsModal = false;
+  showInspectionMontantDetailsModal = false
   showConfirmationModal = false;
   selectedPartner: any = null;
 
   // Méthode pour ouvrir le modal de détails
   openDetailsModal(partner: any) {
     this.selectedPartner = partner;
-    console.log(this.selectedPartner)
     this.showDetailsModal = true;
+  }
+
+  inspectionMontant: any = {}
+  openInspectionAmountDetailsModal(inspectionMontant: any) {
+    this.inspectionMontant = inspectionMontant
+    this.showInspectionAmountModal = true
   }
 
   // Méthode pour ouvrir le modal de confirmation
@@ -280,6 +291,15 @@ export class TechnicalPartenersComponent implements OnInit {
     this.showConfirmationModal = true;
   }
 
+  showConfirmationInspectionMontantModal = false
+  openConfirmationModalForInspectionMontant(id: number) {
+    this.showInspectionMontantDetailsModal = false
+    this.showConfirmationInspectionMontantModal = true;
+  }
+  deleteInspectionMontant(id: number) {
+    this.store.dispatch(deleteInspectionMontant(id))
+
+  }
   deleteInspection() {
     this.store.dispatch(deleteInspection(this.selectedPartner.id))
   }
@@ -310,6 +330,7 @@ export class TechnicalPartenersComponent implements OnInit {
     this.showNewInspectionModal = true;
   }
   showNewInspectionModal = false;
+  showInspectionAmountModal = false;
   selectedFile: File | null = null;
   filePreview: string | ArrayBuffer | null = null;
 
@@ -330,8 +351,17 @@ export class TechnicalPartenersComponent implements OnInit {
     this.showNewInspectionModal = true;
   }
 
+  openInspectionAmountModal() {
+    this.showInspectionAmountModal = true
+  }
+
   closeNewInspectionModal(): void {
     this.showNewInspectionModal = false;
+    this.resetForm();
+  }
+
+  closeInspectionAmountModal() {
+    this.showInspectionAmountModal = false;
     this.resetForm();
   }
 
@@ -357,6 +387,9 @@ export class TechnicalPartenersComponent implements OnInit {
 
   origin: string = ""
 
+  submitInspectionMontant() {
+    this.store.dispatch(createInspectionMontant({ montant: this.montant }))
+  }
   submitInspection(): void {
     if (!this.isFormValid()) return;
     console.log(this.newInspection)

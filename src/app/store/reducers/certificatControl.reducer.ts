@@ -1,15 +1,19 @@
 import { createReducer, on } from "@ngrx/store";
-import { createCertificatControl, createCertificatControlFailure, createCertificatControlSuccess, deleteCertificatControl, deleteCertificatControlFailure, deleteCertificatControlSuccess, generateCertificatControl, generateCertificatControlFailure, generateCertificatControlSuccess, getAllCertificatControl, getAllCertificatControlFailure, getAllCertificatControlSuccess, getCertificatControlsAmount, getCertificatControlsAmountFailure, getCertificatControlsAmountSuccess, visualiserCertificatControl, visualiserCertificatControlFailure, visualiserCertificatControlSuccess } from "../actions/certificatControl.action";
+import { createCertificatControl, createCertificatControlFailure, createCertificatControlSuccess, createInspectionMontant, createInspectionMontantFailure, createInspectionMontantSuccess, deleteCertificatControl, deleteCertificatControlFailure, deleteCertificatControlSuccess, deleteInspectionMontant, deleteInspectionMontantFailure, deleteInspectionMontantSuccess, generateCertificatControl, generateCertificatControlFailure, generateCertificatControlSuccess, getAllCertificatControl, getAllCertificatControlFailure, getAllCertificatControlSuccess, getCertificatControlsAmount, getCertificatControlsAmountFailure, getCertificatControlsAmountSuccess, getInspectionMontant, getInspectionMontantFailure, getInspectionMontantSuccess, visualiserCertificatControl, visualiserCertificatControlFailure, visualiserCertificatControlSuccess } from "../actions/certificatControl.action";
 
 export interface CertificatControlState {
   certificatControls: ReadonlyArray<any>;
   totalAmount: number;
+  inspectionMontant: any;
+  montant: any
   error: string | null
 }
 
 export const initialCertificatControl: CertificatControlState = {
   certificatControls: [],
   totalAmount: 0,
+  inspectionMontant: [],
+  montant: {},
   error: null
 };
 export const certificatControlReducer = createReducer(
@@ -31,7 +35,13 @@ export const certificatControlReducer = createReducer(
     ...state,
     certificatControls: [...state.certificatControls, responseDAO]
   })),
-  //   on(createCertificatControlFailure, (state, { error }) => ({ ...state, error })),
+
+  on(createInspectionMontant, (state) => ({ ...state })),
+  on(createInspectionMontantSuccess, (state, { responseDAO }) => ({ ...state, inspectionMontant: [...state.inspectionMontant, responseDAO] })),
+  on(createInspectionMontantFailure, (state, { error }) => ({ ...state, error })),
+  on(getInspectionMontant, (state) => ({ ...state })),
+  on(getInspectionMontantSuccess, (state, { montant }) => ({ ...state, montant })),
+  on(getInspectionMontantFailure, (state, { error }) => ({ ...state, error })),
   on(visualiserCertificatControl, (state) => ({ ...state })),
   on(visualiserCertificatControlSuccess, (state, { responseDAO }) => ({ ...state, responseDAO })),
   on(visualiserCertificatControlFailure, (state, { error }) => ({ ...state, error })),
@@ -53,6 +63,9 @@ export const certificatControlReducer = createReducer(
     ...state,
     error
   })),
+  on(deleteInspectionMontant, (state) => ({ ...state })),
+  on(deleteInspectionMontantSuccess, (state) => ({ ...state })),
+  on(deleteInspectionMontantFailure, (state, { error }) => ({ ...state, error })),
   on(getCertificatControlsAmount, (state) => ({ ...state })),
   on(getCertificatControlsAmountSuccess, (state, { totalAmount }) => ({ ...state, totalAmount })),
   on(getCertificatControlsAmountFailure, (state) => ({ ...state }))

@@ -1,9 +1,10 @@
 import { CurrencyPipe } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { initFlowbite } from 'flowbite';
 import { Observable } from 'rxjs';
+import SignaturePad from 'signature_pad';
 import { createCertificatControl, visualiserCertificatControl } from 'src/app/store/actions/certificatControl.action';
 import { createChauffeur } from 'src/app/store/actions/chauffeur.action';
 import { hideToast } from 'src/app/store/actions/toast.action';
@@ -39,6 +40,9 @@ export class FormInspectionComponent implements OnInit {
   selectedTypeVoitureOption: string = ''
   utilisateur$: Observable<any>;
   toast$: Observable<ToastState>;
+
+
+
   constructor(private store: Store<any>, private storeCertificatControl: Store<CertificatControlState>, private activatedRoute: ActivatedRoute, private currencyPipe: CurrencyPipe, private router: Router) {
     this.toast$ = this.store.select(selectToast);
     this.inpectionsVehicule$ = this.storeCertificatControl.pipe(select(selectAllCertificatControls))
@@ -96,6 +100,8 @@ export class FormInspectionComponent implements OnInit {
     });
 
   }
+
+
   formatMontant() {
     if (this.certificatControl.montant) {
       this.certificatControl.montant = this.currencyPipe.transform(this.certificatControl.montant, 'XAF', 'symbol', '1.0-0'); // pour FCFA

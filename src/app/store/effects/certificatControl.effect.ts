@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { DataService } from "src/app/services/data.service";
-import { createCertificatControl, createCertificatControlFailure, createCertificatControlSuccess, deleteCertificatControl, deleteCertificatControlFailure, deleteCertificatControlSuccess, generateCertificatControl, getAllCertificatControl, getAllCertificatControlFailure, getAllCertificatControlSuccess, getCertificatControlsAmount, getCertificatControlsAmountFailure, getCertificatControlsAmountSuccess, visualiserCertificatControl, visualiserCertificatControlFailure, visualiserCertificatControlSuccess } from "../actions/certificatControl.action";
+import { createCertificatControl, createCertificatControlFailure, createCertificatControlSuccess, createInspectionMontant, createInspectionMontantFailure, createInspectionMontantSuccess, deleteCertificatControl, deleteCertificatControlFailure, deleteCertificatControlSuccess, deleteInspectionMontant, deleteInspectionMontantFailure, deleteInspectionMontantSuccess, generateCertificatControl, getAllCertificatControl, getAllCertificatControlFailure, getAllCertificatControlSuccess, getCertificatControlsAmount, getCertificatControlsAmountFailure, getCertificatControlsAmountSuccess, getInspectionMontant, getInspectionMontantFailure, getInspectionMontantSuccess, visualiserCertificatControl, visualiserCertificatControlFailure, visualiserCertificatControlSuccess } from "../actions/certificatControl.action";
 import { catchError, concatMap, exhaustMap, map, of, switchMap, tap } from "rxjs";
 import { Router } from "@angular/router";
 import { showToast } from "../actions/toast.action";
@@ -72,6 +72,38 @@ export class CertificatControlEffects {
       })
   ))
 
+
+  createInspectionMontant$ = createEffect(() => this.actions$.pipe(
+    ofType(createInspectionMontant),
+    concatMap(({ inspectionMontant }) =>
+      this.dataService.createObject("MontantInspection", inspectionMontant).pipe(
+        map((responseDAO) => createInspectionMontantSuccess(responseDAO)),
+        catchError((error) => of(createInspectionMontantFailure(error)))
+      )
+    )
+  )
+
+  )
+
+  getInspectionMontant$ = createEffect(() => this.actions$.pipe(
+    ofType(getInspectionMontant),
+    exhaustMap(({ element }) =>
+      this.dataService.loadData(element).pipe(
+        map((montant) => getInspectionMontantSuccess(montant)),
+        catchError((error) => of(getInspectionMontantFailure(error)))
+      )
+    )
+  ))
+
+  deleteInspectionMontant$ = createEffect(() => this.actions$.pipe(
+    ofType(deleteInspectionMontant),
+    concatMap(({ id }) =>
+      this.dataService.deleteInspectionMontant(id).pipe(
+        map(() => deleteInspectionMontantSuccess()),
+        catchError((error) => of(deleteInspectionMontantFailure(error)))
+      )
+    )
+  ))
   showToastOnFailure$ = createEffect(() =>
     this.actions$.pipe(
       ofType(createCertificatControlFailure),
@@ -81,6 +113,7 @@ export class CertificatControlEffects {
       )
     )
   );
+
 
   showToastOnSuccess$ = createEffect(() =>
     this.actions$.pipe(

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CertificatControlState } from './store/reducers/certificatControl.reducer';
-import { getAllCertificatControl, getCertificatControlsAmount } from './store/actions/certificatControl.action';
+import { getAllCertificatControl, getCertificatControlsAmount, getInspectionMontant } from './store/actions/certificatControl.action';
 import { getAllBadge } from './store/actions/badge.action';
 import { Observable } from 'rxjs';
 import { selectAuthError } from './store/selector/auth.selector';
@@ -42,6 +42,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.store.dispatch(getAllCertificatControl("CertificatControls"))
     this.store.dispatch(getCertificatControlsAmount())
     this.store.dispatch(getAllBadge("Badges"))
+    this.store.dispatch(getInspectionMontant("MontantInspection"))
     this.storeUtilisateurs.dispatch(getAllUtilisateur("Utilisateurs"))
     this.storeChart.dispatch(getAllChartObject())
     this.storeInspections.dispatch(getAllInspection())

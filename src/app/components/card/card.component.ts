@@ -23,6 +23,14 @@ export class CardComponent implements OnInit {
   }
   badge: any = {}
 
+  cardData = {
+    number: '',
+    validity: '',
+    idParc: '',
+    enterprise: '',
+    inspectionCode: ''
+  };
+
   creationDate!: Date;
   expirationDate!: Date;
   countBadges: number = 0
