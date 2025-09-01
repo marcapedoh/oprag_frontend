@@ -388,7 +388,8 @@ export class TechnicalPartenersComponent implements OnInit {
   origin: string = ""
 
   submitInspectionMontant() {
-    this.store.dispatch(createInspectionMontant({ montant: this.montant }))
+    console.log("createInspection")
+    //this.store.dispatch(createInspectionMontant({ montant: this.montant }))
   }
   submitInspection(): void {
     if (!this.isFormValid()) return;

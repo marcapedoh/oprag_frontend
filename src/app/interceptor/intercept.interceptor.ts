@@ -17,8 +17,8 @@ import { loginFailure } from '../store/actions/auth.action';
 export class InterceptInterceptor implements HttpInterceptor {
 
   PUBLIC_URL = {
-    login: `http://localhost:8080/OPRAG/v0/endpoint/auth/authenticate`,
-    register: `http://localhost:8080/OPRAG/v0/endpoint/auth/register`
+    login: `https://dev.routeafrique.com:2020/OPRAG/v0/endpoint/auth/authenticate`,
+    register: `https://dev.routeafrique.com:2020/OPRAG/v0/endpoint/auth/register`
   }
   constructor(private router: Router, private tokenService: TokenService, private store: Store<any>) { }
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
