@@ -102,7 +102,10 @@ export class UtilisateurFormComponent implements OnInit {
 
     }
 
-    //this.store.dispatch(registerUser(this.user))
+
+    this.store.dispatch(registerUser(this.user))
+
+    this.user = {}
   }
 
 
