@@ -111,7 +111,7 @@ export class TechnicalPartenersComponent implements OnInit {
 
     this.certificatControls$.subscribe((certificatControls: any) => {
       this.amountCard = certificatControls.totalAmount
-      this.rapportAmount = certificatControls.inspectionMontant
+      this.rapportAmount = certificatControls.montant
 
     })
     this.utilisateurs$.subscribe((utilisateurs: any) => {
@@ -180,7 +180,7 @@ export class TechnicalPartenersComponent implements OnInit {
         },
         foreColor: this.isDarkMode ? '#FFFFFF' : '#000000'
       },
-      labels: ['Activée', 'Désactivée'],
+      labels: ['Activé', 'Désactivé'],
       colors: ['#10B981', '#EF4444'], // Vert pour Active, Rouge pour Désactivée
       responsive: [{
         breakpoint: 480,
@@ -281,7 +281,7 @@ export class TechnicalPartenersComponent implements OnInit {
   inspectionMontant: any = {}
   openInspectionAmountDetailsModal(inspectionMontant: any) {
     this.inspectionMontant = inspectionMontant
-    this.showInspectionAmountModal = true
+    this.showInspectionMontantDetailsModal = true
   }
 
   // Méthode pour ouvrir le modal de confirmation
@@ -388,8 +388,7 @@ export class TechnicalPartenersComponent implements OnInit {
   origin: string = ""
 
   submitInspectionMontant() {
-    console.log("createInspection")
-    //this.store.dispatch(createInspectionMontant({ montant: this.montant }))
+    this.store.dispatch(createInspectionMontant({ montant: this.montant }))
   }
   submitInspection(): void {
     if (!this.isFormValid()) return;
