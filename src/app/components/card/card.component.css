@@ -1,7 +1,7 @@
 /* Styles pour le composant Angular */
 :host {
   display: block;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
   background: #f0f0f0;
   padding: 20px;
   display: flex;
@@ -40,6 +40,7 @@
   flex-direction: column;
   font-size: 2.5mm;
   margin: auto;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 
 /* Nouveau conteneur pour le logo */
@@ -51,8 +52,8 @@
 }
 
 .logo {
-  width: 16mm;
-  height: 16mm;
+  width: 17mm;
+  height: 17mm;
   object-fit: contain;
   border-radius: 2px;
 }
@@ -68,7 +69,7 @@
   overflow: hidden;
   transform: skewX(-130deg);
   transform-origin: top right;
-  border-bottom-left-radius: 3px;
+  border-bottom-left-radius: 0;
 }
 
 .flag-strip {
@@ -168,7 +169,7 @@
 .full-width-partners {
   background: #1e3a8a; /* Bleu nuit pour toute la largeur */
   margin-top: auto; /* Pousser vers le bas */
-  padding: 2mm 4mm; /* Padding horizontal pour aligner avec le contenu */
+  padding: 1mm 4mm; /* Padding horizontal pour aligner avec le contenu */
 }
 
 .partners {
