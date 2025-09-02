@@ -91,7 +91,6 @@ export class BadgeFormComponent {
       }
     });
   }
-  showToastTest: boolean = false
   save() {
     this.badge = {
       ...this.badge,
@@ -99,7 +98,6 @@ export class BadgeFormComponent {
         id: +localStorage.getItem("ConnectedUser")!
       }
     }
-    this.showToastTest = true;
     this.store.dispatch(createBadge(this.badge))
     localStorage.removeItem("badge")
   }

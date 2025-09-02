@@ -4,7 +4,6 @@ import { CertificatControlState } from './store/reducers/certificatControl.reduc
 import { getAllCertificatControl, getCertificatControlsAmount, getInspectionMontant } from './store/actions/certificatControl.action';
 import { getAllBadge } from './store/actions/badge.action';
 import { Observable } from 'rxjs';
-import { selectAuthError } from './store/selector/auth.selector';
 import { AuthState } from './store/reducers/auth.reducer';
 import { ChartBadgesObjectState } from './store/reducers/badge.reducer';
 import { getAllChartObject } from './store/actions/chartObject.action';
@@ -28,7 +27,6 @@ import { UtilisateurState } from './store/reducers/utilisateur.action';
 })
 export class AppComponent implements OnInit, AfterViewInit {
 
-  authError$: Observable<string | null>;
   constructor(private store: Store<CertificatControlState>,
     private storeError: Store<AuthState>,
     private storeChart: Store<ChartBadgesObjectState>,
@@ -36,7 +34,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     private storeUserProfil: Store<userProfil>,
     private storeInspections: Store<InspectionState>,
     private storeUtilisateurs: Store<UtilisateurState>) {
-    this.authError$ = this.store.select(selectAuthError);
   }
   ngOnInit(): void {
     this.store.dispatch(getAllCertificatControl("CertificatControls"))

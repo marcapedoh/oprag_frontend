@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { DataService } from "src/app/services/data.service";
 import { changeUserState, changeUserStateFailure, changeUserStateSuccess, getAllUtilisateur, getAllUtilisateurFailure, getAllUtilisateurSuccess } from "../actions/utilisateur.action";
-import { catchError, concatMap, exhaustMap, map, of } from "rxjs";
+import { catchError, concatMap, exhaustMap, map, of, take, tap } from "rxjs";
+import { NotificationService } from "src/app/services/notification-service/notification.service";
 
 @Injectable()
 export class UtilisateurEffect {
@@ -13,7 +14,13 @@ export class UtilisateurEffect {
       this.dataService.loadData(element).pipe(
         map((responseDAO) => getAllUtilisateurSuccess(responseDAO)),
         catchError((error) => of(getAllUtilisateurFailure(error)))
-      ))
+      )), tap((action) => {
+        if (action.type === "[Utilisateur] Get All Utilisateur Success") {
+          this.notificationService.success("Utilsateurs recupérés")
+        } else {
+          this.notificationService.error("Erreur lors de la récupération des utilisateurs")
+        }
+      })
   ))
 
   changeUserState$ = createEffect(() => this.actions$.pipe(
@@ -25,5 +32,5 @@ export class UtilisateurEffect {
       )
     )
   ))
-  constructor(private actions$: Actions, private dataService: DataService) { }
+  constructor(private actions$: Actions, private dataService: DataService, private notificationService: NotificationService) { }
 }

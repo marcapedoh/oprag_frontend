@@ -5,6 +5,7 @@ import { createBadge, createBadgeFailure, createBadgeSuccess, createQrCodeImage,
 import { catchError, concatMap, exhaustMap, map, of, tap } from "rxjs";
 import { Router } from "@angular/router";
 import { getAllChartObject, getAllChartObjectFailure, getAllChartObjectPerDate, getAllChartObjectPerDateFailure, getAllChartObjectPerDateSuccess, getAllChartObjectSuccess } from "../actions/chartObject.action";
+import { NotificationService } from "src/app/services/notification-service/notification.service";
 
 @Injectable()
 export class BadgeEffect {
@@ -15,7 +16,13 @@ export class BadgeEffect {
       this.dataService.loadData(element).pipe(
         map((responseDAO) => getAllBadgeSuccess(responseDAO)),
         catchError((error) => of(getAllBadgeFailure(error)))
-      ))
+      )), tap((action) => {
+        if (action.type === "[Badge] Get all Badge sucess") {
+          this.notificationService.info("Badges recupérés avec succès")
+        } else {
+          this.notificationService.error("Une erreur est survenue")
+        }
+      })
   )
   )
 
@@ -29,6 +36,9 @@ export class BadgeEffect {
         if (action.type === "[Badge] create Badge sucess") {
           this.dataService.createQrCodeImage(action.responseDAO.numero)
           this.router.navigate(["badge/collection"])
+          this.notificationService.success("Badge créé avec succès")
+        } else {
+          this.notificationService.error("Erreur lors de l'enregistrement")
         }
       })
   ))
@@ -39,7 +49,14 @@ export class BadgeEffect {
       this.dataService.countAllPerDay().pipe(
         map((responseDAO) => getAllChartObjectSuccess(responseDAO)),
         catchError((error: string) => of(getAllChartObjectFailure(error)))
-      ))
+      )),
+    tap((action) => {
+      if (action.type === "[Badge] Get All Chart Badge Object Success") {
+        this.notificationService.success("Données recupérées")
+      } else {
+        this.notificationService.error("Erreur lors de la recupération")
+      }
+    })
   ))
   chartsObjectsByDates$ = createEffect(() => this.actions$.pipe(
     ofType(getAllChartObjectPerDate),
@@ -47,7 +64,13 @@ export class BadgeEffect {
       this.dataService.countAllPerInterval(dateDebut, dateFin).pipe(
         map((responseDAO) => getAllChartObjectPerDateSuccess(responseDAO)),
         catchError((error: string) => of(getAllChartObjectPerDateFailure(error)))
-      ))
+      )), tap((action) => {
+        if (action.type === "[Badge] Get All Chart Badge Object Per Date Success") {
+          this.notificationService.success("Statistique collectées")
+        } else {
+          this.notificationService.error("Erreur lors de la recupération des statistiques")
+        }
+      })
   ))
 
   createBadgeQrCode$ = createEffect(() => this.actions$.pipe(
@@ -63,7 +86,9 @@ export class BadgeEffect {
           window.URL.revokeObjectURL(url);
         })
       )
-    )
+    ), tap((action) => {
+      this.notificationService.info("Génération du QR code...")
+    })
   ))
-  constructor(private actions$: Actions, private dataService: DataService, private router: Router) { }
+  constructor(private actions$: Actions, private dataService: DataService, private router: Router, private notificationService: NotificationService) { }
 }

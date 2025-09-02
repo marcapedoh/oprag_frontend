@@ -5,6 +5,26 @@
 
   <div class="grid grid-cols-3 gap-8">
     <form class="grid grid-cols-3 col-span-3 gap-6">
+
+      <!-- Champ Rapport Inspection -->
+      <div>
+        <label for="fonctionnementEtat"
+          class="block mb-2 text-sm font-medium text-gray-800">
+          Rapport Inspection
+        </label>
+        <select id="fonctionnementEtat" name="etatFonctionnement"
+          [(ngModel)]="badge.certificatControl.id"
+          (ngModelChange)="saveForm()"
+          class="bg-gray-50 border border-gray-800 text-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
+          required>
+          <option>Sélectionnez un Rapport d'inspection</option>
+          <option [value]="rapport.id"
+            *ngFor="let rapport of certificatControls">
+            {{ rapport.numeroRapport }}
+          </option>
+        </select>
+      </div>
+
       <!-- Champ Validité -->
       <div>
         <label for="validite"
@@ -34,25 +54,6 @@
           class="bg-gray-50 border border-gray-800 text-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5" />
       </div>
 
-      <!-- Champ Rapport Inspection -->
-      <div>
-        <label for="fonctionnementEtat"
-          class="block mb-2 text-sm font-medium text-gray-800">
-          Rapport Inspection
-        </label>
-        <select id="fonctionnementEtat" name="etatFonctionnement"
-          [(ngModel)]="badge.certificatControl.id"
-          (ngModelChange)="saveForm()"
-          class="bg-gray-50 border border-gray-800 text-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
-          required>
-          <option>Sélectionnez un Rapport d'inspection</option>
-          <option [value]="rapport.id"
-            *ngFor="let rapport of certificatControls">
-            {{ rapport.numeroRapport }}
-          </option>
-        </select>
-      </div>
-
       <!-- Bouton Enregistrer -->
       <div class="flex justify-end col-start-3">
         <button type="button" (click)="save()"
@@ -63,6 +64,3 @@
     </form>
   </div>
 </div>
-
-<app-toast type="success" message="Element créé ou modifié"
-  *ngIf="showToastTest"></app-toast>

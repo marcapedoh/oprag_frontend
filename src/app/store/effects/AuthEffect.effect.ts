@@ -4,6 +4,7 @@ import { clearAuthError, login, loginFailure, loginSuccess, registerUser, regist
 import { catchError, concatMap, delay, map, of, switchMap, tap } from "rxjs";
 import { AuthServiceService } from "src/app/services/auth-service.service";
 import { Router } from "@angular/router";
+import { NotificationService } from "src/app/services/notification-service/notification.service";
 
 @Injectable()
 export class AuthEffects {
@@ -16,6 +17,7 @@ export class AuthEffects {
         catchError((error: string) => of(loginFailure(error)))
       )), tap((action) => {
         if (action.type === '[Auth] loginSuccess') {
+          this.notificationService.success("Utilisateur authentifié")
           localStorage.setItem("token", action.responseDAO.token)
           localStorage.setItem("ConnectedUser", action.responseDAO.userId)
           localStorage.setItem("UserStatus", action.responseDAO.active)
@@ -34,6 +36,8 @@ export class AuthEffects {
           } else if (action.responseDAO.role == "INSPECTEUR_PRINCIPAL") {
             this.router.navigate(["/vueEnsemble"])
           }
+        } else {
+          this.notificationService.error("Vérifiez vos informations!")
         }
       })
   ))
@@ -52,13 +56,13 @@ export class AuthEffects {
       })
   ))
 
-  resetError$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(loginFailure),
-      delay(5000),
-      map(() => clearAuthError())
-    )
-  );
+  // resetError$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(loginFailure),
+  //     delay(5000),
+  //     map(() => clearAuthError())
+  //   )
+  // );
 
 
   updateUser$ = createEffect(() => this.actions$.pipe(
@@ -70,5 +74,5 @@ export class AuthEffects {
       ))
   ))
 
-  constructor(private actions$: Actions, private authService: AuthServiceService, private router: Router) { }
+  constructor(private actions$: Actions, private authService: AuthServiceService, private router: Router, private notificationService: NotificationService) { }
 }

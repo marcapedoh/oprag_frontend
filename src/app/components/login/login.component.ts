@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { login } from 'src/app/store/actions/auth.action';
 import { AuthState } from 'src/app/store/reducers/auth.reducer';
-import { selectAuthError } from 'src/app/store/selector/auth.selector';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +13,7 @@ export class LoginComponent implements OnInit {
 
   username: string = ""
   motDePasse: string = ""
-  authError$: Observable<string | null>;
   constructor(private store: Store<AuthState>) {
-    this.authError$ = this.store.select(selectAuthError);
   }
   currentStep = 1; // 1 = formulaire de connexion, 2 = formulaire OTP
   otpCode = ""

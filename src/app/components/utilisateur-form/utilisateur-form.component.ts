@@ -40,8 +40,11 @@ export class UtilisateurFormComponent implements OnInit {
     if (this.router.url.includes('/utilisateurs/ajout/')) {
       this.origin = "Modification"
       this.user = JSON.parse(localStorage.getItem("EditableUser")!)
+      console.log(this.user)
     }
-    this.user = {}
+    if (this.router.url === "/utilisateurs/ajout") {
+      this.user = {}
+    }
     const userRole = localStorage.getItem("UserROle") as string
     this.roleAddable = userRole == "INSPECTEUR_PRINCIPAL" ? [
       "CONTROLLEUR",

@@ -29,10 +29,8 @@
               <strong>{{badge.numeroParc}}</strong></div>
             <div><label>ENTREPRISE :</label>
               <strong>{{badge.certificatControl.societe}}</strong></div>
-            <div><label>CODE INSPECTION :</label> <strong>{{
-                badge.inspecteur.inspection.codeInspection?badge.inspecteur.inspection.codeInspection:""}}-
-                {{ creationDate | date:'yyyyMMdd' }}-
-                {{ countBadges | number:'3.0' }}</strong></div>
+            <div><label>CODE INSPECTEUR :</label> <strong>{{
+                badge.inspecteur.userName?badge.inspecteur.userName:""}}</strong></div>
           </div>
 
           <!-- Nouvelle image à droite des informations -->

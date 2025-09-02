@@ -46,7 +46,7 @@ export class InterceptInterceptor implements HttpInterceptor {
     }, (error: any) => {
       if (error instanceof HttpErrorResponse && error.status === 401 || error.status === 403 || error.status === 500) {
         if (!this.tokenService.isTokenValid(localStorage.getItem('token')!) && localStorage.getItem('token')!) {
-          this.store.dispatch(loginFailure("Vous etes déconnecté"))
+
           this.router.navigate(['login']);
         }
       }

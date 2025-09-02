@@ -5,6 +5,7 @@ import { createCertificatControl, createCertificatControlFailure, createCertific
 import { catchError, concatMap, exhaustMap, map, of, switchMap, tap } from "rxjs";
 import { Router } from "@angular/router";
 import { showToast } from "../actions/toast.action";
+import { NotificationService } from "src/app/services/notification-service/notification.service";
 
 @Injectable()
 export class CertificatControlEffects {
@@ -15,7 +16,13 @@ export class CertificatControlEffects {
       this.dataService.loadData(element).pipe(
         map((responseDAO) => getAllCertificatControlSuccess(responseDAO)),
         catchError((error) => of(getAllCertificatControlFailure(error)))
-      ))
+      )), tap((action) => {
+        if (action.type === "[CertificatControl] Get all CertificatControl Success") {
+          this.notificationService.success("Rapports d'Inspection chargés")
+        } else {
+          this.notificationService.error("Erreur lors du chargement des rapports d'inspections")
+        }
+      })
   ))
 
   createCertificatControl$ = createEffect(() => this.actions$.pipe(
@@ -28,6 +35,9 @@ export class CertificatControlEffects {
         if (action.type === "[CertificatControl] create CertificatControl success") {
           this.dataService.createReport("pdf", action.responseDAO.id)
           this.router.navigate(["inspection/collection"])
+          this.notificationService.success("Rapport d'Inspection créé avec succès")
+        } else {
+          this.notificationService.error("Erreur lors de la création du Rapport")
         }
       })
   ))
@@ -46,7 +56,7 @@ export class CertificatControlEffects {
             window.URL.revokeObjectURL(url);
           })
         )
-      )
+      ), tap(() => this.notificationService.info("Génération du Rapport d'inspection......"))
     ),
   );
 
@@ -56,7 +66,13 @@ export class CertificatControlEffects {
       this.dataService.deleteCertificatControl(certificatControlId).pipe(
         map((responseDAO) => deleteCertificatControlSuccess(certificatControlId)),
         catchError((error: string) => of(deleteCertificatControlFailure(error)))
-      ))
+      )), tap((action) => {
+        if (action.type === "[CertificatControl] delete CertificatControl Success") {
+          this.notificationService.success("Suppression effectué avec succès")
+        } else {
+          this.notificationService.error("Erreur lors de la suppression")
+        }
+      })
   ))
   visualiserCertificatControl$ = createEffect(() => this.actions$.pipe(
     ofType(visualiserCertificatControl),
@@ -80,7 +96,13 @@ export class CertificatControlEffects {
         map((responseDAO) => createInspectionMontantSuccess(responseDAO)),
         catchError((error) => of(createInspectionMontantFailure(error)))
       )
-    )
+    ), tap((action) => {
+      if (action.type === "[InspectionMontant] Create InspectionMontant success") {
+        this.notificationService.success("Montant ajouté avec succès")
+      } else {
+        this.notificationService.error("Erreur lors de l'ajout du montant")
+      }
+    })
   )
 
   )
@@ -92,7 +114,13 @@ export class CertificatControlEffects {
         map((montant) => getInspectionMontantSuccess(montant)),
         catchError((error) => of(getInspectionMontantFailure(error)))
       )
-    )
+    ), tap((action) => {
+      if (action.type === "[InspectionMontant] Get InspectionMontant success") {
+        this.notificationService.success("Montant recupéré avec succès")
+      } else {
+        this.notificationService.error("Erreur lors de la recupération du montant")
+      }
+    })
   ))
 
   deleteInspectionMontant$ = createEffect(() => this.actions$.pipe(
@@ -102,7 +130,13 @@ export class CertificatControlEffects {
         map(() => deleteInspectionMontantSuccess()),
         catchError((error) => of(deleteInspectionMontantFailure(error)))
       )
-    )
+    ), tap((action) => {
+      if (action.type === "[InspectionMontant] delete InspectionMontant sucess") {
+        this.notificationService.success("Montant supprimé")
+      } else {
+        this.notificationService.error("Erreur lors de la suppression du montant")
+      }
+    })
   ))
   showToastOnFailure$ = createEffect(() =>
     this.actions$.pipe(
@@ -135,5 +169,5 @@ export class CertificatControlEffects {
         )
       )
     ))
-  constructor(private actions$: Actions, private dataService: DataService, private router: Router) { }
+  constructor(private actions$: Actions, private dataService: DataService, private router: Router, private notificationService: NotificationService) { }
 }
