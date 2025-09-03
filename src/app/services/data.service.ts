@@ -7,19 +7,19 @@ import { Injectable } from '@angular/core';
 export class DataService {
 
   constructor(private httpClient: HttpClient) { }
-  baseUrl: string = "https://dev.routeafrique.com"
+  baseUrl: string = "https://badge.routeafrique.com"
 
   loadData(element: string) {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/" + element + "/all");
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/" + element + "/all");
   }
 
   createObject(element: string, obj: any) {
 
-    return this.httpClient.post<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/" + element + "/create", obj);
+    return this.httpClient.post<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/" + element + "/create", obj);
   }
 
   createReport(reportFormat: string, certificatControl: number) {
-    return this.httpClient.post<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Reports/exportReport/" + reportFormat + "/" + certificatControl, null, { responseType: 'blob' as 'json' })
+    return this.httpClient.post<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Reports/exportReport/" + reportFormat + "/" + certificatControl, null, { responseType: 'blob' as 'json' })
       .subscribe((blob: Blob) => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -31,20 +31,20 @@ export class DataService {
 
   }
   createReportWithNgrx(reportFormat: string, certificatControl: number) {
-    return this.httpClient.post<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Reports/exportReport/" + reportFormat + "/" + certificatControl, null, { responseType: 'blob' as 'json' })
+    return this.httpClient.post<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Reports/exportReport/" + reportFormat + "/" + certificatControl, null, { responseType: 'blob' as 'json' })
 
 
   }
 
   deleteCertificatControl(certificatControlId: number) {
-    return this.httpClient.delete(this.baseUrl + ":2020/OPRAG/v0/endpoint/CertificatControls/delete/" + certificatControlId)
+    return this.httpClient.delete(this.baseUrl + ":1020/OPRAG/v0/endpoint/CertificatControls/delete/" + certificatControlId)
   }
 
   deleteInspectionMontant(inspectionMontantId: number) {
-    return this.httpClient.delete(this.baseUrl + ":2020/OPRAG/v0/endpoint/InspectionMontant/delete/" + inspectionMontantId)
+    return this.httpClient.delete(this.baseUrl + ":1020/OPRAG/v0/endpoint/InspectionMontant/delete/" + inspectionMontantId)
   }
   createQrCodeImage(numero: string) {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Badges/getQrCode/" + numero, { responseType: 'blob' as 'json' })
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/getQrCode/" + numero, { responseType: 'blob' as 'json' })
       .subscribe((blob: Blob) => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -56,75 +56,75 @@ export class DataService {
   }
 
   createQrCodeImageWithNgRx(numero: string) {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Badges/getQrCode/" + numero, { responseType: 'blob' as 'json' })
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/getQrCode/" + numero, { responseType: 'blob' as 'json' })
 
   }
 
   countAllPerDay() {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Badges/countAllPerDay")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/countAllPerDay")
   }
 
   usersPerInspectionName() {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Utilisateurs/findAllByInspectionNom")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/findAllByInspectionNom")
   }
 
   findUserById(userId: number) {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Utilisateurs/findById/" + userId)
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/findById/" + userId)
   }
   updateUser(user: any) {
-    return this.httpClient.post<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/auth/update", user)
+    return this.httpClient.post<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/auth/update", user)
   }
   lastUpdateDate(userId: number) {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Utilisateurs/lastOperationDate/" + userId)
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/lastOperationDate/" + userId)
   }
 
   loadBadgeReport(inspecteurId: number) {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Badges/findAllPerInspecteurId/" + inspecteurId)
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/findAllPerInspecteurId/" + inspecteurId)
   }
   loadCertificatReport(userId: number) {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/CertificatControls/findCertificatControlByUtilisateurId/" + userId)
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/CertificatControls/findCertificatControlByUtilisateurId/" + userId)
   }
   loadInspections() {
     // this.baseUrl +
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Inspections/all")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Inspections/all")
   }
 
   deleteInspection(inspectionId: number) {
-    return this.httpClient.delete<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Inspections/delete/" + inspectionId)
+    return this.httpClient.delete<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Inspections/delete/" + inspectionId)
   }
   createInspection(inspection: any) {
-    return this.httpClient.post<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Inspections/create", inspection)
+    return this.httpClient.post<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Inspections/create", inspection)
   }
   countAllPerInterval(dateDebut: string, dateFin: string) {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Badges/countAllPerIntervalDays/" + dateDebut + "/" + dateFin)
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/countAllPerIntervalDays/" + dateDebut + "/" + dateFin)
   }
   registerChauffeur(chauffeurRequest: any) {
-    return this.httpClient.post<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Chauffeurs/register", chauffeurRequest)
+    return this.httpClient.post<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Chauffeurs/register", chauffeurRequest)
   }
 
   CountBadgeCreated() {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Badges/numberOfBadges")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/numberOfBadges")
   }
 
   countBadgePerInspecton() {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Badges/numberOfBadgePerInspection")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Badges/numberOfBadgePerInspection")
   }
   countRapportCreated() {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/CertificatControls/numberOfCertificatControls")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/CertificatControls/numberOfCertificatControls")
   }
 
   certificatControlsStatsByInspection() {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/CertificatControls/getCertificatControlsStatsByInspection")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/CertificatControls/getCertificatControlsStatsByInspection")
   }
 
   pieChartData() {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Inspections/pieChartStatsData")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Inspections/pieChartStatsData")
   }
   totalCertificatControlsAmount() {
-    return this.httpClient.get<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/CertificatControls/certificatControlsAmount")
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/CertificatControls/certificatControlsAmount")
   }
 
   changeState(userId: number) {
-    return this.httpClient.delete<any>(this.baseUrl + ":2020/OPRAG/v0/endpoint/Utilisateurs/changeState/" + userId)
+    return this.httpClient.delete<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/changeState/" + userId)
   }
 }

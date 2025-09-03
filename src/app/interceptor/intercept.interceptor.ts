@@ -11,14 +11,13 @@ import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { TokenService } from '../services/token-service/token.service';
 import { Store } from '@ngrx/store';
-import { loginFailure } from '../store/actions/auth.action';
 
 @Injectable()
 export class InterceptInterceptor implements HttpInterceptor {
 
   PUBLIC_URL = {
-    login: `https://dev.routeafrique.com:2020/OPRAG/v0/endpoint/auth/authenticate`,
-    register: `https://dev.routeafrique.com:2020/OPRAG/v0/endpoint/auth/register`
+    login: `https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/auth/authenticate`,
+    register: `https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/auth/register`
   }
   constructor(private router: Router, private tokenService: TokenService, private store: Store<any>) { }
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {

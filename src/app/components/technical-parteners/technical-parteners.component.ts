@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { createInspection, deleteInspection } from 'src/app/store/actions/inspection.action';
+import { createInspection, deleteInspection, getAllInspection } from 'src/app/store/actions/inspection.action';
 import { InspectionState } from 'src/app/store/reducers/inspection.reducer';
 import { selectAllInspections } from 'src/app/store/selector/inspection.selector';
 
@@ -23,7 +23,8 @@ import {
 import { selectAllUtilisateur } from 'src/app/store/selector/utilisateur.selector';
 import { DataService } from 'src/app/services/data.service';
 import { selectAllCertificatControls, selectCertificatsControlsAmount } from 'src/app/store/selector/certificatControl.selector';
-import { createInspectionMontant, deleteInspectionMontant } from 'src/app/store/actions/certificatControl.action';
+import { createInspectionMontant, deleteInspectionMontant, getCertificatControlsAmount } from 'src/app/store/actions/certificatControl.action';
+import { getAllChartObject } from 'src/app/store/actions/chartObject.action';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -99,6 +100,10 @@ export class TechnicalPartenersComponent implements OnInit {
   rapportAmount: any = []
   pieChartData: any[] = []
   ngOnInit(): void {
+    this.store.dispatch(getCertificatControlsAmount())
+    this.store.dispatch(getAllChartObject())
+    this.store.dispatch(getAllInspection())
+
     this.initializeChart();
     this.inpections$.subscribe((inspections: any) => {
       console.log(inspections.inspections)

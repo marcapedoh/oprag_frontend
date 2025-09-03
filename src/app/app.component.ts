@@ -38,7 +38,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     this.store.dispatch(getCertificatControlsAmount())
-
+    this.store.dispatch(getAllBadge("Badges"))
+    this.store.dispatch(getAllCertificatControl("CertificatControls"))
     this.store.dispatch(getInspectionMontant("MontantInspection"))
 
     this.storeChart.dispatch(getAllChartObject())

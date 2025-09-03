@@ -46,7 +46,7 @@ export class InspectionsVehiculeListComponent implements OnInit {
   ];
   certificatControls = []
   ngOnInit(): void {
-    this.store.dispatch(getAllCertificatControl("CertificatControls"))
+
     this.inpectionsVehicule$.subscribe((certificatControl: any) => {
       console.log(certificatControl.certificatControls)
       if (Array.isArray(certificatControl.certificatControls) && certificatControl.certificatControls.length > 0) {

@@ -77,7 +77,7 @@ export class CardComponent implements OnInit {
     const mois = validiteMap[this.badge.validite] || 0;
 
 
-    // Calculer la date d'expiration
+    //Calculer la date d'expiration
     this.expirationDate = new Date(this.creationDate);
     this.expirationDate.setMonth(this.expirationDate.getMonth() + mois);
 
@@ -104,7 +104,6 @@ export class CardComponent implements OnInit {
       const imgData1 = canvas1.toDataURL('image/png');
       pdf.addImage(imgData1, 'PNG', 0, 0, 85.6, 53.98);
 
-      // Nouvelle page pour verso
       pdf.addPage([85.6, 53.98], 'landscape');
       html2canvas(verso, { scale: 2 }).then(canvas2 => {
         const imgData2 = canvas2.toDataURL('image/png');
@@ -112,6 +111,9 @@ export class CardComponent implements OnInit {
         pdf.save(`badge-${this.badge?.numero || 'carte'}.pdf`);
       });
     });
+
+
+
   }
 
 

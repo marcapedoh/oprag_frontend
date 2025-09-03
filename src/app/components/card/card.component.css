@@ -145,7 +145,7 @@
 .info label {
   font-weight: bold;
   display: inline-block;
-  width: 22mm;
+  width: 21mm;
 }
 
 /* Conteneur pour l'image à droite */
@@ -301,30 +301,20 @@
 .print-button:hover {
   background: #1e40af; /* Bleu un peu plus clair au survol */
 }
-
 @media print {
-  @page {
-    size: 85.6mm 53.98mm;
-    margin: 0;
+  body * {
+    visibility: hidden; /* cache tout */
   }
 
-  body {
-    margin: 0;
-    padding: 0;
-    background: none;
+  .printable, .printable * {
+    visibility: visible; /* affiche uniquement la carte */
   }
 
-  body > *:not(.printable) {
-    display: none !important;
-  }
-
-  .card-wrapper {
-    display: block !important;
-    width: 100%;
-    height: 100%;
-  }
-
-  .print-button {
-    display: none !important;
+  .printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 85.6mm;
+    height: 53.98mm;
   }
 }
