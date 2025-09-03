@@ -36,11 +36,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     private storeUtilisateurs: Store<UtilisateurState>) {
   }
   ngOnInit(): void {
-    this.store.dispatch(getAllCertificatControl("CertificatControls"))
+
     this.store.dispatch(getCertificatControlsAmount())
-    this.store.dispatch(getAllBadge("Badges"))
+
     this.store.dispatch(getInspectionMontant("MontantInspection"))
-    this.storeUtilisateurs.dispatch(getAllUtilisateur("Utilisateurs"))
+
     this.storeChart.dispatch(getAllChartObject())
     this.storeInspections.dispatch(getAllInspection())
     this.storeUserProfil.dispatch(getUserProfilInfo(+localStorage.getItem("ConnectedUser")!))

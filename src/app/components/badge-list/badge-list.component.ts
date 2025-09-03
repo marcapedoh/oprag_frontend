@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getAllBadge } from 'src/app/store/actions/badge.action';
 import { BadgeState } from 'src/app/store/reducers/badge.reducer';
 import { selectAllBadges } from 'src/app/store/selector/badge.selector';
 
@@ -43,6 +44,7 @@ export class BadgeListComponent implements OnInit {
   ];
   badges = []
   ngOnInit(): void {
+    this.store.dispatch(getAllBadge("Badges"))
     this.badges$.subscribe((badges: any) => {
       console.log(badges.badges)
       if (Array.isArray(badges.badges) && badges.badges.length > 0) {

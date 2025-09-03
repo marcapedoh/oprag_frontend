@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getAllBadge } from 'src/app/store/actions/badge.action';
+import { getAllCertificatControl } from 'src/app/store/actions/certificatControl.action';
 import { getAllUserPerInspectionName, getLastOperationDate, getUserRapport, getUserRapportCertificat } from 'src/app/store/actions/user-per-inspection.action';
-import { changeUserState } from 'src/app/store/actions/utilisateur.action';
+import { changeUserState, getAllUtilisateur } from 'src/app/store/actions/utilisateur.action';
 import { selectAllBadges } from 'src/app/store/selector/badge.selector';
 import { selectAllCertificatControls } from 'src/app/store/selector/certificatControl.selector';
 import { selectAllUserPerInspection } from 'src/app/store/selector/user-per-inspection.selector';
@@ -37,6 +39,9 @@ export class ManageUsersComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.store.dispatch(getAllBadge("Badges"))
+    this.store.dispatch(getAllCertificatControl("CertificatControls"))
+    this.store.dispatch(getAllUtilisateur("Utilisateurs"))
     this.badges$.subscribe((badges: any) => {
       console.log(badges.badges)
       if (Array.isArray(badges.badges) && badges.badges.length > 0) {

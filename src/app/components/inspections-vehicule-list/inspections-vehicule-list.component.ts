@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getAllCertificatControl } from 'src/app/store/actions/certificatControl.action';
 import { CertificatControlState } from 'src/app/store/reducers/certificatControl.reducer';
 import { selectAllCertificatControls } from 'src/app/store/selector/certificatControl.selector';
 
@@ -45,7 +46,7 @@ export class InspectionsVehiculeListComponent implements OnInit {
   ];
   certificatControls = []
   ngOnInit(): void {
-
+    this.store.dispatch(getAllCertificatControl("CertificatControls"))
     this.inpectionsVehicule$.subscribe((certificatControl: any) => {
       console.log(certificatControl.certificatControls)
       if (Array.isArray(certificatControl.certificatControls) && certificatControl.certificatControls.length > 0) {
