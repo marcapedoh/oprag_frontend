@@ -231,8 +231,16 @@
   z-index: 1;
 }
 
-.partner-logo {
-  width: 20mm;
+.partner-logo  {
+  width: 35mm;
+  height: 15mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.partner-logo-bajinn{
+   width: 20mm;
   height: 10mm;
   display: flex;
   align-items: center;
