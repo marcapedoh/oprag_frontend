@@ -47,7 +47,7 @@ import { inspectionReducer } from './store/reducers/inspection.reducer';
 import { InspectionEffect } from './store/effects/inspectionEffect.effect';
 import { utilisateurReducer } from './store/reducers/utilisateur.action';
 import { UtilisateurEffect } from './store/effects/utilisateur.effect';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { SettingComponent } from './components/setting/setting.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 @NgModule({
@@ -87,6 +87,7 @@ import { ComingSoonComponent } from './components/coming-soon/coming-soon.compon
   ],
   providers: [
     CurrencyPipe,
+    DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptInterceptor,

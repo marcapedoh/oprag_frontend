@@ -1,9 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { combineLatest, filter, map, Observable, tap } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
 import { getAllBadge } from 'src/app/store/actions/badge.action';
 import { selectAllBadges, selectOneBadgeById } from 'src/app/store/selector/badge.selector';
 
@@ -18,7 +20,7 @@ export class CardComponent implements OnInit {
   imageUrl: string = ""
   @ViewChild('recto') rectoRef!: ElementRef;
   @ViewChild('verso') versoRef!: ElementRef;
-  constructor(private activatedRoute: ActivatedRoute, private store: Store<any>) {
+  constructor(private activatedRoute: ActivatedRoute, private store: Store<any>, private dataService: DataService, private datePipe: DatePipe) {
     this.badges$ = this.store.pipe(select(selectAllBadges))
   }
   badge: any = {}
@@ -86,33 +88,33 @@ export class CardComponent implements OnInit {
   onFileSelected(event: any) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
-      this.imageUrl = URL.createObjectURL(file);
+      const reader = new FileReader();
+      reader.onload = () => {
+        // reader.result est du type string | ArrayBuffer
+        this.imageUrl = reader.result as string; // ici ce sera du Base64 data:image/...
+      };
+      reader.readAsDataURL(file); // convertit en Base64
     }
+
+
   }
 
   printCard(): void {
-    const recto = this.rectoRef.nativeElement as HTMLElement;
-    const verso = this.versoRef.nativeElement as HTMLElement;
+    const creation = this.creationDate
+      ? this.datePipe.transform(this.creationDate, 'dd/MM/yyyy')
+      : '';
+    const expiration = this.datePipe.transform(this.expirationDate, 'dd/MM/yyyy');
+    const cardInfo = {
+      numeroRapport: this.badge.certificatControl.numeroRapport,
+      validiteDate: creation + " - " + expiration,
+      numeroImmatriculation: this.badge.numeroParc,
+      nomSociete: this.badge.certificatControl.societe,
+      codeInspecteur: this.badge.inspecteur.userName ? this.badge.inspecteur.userName : "",
+      partenaireTechnique: this.badge.inspecteur.inspection.nom,
+      qrCodeString: this.imageUrl
+    }
 
-    const pdf = new jsPDF({
-      orientation: 'landscape',
-      unit: 'mm',
-      format: [85.6, 53.98]
-    });
-
-    html2canvas(recto, { scale: 2 }).then(canvas1 => {
-      const imgData1 = canvas1.toDataURL('image/png');
-      pdf.addImage(imgData1, 'PNG', 0, 0, 85.6, 53.98);
-
-      pdf.addPage([85.6, 53.98], 'landscape');
-      html2canvas(verso, { scale: 2 }).then(canvas2 => {
-        const imgData2 = canvas2.toDataURL('image/png');
-        pdf.addImage(imgData2, 'PNG', 0, 0, 85.6, 53.98);
-        pdf.save(`badge-${this.badge?.numero || 'carte'}.pdf`);
-      });
-    });
-
-
+    this.dataService.createCard(cardInfo)
 
   }
 
