@@ -26,6 +26,10 @@
   max-width: 400px;
 }
 
+.logo_text_color{
+  color: #213e78;
+}
+
 .card {
   width: 85.6mm;
   height: 53.98mm;

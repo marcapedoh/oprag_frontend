@@ -105,7 +105,7 @@ export class CardComponent implements OnInit {
       : '';
     const expiration = this.datePipe.transform(this.expirationDate, 'dd/MM/yyyy');
     const cardInfo = {
-      numeroRapport: this.badge.certificatControl.numeroRapport,
+      numeroRapport: this.badge.numero,
       validiteDate: creation + " - " + expiration,
       numeroImmatriculation: this.badge.numeroParc,
       nomSociete: this.badge.certificatControl.societe,

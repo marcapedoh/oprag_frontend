@@ -21,15 +21,16 @@
       <div class="content">
         <div class="info-container">
           <div class="info">
-            <div><label>N° :</label> <strong>{{badge.numero}}</strong> </div>
-            <div><label>VALIDITÉ :</label>
+            <div><label>Rapport n° :</label> <strong>{{badge.numero}}</strong>
+            </div>
+            <div><label>Validité :</label>
               <strong>{{ creationDate ? (creationDate | date: 'dd/MM/yyyy') : ''
                 }} - {{ expirationDate | date: 'dd/MM/yyyy' }}</strong></div>
-            <div><label>ID PARC :</label>
+            <div><label>N° immat :</label>
               <strong>{{badge.numeroParc}}</strong></div>
-            <div><label>ENTREPRISE :</label>
+            <div><label>Entreprise :</label>
               <strong>{{badge.certificatControl.societe}}</strong></div>
-            <div><label>CODE INSPECTEUR :</label> <strong>{{
+            <div><label>Code Inspecteur :</label> <strong>{{
                 badge.inspecteur.userName?badge.inspecteur.userName:""}}</strong></div>
           </div>
 
@@ -42,7 +43,7 @@
         <!-- Nouvelle structure pour étendre le bleu sur toute la largeur -->
         <div class="full-width-partners">
           <div class="partners">
-            PARTENAIRES TECHNIQUES<br>
+            PARTENAIRE TECHNIQUE<br>
             <strong>{{ badge.inspecteur.inspection.nom }}</strong><br>
           </div>
         </div>
@@ -59,6 +60,7 @@
       <div class="partners-logos">
         <div class="partner-logo left">
           <img src="assets/Logo HP.jpg" alt="Partenaire gauche">
+          <h2 class="mt-0 text-xl font-semibold logo_text_color">CFHP</h2>
         </div>
         <div class="partner-logo-bajinn right">
           <img src="assets/Logo BAJINN.png" alt="Partenaire droit">
