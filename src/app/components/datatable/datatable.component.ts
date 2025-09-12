@@ -27,8 +27,8 @@ export class DatatableComponent {
   filteredElements: any = []
   testSubscription!: Subscription;
   totalPages: number = 0;
-  itemsPerPage: any = 2;
-  currentPage: number = 0;
+  itemsPerPage: any = 20;
+  currentPage: number = 1;
 
   constructor(private router: Router, private store: Store<CertificatControlState>, private storeQrCode: Store<BadgeState>) { }
 
@@ -36,12 +36,11 @@ export class DatatableComponent {
 
     setTimeout(() => {
       if (this.data && this.data.length > 0) {
-        this.data = this.data.filter(data => data.deleted !== true)
-
-        this.updateNumber()
+        this.data = this.data.filter(data => data.deleted !== true);
+        this.totalPages = Math.ceil(this.data.length / this.itemsPerPage);
+        this.updatePagination();
       }
-
-    }, 1500)
+    }, 1500);
 
     this.subscription = this.inputSubject.pipe(
       debounceTime(300),
@@ -50,7 +49,7 @@ export class DatatableComponent {
         if (!searchText.trim()) return this.getRandomItems(this.data, this.numberData);
 
         const lowerSearch = searchText.toString().toLowerCase();
-        if (this.dataType === "CertificatControls") {
+        if (this.dataType === "Gestion des Rapports d'Inspection") {
           this.filteredElements = this.filteredData.filter((item: any) =>
             item.site.toLowerCase().includes(lowerSearch) ||
             item.societe.toLowerCase().includes(lowerSearch) ||
@@ -60,7 +59,7 @@ export class DatatableComponent {
             item.utilisateur.nom.toString().includes(lowerSearch)
 
           );
-        } else if (this.dataType === "Badges") {
+        } else if (this.dataType === "Gestion des Cartes d'Inspection") {
           this.filteredElements = this.filteredData.filter((item: any) =>
             item.numero.toLowerCase().includes(lowerSearch) ||
             item.validite.toLowerCase().includes(lowerSearch) ||
@@ -68,7 +67,7 @@ export class DatatableComponent {
             item.inspecteur.nom.toString().includes(lowerSearch) ||
             item.codeQrString.toString().includes(lowerSearch)
           );
-        } else if (this.dataType === "Utilisateur") {
+        } else if (this.dataType === "Tableau des Utilisateurs") {
           this.filteredElements = this.filteredData.filter((item: any) =>
             item.nom.toLowerCase().includes(lowerSearch) ||
             item.prenom.toLowerCase().includes(lowerSearch) ||
@@ -123,21 +122,18 @@ export class DatatableComponent {
   }
 
   updatePagination(): void {
-    this.totalPages = Math.ceil(this.data.length / +this.itemsPerPage);
-    console.log("Total pages: ", this.totalPages)
-    this.data = this.data.slice(
-      (this.currentPage - 1) * +this.itemsPerPage,
-      this.currentPage * +this.itemsPerPage
+    this.totalPages = Math.ceil(this.data.length / this.itemsPerPage);
+    this.filteredData = this.data.slice(
+      (this.currentPage - 1) * this.itemsPerPage,
+      this.currentPage * this.itemsPerPage
     );
-
   }
 
-  changePage(event: any, page: number): void {
-    event.preventDefault()
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.updatePagination();
-    }
+  changePage(event: Event, page: number): void {
+    event.preventDefault();
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.updatePagination();
   }
 
   generateReportAction(certificatControlId: number) {

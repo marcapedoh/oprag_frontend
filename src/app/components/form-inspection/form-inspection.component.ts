@@ -40,7 +40,71 @@ export class FormInspectionComponent implements OnInit {
   utilisateur$: Observable<any>;
   toast$: Observable<ToastState>;
 
-
+  inspectionElementsList = {
+    Marche_AV_AR: "Marche AVANT ARRIERE",
+    Pictogrammes_securite: "Pictogrammes sécurité",
+    Vibration: "Vibration",
+    Gyrophare: "Gyrophare",
+    Clignotants_AV: "Clignotants AVANT",
+    Clignotants_AR: "Clignotants ARRIERE",
+    Changement_de_direction: "Changement de direction",
+    Trou_d_homme: "Trou d'homme",
+    Freinage: "Freinage",
+    Arret_d_urgence: "Arrêt d'urgence",
+    Etancheite_cuve: "Étanchéité cuve",
+    SYSTEME_DE_FREINAGE: "Système de freinage",
+    SYSTEME_HYDRAULIQUE: "Système hydraulique",
+    CARTE_GRISE: "Carte grise",
+    ASSURANCE: "Assurance",
+    VISITE_TECHNIQUE: "Visite Technique",
+    EXTINCTEUR: "Extincteur",
+    TROUSSE_A_PHARMACIE: "Trousse à pharmacie",
+    BOMBONNE_D_AIR: "Bombonne d'air",
+    TUYAUTERIE_DU_SYSTEME_DES_REMORQUES: "Tuyauterie du système des remorques",
+    SANGLE: "Sangle",
+    ELINGUES: "Élingues",
+    MANILLES: "Manilles",
+    MANOMETRE_DE_PRESSION: "Manomètre de pression",
+    TOLERANCE_USURE_DES_PNEUS: "Tolérance usure des pneus",
+    INDICE_DE_VITESSE_ET_DATE_PEREMPTION: "Indice de vitesse et date péremption",
+    PERMIS_DE_CONDUIRE: "Permis de conduire",
+    ROUES_JANTES_ET_LEURS_FIXATIONS: "Roues, Jantes et leurs Fixations",
+    DIAGNOSTIC_PANNES_ELECTRONIQUES: "Diagnostic pannes électroniques",
+    FONCTIONNEMENT_MANOMETRE_DE_PRESSION: "Fonctionnement manomètre de pression",
+    BAVETTE_ARRIERE_COUVRE_ROUE: "Bavette Arrière / Couvre roue",
+    ETAT_DES_BONBONNES_D_AIR: "État des bonbonnes d'air",
+    TWIST_LOCK_SANGLES_CHAINES: "Twist Lock + Sangles,Chaînes",
+    USURE_GRUE_CAMION_MULTI_LEVE: "Usure Grue camion multi-lève",
+    DOMMAGE_VISIBLE_GRUE_MULTI_LEVE: "Dommage visible grue multi-lève",
+    VERIFICATION_CHASSIE_MULTI_LEVE: "Vérification chassie multi-lève",
+    VERIFICATION_VERINS_MULTI_LEVE: "Vérification vérins multi-lève",
+    VERIFICATION_AXE_GOUPILLES_GALETS_DE_GUIDAGE: "Vérification axes,goupilles,galets de guidage",
+    ESSAI_DE_FONCTIONNEMENT_MULTI_LEVE: "Essai de fonctionnement multi-lève",
+    EPI: "EPI",
+    PHARES: "Phares",
+    RETROVISEURS: "Rétroviseurs",
+    ETAT_DE_LA_BENNE_PLATEAU: "État de la Benne / Plateau",
+    MAIN_D_ACCOUPLEMENT: "Main d'accouplement",
+    TOLERANCE_USURE: "Tolérance usure",
+    SYSTEME_DE_CHARGE_BATTERIE: "Système de charge batterie",
+    ESSAI_FREINAGE: "Essai freinage",
+    FLEXIBLES_DE_FREINAGE: "Flexibles de freinage",
+    SUSPENSION: "Suspension",
+    AMORTISSEURS: "Amortisseurs",
+    ETAT_DES_BEQUILLES: "Etat des Béquilles",
+    DISPOSIF_D_ATTELAGE: "Dispositif d'attelage",
+    USURE_MAILLON_CROCHETS: "Usure maillon crochets",
+    MARQUAGE_CHARGE_MULTI_LEVE: "Marquage charge multi-lève",
+    PLAQUES_D_IMMATRICULATION: "Plaques d'immatriculation",
+    TROUSSE_PREMIER_SECOURS: "Trousse premier secours",
+    FEUX_DE_DETRESSES: "Feux de détresses",
+    ESSUIE_GLACES: "Essuie-Glaces",
+    FEUX_GABARIT: "Feux Gabarit",
+    FEUX_ARRIERE_STOP: "Feux arrière / Feux Stop",
+    CEINTURE_DE_SECURITE: "Ceinture de Sécurité",
+    COUPE_BATTERIE: "Coupe batterie",
+    ETAT_DE_LA_CARROSSERIE: "Etat de la Carrosserie"
+  };
 
   constructor(private store: Store<any>, private storeCertificatControl: Store<CertificatControlState>, private activatedRoute: ActivatedRoute, private currencyPipe: CurrencyPipe, private router: Router) {
     this.toast$ = this.store.select(selectToast);
@@ -54,14 +118,14 @@ export class FormInspectionComponent implements OnInit {
   utilisateur: any = {}
   origin = ""
   ngOnInit(): void {
-
+    const savedData = localStorage.getItem('cetificatControl');
+    if (savedData) {
+      this.certificatControl = JSON.parse(savedData);
+    }
     if (this.router.url.includes('/inspecter/')) {
       this.origin = "Modification"
 
-      const savedData = localStorage.getItem('cetificatControl');
-      if (savedData) {
-        this.certificatControl = JSON.parse(savedData);
-      }
+
     } else {
       this.origin = "Enregistrer"
     }
@@ -101,6 +165,30 @@ export class FormInspectionComponent implements OnInit {
   }
 
 
+  sortAlphabetically(a: any, b: any) {
+    return a.value.localeCompare(b.value);
+  }
+
+  // Ajoutez cette méthode pour obtenir le libellé d'un élément
+  getElementLabel(key: string): string {
+    return this.inspectionElementsList[key as keyof typeof this.inspectionElementsList] || key;
+  }
+
+  // Ajoutez cette méthode pour supprimer un élément
+  removeElement(index: number) {
+    this.certificatControl.essaiFonctionnementList.splice(index, 1);
+    this.saveForm();
+  }
+
+  // Modifiez la méthode onSelectChange
+  onSelectChange(event: Event) {
+    const value = (event.target as HTMLSelectElement).value;
+    if (value && !this.certificatControl.essaiFonctionnementList.includes(value)) {
+      this.certificatControl.essaiFonctionnementList.push(value);
+    }
+    this.selectedOption = '';
+    this.saveForm();
+  }
   formatMontant() {
     if (this.certificatControl.montant) {
       this.certificatControl.montant = this.currencyPipe.transform(this.certificatControl.montant, 'XAF', 'symbol', '1.0-0'); // pour FCFA
@@ -128,13 +216,6 @@ export class FormInspectionComponent implements OnInit {
     setTimeout(() => initFlowbite(), 0);
   }
 
-  onSelectChange(event: Event) {
-    const value = (event.target as HTMLSelectElement).value;
-    if (value && !this.certificatControl.essaiFonctionnementList.includes(value)) {
-      this.certificatControl.essaiFonctionnementList.push(value);
-    }
-    this.selectedOption = '';
-  }
   onSelectTypeVehiculeChange(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
     if (value && !this.certificatControl.vehicule.typeVehicules.includes(value)) {
@@ -154,30 +235,41 @@ export class FormInspectionComponent implements OnInit {
     this.vehiculeStored = this.certificatControl.vehicule
   }
 
-  createRapportInspection() {
-    this.store.dispatch(createCertificatControl(this.certificatControl))
-    localStorage.removeItem("cetificatControl")
-  }
+
 
 
   save() {
-    this.certificatControl = {
-      ...this.certificatControl,
-      signatureDGM: "null",
-      utilisateur: {
-        id: localStorage.getItem("ConnectedUser")!
-      },
-      vehicule: JSON.parse(localStorage.getItem("vehicule")!),
-      chauffeur: JSON.parse(localStorage.getItem("chauffeur")!)
+    if (this.origin === "Modification") {
+      this.certificatControl = {
+        ...this.certificatControl,
+        utilisateur: {
+          id: localStorage.getItem("ConnectedUser")!
+        },
+        vehicule: this.certificatControl.vehicule,
+        chauffeur: this.certificatControl.chauffeur
+      }
+    } else {
+
+      this.certificatControl = {
+        ...this.certificatControl,
+
+        utilisateur: {
+          id: localStorage.getItem("ConnectedUser")!
+        },
+        vehicule: JSON.parse(localStorage.getItem("vehicule")!),
+        chauffeur: JSON.parse(localStorage.getItem("chauffeur")!)
+      }
     }
     console.log(this.certificatControl)
     this.store.dispatch(createCertificatControl(this.certificatControl))
+    localStorage.removeItem("cetificatControl")
+    this.certificatControl = {}
   }
 
   visualiser() {
     this.certificatControl = {
       ...this.certificatControl,
-      signatureDGM: "null",
+
       utilisateur: {
         id: localStorage.getItem("ConnectedUser")!
       },

@@ -42,8 +42,11 @@
       <form class="grid grid-cols-3 col-span-3 gap-6">
         <!-- Champ 1 -->
         <div>
-          <label for="site"
-            class="block mb-2 text-sm font-medium text-gray-800">Site</label>
+          <div class="flex items-center">
+            <label for="site"
+              class="block mb-2 text-sm font-medium text-gray-800">Site</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
           <input type="text" id="site" placeholder="Site" name="site"
             [(ngModel)]="certificatControl.site" (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
@@ -52,8 +55,12 @@
 
         <!-- Champ 2 -->
         <div>
-          <label for="societe"
-            class="block mb-2 text-sm font-medium text-gray-800">Société</label>
+          <div class="flex items-center">
+            <label for="societe"
+              class="block mb-2 text-sm font-medium text-gray-800">Société</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <input type="text" id="societe" placeholder="Société" name="societe"
             [(ngModel)]="certificatControl.societe" (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
@@ -62,9 +69,13 @@
 
         <!-- Champ 3 -->
         <div>
-          <label for="numeroRapport"
-            class="block mb-2 text-sm font-medium text-gray-800">Numéro du
-            Rapport</label>
+          <div class="flex items-center">
+            <label for="numeroRapport"
+              class="block mb-2 text-sm font-medium text-gray-800">Numéro du
+              Rapport</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <input type="text" id="numeroRapport" placeholder="Numéro Rapport"
             name="numeroDuRapport"
             [(ngModel)]="certificatControl.numeroRapport"
@@ -74,8 +85,11 @@
 
         <!-- Champ 4 -->
         <div>
-          <label for="localisation"
-            class="block mb-2 text-sm font-medium text-gray-800">Localisation</label>
+          <div class="flex items-center">
+            <label for="localisation"
+              class="block mb-2 text-sm font-medium text-gray-800">Localisation</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
           <input type="text" id="localisation" placeholder="Localisation"
             name="localisation"
             [(ngModel)]="certificatControl.localisationCertificationFait"
@@ -85,8 +99,12 @@
 
         <!-- Champ 5 -->
         <div>
-          <label for="description"
-            class="block mb-2 text-sm font-medium text-gray-800">Description</label>
+          <div class="flex items-center">
+            <label for="description"
+              class="block mb-2 text-sm font-medium text-gray-800">Description</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <input type="text" id="description" placeholder="Description"
             name="description"
             [(ngModel)]="certificatControl.description"
@@ -95,11 +113,31 @@
             required />
         </div>
 
+        <!-- Nouveau champ Date d'inspection -->
+        <div>
+          <div class="flex items-center">
+            <label for="dateInspection"
+              class="block mb-2 text-sm font-medium text-gray-800">Date
+              d'Inspection</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
+          <input type="date" id="dateInspection" name="dateInspection"
+            [(ngModel)]="certificatControl.dateInspection"
+            (ngModelChange)="saveForm()"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
+            required />
+        </div>
+
         <!-- Checkbox 1 -->
         <div>
-          <label for="noticeInstruction"
-            class="block mb-2 text-sm font-medium text-gray-800">Notice
-            Instruction</label>
+          <div class="flex items-center">
+            <label for="noticeInstruction"
+              class="block mb-2 text-sm font-medium text-gray-800">Notice
+              Instruction</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <input type="checkbox" id="noticeInstruction" name="noticeInstruction"
             [(ngModel)]="certificatControl.noticeInstruction"
             (ngModelChange)="saveForm()"
@@ -108,9 +146,13 @@
 
         <!-- Checkbox 2 -->
         <div>
-          <label for="livretMaintenance"
-            class="block mb-2 text-sm font-medium text-gray-800">Livret
-            Maintenance</label>
+          <div class="flex items-center">
+            <label for="livretMaintenance"
+              class="block mb-2 text-sm font-medium text-gray-800">Livret
+              Maintenance</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <input type="checkbox" id="livretMaintenance" name="livretMaintenance"
             [(ngModel)]="certificatControl.livretMaintenance"
             (ngModelChange)="saveForm()"
@@ -119,9 +161,12 @@
 
         <!-- Checkbox 3 -->
         <div>
-          <label for="declarationConformite"
-            class="block mb-2 text-sm font-medium text-gray-800">Déclaration
-            Conformité</label>
+          <div class="flex items-center">
+            <label for="declarationConformite"
+              class="block mb-2 text-sm font-medium text-gray-800">Déclaration
+              Conformité</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
           <input type="checkbox" id="declarationConformite"
             name="declarationConformite"
             [(ngModel)]="certificatControl.declarationConformite"
@@ -129,34 +174,15 @@
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
-        <!-- Checkbox 4 -->
-        <div>
-          <label for="rapportControlPrecedent"
-            class="block mb-2 text-sm font-medium text-gray-800">Rapport
-            Contrôle Précédent</label>
-          <input type="checkbox" id="rapportControlPrecedent"
-            name="rapportControlPrecedent"
-            [(ngModel)]="certificatControl.rapportControlePrecedent"
-            (ngModelChange)="saveForm()"
-            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
-        </div>
-
-        <!-- Checkbox 5 -->
-        <div>
-          <label for="declarationEcrite"
-            class="block mb-2 text-sm font-medium text-gray-800">Déclaration
-            Écrite</label>
-          <input type="checkbox" id="declarationEcrite" name="declarationEcrite"
-            [(ngModel)]="certificatControl.declarationEcrite"
-            (ngModelChange)="saveForm()"
-            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
-        </div>
-
         <!-- Checkbox 6 -->
         <div>
-          <label for="moyenAccess"
-            class="block mb-2 text-sm font-medium text-gray-800">Moyen
-            Accès</label>
+          <div class="flex items-center">
+            <label for="moyenAccess"
+              class="block mb-2 text-sm font-medium text-gray-800">Moyen
+              Accès</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <input type="checkbox" id="moyenAccess" name="moyenAccess"
             [(ngModel)]="certificatControl.moyenAccess"
             (ngModelChange)="saveForm()"
@@ -165,9 +191,13 @@
 
         <!-- Checkbox 7 -->
         <div>
-          <label for="moyenAccessPartiel"
-            class="block mb-2 text-sm font-medium text-gray-800">Moyen Accès
-            Partiel</label>
+          <div class="flex items-center">
+            <label for="moyenAccessPartiel"
+              class="block mb-2 text-sm font-medium text-gray-800">Moyen Accès
+              Partiel</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <input type="checkbox" id="moyenAccessPartiel"
             name="moyenAccessPartiel"
             [(ngModel)]="certificatControl.moyenAccessPartiel"
@@ -177,9 +207,13 @@
 
         <!-- Checkbox 8 -->
         <div>
-          <label for="moyenAccessConducteur"
-            class="block mb-2 text-sm font-medium text-gray-800">Moyen Accès
-            Conducteur</label>
+          <div class="flex items-center">
+            <label for="moyenAccessConducteur"
+              class="block mb-2 text-sm font-medium text-gray-800">Moyen Accès
+              Conducteur</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <input type="checkbox" id="moyenAccessConducteur"
             name="moyenAccessConducteur"
             [(ngModel)]="certificatControl.moyenAccessConducteur"
@@ -187,65 +221,59 @@
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
-        <!-- Select Etat de fonctionnement -->
-        <div>
-          <label for="fonctionnementEtat"
-            class="block mb-2 text-sm font-medium text-gray-800">État de
-            fonctionnement</label>
-          <select id="fonctionnementEtat" name="etatFonctionnement"
-            [(ngModel)]="selectedOption" (ngModelChange)="saveForm()"
-            (change)="onSelectChange($event)"
-            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
-            required>
-            <option value>Sélectionnez une catégorie</option>
-            <option value="Marche_AV_AR">Marche AVANT ARRIERE</option>
-            <option value="Pictogrammes_securite">Pictogrammes sécurité</option>
-            <option value="Vibration">Vibration</option>
-            <option value="Gyrophare">Gyrophare</option>
-            <option value="Clignotants_AV">Clignotants AVANT</option>
-            <option value="Clignotants_AR">Clignotants ARRIERE</option>
-            <option value="Changement_de_direction">Changement de
-              Direction</option>
-            <option value="Trou_d_homme">Trou d'homme</option>
-            <option value="Freinage">Freinage</option>
-            <option value="Arret_d_urgence">Arrêt d'urgence</option>
-            <option value="Etancheite_cuve">Étanchéité cuve</option>
-            <option value="SYSTEME_DE_FREINAGE">Système de freinage</option>
-            <option value="SYSTEME_HYDRAULIQUE">Système hydraulique</option>
-            <option value="CARTE_GRISE">Carte grise</option>
-            <option value="ASSURANCE">Assurance</option>
-            <option value="VISITE_TECHNIQUE">Visite Technique</option>
-            <option value="EXTINCTEUR">Extincteur</option>
-            <option value="BOMBONNE_D_AIR">Bombonne d'air</option>
-            <option value="TUYAUTERIE_DU_SYSTEME_DES_REMORQUES">Tuyau de système
-              des remorques</option>
-            <option value="SANGLE">Sangle</option>
-            <option value="ELINGUES">Élingues</option>
-            <option value="MANILLES">Manilles</option>
-            <option value="MANOMETRE_DE_PRESSION">Manomètre de pression</option>
-            <option value="TOLERANCE_USURE_DES_PNEUS">Tolérance usure des
-              pneus</option>
-            <option value="INDICE_DE_VITESSE_ET_DATE_PEREMPTION">Indice de
-              vitesse et date péremption</option>
-          </select>
-
-          <div class="mt-4">
-            <p *ngFor="let item of certificatControl.essaiFonctionnementList"
-              class="text-sm text-gray-800">
-              ✔️ {{ item }}
-            </p>
-          </div>
-        </div>
-
         <!-- Checkbox 9 -->
         <div>
-          <label for="conformeReglement"
-            class="block mb-2 text-sm font-medium text-gray-800">Conforme
-            Règlement</label>
+          <div class="flex items-center">
+            <label for="conformeReglement"
+              class="block mb-2 text-sm font-medium text-gray-800">Conforme
+              Règlement</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <input type="checkbox" id="conformeReglement" name="conformeReglement"
             [(ngModel)]="certificatControl.conformeReglement"
             (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+
+        <!-- Select Éléments d'inspection -->
+        <div class="col-span-1">
+          <div class="flex items-center">
+            <label for="inspectionElements"
+              class="block mb-2 text-sm font-medium text-gray-800">Éléments
+              d'Inspection</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
+          <select id="inspectionElements" name="inspectionElements"
+            [(ngModel)]="selectedOption" (ngModelChange)="saveForm()"
+            (change)="onSelectChange($event)"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5">
+            <option value>Sélectionnez un élément</option>
+            <option
+              *ngFor="let element of inspectionElementsList | keyvalue: sortAlphabetically"
+              [value]="element.key">
+              {{element.value}}
+            </option>
+          </select>
+
+          <!-- Liste des éléments sélectionnés avec bouton de suppression -->
+          <div class="mt-4">
+            <div
+              *ngFor="let item of certificatControl.essaiFonctionnementList; let i = index"
+              class="flex items-center justify-between p-2 mb-2 bg-gray-100 rounded">
+              <p class="text-sm text-gray-800">✔️ {{ getElementLabel(item)
+                }}</p>
+              <button type="button" (click)="removeElement(i)"
+                class="text-red-600 hover:text-red-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- Bouton Suivant -->
@@ -306,9 +334,13 @@
       <form class="grid grid-cols-3 col-span-3 gap-6">
         <!-- Champ Motif de Contrôle -->
         <div>
-          <label for="motifControl"
-            class="block mb-2 text-sm font-medium text-gray-800">Motif de
-            Contrôle</label>
+          <div class="flex items-center">
+            <label for="motifControl"
+              class="block mb-2 text-sm font-medium text-gray-800">Motif de
+              Contrôle</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <textarea type="text" id="motifControl"
             placeholder="Motif de Contrôle"
             name="motifControl"
@@ -320,9 +352,14 @@
 
         <!-- Champ Observations & Recommandations -->
         <div>
-          <label for="recommandationsObservations"
-            class="block mb-2 text-sm font-medium text-gray-800">Observations &
-            Recommandations</label>
+          <div class="flex items-center">
+            <label for="recommandationsObservations"
+              class="block mb-2 text-sm font-medium text-gray-800">Observations
+              &
+              Recommandations</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <textarea id="recommandationsObservations"
             placeholder="Observations & Recommandations"
             name="observationEtRecommandations"
@@ -334,8 +371,11 @@
 
         <!-- Champ Validité -->
         <div>
-          <label for="validite"
-            class="block mb-2 text-sm font-medium text-gray-800">Validité</label>
+          <div class="flex items-center">
+            <label for="validite"
+              class="block mb-2 text-sm font-medium text-gray-800">Validité</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
           <select id="validite" name="validite"
             [(ngModel)]="certificatControl.validite"
             (ngModelChange)="saveForm()"
@@ -371,9 +411,13 @@
 
         <!-- Champ Norme de Fabrication -->
         <div>
-          <label for="normeFabrication"
-            class="block mb-2 text-sm font-medium text-gray-800">Norme de
-            Fabrication</label>
+          <div class="flex items-center">
+            <label for="normeFabrication"
+              class="block mb-2 text-sm font-medium text-gray-800">Norme de
+              Fabrication</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
           <input type="text" id="normeFabrication"
             placeholder="Norme de fabrication" name="normeFabrication"
             [(ngModel)]="certificatControl.normeFabrication"
@@ -480,8 +524,7 @@
             chauffeurStored.numeroPermis }}</p>
           <p><span class="font-semibold">Certificat Médical :</span> {{
             chauffeurStored.numeroCertificatMedicalValide }}</p>
-          <p><span class="font-semibold">Visite Technique :</span> {{
-            chauffeurStored.numeroVisiteTechnique }}</p>
+
           <p><span class="font-semibold">CAP Poids Lourd :</span> {{
             chauffeurStored.attestionCapPoidsLourd }}</p>
           <p><span class="font-semibold">Conduite Défensive :</span> {{
@@ -549,9 +592,13 @@
         <form class="grid grid-cols-2 col-span-3 gap-6">
           <!-- Champ 1 -->
           <div>
-            <label for="numeroDePermis"
-              class="block mb-2 text-sm font-medium text-gray-800">Numéro de
-              Permis</label>
+            <div class="flex items-center">
+              <label for="numeroDePermis"
+                class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+                Permis</label>
+              <span class="ml-1 text-red-500">*</span>
+            </div>
+
             <input type="text" id="numeroDePermis"
               placeholder="Numéro de Permis" name="numeroDePermis"
               [(ngModel)]="certificatControl.chauffeur.numeroPermis"
@@ -560,6 +607,7 @@
               required />
           </div>
           <div>
+
             <label for="nomChauffeur"
               class="block mb-2 text-sm font-medium text-gray-800">Nom
               Chauffeur</label>
@@ -655,9 +703,12 @@
         <form class="grid grid-cols-2 col-span-3 gap-6">
           <!-- Champ 1 -->
           <div>
-            <label for="numeroDeCarteGrise"
-              class="block mb-2 text-sm font-medium text-gray-800">Numéro de
-              Carte Grise</label>
+            <div class="flex items-center">
+              <label for="numeroDeCarteGrise"
+                class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+                Carte Grise</label>
+              <span class="ml-1 text-red-500">*</span>
+            </div>
             <input type="text" id="numeroDeCarteGrise"
               placeholder="Numéro de carte grise" name="numeroCarteGrise"
               [(ngModel)]="certificatControl.vehicule.numeroCarteGrise"
@@ -666,9 +717,13 @@
               required />
           </div>
           <div>
-            <label for="validite"
-              class="block mb-2 text-sm font-medium text-gray-800">Type de
-              voiture</label>
+            <div class="flex items-center">
+              <label for="validite"
+                class="block mb-2 text-sm font-medium text-gray-800">Type de
+                voiture</label>
+              <span class="ml-1 text-red-500">*</span>
+            </div>
+
             <select id="validite" name="typeVoiture"
               [(ngModel)]="selectedTypeVoitureOption"
               (change)="onSelectTypeVehiculeChange($event)"
@@ -688,9 +743,13 @@
             </div>
           </div>
           <div>
-            <label for="numeroAssurance"
-              class="block mb-2 text-sm font-medium text-gray-800">Numéro
-              d'Assurance</label>
+            <div class="flex items-center">
+              <label for="numeroAssurance"
+                class="block mb-2 text-sm font-medium text-gray-800">Numéro
+                d'Assurance</label>
+              <span class="ml-1 text-red-500">*</span>
+            </div>
+
             <input type="text" id="numeroAssurance"
               placeholder="Numéro Assurance" name="numeroAssurance"
               [(ngModel)]="certificatControl.vehicule.numeroAssurance"
@@ -699,9 +758,13 @@
               required />
           </div>
           <div>
-            <label for="numeroVisiteTechnique"
-              class="block mb-2 text-sm font-medium text-gray-800">Numéro de
-              visite Technique</label>
+            <div class="flex items-center">
+              <label for="numeroVisiteTechnique"
+                class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+                visite Technique</label>
+              <span class="ml-1 text-red-500">*</span>
+            </div>
+
             <input type="text" id="numeroVisiteTechnique"
               placeholder="Numéro de visite Technique"
               name="numeroVisiteTechnique"
@@ -711,6 +774,7 @@
               required />
           </div>
           <div>
+
             <label for="VGPRemorque"
               class="block mb-2 text-sm font-medium text-gray-800">Numéro VGP
               Remorque</label>
@@ -722,9 +786,13 @@
               required />
           </div>
           <div>
-            <label for="controlEquipementObligatoire"
-              class="block mb-2 text-sm font-medium text-gray-800">Contrôle
-              Équipement obligatoire</label>
+            <div class="flex items-center">
+              <label for="controlEquipementObligatoire"
+                class="block mb-2 text-sm font-medium text-gray-800">Contrôle
+                Équipement obligatoire</label>
+              <span class="ml-1 text-red-500">*</span>
+            </div>
+
             <input type="checkbox" id="paye"
               name="controleEquipementObligatoirel"
               [(ngModel)]="certificatControl.vehicule.controleEquipementObligatoirel"

@@ -16,13 +16,7 @@ export class CertificatControlEffects {
       this.dataService.loadData(element).pipe(
         map((responseDAO) => getAllCertificatControlSuccess(responseDAO)),
         catchError((error) => of(getAllCertificatControlFailure(error)))
-      )), tap((action) => {
-        if (action.type === "[CertificatControl] Get all CertificatControl Success") {
-          this.notificationService.success("Rapports d'Inspection chargés")
-        } else {
-          this.notificationService.error("Erreur lors du chargement des rapports d'inspections")
-        }
-      })
+      ))
   ))
 
   createCertificatControl$ = createEffect(() => this.actions$.pipe(
@@ -114,13 +108,7 @@ export class CertificatControlEffects {
         map((montant) => getInspectionMontantSuccess(montant)),
         catchError((error) => of(getInspectionMontantFailure(error)))
       )
-    ), tap((action) => {
-      if (action.type === "[InspectionMontant] Get InspectionMontant success") {
-        this.notificationService.success("Montant recupéré avec succès")
-      } else {
-        this.notificationService.error("Erreur lors de la recupération du montant")
-      }
-    })
+    )
   ))
 
   deleteInspectionMontant$ = createEffect(() => this.actions$.pipe(

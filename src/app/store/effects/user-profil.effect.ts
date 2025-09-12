@@ -14,13 +14,7 @@ export class UserProfilEffect {
       this.dataService.findUserById(userId).pipe(
         map((responseDAO) => getUserProfilInfoSuccess(responseDAO)),
         catchError((error) => of(getUserProfilInfoFailure(error)))
-      )), tap((action) => {
-        if (action.type === "[User-Profil] Get User Profil Information success") {
-          this.notificationService.success("Informations du profil récupéré")
-        } else {
-          this.notificationService.error("Erreur lors du chargement des informations")
-        }
-      })
+      ))
   ))
 
   updateUserProfil$ = createEffect(() => this.actions$.pipe(

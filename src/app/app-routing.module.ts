@@ -14,6 +14,8 @@ import { ChartsComponent } from './components/chart/chart.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { TechnicalPartenersComponent } from './components/technical-parteners/technical-parteners.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { FicheControlComponent } from './components/fiche-control/fiche-control.component';
+import { FicheDataComponent } from './components/fiche-data/fiche-data.component';
 
 const routes: Routes = [
   {
@@ -62,6 +64,14 @@ const routes: Routes = [
       {
         path: 'badge/:id',
         component: CardComponent
+      },
+      {
+        path: 'fiche',
+        component: FicheControlComponent
+      },
+      {
+        path: 'fiche-data',
+        component: FicheDataComponent
       },
       {
         path: 'utilisateurs/ajout',

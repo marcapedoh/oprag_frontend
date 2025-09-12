@@ -14,13 +14,7 @@ export class UtilisateurEffect {
       this.dataService.loadData(element).pipe(
         map((responseDAO) => getAllUtilisateurSuccess(responseDAO)),
         catchError((error) => of(getAllUtilisateurFailure(error)))
-      )), tap((action) => {
-        if (action.type === "[Utilisateur] Get All Utilisateur Success") {
-          this.notificationService.success("Utilsateurs recupérés")
-        } else {
-          this.notificationService.error("Erreur lors de la récupération des utilisateurs")
-        }
-      })
+      ))
   ))
 
   changeUserState$ = createEffect(() => this.actions$.pipe(

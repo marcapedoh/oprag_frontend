@@ -14,13 +14,7 @@ export class InspectionEffect {
       this.dataService.loadInspections().pipe(
         map((responseDAO) => getAllInspectionSuccess(responseDAO)),
         catchError((error) => of(getAllInspectionFailure(error)))
-      )), tap((action) => {
-        if (action.type === "[Inspection] Get all Inspection success") {
-          this.notificationService.success("Inspections récupérées")
-        } else {
-          this.notificationService.error("Erreur lors de la recupération des Inspections")
-        }
-      })
+      ))
 
   ))
 

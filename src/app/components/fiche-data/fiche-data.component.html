@@ -1,0 +1,241 @@
+<div class="form-container" [class.step-4]="step === 4">
+
+  <div class="progress-bar">
+    <div class="progress-step" [class.active]="step >= 1">
+      <div class="step-number">1</div>
+      <div class="step-label">Informations</div>
+    </div>
+    <div class="progress-step" [class.active]="step >= 2">
+      <div class="step-number">2</div>
+      <div class="step-label">Documents</div>
+    </div>
+    <div class="progress-step" [class.active]="step >= 3">
+      <div class="step-number">3</div>
+      <div class="step-label">Conditions</div>
+    </div>
+    <div class="progress-step" [class.active]="step >= 4">
+      <div class="step-number">4</div>
+      <div class="step-label">Contrôles</div>
+    </div>
+    <div class="progress-step" [class.active]="step >= 5">
+      <div class="step-number">5</div>
+      <div class="step-label">Avis</div>
+    </div>
+  </div>
+
+  <div *ngIf="step === 1">
+    <h2>Étape 1: Informations Générales</h2>
+    <div class="form-group">
+      <label for="rapport_id">N° de rapport :</label>
+      <input type="text" id="rapport_id" name="rapport_id"
+        [(ngModel)]="formData.rapport_id">
+    </div>
+    <div class="form-group">
+      <label for="date">Date :</label>
+      <input type="date" id="date" name="date" [(ngModel)]="formData.date">
+    </div>
+    <div class="form-group">
+      <label for="societe">Société / Entreprise :</label>
+      <input type="text" id="societe" name="societe"
+        [(ngModel)]="formData.societe">
+    </div>
+    <div class="form-group">
+      <label for="localisation">Localisation :</label>
+      <input type="text" id="localisation" name="localisation"
+        [(ngModel)]="formData.localisation">
+    </div>
+    <div class="form-group">
+      <label for="designation">Désignation, Identification équipement :</label>
+      <input type="text" id="designation" name="designation"
+        [(ngModel)]="formData.designation">
+    </div>
+    <div class="form-group">
+      <label for="plaque">Numéro de la plaque:</label>
+      <input type="text" id="plaque" name="plaque"
+        [(ngModel)]="formData.plaque">
+    </div>
+    <div class="form-group">
+      <label for="annee">Année:</label>
+      <input type="text" id="annee" name="annee" [(ngModel)]="formData.annee">
+    </div>
+    <div class="form-group">
+      <label for="marque">Marque:</label>
+      <input type="text" id="marque" name="marque"
+        [(ngModel)]="formData.marque">
+    </div>
+    <div class="form-group">
+      <label for="model">Model:</label>
+      <input type="text" id="model" name="model" [(ngModel)]="formData.model">
+    </div>
+    <div class="form-group">
+      <label for="parc">N°Parc:</label>
+      <input type="text" id="parc" name="parc" [(ngModel)]="formData.parc">
+    </div>
+    <div class="form-group">
+      <label for="serie">Numéro de série:</label>
+      <input type="text" id="serie" name="serie" [(ngModel)]="formData.serie"
+        maxlength="30" class="serial-input">
+    </div>
+    <div class="button-group">
+      <span></span> <!-- Empty span for spacing -->
+      <button (click)="nextStep()">Suivant</button>
+    </div>
+  </div>
+
+  <div *ngIf="step === 2">
+    <h2>Étape 2: Documents Présentés</h2>
+    <ul class="doc-checklist">
+      <li><label><input type="checkbox" [(ngModel)]="formData.documents.notice">
+          Notice d’instruction</label></li>
+      <li><label><input type="checkbox"
+            [(ngModel)]="formData.documents.maintenance"> Livret
+          maintenance</label></li>
+      <li><label><input type="checkbox"
+            [(ngModel)]="formData.documents.conformite"> Déclaration /
+          Attestation de conformité</label></li>
+      <li><label><input type="checkbox"
+            [(ngModel)]="formData.documents.rapport"> Rapport de contrôle
+          précédent</label></li>
+    </ul>
+    <div class="button-group">
+      <button (click)="previousStep()" class="secondary">Précédent</button>
+      <button (click)="nextStep()">Suivant</button>
+    </div>
+  </div>
+
+  <div *ngIf="step === 3">
+    <h2>Étape 3: Condition d’intervention</h2>
+    <div class="form-group">
+      <label for="condition">Condition d’intervention :</label>
+      <input type="text" id="condition" name="condition"
+        [(ngModel)]="formData.condition">
+    </div>
+    <div class="form-group">
+      <label for="acces">Moyen d’accès :</label>
+      <input type="text" id="acces" name="acces" [(ngModel)]="formData.acces">
+    </div>
+    <div class="form-group">
+      <label for="partiel">Partiel :</label>
+      <input type="text" id="partiel" name="partiel"
+        [(ngModel)]="formData.partiel">
+    </div>
+    <div class="form-group">
+      <label for="conducteur">Conducteur :</label>
+      <input type="text" id="conducteur" name="conducteur"
+        [(ngModel)]="formData.conducteur">
+    </div>
+    <div class="form-group">
+      <label for="motif">Motif contrôle :</label>
+      <input type="text" id="motif" name="motif" [(ngModel)]="formData.motif">
+    </div>
+    <div class="button-group">
+      <button (click)="previousStep()" class="secondary">Précédent</button>
+      <button (click)="nextStep()">Suivant</button>
+    </div>
+  </div>
+
+  <div *ngIf="step === 4">
+    <h2>Étape 4: Points de Contrôles</h2>
+    <div class="container">
+      <div class="column">
+        <div class="section-title">1/ Points de contrôles bloquants</div>
+        <div class="table-box">
+          <table class="items" aria-label="Points bloquants">
+            <tbody>
+              <tr *ngFor="let item of blockingPoints; let i = index">
+                <td class="label">
+                  <span *ngIf="!item.isNew">{{ item.label }}</span>
+                  <input *ngIf="item.isNew" type="text" [(ngModel)]="item.label"
+                    placeholder="Nouveau point de contrôle">
+                </td>
+                <td class="check-col">C<input type="checkbox"
+                    [checked]="item.value === 'C'"
+                    (change)="onCheckboxChange(item, 'C')"></td>
+                <td class="check-col">N.C<input type="checkbox"
+                    [checked]="item.value === 'N.C'"
+                    (change)="onCheckboxChange(item, 'N.C')"></td>
+                <td class="check-col">B.E<input type="checkbox"
+                    [checked]="item.value === 'B.E'"
+                    (change)="onCheckboxChange(item, 'B.E')"></td>
+                <td class="check-col">M.E<input type="checkbox"
+                    [checked]="item.value === 'M.E'"
+                    (change)="onCheckboxChange(item, 'M.E')"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="add-row-btn-container">
+            <button type="button" (click)="addRow('blocking')">+
+              Ajouter</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="section-title">2/ Points de contrôles non bloquants</div>
+        <div class="table-box">
+          <table class="items" aria-label="Points non bloquants">
+            <tbody>
+              <tr *ngFor="let item of nonBlockingPoints; let i = index">
+                <td class="label">
+                  <span *ngIf="!item.isNew">{{ item.label }}</span>
+                  <input *ngIf="item.isNew" type="text" [(ngModel)]="item.label"
+                    placeholder="Nouveau point de contrôle">
+                </td>
+                <td class="check-col">C<input type="checkbox"
+                    [checked]="item.value === 'C'"
+                    (change)="onCheckboxChange(item, 'C')"></td>
+                <td class="check-col">N.C<input type="checkbox"
+                    [checked]="item.value === 'N.C'"
+                    (change)="onCheckboxChange(item, 'N.C')"></td>
+                <td class="check-col">B.E<input type="checkbox"
+                    [checked]="item.value === 'B.E'"
+                    (change)="onCheckboxChange(item, 'B.E')"></td>
+                <td class="check-col">M.E<input type="checkbox"
+                    [checked]="item.value === 'M.E'"
+                    (change)="onCheckboxChange(item, 'M.E')"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="add-row-btn-container">
+            <button type="button" (click)="addRow('non-blocking')">+
+              Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-group">
+      <button (click)="previousStep()" class="secondary">Précédent</button>
+      <button (click)="nextStep()">Suivant</button>
+    </div>
+  </div>
+
+  <div *ngIf="step === 5">
+    <h2>Étape 5: Observations et Recommandations</h2>
+    <div class="obs-recom" role="region"
+      aria-label="Observations et Recommandations">
+      <div class="part">
+        <div class="obs-text">
+          <strong>OBSERVATIONS :</strong>
+          <textarea [(ngModel)]="formData.observations"></textarea>
+        </div>
+        <div class="avis-section">
+          <u>AVIS:</u>
+          <label><input type="radio" name="avis" value="Favorable"
+              [(ngModel)]="avis"> Favorable</label>
+          <label><input type="radio" name="avis" value="Défavorable"
+              [(ngModel)]="avis"> Défavorable</label>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="part recom-part">
+        <strong>RECOMMANDATIONS :</strong>
+        <textarea [(ngModel)]="formData.recommandations"></textarea>
+      </div>
+    </div>
+    <div class="button-group">
+      <button (click)="previousStep()" class="secondary">Précédent</button>
+      <button (click)="onSubmit()">Générer la fiche d'inspection</button>
+    </div>
+  </div>
+
+</div>

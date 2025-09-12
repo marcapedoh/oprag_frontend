@@ -14,14 +14,7 @@ export class VehiculeEffect {
       this.dataService.createObject("Vehicules", vehicule).pipe(
         map((responseDAO) => createVehiculeSuccess(responseDAO)),
         catchError((error: string) => of(createVehiculeFailure(error)))
-      )), tap((action) => {
-        if (action.type === "[Vehicule] Create Vehicule Success") {
-          localStorage.setItem("vehicule", JSON.stringify(action.responseDAO))
-          this.notificationService.success("Véhicule ajouté")
-        } else {
-          this.notificationService.error("Erreur lors de l'ajout du véicule vérifier les informations")
-        }
-      })
+      ))
   ))
 
   constructor(private actions$: Actions, private dataService: DataService, private notificationService: NotificationService) { }

@@ -50,6 +50,8 @@ import { UtilisateurEffect } from './store/effects/utilisateur.effect';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { SettingComponent } from './components/setting/setting.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+import { FicheControlComponent } from './components/fiche-control/fiche-control.component';
+import { FicheDataComponent } from './components/fiche-data/fiche-data.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +74,9 @@ import { ComingSoonComponent } from './components/coming-soon/coming-soon.compon
     TechnicalPartenersComponent,
     UserStatsComponent,
     SettingComponent,
-    ComingSoonComponent
+    ComingSoonComponent,
+    FicheControlComponent,
+    FicheDataComponent
   ],
   imports: [
     BrowserModule,

@@ -8,10 +8,14 @@
 
       <!-- Champ Rapport Inspection -->
       <div>
-        <label for="fonctionnementEtat"
-          class="block mb-2 text-sm font-medium text-gray-800">
-          Rapport Inspection
-        </label>
+        <div class="flex items-center">
+          <label for="fonctionnementEtat"
+            class="block mb-2 text-sm font-medium text-gray-800">
+            Rapport Inspection
+          </label>
+          <span class="ml-1 text-red-500">*</span>
+        </div>
+
         <select id="fonctionnementEtat" name="etatFonctionnement"
           [(ngModel)]="badge.certificatControl.id"
           (ngModelChange)="saveForm()"
@@ -25,12 +29,33 @@
         </select>
       </div>
 
+      <!-- Champ Numéro du Parc -->
+      <div>
+        <div class="flex items-center">
+          <label for="numeroImmatriculation"
+            class="block mb-2 text-sm font-medium text-gray-800">
+            Numéro d'immatriculation
+          </label>
+          <span class="ml-1 text-red-500">*</span>
+        </div>
+
+        <input type="text" id="numeroRapport"
+          placeholder="Numéro d'immatriculation"
+          name="numeroImmatriculation" [(ngModel)]="badge.numeroParc"
+          (ngModelChange)="saveForm()"
+          class="bg-gray-50 border border-gray-800 text-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5" />
+      </div>
+
       <!-- Champ Validité -->
       <div>
-        <label for="validite"
-          class="block mb-2 text-sm font-medium text-gray-800">
-          Validité
-        </label>
+        <div class="flex items-center">
+          <label for="validite"
+            class="block mb-2 text-sm font-medium text-gray-800">
+            Validité
+          </label>
+          <span class="ml-1 text-red-500">*</span>
+        </div>
+
         <select id="validite" name="validite" [(ngModel)]="badge.validite"
           (ngModelChange)="saveForm()"
           class="bg-gray-50 border border-gray-800 text-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
@@ -40,18 +65,6 @@
             {{ mois.label }}
           </option>
         </select>
-      </div>
-
-      <!-- Champ Numéro du Parc -->
-      <div>
-        <label for="numeroRapport"
-          class="block mb-2 text-sm font-medium text-gray-800">
-          Numéro du Parc
-        </label>
-        <input type="text" id="numeroRapport" placeholder="Numéro du Parc"
-          name="numeroDuRapport" [(ngModel)]="badge.numeroParc"
-          (ngModelChange)="saveForm()"
-          class="bg-gray-50 border border-gray-800 text-gray-800 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5" />
       </div>
 
       <!-- Bouton Enregistrer -->
