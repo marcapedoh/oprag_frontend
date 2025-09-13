@@ -240,8 +240,8 @@
         <div class="col-span-1">
           <div class="flex items-center">
             <label for="inspectionElements"
-              class="block mb-2 text-sm font-medium text-gray-800">Éléments
-              d'Inspection</label>
+              class="block mb-2 text-sm font-medium text-gray-800">Points
+              de contrôle</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
@@ -275,7 +275,45 @@
             </div>
           </div>
         </div>
+        <!-- Select Éléments non contrôlé -->
+        <div class="col-span-1">
+          <div class="flex items-center">
+            <label for="inspectionElements"
+              class="block mb-2 text-sm font-medium text-gray-800">Points
+              non contrôle</label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
 
+          <select id="inspectionElements" name="inspectionElements"
+            [(ngModel)]="selectedNoCheckingPoint" (ngModelChange)="saveForm()"
+            (change)="onSelectNoCheckingPoints($event)"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5">
+            <option value>Sélectionnez un élément</option>
+            <option
+              *ngFor="let element of inspectionElementsList | keyvalue: sortAlphabetically"
+              [value]="element.key">
+              {{element.value}}
+            </option>
+          </select>
+
+          <!-- Liste des éléments sélectionnés avec bouton de suppression -->
+          <div class="mt-4">
+            <div
+              *ngFor="let item of certificatControl.essaiNonFonctionnementList; let i = index"
+              class="flex items-center justify-between p-2 mb-2 bg-gray-100 rounded">
+              <p class="text-sm text-gray-800">✔️ {{ getElementLabel(item)
+                }}</p>
+              <button type="button" (click)="removeNoCheckingElement(i)"
+                class="text-red-600 hover:text-red-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
         <!-- Bouton Suivant -->
         <div class="col-start-3">
           <button type="button" (click)="nextStep()"
@@ -511,24 +549,24 @@
       <div></div>
 
       <!-- Carte Chauffeur -->
-      <div *ngIf="chauffeurStored.nom"
+      <div *ngIf="chauffeurStored"
         class="w-full p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
         <h5 class="mb-4 text-xl font-bold text-gray-800">Informations du
           Chauffeur</h5>
         <div class="space-y-2 text-gray-800">
-          <p><span class="font-semibold">Nom :</span> {{ chauffeurStored.nom
+          <p><span class="font-semibold">Nom :</span> {{ chauffeurStored?.nom
             }}</p>
           <p><span class="font-semibold">Prénom :</span> {{
-            chauffeurStored.prenom }}</p>
+            chauffeurStored?.prenom }}</p>
           <p><span class="font-semibold">N° Permis :</span> {{
-            chauffeurStored.numeroPermis }}</p>
+            chauffeurStored?.numeroPermis }}</p>
           <p><span class="font-semibold">Certificat Médical :</span> {{
-            chauffeurStored.numeroCertificatMedicalValide }}</p>
+            chauffeurStored?.numeroCertificatMedicalValide }}</p>
 
           <p><span class="font-semibold">CAP Poids Lourd :</span> {{
-            chauffeurStored.attestionCapPoidsLourd }}</p>
+            chauffeurStored?.attestionCapPoidsLourd }}</p>
           <p><span class="font-semibold">Conduite Défensive :</span> {{
-            chauffeurStored.attestationDeConduiteDefensive }}</p>
+            chauffeurStored?.attestationDeConduiteDefensive }}</p>
         </div>
       </div>
 
@@ -589,7 +627,8 @@
         </button>
       </div>
       <div class="grid grid-cols-2 gap-8 p-4 space-y-4">
-        <form class="grid grid-cols-2 col-span-3 gap-6">
+        <form class="grid grid-cols-2 col-span-3 gap-6"
+          *ngIf="certificatControl.chauffeur">
           <!-- Champ 1 -->
           <div>
             <div class="flex items-center">

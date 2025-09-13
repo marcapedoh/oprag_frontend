@@ -5,6 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { initFlowbite } from 'flowbite';
 import { Observable } from 'rxjs';
 import SignaturePad from 'signature_pad';
+import { NotificationService } from 'src/app/services/notification-service/notification.service';
 import { createCertificatControl, visualiserCertificatControl } from 'src/app/store/actions/certificatControl.action';
 import { createChauffeur } from 'src/app/store/actions/chauffeur.action';
 import { hideToast } from 'src/app/store/actions/toast.action';
@@ -27,6 +28,7 @@ export class FormInspectionComponent implements OnInit {
   isChauffeurModal = true
   certificatControl: any = {
     essaiFonctionnementList: [],
+    essaiNonFonctionnementList: [],
     chauffeur: {},
     vehicule: {
       typeVehicules: []
@@ -106,7 +108,7 @@ export class FormInspectionComponent implements OnInit {
     ETAT_DE_LA_CARROSSERIE: "Etat de la Carrosserie"
   };
 
-  constructor(private store: Store<any>, private storeCertificatControl: Store<CertificatControlState>, private activatedRoute: ActivatedRoute, private currencyPipe: CurrencyPipe, private router: Router) {
+  constructor(private store: Store<any>, private storeCertificatControl: Store<CertificatControlState>, private activatedRoute: ActivatedRoute, private currencyPipe: CurrencyPipe, private router: Router, private notificationService: NotificationService) {
     this.toast$ = this.store.select(selectToast);
     this.inpectionsVehicule$ = this.storeCertificatControl.pipe(select(selectAllCertificatControls))
     this.utilisateur$ = this.store.pipe(select(selectUserProfil))
@@ -174,19 +176,43 @@ export class FormInspectionComponent implements OnInit {
     return this.inspectionElementsList[key as keyof typeof this.inspectionElementsList] || key;
   }
 
+
   // Ajoutez cette méthode pour supprimer un élément
   removeElement(index: number) {
     this.certificatControl.essaiFonctionnementList.splice(index, 1);
     this.saveForm();
   }
-
+  removeNoCheckingElement(index: number) {
+    this.certificatControl.essaiNonFonctionnementList.splice(index, 1);
+    this.saveForm();
+  }
   // Modifiez la méthode onSelectChange
   onSelectChange(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
-    if (value && !this.certificatControl.essaiFonctionnementList.includes(value)) {
+    if (value && !this.certificatControl.essaiFonctionnementList.includes(value) && !this.certificatControl.essaiNonFonctionnementList.includes(value)) {
       this.certificatControl.essaiFonctionnementList.push(value);
+    } else {
+      this.notificationService.info("Elément déjà ajouté")
     }
     this.selectedOption = '';
+    this.saveForm();
+  }
+
+  selectedNoCheckingPoint = ''
+  onSelectNoCheckingPoints(event: Event) {
+    const value = (event.target as HTMLSelectElement).value;
+    if (!this.certificatControl.essaiNonFonctionnementList) {
+      this.certificatControl = {
+        ...this.certificatControl,
+        essaiNonFonctionnementList: []
+      };
+    }
+    if (value && !this.certificatControl.essaiNonFonctionnementList.includes(value) && !this.certificatControl.essaiFonctionnementList.includes(value)) {
+      this.certificatControl.essaiNonFonctionnementList.push(value);
+    } else {
+      this.notificationService.info("Elément déjà ajouté")
+    }
+    this.selectedNoCheckingPoint = '';
     this.saveForm();
   }
   formatMontant() {

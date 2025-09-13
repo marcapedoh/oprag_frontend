@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { createBadge } from 'src/app/store/actions/badge.action';
@@ -22,7 +22,7 @@ export class BadgeFormComponent {
   badges$: Observable<ReadonlyArray<any>>;
   inpectionsVehicule$: Observable<ReadonlyArray<any>>;
   certificatControls: any[] = []
-
+  origin = ''
   moisOptions = [
     { value: 'UN_MOIS', label: '1 MOIS' },
     { value: 'DEUX_MOIS', label: '2 MOIS' },
@@ -49,7 +49,7 @@ export class BadgeFormComponent {
     { value: 'VINGT_TROIS_MOIS', label: '23 MOIS' },
     { value: 'VINGT_QUATRE_MOIS', label: '24 MOIS' },
   ];
-  constructor(private store: Store<CertificatControlState>, private storeBadge: Store<BadgeState>, private activatedRoute: ActivatedRoute) {
+  constructor(private store: Store<CertificatControlState>, private storeBadge: Store<BadgeState>, private activatedRoute: ActivatedRoute, private router: Router) {
     this.inpectionsVehicule$ = this.store.pipe(select(selectAllCertificatControls))
     this.badges$ = this.storeBadge.pipe(select(selectAllBadges))
   }
@@ -63,6 +63,13 @@ export class BadgeFormComponent {
     const savedData = localStorage.getItem('badge');
     if (savedData) {
       this.badge = JSON.parse(savedData);
+    }
+
+    if (this.router.url.includes('/badge/ajout/')) {
+      this.origin = "Modifier"
+
+    } else {
+      this.origin = "Enregistrer"
     }
 
     this.inpectionsVehicule$.subscribe((certificatControl: any) => {
@@ -98,6 +105,7 @@ export class BadgeFormComponent {
         id: +localStorage.getItem("ConnectedUser")!
       }
     }
+
     this.store.dispatch(createBadge(this.badge))
     localStorage.removeItem("badge")
   }
