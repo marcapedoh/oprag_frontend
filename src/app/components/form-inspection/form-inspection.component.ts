@@ -189,10 +189,26 @@ export class FormInspectionComponent implements OnInit {
   // Modifiez la méthode onSelectChange
   onSelectChange(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
-    if (value && !this.certificatControl.essaiFonctionnementList.includes(value) && !this.certificatControl.essaiNonFonctionnementList.includes(value)) {
-      this.certificatControl.essaiFonctionnementList.push(value);
+    if (!this.certificatControl.essaiFonctionnementList) {
+      this.certificatControl = {
+        ...this.certificatControl,
+        essaiFonctionnementList: []
+      };
+    }
+    if (
+      value &&
+      !this.certificatControl.essaiFonctionnementList.includes(value) &&
+      !this.certificatControl.essaiNonFonctionnementList.includes(value)
+    ) {
+      this.certificatControl = {
+        ...this.certificatControl,
+        essaiFonctionnementList: [
+          ...this.certificatControl.essaiFonctionnementList,
+          value
+        ]
+      };
     } else {
-      this.notificationService.info("Elément déjà ajouté")
+      this.notificationService.info("Élément déjà ajouté");
     }
     this.selectedOption = '';
     this.saveForm();

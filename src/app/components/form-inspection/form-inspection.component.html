@@ -393,8 +393,7 @@
           <div class="flex items-center">
             <label for="recommandationsObservations"
               class="block mb-2 text-sm font-medium text-gray-800">Observations
-              &
-              Recommandations</label>
+            </label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
@@ -402,6 +401,23 @@
             placeholder="Observations & Recommandations"
             name="observationEtRecommandations"
             [(ngModel)]="certificatControl.observationRecommendation"
+            (ngModelChange)="saveForm()"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
+            required></textarea>
+        </div>
+
+        <div>
+          <div class="flex items-center">
+            <label for="recommandationsObservations"
+              class="block mb-2 text-sm font-medium text-gray-800">Recommandation
+            </label>
+            <span class="ml-1 text-red-500">*</span>
+          </div>
+
+          <textarea id="recommandationsObservations"
+            placeholder="Observations & Recommandations"
+            name="observationEtRecommandations"
+            [(ngModel)]="certificatControl.recommendation"
             (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
             required></textarea>
@@ -549,24 +565,24 @@
       <div></div>
 
       <!-- Carte Chauffeur -->
-      <div *ngIf="chauffeurStored"
+      <div *ngIf="chauffeurStored.nom"
         class="w-full p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
         <h5 class="mb-4 text-xl font-bold text-gray-800">Informations du
           Chauffeur</h5>
         <div class="space-y-2 text-gray-800">
-          <p><span class="font-semibold">Nom :</span> {{ chauffeurStored?.nom
+          <p><span class="font-semibold">Nom :</span> {{ chauffeurStored.nom
             }}</p>
           <p><span class="font-semibold">Prénom :</span> {{
-            chauffeurStored?.prenom }}</p>
+            chauffeurStored.prenom }}</p>
           <p><span class="font-semibold">N° Permis :</span> {{
-            chauffeurStored?.numeroPermis }}</p>
+            chauffeurStored.numeroPermis }}</p>
           <p><span class="font-semibold">Certificat Médical :</span> {{
-            chauffeurStored?.numeroCertificatMedicalValide }}</p>
+            chauffeurStored.numeroCertificatMedicalValide }}</p>
 
           <p><span class="font-semibold">CAP Poids Lourd :</span> {{
-            chauffeurStored?.attestionCapPoidsLourd }}</p>
+            chauffeurStored.attestionCapPoidsLourd }}</p>
           <p><span class="font-semibold">Conduite Défensive :</span> {{
-            chauffeurStored?.attestationDeConduiteDefensive }}</p>
+            chauffeurStored.attestationDeConduiteDefensive }}</p>
         </div>
       </div>
 

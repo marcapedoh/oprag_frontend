@@ -50,7 +50,7 @@ export class DatatableComponent {
 
         const lowerSearch = searchText.toString().toLowerCase();
         if (this.dataType === "Gestion des Rapports d'Inspection") {
-          this.filteredElements = this.filteredData.filter((item: any) =>
+          this.filteredElements = this.data.filter((item: any) =>
             item.site.toLowerCase().includes(lowerSearch) ||
             item.societe.toLowerCase().includes(lowerSearch) ||
             item.numeroRapport.toLowerCase().includes(lowerSearch) ||
@@ -60,7 +60,7 @@ export class DatatableComponent {
 
           );
         } else if (this.dataType === "Gestion des Cartes d'Inspection") {
-          this.filteredElements = this.filteredData.filter((item: any) =>
+          this.filteredElements = this.data.filter((item: any) =>
             item.numero.toLowerCase().includes(lowerSearch) ||
             item.validite.toLowerCase().includes(lowerSearch) ||
             item.numeroParc.toLowerCase().includes(lowerSearch) ||
@@ -68,7 +68,7 @@ export class DatatableComponent {
             item.codeQrString.toString().includes(lowerSearch)
           );
         } else if (this.dataType === "Tableau des Utilisateurs") {
-          this.filteredElements = this.filteredData.filter((item: any) =>
+          this.filteredElements = this.data.filter((item: any) =>
             item.nom.toLowerCase().includes(lowerSearch) ||
             item.prenom.toLowerCase().includes(lowerSearch) ||
             item.userName.toLowerCase().includes(lowerSearch) ||
