@@ -31,6 +31,7 @@ export class FormInspectionComponent implements OnInit {
     essaiNonFonctionnementList: [],
     chauffeur: {},
     vehicule: {
+      numeroCarteGrise: '',
       typeVehicules: []
     }
   }
@@ -294,15 +295,19 @@ export class FormInspectionComponent implements OnInit {
 
       this.certificatControl = {
         ...this.certificatControl,
-
+        signatureDGM: "null",
         utilisateur: {
           id: localStorage.getItem("ConnectedUser")!
         },
-        vehicule: JSON.parse(localStorage.getItem("vehicule")!),
+        vehicule: {
+          id: +localStorage.getItem("vehiculeId")!,
+          ...JSON.parse(localStorage.getItem("vehicule")!)
+        },
         chauffeur: JSON.parse(localStorage.getItem("chauffeur")!)
       }
     }
     console.log(this.certificatControl)
+
     this.store.dispatch(createCertificatControl(this.certificatControl))
     localStorage.removeItem("cetificatControl")
     this.certificatControl = {}
@@ -311,7 +316,7 @@ export class FormInspectionComponent implements OnInit {
   visualiser() {
     this.certificatControl = {
       ...this.certificatControl,
-
+      signatureDGM: "null",
       utilisateur: {
         id: localStorage.getItem("ConnectedUser")!
       },

@@ -15,6 +15,14 @@ export class VehiculeEffect {
         map((responseDAO) => createVehiculeSuccess(responseDAO)),
         catchError((error: string) => of(createVehiculeFailure(error)))
       ))
+    , tap((action) => {
+      if (action.type === "[Vehicule] Create Vehicule Success") {
+        this.notificationService.success("Vehicule créé avec succès")
+        localStorage.setItem("vehiculeId", JSON.stringify(action.responseDAO.id))
+      } else {
+        this.notificationService.error("Erreur lors de l'ajout du vehciule")
+      }
+    })
   ))
 
   constructor(private actions$: Actions, private dataService: DataService, private notificationService: NotificationService) { }

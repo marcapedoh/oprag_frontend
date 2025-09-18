@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { DataService } from "src/app/services/data.service";
-import { getAllUserPerInspectionName, getAllUserPerInspectionNameFailure, getAllUserPerInspectionNameSuccess, getLastOperationDate, getLastOperationDateFailure, getLastOperationDateSuccess, getUserRapport, getUserRapportCertificat, getUserRapportCertificatFailure, getUserRapportCertificatSuccess, getUserRapportFailure, getUserRapportSuccess } from "../actions/user-per-inspection.action";
+import { getAllUserPerInspectionName, getAllUserPerInspectionNameFailure, getAllUserPerInspectionNameFailureWithParam, getAllUserPerInspectionNameSuccess, getAllUserPerInspectionNameSuccessWithParam, getAllUserPerInspectionNameWithParam, getLastOperationDate, getLastOperationDateFailure, getLastOperationDateSuccess, getUserRapport, getUserRapportCertificat, getUserRapportCertificatFailure, getUserRapportCertificatSuccess, getUserRapportFailure, getUserRapportSuccess } from "../actions/user-per-inspection.action";
 import { catchError, exhaustMap, map, of } from "rxjs";
 
 @Injectable()
@@ -13,6 +13,15 @@ export class UsersPerInspectionEffect {
       this.dataService.usersPerInspectionName().pipe(
         map((responseDAO) => getAllUserPerInspectionNameSuccess(responseDAO)),
         catchError((error) => of(getAllUserPerInspectionNameFailure(error)))
+      ))
+  ))
+
+  loadUserPerInspectionWithParam$ = createEffect(() => this.actions$.pipe(
+    ofType(getAllUserPerInspectionNameWithParam),
+    exhaustMap(({ nomInspection }) =>
+      this.dataService.usersPerInspectionNameWithParam(nomInspection).pipe(
+        map((responseDAO) => getAllUserPerInspectionNameSuccessWithParam(responseDAO)),
+        catchError((error) => of(getAllUserPerInspectionNameFailureWithParam(error)))
       ))
   ))
 

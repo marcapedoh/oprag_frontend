@@ -10,7 +10,7 @@ import { getAllChartObject } from './store/actions/chartObject.action';
 import { ToastState } from './store/reducers/toast.reducer';
 import { selectToast } from './store/selector/toast.selector';
 import { hideToast } from './store/actions/toast.action';
-import { getAllUserPerInspectionName } from './store/actions/user-per-inspection.action';
+import { getAllUserPerInspectionName, getAllUserPerInspectionNameWithParam } from './store/actions/user-per-inspection.action';
 import { UsersPerInspectionState } from './store/reducers/user-per-inspection.reducer';
 import { initFlowbite } from 'flowbite';
 import { userProfil } from './store/reducers/user-profil.reducer';
@@ -45,7 +45,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.storeChart.dispatch(getAllChartObject())
     this.storeInspections.dispatch(getAllInspection())
     this.storeUserProfil.dispatch(getUserProfilInfo(+localStorage.getItem("ConnectedUser")!))
-    this.storeUsersPerInspection.dispatch(getAllUserPerInspectionName())
+    console.log(localStorage.getItem("UserROle"))
+
+    if (localStorage.getItem("UserROle")!.toString() === "SUPER_ADMIN") {
+      console.log("Test passed")
+      this.storeUsersPerInspection.dispatch(getAllUserPerInspectionName())
+    } else {
+      this.storeUsersPerInspection.dispatch(getAllUserPerInspectionNameWithParam(localStorage.getItem("InspectionName")!))
+    }
   }
 
   ngAfterViewInit(): void {

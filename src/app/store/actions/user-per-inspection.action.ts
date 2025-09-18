@@ -4,6 +4,10 @@ export const getAllUserPerInspectionName = createAction("[User-Inspection] Get A
 export const getAllUserPerInspectionNameSuccess = createAction("[User-Inspection] Get All User Per Inspection Success", (usersInspection: ReadonlyArray<any>) => ({ usersInspection }))
 export const getAllUserPerInspectionNameFailure = createAction("[User-Inspection] Get All User Per Inspection Failure", (error: string) => ({ error }))
 
+export const getAllUserPerInspectionNameWithParam = createAction("[User-Inspection] Get All User Per Inspection with Param", (nomInspection: string) => ({ nomInspection }))
+export const getAllUserPerInspectionNameSuccessWithParam = createAction("[User-Inspection] Get All User Per Inspection With Param Success ", (usersInspection: ReadonlyArray<any>) => ({ usersInspection }))
+export const getAllUserPerInspectionNameFailureWithParam = createAction("[User-Inspection] Get All User Per Inspection With Param Failure", (error: string) => ({ error }))
+
 export const getLastOperationDate = createAction("[User-Inspection-Date] Get Last Operation Date", (userId: number) => ({ userId }))
 export const getLastOperationDateSuccess = createAction("[User-Inspection-Date] Get Last Operation Date Success", (responseDAO: any) => ({ responseDAO }))
 export const getLastOperationDateFailure = createAction("[User-Inspection-Date] Get Last Operation Date Failure", (error: string) => ({ error }))
