@@ -1,0 +1,191 @@
+<div class="max-w-screen-xl p-6 mx-auto bg-white shadow-md rounded-xl">
+  <h2 class="mb-6 text-2xl font-medium text-gray-800">Tableau de Bord</h2>
+
+  <!-- Statistiques -->
+  <div class="max-w-6xl p-4 mx-auto">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
+      <!-- Statistique 1 : Cartes d'inspection -->
+      <div class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
+        <h3 class="mb-2 text-xl font-semibold text-gray-800">Cartes
+          d'inspection</h3>
+        <p class="text-3xl font-bold text-gray-800">{{ badges.length }}</p>
+      </div>
+
+      <!-- Statistique 2 : Rapports d'inspection -->
+      <div class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
+        <h3 class="mb-2 text-xl font-semibold text-gray-800">Rapports
+          d'inspection</h3>
+        <p class="text-3xl font-bold text-gray-800">{{ certificatControls.length
+          }}</p>
+      </div>
+
+      <!-- Statistique 3 : Cartes actives -->
+      <div class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
+        <h3 class="mb-2 text-xl font-semibold text-gray-800">Cartes actives</h3>
+        <p class="text-3xl font-bold text-gray-800">{{ totalBadgesActive ?
+          totalBadgesActive : 0 }}</p>
+      </div>
+
+      <!-- Nouvelle statistique : Taux de conformité -->
+      <div class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
+        <h3 class="mb-2 text-xl font-semibold text-gray-800">Taux de
+          conformité</h3>
+        <p class="text-3xl font-bold text-gray-800">{{ complianceRate }}%</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtres -->
+  <div class="p-6 mt-8 bg-white border border-blue-200 shadow-sm rounded-xl">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-5">
+      <div>
+        <label for="dateDebut" class="block mb-2 text-sm font-medium text-blue-800">Date
+          Début</label>
+        <input type="date" id="dateDebut" name="dateDebut" [(ngModel)]="dateDebut"
+          class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+      </div>
+      <div>
+        <label for="dateFin" class="block mb-2 text-sm font-medium text-blue-800">Date de
+          Fin</label>
+        <input type="date" id="dateFin" name="dateFin" [(ngModel)]="dateFin"
+          class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+      </div>
+      <div>
+        <label for="societe" class="block mb-2 text-sm font-medium text-blue-800">Partenaires</label>
+        <select id="societe" [(ngModel)]="selectedSociete"
+          class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+          <option value>Tous les partenaires</option>
+          <option *ngFor="let societe of societes" [value]="societe">{{ societe
+            }}</option>
+        </select>
+      </div>
+
+      <div class="flex items-end">
+        <button type="button" (click)="applyFilters()"
+          class="w-full text-white bg-gray-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">
+          Appliquer les filtres
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graphiques -->
+  <div class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
+    <!-- Graphique 1: Évolution des inspections -->
+    <div class="p-4 bg-white border border-blue-200 shadow-sm rounded-xl">
+      <h3 class="mb-4 text-lg font-semibold">Évolution des inspections</h3>
+      <div id="trend-chart">
+        <apx-chart [series]="trendChart.series!" [chart]="trendChart.chart!" [dataLabels]="trendChart.dataLabels!"
+          [stroke]="trendChart.stroke!" [xaxis]="trendChart.xaxis!" [yaxis]="trendChart.yaxis!"
+          [grid]="trendChart.grid!" [title]="trendChart.title!">
+        </apx-chart>
+      </div>
+    </div>
+
+    <!-- Graphique 2: Répartition par type de véhicule -->
+    <div class="p-4 bg-white border border-blue-200 shadow-sm rounded-xl">
+      <h3 class="mb-4 text-lg font-semibold">Répartition par type de
+        véhicule</h3>
+      <div id="vehicle-type-chart">
+        <apx-chart [series]="vehicleTypeChart.series!" [chart]="vehicleTypeChart.chart!"
+          [labels]="vehicleTypeChart.labels!" [responsive]="vehicleTypeChart.responsive!"
+          [colors]="vehicleTypeChart.colors!">
+        </apx-chart>
+      </div>
+    </div>
+
+    <!-- Graphique 3: Conformité par statut -->
+    <div class="p-4 bg-white border border-blue-200 shadow-sm rounded-xl">
+      <h3 class="mb-4 text-lg font-semibold">Inspections conformes vs non
+        conformes</h3>
+      <div id="status-chart">
+        <apx-chart [series]="statusChart.series!" [chart]="statusChart.chart!" [plotOptions]="statusChart.plotOptions!"
+          [dataLabels]="statusChart.dataLabels!" [stroke]="statusChart.stroke!" [xaxis]="statusChart.xaxis!"
+          [yaxis]="statusChart.yaxis!" [fill]="statusChart.fill!" [colors]="statusChart.colors!"
+          [legend]="statusChart.legend!">
+        </apx-chart>
+      </div>
+    </div>
+
+    <!-- Graphique 4: Taux de conformité par catégorie -->
+    <div class="p-4 bg-white border border-blue-200 shadow-sm rounded-xl">
+      <h3 class="mb-4 text-lg font-semibold">Évolution des rapports d'inspection par partenaire</h3>
+      <div id="line-chart" class="mt-2">
+        <apx-chart class="mt-5" [series]="lineChart.series!" [chart]="lineChart.chart!" [xaxis]="lineChart.xaxis!"
+          [yaxis]="lineChart.yaxis!" [stroke]="lineChart.stroke!" [markers]="lineChart.markers!"
+          [dataLabels]="lineChart.dataLabels!" [colors]="lineChart.colors!" [grid]="lineChart.grid!"
+          [legend]="lineChart.legend!">
+        </apx-chart>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tableau des données -->
+  <div class="mt-8 bg-white border border-blue-200 shadow-sm rounded-xl">
+    <div class="p-6">
+      <h3 class="mb-4 text-lg font-semibold">Détails des inspections</h3>
+      <div class="flex justify-between mb-4">
+        <div class="relative">
+          <input type="text" placeholder="Rechercher..." [(ngModel)]="searchTerm"
+            class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pl-10">
+        </div>
+        <button (click)="exportToExcel()"
+          class="flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">
+          <span>Exporter en Excel</span>
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-800">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+            <tr>
+              <th scope="col" class="px-4 py-3">N° Inspection</th>
+              <th scope="col" class="px-4 py-3">Date inspection</th>
+              <th scope="col" class="px-4 py-3">Société</th>
+              <th scope="col" class="px-4 py-3">Véhicule</th>
+              <th scope="col" class="px-4 py-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let inspection of filteredInspections" class="bg-white border-b hover:bg-gray-50">
+              <td class="px-4 py-3 font-medium">{{ inspection.id }}</td>
+              <td class="px-4 py-3">{{ inspection.inspectionDate |
+                date:'dd/MM/yyyy' }}</td>
+              <td class="px-4 py-3">{{ inspection.company }}</td>
+              <td class="px-4 py-3">{{ inspection.vehicleType }}</td>
+
+              <td class="px-4 py-3">
+                <button (click)="downloadInspection(inspection.id)"
+                  class="font-medium text-blue-600 hover:underline">Télécharger</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex items-center justify-between pt-4">
+        <span class="text-sm font-normal text-gray-700">
+          Affichage de <span class="font-semibold">{{ startIndex }}-{{ endIndex
+            }}</span> sur <span class="font-semibold">{{ totalItems }}</span>
+        </span>
+        <div class="inline-flex space-x-2">
+          <button (click)="previousPage()" [disabled]="currentPage === 1"
+            class="flex items-center justify-center h-8 px-3 text-sm font-medium text-gray-800 bg-white border border-gray-300 rounded-lg hover:bg-gray-100">
+            Précédent
+          </button>
+          <span *ngFor="let page of visiblePages" (click)="goToPage(page)" [ngClass]="{
+              'bg-blue-50 text-blue-600 border-blue-300': currentPage === page,
+              'bg-white text-gray-800 border-gray-300': currentPage !== page
+            }" class="flex items-center justify-center h-8 px-3 text-sm font-medium border rounded-lg cursor-pointer">
+            {{ page }}
+          </span>
+          <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+            class="flex items-center justify-center h-8 px-3 text-sm font-medium text-gray-800 bg-white border border-gray-300 rounded-lg hover:bg-gray-100">
+            Suivant
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,8 @@ import { TechnicalPartenersComponent } from './components/technical-parteners/te
 import { SettingComponent } from './components/setting/setting.component';
 import { FicheControlComponent } from './components/fiche-control/fiche-control.component';
 import { FicheDataComponent } from './components/fiche-data/fiche-data.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FichePreviewComponent } from './components/fiche-preview/fiche-preview.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,13 @@ const routes: Routes = [
       {
         path: "inspecter",
         component: FormInspectionComponent
+      },
+      {
+        path: "vue-ensemble",
+        component: DashboardComponent
+      }, {
+        path: "visuualiser-fiche",
+        component: FichePreviewComponent
       },
       {
         path: "inspecter/:id",

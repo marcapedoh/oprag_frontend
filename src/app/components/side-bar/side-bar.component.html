@@ -26,6 +26,24 @@
         </a>
       </li>
 
+      <li *ngIf="role === 'INSPECTEUR_PRINCIPAL' || role === 'SUPER_ADMIN'">
+        <a routerLink="vue-ensemble"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
+          class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg hover:bg-blue-100/40 group">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="text-gray-800 size-5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+          </svg>
+
+          <span class="text-gray-800 ms-3">Vue d'Ensemble</span>
+        </a>
+      </li>
+
       <li
         *ngIf="role === 'CONTROLLEUR' || role === 'SUPER_ADMIN' || role === 'INSPECTEUR_PRINCIPAL'">
         <a routerLink="inspection/collection"

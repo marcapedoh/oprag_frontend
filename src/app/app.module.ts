@@ -52,6 +52,8 @@ import { SettingComponent } from './components/setting/setting.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 import { FicheControlComponent } from './components/fiche-control/fiche-control.component';
 import { FicheDataComponent } from './components/fiche-data/fiche-data.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FichePreviewComponent } from './components/fiche-preview/fiche-preview.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +78,9 @@ import { FicheDataComponent } from './components/fiche-data/fiche-data.component
     SettingComponent,
     ComingSoonComponent,
     FicheControlComponent,
-    FicheDataComponent
+    FicheDataComponent,
+    DashboardComponent,
+    FichePreviewComponent
   ],
   imports: [
     BrowserModule,

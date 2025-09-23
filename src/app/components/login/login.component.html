@@ -1,115 +1,110 @@
-<div class="min-h-screen bg-gray-50">
-  <div class="flex flex-col min-h-screen md:flex-row">
-    <!-- Partie gauche avec graphisme - Pleine hauteur -->
-    <div
-      class="relative flex flex-col w-full p-8 overflow-hidden bg-gradient-to-b from-blue-50 to-blue-100 md:w-1/2">
-      <!-- Zone décorative supérieure -->
-      <div
-        class="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-r from-blue-200 to-blue-300 opacity-30"></div>
-
-      <!-- Formes géométriques décoratives -->
-      <svg class="absolute top-0 left-0 w-full h-full opacity-10"
-        viewBox="0 0 500 500" preserveAspectRatio="none">
-        <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"
-          class="text-white fill-current"></path>
-      </svg>
-
-      <div
-        class="absolute top-0 right-0 w-32 h-32 -mt-16 -mr-16 bg-blue-200 rounded-full opacity-20"></div>
-      <div
-        class="absolute bottom-0 left-0 w-32 h-32 -mb-16 -ml-16 bg-blue-200 rounded-full opacity-20"></div>
-      <div
-        class="absolute w-24 h-24 transform rotate-45 bg-blue-300 rounded-lg bottom-20 right-20 opacity-30"></div>
-
-      <!-- Première ligne : Titre -->
-      <div class="relative z-10 flex items-center justify-center h-1/6">
-        <h1 class="text-4xl font-bold text-gray-800">CERTIPORT</h1>
+<div class="min-h-screen bg-white">
+  <div class="flex flex-col min-h-screen lg:flex-row">
+    <!-- Partie gauche avec image - Pleine hauteur -->
+    <div class="relative flex flex-col w-full bg-white lg:w-1/2">
+      <!-- Titre CERTIPORT centré en haut -->
+      <div class="flex items-center justify-center py-8">
+        <h1 class="text-4xl font-bold tracking-wider text-blue-600">CERTIPORT</h1>
       </div>
 
-      <!-- Deuxième ligne : Image avec fond assombri -->
-      <div
-        class="relative z-10 flex items-center justify-center mt-4 rounded-lg h-5/6 bg-opacity-30">
-        <img src="assets/oprag-logo.jpg"
-          class="object-contain w-full h-full max-h-[60vh]">
+      <!-- Image principale -->
+      <div class="flex items-center justify-center flex-1 p-8">
+        <div class="w-full max-w-lg">
+          <img src="assets/image.png" alt="OPRAG Port" class="object-contain w-full h-auto rounded-lg shadow-lg">
+        </div>
       </div>
     </div>
 
-    <!-- Partie droite avec formulaire - Pleine hauteur -->
-    <div class="flex items-center justify-center w-full p-8 md:w-1/2 md:p-12">
+    <!-- Partie droite avec formulaire - Fond bleu gradient -->
+    <div
+      class="relative flex items-center justify-center w-full overflow-hidden lg:w-1/2 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700">
+      <!-- Éléments décoratifs de réseau -->
+      <div class="absolute inset-0">
+        <!-- Cercles et lignes décoratives -->
+        <div class="absolute w-3 h-3 bg-white rounded-full top-20 right-20 opacity-60"></div>
+        <div class="absolute w-2 h-2 bg-white rounded-full top-32 right-32 opacity-40"></div>
+        <div class="absolute w-4 h-4 bg-white rounded-full opacity-50 bottom-20 right-16"></div>
+        <div class="absolute w-2 h-2 bg-white rounded-full bottom-32 right-40 opacity-60"></div>
+        <div class="absolute w-2 h-2 bg-white rounded-full top-40 right-12 opacity-70"></div>
+
+        <!-- Lignes de connexion -->
+        <svg class="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 600">
+          <line x1="300" y1="80" x2="330" y2="130" stroke="white" stroke-width="1" />
+          <line x1="330" y1="130" x2="290" y2="160" stroke="white" stroke-width="1" />
+          <line x1="320" y1="480" x2="360" y2="520" stroke="white" stroke-width="1" />
+          <line x1="360" y1="520" x2="340" y2="550" stroke="white" stroke-width="1" />
+          <line x1="350" y1="160" x2="380" y2="200" stroke="white" stroke-width="1" />
+        </svg>
+      </div>
+
       <!-- Conteneur du formulaire -->
-      <div class="w-full max-w-md">
+      <div class="relative z-10 w-full max-w-md p-8">
         <!-- Formulaire principal de connexion -->
-        <form
-          [ngClass]="{'animate-slide-in-right': currentStep === 1, 'hidden': currentStep !== 1}"
-          class="w-full">
-          <h2 class="mb-8 text-3xl font-bold text-gray-800">Portail de
-            Connexion</h2>
-          <p class="mb-8 text-sm text-gray-800">Veuillez vous identifier pour
-            accéder à la plateforme CERTIPORT</p>
+        <form [ngClass]="{'animate-slide-in-right': currentStep === 1, 'hidden': currentStep !== 1}" class="w-full">
+
+          <h2 class="mb-3 text-3xl font-bold text-white">PORTAIL DE CONNEXION</h2>
+          <p class="mb-8 text-sm text-blue-100">Veuillez vous identifier pour accéder à la plateforme CERTIPORT</p>
+
           <div class="mb-6">
-            <label for="username"
-              class="block mb-2 text-sm font-medium text-gray-700">
+            <label for="username" class="block mb-2 text-sm font-medium text-white">
               Nom d'utilisateur
             </label>
-            <input type="text" id="username" name="username"
-              [(ngModel)]="username"
-              class="block w-full p-3 text-lg text-gray-800 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="votre.nom" required />
+            <input type="text" id="username" name="username" [(ngModel)]="username"
+              class="block w-full p-3 text-lg text-gray-900 bg-white border-0 rounded-lg focus:ring-2 focus:ring-blue-300 focus:outline-none"
+              placeholder="user@name" required />
           </div>
 
           <div class="mb-6">
-            <label for="password"
-              class="block mb-2 text-sm font-medium text-gray-700">
-              Mot de passe
+            <label for="password" class="block mb-2 text-sm font-medium text-white">
+              Mots de passe
             </label>
-            <input type="password" id="password" name="password"
-              [(ngModel)]="motDePasse" placeholder="••••••••"
-              class="block w-full p-3 text-lg text-gray-800 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+            <input type="password" id="password" name="password" [(ngModel)]="motDePasse" placeholder="••••••••"
+              class="block w-full p-3 text-lg text-gray-900 bg-white border-0 rounded-lg focus:ring-2 focus:ring-blue-300 focus:outline-none"
               required />
           </div>
 
           <button type="submit" (click)="login()"
-            class="w-full px-5 py-3 text-lg font-medium text-center text-white bg-blue-900 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-            Se connecter
+            class="w-full px-5 py-3 text-lg font-medium text-center text-blue-600 transition-colors duration-200 bg-white rounded-lg hover:bg-blue-50 focus:ring-4 focus:outline-none focus:ring-blue-300">
+            Se Connecter
           </button>
+
           <div class="mt-6 text-right">
             <button type="button" (click)="goToStep(2)"
-              class="text-sm text-gray-800 hover:text-gray-600">
-              Mot de passe oublié ?
+              class="text-sm text-blue-100 transition-colors duration-200 hover:text-white">
+              Mots de passe oublié?
             </button>
           </div>
-          <div class="mt-6 text-center">
-            <p class="text-gray-800">&copy; 2025 CERTIPORT - Tous droits
-              réservés . Politique de
-              confidentialité . Conditions d'utilisation</p>
+
+          <div class="mt-8 text-center">
+            <p class="text-xs leading-relaxed text-blue-100">
+              2025 CERTIPORT Tous droits réservés . Politique de confidentialité . Condition d'utilisation
+            </p>
           </div>
         </form>
 
         <!-- Formulaire OTP -->
-        <form
-          [ngClass]="{'animate-slide-in-right': currentStep === 2, 'hidden': currentStep !== 2}"
-          class="w-full">
-          <h2 class="mb-8 text-3xl font-bold text-gray-800">Vérification</h2>
+        <form [ngClass]="{'animate-slide-in-right': currentStep === 2, 'hidden': currentStep !== 2}" class="w-full">
+
+          <h2 class="mb-8 text-3xl font-bold text-white">Vérification</h2>
 
           <div class="mb-6">
-            <label for="otp"
-              class="block mb-2 text-sm font-medium text-gray-700">
+            <label for="otp" class="block mb-2 text-sm font-medium text-white">
               Code OTP
             </label>
             <input type="text" id="otp" name="otp" [(ngModel)]="otpCode"
-              class="block w-full p-3 text-lg text-gray-800 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+              class="block w-full p-3 text-lg text-gray-900 bg-white border-0 rounded-lg focus:ring-2 focus:ring-blue-300 focus:outline-none"
               placeholder="Entrez le code reçu" required />
           </div>
 
           <div class="mb-6 text-right">
             <button type="button" (click)="goToStep(1)"
-              class="text-sm text-blue-600 hover:text-blue-800">
+              class="text-sm text-blue-100 transition-colors duration-200 hover:text-white">
               Retour à la connexion
             </button>
           </div>
 
           <button type="button" (click)="verifyOtp()"
-            class="w-full px-5 py-3 text-lg font-medium text-center text-white bg-blue-900 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+            class="w-full px-5 py-3 text-lg font-medium text-center text-blue-600 transition-colors duration-200 bg-white rounded-lg hover:bg-blue-50 focus:ring-4 focus:outline-none focus:ring-blue-300">
             Vérifier le code
           </button>
         </form>

@@ -1,7 +1,6 @@
 <div class="max-w-screen-xl p-6 mx-auto bg-white shadow-md rounded-xl">
   <!-- 🧾 Form Step 1 -->
-  <div
-    [ngClass]="{'animate-slide-in-left': currentStep === 1, 'hidden': currentStep !== 1}">
+  <div [ngClass]="{'animate-slide-in-left': currentStep === 1, 'hidden': currentStep !== 1}">
     <h2 class="mb-6 text-2xl font-medium text-gray-800">
       Créer un Rapport d'Inspection
     </h2>
@@ -12,12 +11,9 @@
         <li class="mb-10 ms-6">
           <span [ngClass]="currentStep >= 1 ? 'bg-blue-400' : 'bg-gray-100'"
             class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white">
-            <svg class="w-3.5 h-3.5"
-              [ngClass]="currentStep >= 1 ? 'text-blue-600' : 'text-gray-500'"
-              xmlns="http://www.w3.org/2000/svg" fill="none"
-              viewBox="0 0 16 12">
-              <path stroke="currentColor" stroke-linecap="round"
-                stroke-linejoin="round" stroke-width="2"
+            <svg class="w-3.5 h-3.5" [ngClass]="currentStep >= 1 ? 'text-blue-600' : 'text-gray-500'"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M1 5.917 5.724 10.5 15 1.5" />
             </svg>
           </span>
@@ -26,10 +22,8 @@
         <li class="mb-10 ms-6">
           <span [ngClass]="currentStep >= 2 ? 'bg-blue-400' : 'bg-gray-100'"
             class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white">
-            <svg class="w-3.5 h-3.5"
-              [ngClass]="currentStep >= 2 ? 'text-blue-600' : 'text-gray-500'"
-              xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-              viewBox="0 0 20 16">
+            <svg class="w-3.5 h-3.5" [ngClass]="currentStep >= 2 ? 'text-blue-600' : 'text-gray-500'"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
               <path
                 d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z" />
             </svg>
@@ -43,12 +37,11 @@
         <!-- Champ 1 -->
         <div>
           <div class="flex items-center">
-            <label for="site"
-              class="block mb-2 text-sm font-medium text-gray-800">Site</label>
+            <label for="site" class="block mb-2 text-sm font-medium text-gray-800">Site</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
-          <input type="text" id="site" placeholder="Site" name="site"
-            [(ngModel)]="certificatControl.site" (ngModelChange)="saveForm()"
+          <input type="text" id="site" placeholder="Site" name="site" [(ngModel)]="certificatControl.site"
+            (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
             required />
         </div>
@@ -56,13 +49,12 @@
         <!-- Champ 2 -->
         <div>
           <div class="flex items-center">
-            <label for="societe"
-              class="block mb-2 text-sm font-medium text-gray-800">Société</label>
+            <label for="societe" class="block mb-2 text-sm font-medium text-gray-800">Société</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <input type="text" id="societe" placeholder="Société" name="societe"
-            [(ngModel)]="certificatControl.societe" (ngModelChange)="saveForm()"
+          <input type="text" id="societe" placeholder="Société" name="societe" [(ngModel)]="certificatControl.societe"
+            (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
             required />
         </div>
@@ -70,45 +62,36 @@
         <!-- Champ 3 -->
         <div>
           <div class="flex items-center">
-            <label for="numeroRapport"
-              class="block mb-2 text-sm font-medium text-gray-800">Numéro du
+            <label for="numeroRapport" class="block mb-2 text-sm font-medium text-gray-800">Numéro du
               Rapport</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <input type="text" id="numeroRapport" placeholder="Numéro Rapport"
-            name="numeroDuRapport"
-            [(ngModel)]="certificatControl.numeroRapport"
-            (ngModelChange)="saveForm()"
+          <input type="text" id="numeroRapport" placeholder="Numéro Rapport" name="numeroDuRapport"
+            [(ngModel)]="certificatControl.numeroRapport" (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5" />
         </div>
 
         <!-- Champ 4 -->
         <div>
           <div class="flex items-center">
-            <label for="localisation"
-              class="block mb-2 text-sm font-medium text-gray-800">Localisation</label>
+            <label for="localisation" class="block mb-2 text-sm font-medium text-gray-800">Localisation</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
-          <input type="text" id="localisation" placeholder="Localisation"
-            name="localisation"
-            [(ngModel)]="certificatControl.localisationCertificationFait"
-            (ngModelChange)="saveForm()"
+          <input type="text" id="localisation" placeholder="Localisation" name="localisation"
+            [(ngModel)]="certificatControl.localisationCertificationFait" (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5" />
         </div>
 
         <!-- Champ 5 -->
         <div>
           <div class="flex items-center">
-            <label for="description"
-              class="block mb-2 text-sm font-medium text-gray-800">Description</label>
+            <label for="description" class="block mb-2 text-sm font-medium text-gray-800">Description</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <input type="text" id="description" placeholder="Description"
-            name="description"
-            [(ngModel)]="certificatControl.description"
-            (ngModelChange)="saveForm()"
+          <input type="text" id="description" placeholder="Description" name="description"
+            [(ngModel)]="certificatControl.description" (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
             required />
         </div>
@@ -116,14 +99,12 @@
         <!-- Nouveau champ Date d'inspection -->
         <div>
           <div class="flex items-center">
-            <label for="dateInspection"
-              class="block mb-2 text-sm font-medium text-gray-800">Date
+            <label for="dateInspection" class="block mb-2 text-sm font-medium text-gray-800">Date
               d'Inspection</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <input type="date" id="dateInspection" name="dateInspection"
-            [(ngModel)]="certificatControl.creationDate"
+          <input type="date" id="dateInspection" name="dateInspection" [(ngModel)]="certificatControl.creationDate"
             (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
             required />
@@ -132,59 +113,50 @@
         <!-- Checkbox 1 -->
         <div>
           <div class="flex items-center">
-            <label for="noticeInstruction"
-              class="block mb-2 text-sm font-medium text-gray-800">Notice
+            <label for="noticeInstruction" class="block mb-2 text-sm font-medium text-gray-800">Notice
               Instruction</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
           <input type="checkbox" id="noticeInstruction" name="noticeInstruction"
-            [(ngModel)]="certificatControl.noticeInstruction"
-            (ngModelChange)="saveForm()"
+            [(ngModel)]="certificatControl.noticeInstruction" (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
         <!-- Checkbox 2 -->
         <div>
           <div class="flex items-center">
-            <label for="livretMaintenance"
-              class="block mb-2 text-sm font-medium text-gray-800">Livret
+            <label for="livretMaintenance" class="block mb-2 text-sm font-medium text-gray-800">Livret
               Maintenance</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
           <input type="checkbox" id="livretMaintenance" name="livretMaintenance"
-            [(ngModel)]="certificatControl.livretMaintenance"
-            (ngModelChange)="saveForm()"
+            [(ngModel)]="certificatControl.livretMaintenance" (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
         <!-- Checkbox 3 -->
         <div>
           <div class="flex items-center">
-            <label for="declarationConformite"
-              class="block mb-2 text-sm font-medium text-gray-800">Déclaration
+            <label for="declarationConformite" class="block mb-2 text-sm font-medium text-gray-800">Déclaration
               Conformité</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
-          <input type="checkbox" id="declarationConformite"
-            name="declarationConformite"
-            [(ngModel)]="certificatControl.declarationConformite"
-            (ngModelChange)="saveForm()"
+          <input type="checkbox" id="declarationConformite" name="declarationConformite"
+            [(ngModel)]="certificatControl.declarationConformite" (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
         <!-- Checkbox 6 -->
         <div>
           <div class="flex items-center">
-            <label for="moyenAccess"
-              class="block mb-2 text-sm font-medium text-gray-800">Moyen
+            <label for="moyenAccess" class="block mb-2 text-sm font-medium text-gray-800">Moyen
               Accès</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <input type="checkbox" id="moyenAccess" name="moyenAccess"
-            [(ngModel)]="certificatControl.moyenAccess"
+          <input type="checkbox" id="moyenAccess" name="moyenAccess" [(ngModel)]="certificatControl.moyenAccess"
             (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
@@ -192,84 +164,69 @@
         <!-- Checkbox 7 -->
         <div>
           <div class="flex items-center">
-            <label for="moyenAccessPartiel"
-              class="block mb-2 text-sm font-medium text-gray-800">Moyen Accès
+            <label for="moyenAccessPartiel" class="block mb-2 text-sm font-medium text-gray-800">Moyen Accès
               Partiel</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <input type="checkbox" id="moyenAccessPartiel"
-            name="moyenAccessPartiel"
-            [(ngModel)]="certificatControl.moyenAccessPartiel"
-            (ngModelChange)="saveForm()"
+          <input type="checkbox" id="moyenAccessPartiel" name="moyenAccessPartiel"
+            [(ngModel)]="certificatControl.moyenAccessPartiel" (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
         <!-- Checkbox 8 -->
         <div>
           <div class="flex items-center">
-            <label for="moyenAccessConducteur"
-              class="block mb-2 text-sm font-medium text-gray-800">Moyen Accès
+            <label for="moyenAccessConducteur" class="block mb-2 text-sm font-medium text-gray-800">Moyen Accès
               Conducteur</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <input type="checkbox" id="moyenAccessConducteur"
-            name="moyenAccessConducteur"
-            [(ngModel)]="certificatControl.moyenAccessConducteur"
-            (ngModelChange)="saveForm()"
+          <input type="checkbox" id="moyenAccessConducteur" name="moyenAccessConducteur"
+            [(ngModel)]="certificatControl.moyenAccessConducteur" (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
         <!-- Checkbox 9 -->
         <div>
           <div class="flex items-center">
-            <label for="conformeReglement"
-              class="block mb-2 text-sm font-medium text-gray-800">Conforme
+            <label for="conformeReglement" class="block mb-2 text-sm font-medium text-gray-800">Conforme
               Règlement</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
           <input type="checkbox" id="conformeReglement" name="conformeReglement"
-            [(ngModel)]="certificatControl.conformeReglement"
-            (ngModelChange)="saveForm()"
+            [(ngModel)]="certificatControl.conformeReglement" (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
         <!-- Select Éléments d'inspection -->
         <div class="col-span-1">
           <div class="flex items-center">
-            <label for="inspectionElements"
-              class="block mb-2 text-sm font-medium text-gray-800">Points
+            <label for="inspectionElements" class="block mb-2 text-sm font-medium text-gray-800">Points
               de contrôle</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <select id="inspectionElements" name="inspectionElements"
-            [(ngModel)]="selectedOption" (ngModelChange)="saveForm()"
-            (change)="onSelectChange($event)"
+          <select id="inspectionElements" name="inspectionElements" [(ngModel)]="selectedOption"
+            (ngModelChange)="saveForm()" (change)="onSelectChange($event)"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5">
             <option value>Sélectionnez un élément</option>
-            <option
-              *ngFor="let element of inspectionElementsList | keyvalue: sortAlphabetically"
-              [value]="element.key">
+            <option *ngFor="let element of inspectionElementsList | keyvalue: sortAlphabetically" [value]="element.key">
               {{element.value}}
             </option>
           </select>
 
           <!-- Liste des éléments sélectionnés avec bouton de suppression -->
           <div class="mt-4">
-            <div
-              *ngFor="let item of certificatControl.essaiFonctionnementList; let i = index"
+            <div *ngFor="let item of certificatControl.essaiFonctionnementList; let i = index"
               class="flex items-center justify-between p-2 mb-2 bg-gray-100 rounded">
               <p class="text-sm text-gray-800">✔️ {{ getElementLabel(item)
                 }}</p>
-              <button type="button" (click)="removeElement(i)"
-                class="text-red-600 hover:text-red-800">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              <button type="button" (click)="removeElement(i)" class="text-red-600 hover:text-red-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
@@ -278,37 +235,30 @@
         <!-- Select Éléments non contrôlé -->
         <div class="col-span-1">
           <div class="flex items-center">
-            <label for="inspectionElements"
-              class="block mb-2 text-sm font-medium text-gray-800">Points
+            <label for="inspectionElements" class="block mb-2 text-sm font-medium text-gray-800">Points
               non contrôle</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <select id="inspectionElements" name="inspectionElements"
-            [(ngModel)]="selectedNoCheckingPoint" (ngModelChange)="saveForm()"
-            (change)="onSelectNoCheckingPoints($event)"
+          <select id="inspectionElements" name="inspectionElements" [(ngModel)]="selectedNoCheckingPoint"
+            (ngModelChange)="saveForm()" (change)="onSelectNoCheckingPoints($event)"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5">
             <option value>Sélectionnez un élément</option>
-            <option
-              *ngFor="let element of inspectionElementsList | keyvalue: sortAlphabetically"
-              [value]="element.key">
+            <option *ngFor="let element of inspectionElementsList | keyvalue: sortAlphabetically" [value]="element.key">
               {{element.value}}
             </option>
           </select>
 
           <!-- Liste des éléments sélectionnés avec bouton de suppression -->
           <div class="mt-4">
-            <div
-              *ngFor="let item of certificatControl.essaiNonFonctionnementList; let i = index"
+            <div *ngFor="let item of certificatControl.essaiNonFonctionnementList; let i = index"
               class="flex items-center justify-between p-2 mb-2 bg-gray-100 rounded">
               <p class="text-sm text-gray-800">✔️ {{ getElementLabel(item)
                 }}</p>
-              <button type="button" (click)="removeNoCheckingElement(i)"
-                class="text-red-600 hover:text-red-800">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              <button type="button" (click)="removeNoCheckingElement(i)" class="text-red-600 hover:text-red-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
@@ -318,8 +268,7 @@
         <div class="col-start-3">
           <button type="button" (click)="nextStep()"
             class="mt-4 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-              fill="currentColor" class="w-5 h-5">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
               <path fill-rule="evenodd"
                 d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z"
                 clip-rule="evenodd" />
@@ -332,8 +281,7 @@
   </div>
 
   <!-- 🧾 Form Step 2 -->
-  <div
-    [ngClass]="{'animate-slide-in-right': currentStep === 2, 'hidden': currentStep !== 2}">
+  <div [ngClass]="{'animate-slide-in-right': currentStep === 2, 'hidden': currentStep !== 2}">
     <h2 class="mb-6 text-2xl font-medium text-gray-800">Compléter le
       Rapport</h2>
 
@@ -343,12 +291,9 @@
         <li class="mb-10 ms-6">
           <span [ngClass]="currentStep >= 1 ? 'bg-blue-400' : 'bg-gray-100'"
             class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white">
-            <svg class="w-3.5 h-3.5"
-              [ngClass]="currentStep >= 1 ? 'text-blue-600' : 'text-gray-500'"
-              xmlns="http://www.w3.org/2000/svg" fill="none"
-              viewBox="0 0 16 12">
-              <path stroke="currentColor" stroke-linecap="round"
-                stroke-linejoin="round" stroke-width="2"
+            <svg class="w-3.5 h-3.5" [ngClass]="currentStep >= 1 ? 'text-blue-600' : 'text-gray-500'"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M1 5.917 5.724 10.5 15 1.5" />
             </svg>
           </span>
@@ -357,10 +302,8 @@
         <li class="mb-10 ms-6">
           <span [ngClass]="currentStep >= 2 ? 'bg-blue-400' : 'bg-gray-100'"
             class="absolute flex items-center justify-center w-8 h-8 rounded-full -start-4 ring-4 ring-white">
-            <svg class="w-3.5 h-3.5"
-              [ngClass]="currentStep >= 2 ? 'text-blue-600' : 'text-gray-500'"
-              xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-              viewBox="0 0 20 16">
+            <svg class="w-3.5 h-3.5" [ngClass]="currentStep >= 2 ? 'text-blue-600' : 'text-gray-500'"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
               <path
                 d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z" />
             </svg>
@@ -373,17 +316,13 @@
         <!-- Champ Motif de Contrôle -->
         <div>
           <div class="flex items-center">
-            <label for="motifControl"
-              class="block mb-2 text-sm font-medium text-gray-800">Motif de
+            <label for="motifControl" class="block mb-2 text-sm font-medium text-gray-800">Motif de
               Contrôle</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <textarea type="text" id="motifControl"
-            placeholder="Motif de Contrôle"
-            name="motifControl"
-            [(ngModel)]="certificatControl.motifControle"
-            (ngModelChange)="saveForm()"
+          <textarea type="text" id="motifControl" placeholder="Motif de Contrôle" name="motifControl"
+            [(ngModel)]="certificatControl.motifControle" (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
             required></textarea>
         </div>
@@ -391,16 +330,13 @@
         <!-- Champ Observations & Recommandations -->
         <div>
           <div class="flex items-center">
-            <label for="recommandationsObservations"
-              class="block mb-2 text-sm font-medium text-gray-800">Observations
+            <label for="recommandationsObservations" class="block mb-2 text-sm font-medium text-gray-800">Observations
             </label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <textarea id="recommandationsObservations"
-            placeholder="Observations & Recommandations"
-            name="observationEtRecommandations"
-            [(ngModel)]="certificatControl.observationRecommendation"
+          <textarea id="recommandationsObservations" placeholder="Observations & Recommandations"
+            name="observationEtRecommandations" [(ngModel)]="certificatControl.observationRecommendation"
             (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
             required></textarea>
@@ -408,17 +344,13 @@
 
         <div>
           <div class="flex items-center">
-            <label for="recommandationsObservations"
-              class="block mb-2 text-sm font-medium text-gray-800">Recommandation
+            <label for="recommandationsObservations" class="block mb-2 text-sm font-medium text-gray-800">Recommandation
             </label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <textarea id="recommandationsObservations"
-            placeholder="Observations & Recommandations"
-            name="observationEtRecommandations"
-            [(ngModel)]="certificatControl.recommendation"
-            (ngModelChange)="saveForm()"
+          <textarea id="recommendation" placeholder="Observations & Recommandations" name="recommendation"
+            [(ngModel)]="certificatControl.recommendation" (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
             required></textarea>
         </div>
@@ -426,13 +358,10 @@
         <!-- Champ Validité -->
         <div>
           <div class="flex items-center">
-            <label for="validite"
-              class="block mb-2 text-sm font-medium text-gray-800">Validité</label>
+            <label for="validite" class="block mb-2 text-sm font-medium text-gray-800">Validité</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
-          <select id="validite" name="validite"
-            [(ngModel)]="certificatControl.validite"
-            (ngModelChange)="saveForm()"
+          <select id="validite" name="validite" [(ngModel)]="certificatControl.validite" (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
             required>
             <option value>Sélectionnez une Validité</option>
@@ -466,26 +395,27 @@
         <!-- Champ Norme de Fabrication -->
         <div>
           <div class="flex items-center">
-            <label for="normeFabrication"
-              class="block mb-2 text-sm font-medium text-gray-800">Norme de
+            <label for="normeFabrication" class="block mb-2 text-sm font-medium text-gray-800">Norme de
               Fabrication</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
-          <input type="text" id="normeFabrication"
-            placeholder="Norme de fabrication" name="normeFabrication"
-            [(ngModel)]="certificatControl.normeFabrication"
-            (ngModelChange)="saveForm()"
+          <input type="text" id="normeFabrication" placeholder="Norme de fabrication" name="normeFabrication"
+            [(ngModel)]="certificatControl.normeFabrication" (ngModelChange)="saveForm()"
             class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5" />
         </div>
 
         <!-- Checkbox Payé -->
         <div>
-          <label for="paye"
-            class="block mb-2 text-sm font-medium text-gray-800">Carte
+          <label for="paye" class="block mb-2 text-sm font-medium text-gray-800">Carte
             payé?</label>
-          <input type="checkbox" id="paye" name="paye"
-            [(ngModel)]="certificatControl.paye" (ngModelChange)="saveForm()"
+          <input type="checkbox" id="paye" name="paye" [(ngModel)]="certificatControl.paye" (ngModelChange)="saveForm()"
+            class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
+        </div>
+        <div>
+          <label for="avisFavorable" class="block mb-2 text-sm font-medium text-gray-800">Avis Favorable</label>
+          <input type="checkbox" id="paye" name="avisFavorable" [(ngModel)]="certificatControl.avisFavorable"
+            (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
@@ -500,10 +430,8 @@
 
         <!-- Bouton Ajouter chauffeur -->
         <div>
-          <button (click)="openChauffeurModal()" type="button"
-            *ngIf="eligibleforInspection"
-            data-modal-target="chauffeur-modal"
-            data-modal-toggle="chauffeur-modal"
+          <button (click)="openChauffeurModal()" type="button" *ngIf="eligibleforInspection"
+            data-modal-target="chauffeur-modal" data-modal-toggle="chauffeur-modal"
             class="mt-5 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
             Ajouter chauffeur
           </button>
@@ -511,10 +439,8 @@
 
         <!-- Bouton Ajouter Véhicule -->
         <div>
-          <button (click)="openChauffeurModal()" type="button"
-            *ngIf="eligibleforInspection"
-            data-modal-target="vehicule-modal"
-            data-modal-toggle="vehicule-modal"
+          <button (click)="openChauffeurModal()" type="button" *ngIf="eligibleforInspection"
+            data-modal-target="vehicule-modal" data-modal-toggle="vehicule-modal"
             class="mt-5 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
             Ajouter Véhicule
           </button>
@@ -524,8 +450,7 @@
         <div class="flex col-start-3 gap-4 ">
           <button type="button" (click)="prevStep()"
             class="mt-4 flex items-center gap-2 text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-              fill="currentColor" class="size-6">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
               <path fill-rule="evenodd"
                 d="M7.28 7.72a.75.75 0 0 1 0 1.06l-2.47 2.47H21a.75.75 0 0 1 0 1.5H4.81l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3.75-3.75a.75.75 0 0 1 0-1.06l3.75-3.75a.75.75 0 0 1 1.06 0Z"
                 clip-rule="evenodd" />
@@ -543,8 +468,7 @@
             </svg>
             Visualiser
           </button> -->
-          <button type="submit" (click)="save()"
-            *ngIf="eligibleforInspection"
+          <button type="submit" (click)="save()" *ngIf="eligibleforInspection"
             class="mt-4 flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center">
             {{ origin }}
           </button>
@@ -565,8 +489,7 @@
       <div></div>
 
       <!-- Carte Chauffeur -->
-      <div *ngIf="chauffeurStored?.nom"
-        class="w-full p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
+      <div *ngIf="chauffeurStored?.nom" class="w-full p-6 bg-white border border-gray-300 rounded-lg shadow-sm">
         <h5 class="mb-4 text-xl font-bold text-gray-800">Informations du
           Chauffeur</h5>
         <div class="space-y-2 text-gray-800">
@@ -602,8 +525,7 @@
             vehiculeStored.vgpRemorque }}</p>
           <p>
             <span class="font-semibold">Équipement obligatoire :</span>
-            <span
-              *ngIf="vehiculeStored.controleEquipementObligatoirel; else non">✅
+            <span *ngIf="vehiculeStored.controleEquipementObligatoirel; else non">✅
               Oui</span>
             <ng-template #non>❌ Non</ng-template>
           </p>
@@ -627,95 +549,73 @@
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
   <div class="relative w-full max-w-2xl max-h-full p-4">
     <div class="relative bg-white border border-gray-300 rounded-lg shadow-sm">
-      <div
-        class="flex items-center justify-between p-4 border-b border-gray-300 rounded-t">
+      <div class="flex items-center justify-between p-4 border-b border-gray-300 rounded-t">
         <h3 class="text-xl font-semibold text-gray-800">Ajout Chauffeur</h3>
         <button type="button"
           class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto"
           data-modal-hide="chauffeur-modal">
-          <svg class="w-3 h-3" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round"
-              stroke-linejoin="round" stroke-width="2"
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
           </svg>
           <span class="sr-only">Close modal</span>
         </button>
       </div>
       <div class="grid grid-cols-2 gap-8 p-4 space-y-4">
-        <form class="grid grid-cols-2 col-span-3 gap-6"
-          *ngIf="certificatControl.chauffeur">
+        <form class="grid grid-cols-2 col-span-3 gap-6" *ngIf="certificatControl.chauffeur">
           <!-- Champ 1 -->
           <div>
             <div class="flex items-center">
-              <label for="numeroDePermis"
-                class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+              <label for="numeroDePermis" class="block mb-2 text-sm font-medium text-gray-800">Numéro de
                 Permis</label>
               <span class="ml-1 text-red-500">*</span>
             </div>
 
-            <input type="text" id="numeroDePermis"
-              placeholder="Numéro de Permis" name="numeroDePermis"
-              [(ngModel)]="certificatControl.chauffeur.numeroPermis"
-              (ngModelChange)="saveForm()"
+            <input type="text" id="numeroDePermis" placeholder="Numéro de Permis" name="numeroDePermis"
+              [(ngModel)]="certificatControl.chauffeur.numeroPermis" (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
 
-            <label for="nomChauffeur"
-              class="block mb-2 text-sm font-medium text-gray-800">Nom
+            <label for="nomChauffeur" class="block mb-2 text-sm font-medium text-gray-800">Nom
               Chauffeur</label>
-            <input type="text" id="nomChauffeur" placeholder="Nom Chauffeur"
-              name="nomChauffeur"
-              [(ngModel)]="certificatControl.chauffeur.nom"
-              (ngModelChange)="saveForm()"
+            <input type="text" id="nomChauffeur" placeholder="Nom Chauffeur" name="nomChauffeur"
+              [(ngModel)]="certificatControl.chauffeur.nom" (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
-            <label for="prenomChauffeur"
-              class="block mb-2 text-sm font-medium text-gray-800">Prénom</label>
-            <input type="text" id="prenomChauffeur"
-              placeholder="Prénom Chauffeur" name="prenom"
-              [(ngModel)]="certificatControl.chauffeur.prenom"
-              (ngModelChange)="saveForm()"
+            <label for="prenomChauffeur" class="block mb-2 text-sm font-medium text-gray-800">Prénom</label>
+            <input type="text" id="prenomChauffeur" placeholder="Prénom Chauffeur" name="prenom"
+              [(ngModel)]="certificatControl.chauffeur.prenom" (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
-            <label for="numeroDeCertificatMedicalValide"
-              class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+            <label for="numeroDeCertificatMedicalValide" class="block mb-2 text-sm font-medium text-gray-800">Numéro de
               Certificat Médical Valide</label>
-            <input type="text" id="numeroDeCertificatMedicalValide"
-              placeholder="Numéro de Certificat Médical Valide"
-              name="numeroCertificatMedical"
-              [(ngModel)]="certificatControl.chauffeur.numeroCertificatMedicalValide"
+            <input type="text" id="numeroDeCertificatMedicalValide" placeholder="Numéro de Certificat Médical Valide"
+              name="numeroCertificatMedical" [(ngModel)]="certificatControl.chauffeur.numeroCertificatMedicalValide"
               (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
-            <label for="attestationPoidsLourd"
-              class="block mb-2 text-sm font-medium text-gray-800">Numéro
+            <label for="attestationPoidsLourd" class="block mb-2 text-sm font-medium text-gray-800">Numéro
               Attestation Poids lourd</label>
-            <input type="text" id="numeroVisiteTechnique"
-              placeholder="Attestation Poids lourds"
-              name="numeroAttestationPoidsLourd"
-              [(ngModel)]="certificatControl.chauffeur.attestionCapPoidsLourd"
+            <input type="text" id="numeroVisiteTechnique" placeholder="Attestation Poids lourds"
+              name="numeroAttestationPoidsLourd" [(ngModel)]="certificatControl.chauffeur.attestionCapPoidsLourd"
               (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
-            <label for="attestationDeConduiteDefensive"
-              class="block mb-2 text-sm font-medium text-gray-800">Numéro
+            <label for="attestationDeConduiteDefensive" class="block mb-2 text-sm font-medium text-gray-800">Numéro
               Attestation de conduite défensive</label>
-            <input type="text" id="attestationDeConduiteDefensive"
-              placeholder="Attestation conduite défensive"
+            <input type="text" id="attestationDeConduiteDefensive" placeholder="Attestation conduite défensive"
               name="attestationconduiteDefensive"
-              [(ngModel)]="certificatControl.chauffeur.attestationDeConduiteDefensive"
-              (ngModelChange)="saveForm()"
+              [(ngModel)]="certificatControl.chauffeur.attestationDeConduiteDefensive" (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
@@ -739,16 +639,13 @@
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
   <div class="relative w-full max-w-2xl max-h-full p-4">
     <div class="relative bg-white border border-gray-300 rounded-lg shadow-sm">
-      <div
-        class="flex items-center justify-between p-4 border-b border-gray-300 rounded-t">
+      <div class="flex items-center justify-between p-4 border-b border-gray-300 rounded-t">
         <h3 class="text-xl font-semibold text-gray-800">Ajout Véhicule</h3>
         <button type="button"
           class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto"
           data-modal-hide="vehicule-modal">
-          <svg class="w-3 h-3" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round"
-              stroke-linejoin="round" stroke-width="2"
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
           </svg>
           <span class="sr-only">Close modal</span>
@@ -759,30 +656,24 @@
           <!-- Champ 1 -->
           <div>
             <div class="flex items-center">
-              <label for="numeroDeCarteGrise"
-                class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+              <label for="numeroDeCarteGrise" class="block mb-2 text-sm font-medium text-gray-800">Numéro de
                 Carte Grise</label>
               <span class="ml-1 text-red-500">*</span>
             </div>
-            <input type="text" id="numeroDeCarteGrise"
-              placeholder="Numéro de carte grise" name="numeroCarteGrise"
-              [(ngModel)]="certificatControl.vehicule.numeroCarteGrise"
-              (ngModelChange)="saveForm()"
+            <input type="text" id="numeroDeCarteGrise" placeholder="Numéro de carte grise" name="numeroCarteGrise"
+              [(ngModel)]="certificatControl.vehicule.numeroCarteGrise" (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
             <div class="flex items-center">
-              <label for="validite"
-                class="block mb-2 text-sm font-medium text-gray-800">Type de
+              <label for="validite" class="block mb-2 text-sm font-medium text-gray-800">Type de
                 voiture</label>
               <span class="ml-1 text-red-500">*</span>
             </div>
 
-            <select id="validite" name="typeVoiture"
-              [(ngModel)]="selectedTypeVoitureOption"
-              (change)="onSelectTypeVehiculeChange($event)"
-              (ngModelChange)="saveForm()"
+            <select id="validite" name="typeVoiture" [(ngModel)]="selectedTypeVoitureOption"
+              (change)="onSelectTypeVehiculeChange($event)" (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required>
               <option value>Sélectionnez un type</option>
@@ -791,67 +682,54 @@
               <option value="PICKUP">PICK UP</option>
             </select>
             <div class="mt-4">
-              <p *ngFor="let item of certificatControl.vehicule.typeVehicules"
-                class="text-sm text-gray-800">
+              <p *ngFor="let item of certificatControl.vehicule.typeVehicules" class="text-sm text-gray-800">
                 ✔️ {{ item }}
               </p>
             </div>
           </div>
           <div>
             <div class="flex items-center">
-              <label for="numeroAssurance"
-                class="block mb-2 text-sm font-medium text-gray-800">Numéro
+              <label for="numeroAssurance" class="block mb-2 text-sm font-medium text-gray-800">Numéro
                 d'Assurance</label>
               <span class="ml-1 text-red-500">*</span>
             </div>
 
-            <input type="text" id="numeroAssurance"
-              placeholder="Numéro Assurance" name="numeroAssurance"
-              [(ngModel)]="certificatControl.vehicule.numeroAssurance"
-              (ngModelChange)="saveForm()"
+            <input type="text" id="numeroAssurance" placeholder="Numéro Assurance" name="numeroAssurance"
+              [(ngModel)]="certificatControl.vehicule.numeroAssurance" (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
             <div class="flex items-center">
-              <label for="numeroVisiteTechnique"
-                class="block mb-2 text-sm font-medium text-gray-800">Numéro de
+              <label for="numeroVisiteTechnique" class="block mb-2 text-sm font-medium text-gray-800">Numéro de
                 visite Technique</label>
               <span class="ml-1 text-red-500">*</span>
             </div>
 
-            <input type="text" id="numeroVisiteTechnique"
-              placeholder="Numéro de visite Technique"
-              name="numeroVisiteTechnique"
-              (ngModelChange)="saveForm()"
+            <input type="text" id="numeroVisiteTechnique" placeholder="Numéro de visite Technique"
+              name="numeroVisiteTechnique" (ngModelChange)="saveForm()"
               [(ngModel)]="certificatControl.vehicule.numeroVisiteTechnique"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
 
-            <label for="VGPRemorque"
-              class="block mb-2 text-sm font-medium text-gray-800">Numéro VGP
+            <label for="VGPRemorque" class="block mb-2 text-sm font-medium text-gray-800">Numéro VGP
               Remorque</label>
-            <input type="text" id="VGPRemorque" placeholder="VGP Remorque"
-              name="vgpRemorque"
-              [(ngModel)]="certificatControl.vehicule.vgpRemorque"
-              (ngModelChange)="saveForm()"
+            <input type="text" id="VGPRemorque" placeholder="VGP Remorque" name="vgpRemorque"
+              [(ngModel)]="certificatControl.vehicule.vgpRemorque" (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
           <div>
             <div class="flex items-center">
-              <label for="controlEquipementObligatoire"
-                class="block mb-2 text-sm font-medium text-gray-800">Contrôle
+              <label for="controlEquipementObligatoire" class="block mb-2 text-sm font-medium text-gray-800">Contrôle
                 Équipement obligatoire</label>
               <span class="ml-1 text-red-500">*</span>
             </div>
 
-            <input type="checkbox" id="paye"
-              name="controleEquipementObligatoirel"
-              [(ngModel)]="certificatControl.vehicule.controleEquipementObligatoirel"
-              (ngModelChange)="saveForm()"
+            <input type="checkbox" id="paye" name="controleEquipementObligatoirel"
+              [(ngModel)]="certificatControl.vehicule.controleEquipementObligatoirel" (ngModelChange)="saveForm()"
               class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
           </div>
         </form>

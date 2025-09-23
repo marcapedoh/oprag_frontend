@@ -27,6 +27,7 @@ export class FormInspectionComponent implements OnInit {
   currentStep = 1;
   isChauffeurModal = true
   certificatControl: any = {
+    site: '',
     essaiFonctionnementList: [],
     essaiNonFonctionnementList: [],
     chauffeur: {},
@@ -156,7 +157,8 @@ export class FormInspectionComponent implements OnInit {
           const certificatControlId = Number(param.get('id'));
 
           if (certificatControlId) {
-            this.certificatControl = certificatControl.certificatControls.find((certificatControl: any) => certificatControl.id === certificatControlId)
+            const foundCertificat = certificatControl.certificatControls.find((certificatControl: any) => certificatControl.id === certificatControlId)
+            this.certificatControl = { ...foundCertificat }
             this.chauffeurStored = this.certificatControl.chauffeur
             this.vehiculeStored = this.certificatControl.vehicule
           }
@@ -283,13 +285,14 @@ export class FormInspectionComponent implements OnInit {
 
   save() {
     if (this.origin === "Modification") {
+      const clone = JSON.parse(JSON.stringify(this.certificatControl));
       this.certificatControl = {
-        ...this.certificatControl,
+        ...clone,
         utilisateur: {
           id: localStorage.getItem("ConnectedUser")!
         },
-        vehicule: this.certificatControl.vehicule,
-        chauffeur: this.certificatControl.chauffeur
+        vehicule: { ...this.certificatControl.vehicule },
+        chauffeur: { ...this.certificatControl.chauffeur }
       }
     } else {
 
