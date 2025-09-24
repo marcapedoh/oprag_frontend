@@ -35,6 +35,10 @@ export class AuthEffects {
             this.router.navigate(["/vueEnsemble"])
           } else if (action.responseDAO.role == "INSPECTEUR_PRINCIPAL") {
             this.router.navigate(["/vueEnsemble"])
+          } else if (action.responseDAO.role == "DIRECTEUR_TECHNIQUE") {
+            this.router.navigate(["/vue-ensemble"])
+          } else if (action.responseDAO.role == "CHEF_SEVICE_TECHNIQUE") {
+            this.router.navigate(["/vue-ensemble"])
           }
         } else {
           this.notificationService.error("Vérifiez vos informations!")

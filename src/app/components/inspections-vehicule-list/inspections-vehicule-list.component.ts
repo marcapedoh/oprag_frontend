@@ -19,8 +19,8 @@ export class InspectionsVehiculeListComponent implements OnInit {
   }
   columns: any =
     {
-      columnsName: ["id", "creationDate", "societe", "numeroRapport", "localisationCertificationFait", "description", "validite", "utilisateur.nom"],
-      field: ["#", "Date Creation", "Societe", "Numero Rapport", "Localisation", "Description", "validite", "Inspecteur"]
+      columnsName: ["id", "creationDate", "societe", "numeroRapport", "localisationCertificationFait", "vehicule.numeroAssurance", "validite", "utilisateur.nom"],
+      field: ["#", "Date Inspection", "Societe", "Numero Rapport", "Localisation", "Matricule Vehicule", "validite", "Inspecteur"]
     }
   moisOptions = [
     { value: 'UN_MOIS', label: '1 MOIS' },

@@ -1,0 +1,219 @@
+<div class="max-w-screen-xl p-6 mx-auto bg-white shadow-md rounded-xl">
+  <h2 class="mb-6 text-2xl font-medium text-gray-800">Explication des Graphiques</h2>
+
+  <!-- Introduction -->
+  <div class="p-6 mb-6 border border-blue-200 bg-blue-50 rounded-xl">
+    <h3 class="mb-3 text-xl font-semibold text-blue-800">Comprendre vos données d'inspection</h3>
+    <p class="text-gray-700">
+      Cette page vous aide à interpréter les différents graphiques présents dans votre tableau de bord.
+      Chaque section explique un graphique spécifique et comment utiliser les informations qu'il présente.
+    </p>
+  </div>
+
+  <!-- Graphique 1: Évolution des rapports d'inspection par partenaire -->
+  <div class="p-6 mb-6 bg-white border border-blue-200 shadow-sm rounded-xl">
+    <h3 class="mb-4 text-xl font-semibold text-gray-800">Évolution des rapports d'inspection par partenaire</h3>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div>
+        <div class="p-4 mb-4 bg-gray-100 rounded-lg">
+          <h4 class="mb-2 font-medium text-gray-700">À quoi sert ce graphique ?</h4>
+          <p class="text-sm text-gray-600">
+            Ce graphique linéaire montre l'évolution du nombre de rapports d'inspection produits par chaque partenaire
+            au fil du temps.
+          </p>
+        </div>
+
+        <div class="p-4 mb-4 bg-gray-100 rounded-lg">
+          <h4 class="mb-2 font-medium text-gray-700">Comment l'interpréter ?</h4>
+          <ul class="pl-5 text-sm text-gray-600 list-disc">
+            <li>Chaque ligne colorée représente un partenaire différent</li>
+            <li>L'axe horizontal (X) indique les dates</li>
+            <li>L'axe vertical (Y) montre le nombre de rapports</li>
+            <li>Les pics indiquent des périodes d'activité intense</li>
+            <li>Les baisses peuvent révéler des périodes moins actives</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="p-4 border border-blue-200 rounded-lg bg-blue-50">
+          <h4 class="mb-2 font-medium text-blue-800">Exemple d'analyse</h4>
+          <p class="text-sm text-blue-700">
+            Si vous observez une ligne qui monte régulièrement, cela indique que le partenaire concerné augmente son
+            activité d'inspection.
+            À l'inverse, une baisse soudaine pourrait nécessiter une investigation.
+          </p>
+        </div>
+
+        <div class="p-4 mt-4 border border-green-200 rounded-lg bg-green-50">
+          <h4 class="mb-2 font-medium text-green-800">Actions possibles</h4>
+          <ul class="pl-5 text-sm text-green-700 list-disc">
+            <li>Identifier les partenaires les plus actifs</li>
+            <li>Détecter les tendances saisonnières</li>
+            <li>Comparer la performance entre partenaires</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graphique 2: Inspections conformes vs non conformes -->
+  <div class="p-6 mb-6 bg-white border border-blue-200 shadow-sm rounded-xl">
+    <h3 class="mb-4 text-xl font-semibold text-gray-800">Inspections conformes vs non conformes</h3>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div>
+        <div class="p-4 mb-4 bg-gray-100 rounded-lg">
+          <h4 class="mb-2 font-medium text-gray-700">À quoi sert ce graphique ?</h4>
+          <p class="text-sm text-gray-600">
+            Ce graphique à barres compare quotidiennement le nombre d'inspection conformes et non conformes.
+          </p>
+        </div>
+
+        <div class="p-4 mb-4 bg-gray-100 rounded-lg">
+          <h4 class="mb-2 font-medium text-gray-700">Comment l'interpréter ?</h4>
+          <ul class="pl-5 text-sm text-gray-600 list-disc">
+            <li>Chaque paire de barres représente un jour</li>
+            <li>La barre "Conformes" montre les inspections valides</li>
+            <li>La barre "Non conformes" indique les problèmes détectés</li>
+            <li>La hauteur des barres représente le volume</li>
+            <li>Le ratio entre les deux donne le taux de conformité</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="p-4 border border-blue-200 rounded-lg bg-blue-50">
+          <h4 class="mb-2 font-medium text-blue-800">Exemple d'analyse</h4>
+          <p class="text-sm text-blue-700">
+            Un jour où les barres non conformes sont particulièrement hautes par rapport aux conformes
+            peut indiquer un problème spécifique qui mérite investigation.
+          </p>
+        </div>
+
+        <div class="p-4 mt-4 border border-green-200 rounded-lg bg-green-50">
+          <h4 class="mb-2 font-medium text-green-800">Actions possibles</h4>
+          <ul class="pl-5 text-sm text-green-700 list-disc">
+            <li>Surveiller le taux de conformité quotidien</li>
+            <li>Identifier les jours à problèmes</li>
+            <li>Analyser les causes des non-conformités</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graphique 3: Répartition par type de véhicule -->
+  <div class="p-6 mb-6 bg-white border border-blue-200 shadow-sm rounded-xl">
+    <h3 class="mb-4 text-xl font-semibold text-gray-800">Répartition par type de véhicule</h3>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div>
+        <div class="p-4 mb-4 bg-gray-100 rounded-lg">
+          <h4 class="mb-2 font-medium text-gray-700">À quoi sert ce graphique ?</h4>
+          <p class="text-sm text-gray-600">
+            Ce graphique circulaire (camembert) montre la proportion des différents types de véhicules inspectés.
+          </p>
+        </div>
+
+        <div class="p-4 mb-4 bg-gray-100 rounded-lg">
+          <h4 class="mb-2 font-medium text-gray-700">Comment l'interpréter ?</h4>
+          <ul class="pl-5 text-sm text-gray-600 list-disc">
+            <li>Chaque section représente un type de véhicule</li>
+            <li>La taille de la section indique sa proportion</li>
+            <li>Le pourcentage précise la part de chaque type</li>
+            <li>Les couleurs aident à différencier les catégories</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="p-4 border border-blue-200 rounded-lg bg-blue-50">
+          <h4 class="mb-2 font-medium text-blue-800">Exemple d'analyse</h4>
+          <p class="text-sm text-blue-700">
+            Si les camions représentent 98.5% des inspections, cela signifie que votre activité
+            est principalement concentrée sur ce type de véhicule.
+          </p>
+        </div>
+
+        <div class="p-4 mt-4 border border-green-200 rounded-lg bg-green-50">
+          <h4 class="mb-2 font-medium text-green-800">Actions possibles</h4>
+          <ul class="pl-5 text-sm text-green-700 list-disc">
+            <li>Adapter les ressources aux types de véhicules majoritaires</li>
+            <li>Identifier les niches ou marchés émergents</li>
+            <li>Planifier les formations spécifiques</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graphique 4: Évolution des inspections -->
+  <div class="p-6 mb-6 bg-white border border-blue-200 shadow-sm rounded-xl">
+    <h3 class="mb-4 text-xl font-semibold text-gray-800">Évolution des inspections</h3>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div>
+        <div class="p-4 mb-4 bg-gray-100 rounded-lg">
+          <h4 class="mb-2 font-medium text-gray-700">À quoi sert ce graphique ?</h4>
+          <p class="text-sm text-gray-600">
+            Ce graphique montre la tendance globale du volume d'inspections réalisées jour après jour.
+          </p>
+        </div>
+
+        <div class="p-4 mb-4 bg-gray-100 rounded-lg">
+          <h4 class="mb-2 font-medium text-gray-700">Comment l'interpréter ?</h4>
+          <ul class="pl-5 text-sm text-gray-600 list-disc">
+            <li>La ligne représente l'évolution du nombre total d'inspections</li>
+            <li>Les points marquent les valeurs quotidiennes</li>
+            <li>La pente indique si l'activité augmente ou diminue</li>
+            <li>Les écarts entre points montrent la variabilité</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="p-4 border border-blue-200 rounded-lg bg-blue-50">
+          <h4 class="mb-2 font-medium text-blue-800">Exemple d'analyse</h4>
+          <p class="text-sm text-blue-700">
+            Une tendance à la hausse régulière indique une croissance de l'activité.
+            Des baisses soudaines peuvent révéler des problèmes opérationnels ou des jours fériés.
+          </p>
+        </div>
+
+        <div class="p-4 mt-4 border border-green-200 rounded-lg bg-green-50">
+          <h4 class="mb-2 font-medium text-green-800">Actions possibles</h4>
+          <ul class="pl-5 text-sm text-green-700 list-disc">
+            <li>Planifier les ressources en fonction des tendances</li>
+            <li>Anticiper les périodes de forte activité</li>
+            <li>Analyser l'impact des actions commerciales</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conseils généraux -->
+  <div class="p-6 border border-yellow-200 bg-yellow-50 rounded-xl">
+    <h3 class="mb-3 text-xl font-semibold text-yellow-800">Conseils pour une analyse efficace</h3>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div>
+        <h4 class="mb-2 font-medium text-yellow-700">Utilisez les filtres</h4>
+        <p class="text-sm text-yellow-600">
+          N'oubliez pas d'utiliser les filtres par date et partenaire pour affiner votre analyse
+          et obtenir des données plus précises.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="mb-2 font-medium text-yellow-700">Comparez les périodes</h4>
+        <p class="text-sm text-yellow-600">
+          Pour une analyse pertinente, comparez toujours les données sur différentes périodes
+          (semaine vs semaine précédente, mois vs même mois l'année dernière).
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

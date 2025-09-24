@@ -49,7 +49,9 @@ export class UtilisateurFormComponent implements OnInit {
     this.roleAddable = userRole == "INSPECTEUR_PRINCIPAL" ? [
       "CONTROLLEUR",
     ] : [
-      "INSPECTEUR_PRINCIPAL"
+      "INSPECTEUR_PRINCIPAL",
+      "DIRECTEUR_TECHNIQUE",
+      "CHEF_SEVICE_TECHNIQUE"
     ]
 
     this.usersPerInspection$.subscribe((usersInspection: any) => {

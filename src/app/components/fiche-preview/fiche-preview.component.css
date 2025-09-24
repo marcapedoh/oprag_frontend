@@ -1,101 +1,138 @@
+.fiche-preview-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 0;
+}
+
+.controls-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: white;
+  border-bottom: 2px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.fiche-content {
+  margin: 20px auto;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.page-content {
+  width: 100%;
+  overflow: auto;
+}
+
 /* Styles pour l'impression */
 @media print {
-  .no-print {
+  .controls-header {
     display: none !important;
   }
 
-  body * {
-    visibility: hidden;
-  }
-
-  app-fiche-preview,
-  app-fiche-preview * {
-    visibility: visible;
-  }
-
-  app-fiche-preview {
-    position: absolute !important;
-    left: 0;
-    top: 0;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .fixed {
-    position: static !important;
-  }
-
-  .bg-black {
+  .fiche-preview-container {
     background: white !important;
+    padding: 0 !important;
   }
 
-  .bg-opacity-50 {
-    opacity: 1 !important;
-  }
-
-  .max-h-screen {
-    max-height: none !important;
-    height: auto !important;
-  }
-
-  .overflow-auto {
-    overflow: visible !important;
-  }
-
-  .shadow-xl {
+  .fiche-content {
     box-shadow: none !important;
-  }
-
-  .rounded-lg {
+    margin: 0 !important;
     border-radius: 0 !important;
   }
+
+  .page-content {
+    page-break-after: always;
+  }
+
+  .page-content:last-child {
+    page-break-after: auto;
+  }
 }
 
-/* Styles spécifiques pour la fiche */
-.jrPage {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+/* Styles pour les éléments du formulaire JasperReports */
+::ng-deep .fiche-content table {
+  font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif !important;
+}
+
+::ng-deep .fiche-content span {
+  font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif !important;
+}
+
+/* Assurer que les bordures et styles JasperReports sont préservés */
+::ng-deep .fiche-content table td {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+::ng-deep .fiche-content .jrPage {
   margin: 0 auto;
+  background-color: white;
 }
 
-.border-black {
-  border-color: #000000 !important;
+/* Responsive design */
+@media (max-width: 768px) {
+  .controls-header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 10px;
+  }
+
+  .controls-header > div {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .fiche-content {
+    margin: 10px;
+    border-radius: 4px;
+  }
+
+  .page-content {
+    overflow-x: auto;
+  }
+
+  ::ng-deep .fiche-content table {
+    min-width: 595px;
+  }
 }
 
-.bg-gray {
-  background-color: #D9D9D9 !important;
-}
-
-.bg-light-gray {
-  background-color: #FCFCFC !important;
-}
-
-/* Assurer la lisibilité */
-.text-small {
-  font-size: 7px;
-  line-height: 1.2;
-}
-
-.text-normal {
-  font-size: 9px;
-  line-height: 1.2;
-}
-
-.text-medium {
-  font-size: 10px;
-  line-height: 1.2;
-}
-
-.text-large {
-  font-size: 11px;
-  line-height: 1.2;
-}
-
-.text-xlarge {
-  font-size: 12px;
-  line-height: 1.2;
-}
-
-.text-xxlarge {
+/* Boutons des contrôles */
+.controls-header button {
+  transition: all 0.3s ease;
   font-size: 14px;
-  line-height: 1.2;
+  font-weight: 500;
+  min-width: 120px;
+}
+
+.controls-header button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.controls-header button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.controls-header button:disabled {
+  opacity: 0.6;
+}
+
+/* Animation pour le changement de page */
+.page-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

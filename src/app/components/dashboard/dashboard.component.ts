@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 import {
   ApexAxisChartSeries,
@@ -16,6 +19,13 @@ import {
   ChartComponent,
   ApexResponsive
 } from 'ng-apexcharts';
+import { debounceTime, distinctUntilChanged, map, Observable, Subject, Subscription } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
+import { generateCertificatControl, getStat } from 'src/app/store/actions/certificatControl.action';
+import { CertificatControlState } from 'src/app/store/reducers/certificatControl.reducer';
+import { InspectionState } from 'src/app/store/reducers/inspection.reducer';
+import { selectAllCertificatControls } from 'src/app/store/selector/certificatControl.selector';
+import { selectAllInspections } from 'src/app/store/selector/inspection.selector';
 
 export type PieChartOptions = {
   series: number[];
@@ -88,18 +98,22 @@ export type ChartOptions = {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+  inpectionsVehicule$: Observable<ReadonlyArray<any>>;
+
   @ViewChild("chart") chart!: ChartComponent;
   public statusChart!: Partial<BarChartOptions>;
   public trendChart!: Partial<LineChartOptions>;
   public lineChart!: Partial<LineChartOptions2>;
   public vehicleTypeChart!: Partial<PieChartOptions>;
 
-  // Données simulées
-  badges = Array(150).fill(0);
-  certificatControls = Array(120).fill(0);
+  paginatedInspections: any[] = [];
+  badges = 150;
+  certificatControls = 120;
   totalBadgesActive = 135;
   complianceRate = 82;
-
+  subscription!: Subscription;
+  inputSubject = new Subject<string>();
   dateDebut: string = '';
   dateFin: string = '';
   selectedSociete: string = '';
@@ -112,30 +126,7 @@ export class DashboardComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalItems: number = 0;
-
   // Données d'exemple pour les inspections
-  inspections = [
-    { id: 'INSP-001', inspectionDate: new Date(2025, 8, 1), company: 'Transports ABC', vehicleType: 'Camion frigorifique', status: 'conforme' },
-    { id: 'INSP-002', inspectionDate: new Date(2025, 8, 1), company: 'Logistique XYZ', vehicleType: 'Porte-conteneurs', status: 'non_conforme' },
-    { id: 'INSP-003', inspectionDate: new Date(2025, 8, 2), company: 'Camions 123', vehicleType: 'Camion-citerne', status: 'conforme' },
-    { id: 'INSP-004', inspectionDate: new Date(2025, 8, 2), company: 'Fret Ouest', vehicleType: 'Plateau', status: 'conforme' },
-    { id: 'INSP-005', inspectionDate: new Date(2025, 8, 3), company: 'Transporteurs Associés', vehicleType: 'Camion frigorifique', status: 'non_conforme' },
-    { id: 'INSP-006', inspectionDate: new Date(2025, 8, 3), company: 'Transports ABC', vehicleType: 'Porte-conteneurs', status: 'conforme' },
-    { id: 'INSP-007', inspectionDate: new Date(2025, 8, 4), company: 'Logistique XYZ', vehicleType: 'Camion-citerne', status: 'conforme' },
-    { id: 'INSP-008', inspectionDate: new Date(2025, 8, 4), company: 'Camions 123', vehicleType: 'Plateau', status: 'non_conforme' },
-    { id: 'INSP-009', inspectionDate: new Date(2025, 8, 5), company: 'Fret Ouest', vehicleType: 'Camion frigorifique', status: 'conforme' },
-    { id: 'INSP-010', inspectionDate: new Date(2025, 8, 5), company: 'Transporteurs Associés', vehicleType: 'Porte-conteneurs', status: 'conforme' },
-    { id: 'INSP-011', inspectionDate: new Date(2025, 8, 8), company: 'Transports ABC', vehicleType: 'Camion-citerne', status: 'non_conforme' },
-    { id: 'INSP-012', inspectionDate: new Date(2025, 8, 8), company: 'Logistique XYZ', vehicleType: 'Plateau', status: 'conforme' },
-    { id: 'INSP-013', inspectionDate: new Date(2025, 8, 9), company: 'Camions 123', vehicleType: 'Camion frigorifique', status: 'conforme' },
-    { id: 'INSP-014', inspectionDate: new Date(2025, 8, 9), company: 'Fret Ouest', vehicleType: 'Porte-conteneurs', status: 'non_conforme' },
-    { id: 'INSP-015', inspectionDate: new Date(2025, 8, 10), company: 'Transporteurs Associés', vehicleType: 'Camion-citerne', status: 'conforme' },
-    { id: 'INSP-016', inspectionDate: new Date(2025, 8, 10), company: 'Transports ABC', vehicleType: 'Plateau', status: 'conforme' },
-    { id: 'INSP-017', inspectionDate: new Date(2025, 8, 11), company: 'Logistique XYZ', vehicleType: 'Camion frigorifique', status: 'non_conforme' },
-    { id: 'INSP-018', inspectionDate: new Date(2025, 8, 11), company: 'Camions 123', vehicleType: 'Porte-conteneurs', status: 'conforme' },
-    { id: 'INSP-019', inspectionDate: new Date(2025, 8, 12), company: 'Fret Ouest', vehicleType: 'Camion-citerne', status: 'conforme' },
-    { id: 'INSP-020', inspectionDate: new Date(2025, 8, 12), company: 'Transporteurs Associés', vehicleType: 'Plateau', status: 'non_conforme' }
-  ];
 
   // Données d'exemple pour l'évolution sur plusieurs mois
   private sampleData = {
@@ -148,23 +139,49 @@ export class DashboardComponent implements OnInit {
       { name: 'Partner E', data: [30, 28, 32, 35, 30, 33, 36] }
     ]
   };
-
-  constructor() {
+  trendMultiLine: any[] = [];
+  inpections$: Observable<ReadonlyArray<any>>;
+  constructor(private store: Store<any>, private dataService: DataService) {
+    this.inpectionsVehicule$ = this.store.pipe(select(selectAllCertificatControls))
     // Initialisation des graphiques
     this.initStatusChart();
     this.initTrendChart();
     this.initVehicleTypeChart();
     this.initLineChart();
+    this.inpections$ = this.store.pipe(select(selectAllInspections))
   }
-
+  inspections: any[] = [];
+  selectedInspection = 0
   ngOnInit(): void {
+
     // Initialiser les dates par défaut (du 1er au 14 septembre 2025)
     this.dateDebut = '2025-09-01';
     this.dateFin = '2025-09-14';
-
+    this.selectedInspection = +localStorage.getItem("InspectionId")!
+    // this.store.dispatch(getStat(this.dateDebut, this.dateFin, +localStorage.getItem("InspectionId")!));
+    this.inpections$.subscribe((inspections: any) => {
+      console.log(inspections.inspections)
+      if (Array.isArray(inspections.inspections) && inspections.inspections.length > 0) {
+        this.inspections = inspections.inspections
+      } else {
+        console.log('No inspections found or still loading.');
+      }
+    });
     // Appliquer les filtres initiaux
     this.applyFilters();
   }
+
+
+  onInputChange(event: any) {
+    this.inputSubject.next(event.target.value);
+  }
+
+  updatePaginatedInspections(): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = this.currentPage * this.itemsPerPage;
+    this.paginatedInspections = this.filteredInspections.slice(start, end);
+  }
+
 
   initStatusChart(): void {
     this.statusChart = {
@@ -263,7 +280,7 @@ export class DashboardComponent implements OnInit {
     this.vehicleTypeChart = {
       series: [44, 55, 13, 43, 22],
       chart: {
-        width: 380,
+        width: 480,
         type: 'pie',
       },
       labels: ['Camions frigorifiques', 'Porte-conteneurs', 'Camions-citernes', 'Plateaux', 'Autres'],
@@ -294,7 +311,7 @@ export class DashboardComponent implements OnInit {
 
   initLineChart(): void {
     // Récupérer les données réelles de votre base
-    const chartData = this.getReportsTrendData();
+    const chartData = this.transformTrendData(this.trendMultiLine);
 
     this.lineChart = {
       series: chartData.series,
@@ -375,6 +392,108 @@ export class DashboardComponent implements OnInit {
       }
     };
   }
+  private transformTrendData(trendData: any[]): any {
+    // Si vous avez plusieurs inspectionId (multi-lignes)
+    const uniqueInspectionIds = [...new Set(trendData.map(item => item.inspectionId))];
+
+    // Grouper les données par inspectionId
+    const seriesData = uniqueInspectionIds.map(inspectionId => {
+      const filteredData = trendData.filter(item => item.inspectionId === inspectionId);
+
+      return {
+        name: `Inspection ${inspectionId}`,
+        data: this.prepareDataForSeries(filteredData, this.getDateRange(trendData))
+      };
+    });
+
+    // Si vous voulez une seule ligne avec le total
+    const singleSeriesData = [{
+      name: 'Total des inspections',
+      data: this.prepareSingleSeriesData(trendData)
+    }];
+
+    // Dates pour l'axe X
+    const categories = this.getDateRange(trendData).map(date =>
+      this.formatDateForChart(date)
+    );
+
+    return {
+      series: singleSeriesData, // ou seriesData pour multi-lignes
+      categories: categories
+    };
+  }
+
+  /**
+   * Prépare les données pour une série unique (total)
+   */
+  private prepareSingleSeriesData(trendData: any[]): number[] {
+    const dateRange = this.getDateRange(trendData);
+
+    return dateRange.map(date => {
+      const dataForDate = trendData.find(item => item.date === date);
+      return dataForDate ? dataForDate.count : 0;
+    });
+  }
+
+  /**
+   * Prépare les données pour plusieurs séries
+   */
+  private prepareDataForSeries(filteredData: any[], dateRange: string[]): number[] {
+    return dateRange.map(date => {
+      const dataForDate = filteredData.find(item => item.date === date);
+      return dataForDate ? dataForDate.count : 0;
+    });
+  }
+
+  /**
+   * Extrait la plage de dates complète
+   */
+  private getDateRange(trendData: any[]): string[] {
+    if (!trendData || trendData.length === 0) return [];
+
+    // Trier les dates
+    const dates = trendData.map(item => item.date).sort();
+    const startDate = dates[0];
+    const endDate = dates[dates.length - 1];
+
+    // Générer toutes les dates entre startDate et endDate
+    return this.generateDateRange(startDate, endDate);
+  }
+
+  /**
+   * Génère toutes les dates entre deux dates
+   */
+  private generateDateRange(start: string, end: string): string[] {
+    const dates: string[] = [];
+    const currentDate = new Date(start);
+    const endDate = new Date(end);
+
+    while (currentDate <= endDate) {
+      dates.push(currentDate.toISOString().split('T')[0]);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return dates;
+  }
+
+  /**
+   * Formate la date pour l'affichage dans le chart
+   */
+  private formatDateForChart(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('fr-FR', {
+      day: '2-digit',
+      month: '2-digit'
+    });
+  }
+
+  /**
+   * Méthode pour mettre à jour le chart avec de nouvelles données
+   */
+  updateChartWithData(newData: any[]): void {
+    this.trendMultiLine = newData;
+    this.initLineChart();
+  }
 
   // Données d'exemple pour la semaine dernière
 
@@ -418,46 +537,81 @@ export class DashboardComponent implements OnInit {
   }
 
   applyFilters(): void {
-    let filtered = [...this.inspections];
+    this.dataService.getState(this.dateDebut, this.dateFin, this.selectedInspection).subscribe((stat) => {
+      console.log(stat)
+      this.totalBadgesActive = stat.totalCardActive
+      this.badges = stat.totalCard
+      this.certificatControls = stat.totalRapport
+      this.complianceRate = stat.ConformeRate
+      this.trendChart = {
+        ...this.trendChart,
+        series: [
+          {
+            name: "Inspections",
+            data: stat.trend.inspections
+          }
+        ],
+        xaxis: {
+          ...this.trendChart.xaxis,
+          categories: stat.trend.categories,
+        }
+      }
+      this.vehicleTypeChart = {
+        ...this.vehicleTypeChart,
+        series: stat.vehicleTypes.series,
+        labels: [...stat.vehicleTypes.labels]
+      }
+      this.statusChart = {
+        ...this.statusChart,
+        series: [
+          {
+            name: "Conformes",
+            data: stat.status.conformes
+          },
+          {
+            name: "Non conformes",
+            data: stat.status.nonConformes
+          }
+        ],
+        xaxis: {
+          ...this.statusChart.xaxis,
+          categories: stat.status.categories
+        }
+      }
+      this.lineChart = {
+        ...this.lineChart,
+        series: stat.partners,
+        xaxis: {
+          ...this.lineChart.xaxis,
+          categories: stat.categories
+        }
+      }
+      this.updateChartWithData(stat.trendMultiLine)
+      this.filteredInspections = stat.filteredData
+      this.totalItems = this.filteredInspections.length
+      this.updatePaginatedInspections();
+    })
+    this.subscription = this.inputSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      map(searchText => {
+        if (!searchText.trim()) return this.paginatedInspections.slice(0, this.itemsPerPage);
 
-    // Filtrer par date
-    if (this.dateDebut && this.dateFin) {
-      const startDate = new Date(this.dateDebut);
-      const endDate = new Date(this.dateFin);
-      endDate.setHours(23, 59, 59); // Inclure toute la journée de fin
+        const lowerSearch = searchText.toString().toLowerCase();
+        this.paginatedInspections = this.filteredInspections.filter((item: any) =>
+          item.societe.toLowerCase().includes(lowerSearch) ||
+          item.creationDate.toString().includes(lowerSearch) ||
+          item.validite.toString().includes(lowerSearch) ||
+          item.avisFavorable?.toString().includes(lowerSearch)
 
-      filtered = filtered.filter(inspection => {
-        const inspectionDate = new Date(inspection.inspectionDate);
-        return inspectionDate >= startDate && inspectionDate <= endDate;
-      });
-    }
+        );
 
-    // Filtrer par société
-    if (this.selectedSociete) {
-      filtered = filtered.filter(inspection => inspection.company === this.selectedSociete);
-    }
+        return this.paginatedInspections
+      })
+    ).subscribe(filtered => {
+      this.paginatedInspections = filtered;
+    });
 
-    // Filtrer par statut
-    if (this.selectedStatut) {
-      filtered = filtered.filter(inspection => inspection.status === this.selectedStatut);
-    }
-
-    // Filtrer par terme de recherche
-    if (this.searchTerm) {
-      const term = this.searchTerm.toLowerCase();
-      filtered = filtered.filter(inspection =>
-        inspection.id.toLowerCase().includes(term) ||
-        inspection.company.toLowerCase().includes(term) ||
-        inspection.vehicleType.toLowerCase().includes(term)
-      );
-    }
-
-    this.filteredInspections = filtered;
-    this.totalItems = filtered.length;
-    this.currentPage = 1;
-
-    // Mettre à jour les graphiques avec les données filtrées
-    this.updateChartsWithFilteredData(filtered);
   }
 
   updateChartsWithFilteredData(filteredData: any[]): void {
@@ -483,6 +637,10 @@ export class DashboardComponent implements OnInit {
     this.trendChart = { ...this.trendChart };
   }
 
+  generateReportAction(certificatControlId: number) {
+    this.store.dispatch(generateCertificatControl(certificatControlId))
+  }
+
   downloadInspection(inspectionId: string): void {
     // Simuler le téléchargement d'une fiche d'inspection
     console.log(`Téléchargement de la fiche d'inspection: ${inspectionId}`);
@@ -491,10 +649,21 @@ export class DashboardComponent implements OnInit {
   }
 
   exportToExcel(): void {
-    // Simuler l'exportation Excel
-    console.log('Exportation des données en Excel');
-    // Ici, vous implémenteriez la logique réelle d'exportation Excel
-    alert('Exportation Excel effectuée');
+    // 1. Convertir les données en worksheet
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.paginatedInspections);
+
+    // 2. Créer un workbook et ajouter le worksheet
+    const workbook: XLSX.WorkBook = {
+      Sheets: { 'Données': worksheet },
+      SheetNames: ['Données'],
+    };
+
+    // 3. Générer un buffer Excel
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+    // 4. Sauvegarder le fichier
+    const blob: Blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(blob, `export_${new Date().toISOString().slice(0, 10)}.xlsx`);
   }
 
   get startIndex(): number {
@@ -529,18 +698,21 @@ export class DashboardComponent implements OnInit {
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
+      this.updatePaginatedInspections();
     }
   }
 
   previousPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
+      this.updatePaginatedInspections();
     }
   }
 
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
+      this.updatePaginatedInspections();
     }
   }
 }

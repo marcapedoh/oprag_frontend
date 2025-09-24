@@ -12,12 +12,10 @@
   <div class="h-full px-3 py-4 overflow-y-auto">
     <ul class="mt-8 space-y-2 font-medium">
       <li *ngIf="role === 'INSPECTEUR_PRINCIPAL' || role === 'SUPER_ADMIN'">
-        <a routerLink="vueEnsemble"
-          [routerLinkActiveOptions]="{ exact: true }"
+        <a routerLink="vueEnsemble" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
           class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg hover:bg-blue-100/40 group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="text-gray-800 size-5">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-gray-800 size-5">
             <path fill-rule="evenodd"
               d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm4.5 7.5a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0v-2.25a.75.75 0 0 1 .75-.75Zm3.75-1.5a.75.75 0 0 0-1.5 0v4.5a.75.75 0 0 0 1.5 0V12Zm2.25-3a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 1-1.5 0V9.75A.75.75 0 0 1 13.5 9Zm3.75-1.5a.75.75 0 0 0-1.5 0v9a.75.75 0 0 0 1.5 0v-9Z"
               clip-rule="evenodd" />
@@ -26,32 +24,25 @@
         </a>
       </li>
 
-      <li *ngIf="role === 'INSPECTEUR_PRINCIPAL' || role === 'SUPER_ADMIN'">
-        <a routerLink="vue-ensemble"
-          [routerLinkActiveOptions]="{ exact: true }"
+      <li *ngIf="role=='SUPER_ADMIN' || role === 'DIRECTEUR_TECHNIQUE' || role === 'CHEF_SEVICE_TECHNIQUE'">
+        <a routerLink="vue-ensemble" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
           class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg hover:bg-blue-100/40 group">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            class="text-gray-800 size-5">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="text-gray-800 size-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
           </svg>
 
           <span class="text-gray-800 ms-3">Vue d'Ensemble</span>
         </a>
       </li>
 
-      <li
-        *ngIf="role === 'CONTROLLEUR' || role === 'SUPER_ADMIN' || role === 'INSPECTEUR_PRINCIPAL'">
-        <a routerLink="inspection/collection"
-          [routerLinkActiveOptions]="{ exact: true }"
+      <li *ngIf="role === 'CONTROLLEUR' || role === 'SUPER_ADMIN' || role === 'INSPECTEUR_PRINCIPAL'">
+        <a routerLink="inspection/collection" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
           class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg hover:bg-blue-100/40 group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="text-gray-800 size-5">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-gray-800 size-5">
             <path
               d="M5.223 2.25c-.497 0-.974.198-1.325.55l-1.3 1.298A3.75 3.75 0 0 0 7.5 9.75c.627.47 1.406.75 2.25.75.844 0 1.624-.28 2.25-.75.626.47 1.406.75 2.25.75.844 0 1.623-.28 2.25-.75a3.75 3.75 0 0 0 4.902-5.652l-1.3-1.299a1.875 1.875 0 0 0-1.325-.549H5.223Z" />
             <path fill-rule="evenodd"
@@ -62,14 +53,11 @@
         </a>
       </li>
 
-      <li
-        *ngIf="role === 'CONTROLLEUR' || role === 'SUPER_ADMIN' || role === 'INSPECTEUR_PRINCIPAL'">
-        <a routerLink="badge/collection"
-          [routerLinkActiveOptions]="{ exact: true }"
+      <li *ngIf="role === 'CONTROLLEUR' || role === 'SUPER_ADMIN' || role === 'INSPECTEUR_PRINCIPAL'">
+        <a routerLink="badge/collection" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
           class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg hover:bg-blue-100/40 group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="text-gray-800 size-5">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-gray-800 size-5">
             <path fill-rule="evenodd"
               d="M4.5 3.75a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V6.75a3 3 0 0 0-3-3h-15Zm4.125 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm-3.873 8.703a4.126 4.126 0 0 1 7.746 0 .75.75 0 0 1-.351.92 7.47 7.47 0 0 1-3.522.877 7.47 7.47 0 0 1-3.522-.877.75.75 0 0 1-.351-.92ZM15 8.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15ZM14.25 12a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H15a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15Z"
               clip-rule="evenodd" />
@@ -80,12 +68,10 @@
       </li>
 
       <li *ngIf="role === 'INSPECTEUR_PRINCIPAL' || role === 'SUPER_ADMIN'">
-        <a routerLink="users"
-          [routerLinkActiveOptions]="{ exact: true }"
+        <a routerLink="users" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
           class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg hover:bg-blue-100/40 group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="text-gray-800 size-5">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-gray-800 size-5">
             <path fill-rule="evenodd"
               d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
               clip-rule="evenodd" />
@@ -95,19 +81,16 @@
       </li>
 
       <li *ngIf="role=='SUPER_ADMIN'">
-        <a routerLink="partenaires-technique"
-          [routerLinkActiveOptions]="{ exact: true }"
+        <a routerLink="partenaires-technique" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
           class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg hover:bg-blue-100/40 group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="text-gray-800 size-5">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-gray-800 size-5">
             <path
               d="M11.584 2.376a.75.75 0 0 1 .832 0l9 6a.75.75 0 1 1-.832 1.248L12 3.901 3.416 9.624a.75.75 0 0 1-.832-1.248l9-6Z" />
             <path fill-rule="evenodd"
               d="M20.25 10.332v9.918H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h.75v-9.918a.75.75 0 0 1 .634-.74A49.109 49.109 0 0 1 12 9c2.59 0 5.134.202 7.616.592a.75.75 0 0 1 .634.74Zm-7.5 2.418a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Zm3-.75a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 1-1.5 0v-6.75a.75.75 0 0 1 .75-.75ZM9 12.75a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Z"
               clip-rule="evenodd" />
-            <path
-              d="M12 7.875a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" />
+            <path d="M12 7.875a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" />
           </svg>
           <span class="text-gray-800 ms-3">Partenaires Techniques</span>
         </a>
@@ -117,8 +100,7 @@
         <a routerLink="profil" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="!bg-blue-100/50 !text-blue-800 border-l-4 border-blue-600 font-medium"
           class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg hover:bg-blue-100/40 group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="text-gray-800 size-5">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-gray-800 size-5">
             <path fill-rule="evenodd"
               d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
               clip-rule="evenodd" />
@@ -144,8 +126,7 @@
       <li>
         <a routerLink="parametre"
           class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-blue-100/40 group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="text-gray-800 size-5">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-gray-800 size-5">
             <path
               d="M17.004 10.407c.138.435-.216.842-.672.842h-3.465a.75.75 0 0 1-.65-.375l-1.732-3c-.229-.396-.053-.907.393-1.004a5.252 5.252 0 0 1 6.126 3.537ZM8.12 8.464c.307-.338.838-.235 1.066.16l1.732 3a.75.75 0 0 1 0 .75l-1.732 3c-.229.397-.76.5-1.067.161A5.23 5.23 0 0 1 6.75 12a5.23 5.23 0 0 1 1.37-3.536ZM10.878 17.13c-.447-.098-.623-.608-.394-1.004l1.733-3.002a.75.75 0 0 1 .65-.375h3.465c.457 0 .81.407.672.842a5.252 5.252 0 0 1-6.126 3.539Z" />
             <path fill-rule="evenodd"
@@ -156,11 +137,24 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Parametrage</span>
         </a>
       </li>
+      <li *ngIf="role=='SUPER_ADMIN' || role === 'DIRECTEUR_TECHNIQUE' || role === 'CHEF_SEVICE_TECHNIQUE'">
+        <a routerLink="aide"
+          class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-blue-100/40 group">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-gray-800 size-5">
+            <path fill-rule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+              clip-rule="evenodd" />
+          </svg>
+
+
+          <span class="flex-1 ms-3 whitespace-nowrap">Aide</span>
+        </a>
+      </li>
       <li>
         <a (click)="showConfirmationModal = true"
           class="flex items-center p-3 text-gray-800 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-blue-100/40 group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="currentColor" class="text-gray-800 size-5">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-gray-800 size-5">
             <path
               d="M18 1.5c2.9 0 5.25 2.35 5.25 5.25v3.75a.75.75 0 0 1-1.5 0V6.75a3.75 3.75 0 1 0-7.5 0v3a3 3 0 0 1 3 3v6.75a3 3 0 0 1-3 3H3.75a3 3 0 0 1-3-3v-6.75a3 3 0 0 1 3-3h9v-3c0-2.9 2.35-5.25 5.25-5.25Z" />
           </svg>
@@ -178,16 +172,14 @@
       <span class="text-sm text-gray-800">&copy; 2025 prolab Afrik</span>
     </div>
     <div class="mt-1">
-      <span
-        class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
+      <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
         Production
       </span>
     </div>
   </div>
 </aside>
 
-<div *ngIf="showConfirmationModal"
-  class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+<div *ngIf="showConfirmationModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
   <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-lg w-96">
     <h3 class="mb-4 text-xl font-semibold text-gray-800">Confirmer l'action</h3>
     <p class="text-gray-600">

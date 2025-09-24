@@ -8,14 +8,14 @@
       <div class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
         <h3 class="mb-2 text-xl font-semibold text-gray-800">Cartes
           d'inspection</h3>
-        <p class="text-3xl font-bold text-gray-800">{{ badges.length }}</p>
+        <p class="text-3xl font-bold text-gray-800">{{ badges }}</p>
       </div>
 
       <!-- Statistique 2 : Rapports d'inspection -->
       <div class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
         <h3 class="mb-2 text-xl font-semibold text-gray-800">Rapports
           d'inspection</h3>
-        <p class="text-3xl font-bold text-gray-800">{{ certificatControls.length
+        <p class="text-3xl font-bold text-gray-800">{{ certificatControls
           }}</p>
       </div>
 
@@ -50,12 +50,12 @@
         <input type="date" id="dateFin" name="dateFin" [(ngModel)]="dateFin"
           class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
       </div>
-      <div>
+      <div *ngIf="inspections && inspections.length > 0">
         <label for="societe" class="block mb-2 text-sm font-medium text-blue-800">Partenaires</label>
-        <select id="societe" [(ngModel)]="selectedSociete"
+        <select id="societe" [(ngModel)]="selectedInspection" name="societe"
           class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
           <option value>Tous les partenaires</option>
-          <option *ngFor="let societe of societes" [value]="societe">{{ societe
+          <option *ngFor="let societe of inspections" [value]="societe.id">{{ societe.nom
             }}</option>
         </select>
       </div>
@@ -126,7 +126,7 @@
       <h3 class="mb-4 text-lg font-semibold">Détails des inspections</h3>
       <div class="flex justify-between mb-4">
         <div class="relative">
-          <input type="text" placeholder="Rechercher..." [(ngModel)]="searchTerm"
+          <input type="text" placeholder="Rechercher..." (input)="onInputChange($event)"
             class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pl-10">
         </div>
         <button (click)="exportToExcel()"
@@ -143,19 +143,28 @@
               <th scope="col" class="px-4 py-3">Date inspection</th>
               <th scope="col" class="px-4 py-3">Société</th>
               <th scope="col" class="px-4 py-3">Véhicule</th>
+              <th scope="col" class="px-4 py-3">Statut</th>
               <th scope="col" class="px-4 py-3">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let inspection of filteredInspections" class="bg-white border-b hover:bg-gray-50">
-              <td class="px-4 py-3 font-medium">{{ inspection.id }}</td>
-              <td class="px-4 py-3">{{ inspection.inspectionDate |
+            <tr *ngFor="let inspection of paginatedInspections; let i=index" class="bg-white border-b hover:bg-gray-50">
+              <td class="px-4 py-3 font-medium">{{ i+1}}</td>
+              <td class="px-4 py-3">{{ inspection.creationDate |
                 date:'dd/MM/yyyy' }}</td>
-              <td class="px-4 py-3">{{ inspection.company }}</td>
-              <td class="px-4 py-3">{{ inspection.vehicleType }}</td>
-
+              <td class="px-4 py-3">{{ inspection.societe }}</td>
+              <td class="px-4 py-3">{{ inspection.vehicule?.numeroAssurance }}</td>
               <td class="px-4 py-3">
-                <button (click)="downloadInspection(inspection.id)"
+                <span [ngClass]="{
+                  'bg-green-100 text-green-800': inspection.avisFavorable === true,
+                  'bg-red-100 text-red-800': inspection.avisFavorable != true
+                }" class="text-xs font-medium px-2.5 py-0.5 rounded">
+                  {{ inspection.avisFavorable!=null && inspection.avisFavorable === true ? 'Conforme' : 'Non conforme'
+                  }}
+                </span>
+              </td>
+              <td class="px-4 py-3">
+                <button (click)="generateReportAction(inspection.id)"
                   class="font-medium text-blue-600 hover:underline">Télécharger</button>
               </td>
             </tr>

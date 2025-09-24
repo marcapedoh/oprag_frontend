@@ -53,6 +53,7 @@ export class DatatableComponent {
           this.filteredElements = this.data.filter((item: any) =>
             item.site.toLowerCase().includes(lowerSearch) ||
             item.societe.toLowerCase().includes(lowerSearch) ||
+            item.creationDate.toString().includes(lowerSearch) ||
             item.numeroRapport.toLowerCase().includes(lowerSearch) ||
             item.description.toString().includes(lowerSearch) ||
             item.validite.toString().includes(lowerSearch) ||
@@ -62,10 +63,8 @@ export class DatatableComponent {
         } else if (this.dataType === "Gestion des Cartes d'Inspection") {
           this.filteredElements = this.data.filter((item: any) =>
             item.numero.toLowerCase().includes(lowerSearch) ||
-            item.validite.toLowerCase().includes(lowerSearch) ||
             item.numeroParc.toLowerCase().includes(lowerSearch) ||
-            item.inspecteur.nom.toString().includes(lowerSearch) ||
-            item.codeQrString.toString().includes(lowerSearch)
+            item.inspecteur.nom.toString().includes(lowerSearch)
           );
         } else if (this.dataType === "Tableau des Utilisateurs") {
           this.filteredElements = this.data.filter((item: any) =>

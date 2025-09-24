@@ -139,6 +139,9 @@ export class DataService {
   totalCertificatControlsAmount() {
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/CertificatControls/certificatControlsAmount")
   }
+  getState(dateDebut = "2025-09-20", dateFin = "2025-09-24", inspectionId: number) {
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Statistiques/" + dateDebut + "/" + dateFin + "/" + inspectionId)
+  }
 
   changeState(userId: number) {
     return this.httpClient.delete<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Utilisateurs/changeState/" + userId)

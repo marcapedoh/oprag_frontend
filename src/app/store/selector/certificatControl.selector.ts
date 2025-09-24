@@ -11,5 +11,9 @@ export const selectCertificatsControlsAmount = createSelector(
   (state: CertificatControlState) => state.totalAmount,
   (totalAmount: number) => totalAmount
 )
+export const selectStat = createSelector(
+  (state: CertificatControlState) => state.stat,
+  (stat: any) => stat
+)
 
 

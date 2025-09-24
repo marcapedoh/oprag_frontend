@@ -18,6 +18,7 @@ import { FicheControlComponent } from './components/fiche-control/fiche-control.
 import { FicheDataComponent } from './components/fiche-data/fiche-data.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FichePreviewComponent } from './components/fiche-preview/fiche-preview.component';
+import { HelpPageComponent } from './components/help-page/help-page.component';
 
 const routes: Routes = [
   {
@@ -93,6 +94,10 @@ const routes: Routes = [
       {
         path: 'vueEnsemble',
         component: ChartsComponent
+      },
+      {
+        path: 'aide',
+        component: HelpPageComponent
       },
       {
         path: 'parametre',

@@ -292,7 +292,7 @@ export class FormInspectionComponent implements OnInit {
           id: localStorage.getItem("ConnectedUser")!
         },
         vehicule: { ...this.certificatControl.vehicule },
-        chauffeur: { ...this.certificatControl.chauffeur }
+        chauffeur: this.certificatControl.chauffeur
       }
     } else {
 

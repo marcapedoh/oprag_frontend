@@ -38,3 +38,8 @@ export const createInspectionMontantFailure = createAction("[InspectionMontant] 
 export const deleteInspectionMontant = createAction("[InspectionMontant] delete InspectionMontant", (id: number) => ({ id }))
 export const deleteInspectionMontantSuccess = createAction("[InspectionMontant] delete InspectionMontant sucess")
 export const deleteInspectionMontantFailure = createAction("[InspectionMontant] delete inspectionMontant failure", (error: string) => ({ error }))
+
+
+export const getStat = createAction("[Stat] get Stat", (dateDebut, dateFin, inspectionId) => ({ dateDebut, dateFin, inspectionId }))
+export const getStatSuccess = createAction("[Stat] get Stat success", (stat: any) => ({ stat }))
+export const getStatFailure = createAction("[Stat] get Stat failure", (error: string) => ({ error }))
