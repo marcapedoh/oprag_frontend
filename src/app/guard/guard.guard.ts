@@ -8,7 +8,9 @@ export const guardGuard: CanActivateFn = (route, state) => {
   if (tokenService.isTokenValid(localStorage.getItem('token')!)) {
     return true;
   } else {
-    router.navigate(['login'])
+    // Sauvegarder l'URL de destination pour redirection post-login
+    localStorage.setItem('redirectUrl', state.url);
+    router.navigate(['login']);
     return false;
   }
 };
