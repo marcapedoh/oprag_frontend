@@ -736,7 +736,7 @@ export class DashboardComponent implements OnInit {
         console.log(stat)
         this.totalBadgesActive = stat.totalCardActive
         this.badges = stat.totalCard
-
+        this.certificatControls = stat.totalRapport
         this.complianceRate = stat.ConformeRate
         this.trendMultiLine = stat.trendMultiLine
         this.trendChart = {

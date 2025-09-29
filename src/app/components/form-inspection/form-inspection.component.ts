@@ -240,6 +240,13 @@ export class FormInspectionComponent implements OnInit {
     }
   }
   saveForm() {
+    this.certificatControl = {
+      ...this.certificatControl,
+      vehicule: {
+        ...this.certificatControl.vehicule,
+        numeroVisiteTechnique: this.certificatControl.vehicule.numeroAssurance,
+      }
+    }
     localStorage.setItem('cetificatControl', JSON.stringify(this.certificatControl));
   }
 
@@ -275,6 +282,15 @@ export class FormInspectionComponent implements OnInit {
   }
 
   createVehicule() {
+    this.certificatControl = {
+      ...this.certificatControl,
+      vehicule: {
+        ...this.certificatControl.vehicule,
+        numeroVisiteTechnique: this.certificatControl.vehicule.numeroAssurance,
+      }
+    }
+    console.log(this.certificatControl.vehicule)
+
     this.store.dispatch(createVehicule(this.certificatControl.vehicule))
 
     this.vehiculeStored = this.certificatControl.vehicule
@@ -299,7 +315,7 @@ export class FormInspectionComponent implements OnInit {
 
       this.certificatControl = {
         ...this.certificatControl,
-        numeroVisiteTechnique: this.certificatControl.vehicule.numeroAssurance,
+
         signatureDGM: "null",
         utilisateur: {
           id: localStorage.getItem("ConnectedUser")!
