@@ -1,0 +1,19 @@
+.pdf-container {
+  height: 900px;
+  max-height: 90vh;
+  min-height: 600px;
+}
+
+@media (max-width: 768px) {
+  .pdf-container {
+    height: 70vh;
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pdf-container {
+    height: 60vh;
+    min-height: 300px;
+  }
+}
