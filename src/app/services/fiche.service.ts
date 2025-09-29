@@ -14,7 +14,7 @@ export class FicheService {
    * Récupère les données d'une fiche par son ID de certificat de contrôle
    */
   getFicheById(certificatControlId: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.baseUrl}:1020/OPRAG/v0/endpoint/CertificatControl/${certificatControlId}`);
+    return this.httpClient.get<any>(`${this.baseUrl}:1020/OPRAG/v0/endpoint/CertificatControls/findById/${certificatControlId}`);
   }
 
   /**
