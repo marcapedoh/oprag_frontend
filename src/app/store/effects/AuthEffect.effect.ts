@@ -29,16 +29,25 @@ export class AuthEffects {
           localStorage.setItem("Nom", action.responseDAO.nom)
           localStorage.setItem("Prenom", action.responseDAO.prenom)
           localStorage.setItem("SignaturePresence", JSON.stringify(action.responseDAO.signaturePresence))
-          if (action.responseDAO.role == "CONTROLLEUR") {
-            this.router.navigate(["/inspection/collection"])
-          } else if (action.responseDAO.role == "SUPER_ADMIN") {
-            this.router.navigate(["/vueEnsemble"])
-          } else if (action.responseDAO.role == "INSPECTEUR_PRINCIPAL") {
-            this.router.navigate(["/vueEnsemble"])
-          } else if (action.responseDAO.role == "DIRECTEUR_TECHNIQUE") {
-            this.router.navigate(["/vue-ensemble"])
-          } else if (action.responseDAO.role == "CHEF_SEVICE_TECHNIQUE") {
-            this.router.navigate(["/vue-ensemble"])
+
+          // Vérifier si une URL de redirection est sauvegardée
+          const redirectUrl = localStorage.getItem('redirectUrl');
+          if (redirectUrl) {
+            localStorage.removeItem('redirectUrl');
+            this.router.navigateByUrl(redirectUrl);
+          } else {
+            // Redirection par défaut selon le rôle
+            if (action.responseDAO.role == "CONTROLLEUR") {
+              this.router.navigate(["/inspection/collection"])
+            } else if (action.responseDAO.role == "SUPER_ADMIN") {
+              this.router.navigate(["/vueEnsemble"])
+            } else if (action.responseDAO.role == "INSPECTEUR_PRINCIPAL") {
+              this.router.navigate(["/vueEnsemble"])
+            } else if (action.responseDAO.role == "DIRECTEUR_TECHNIQUE") {
+              this.router.navigate(["/vue-ensemble"])
+            } else if (action.responseDAO.role == "CHEF_SEVICE_TECHNIQUE") {
+              this.router.navigate(["/vue-ensemble"])
+            }
           }
         } else {
           this.notificationService.error("Vérifiez vos informations!")

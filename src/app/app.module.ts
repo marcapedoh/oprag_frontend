@@ -55,6 +55,8 @@ import { FicheDataComponent } from './components/fiche-data/fiche-data.component
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FichePreviewComponent } from './components/fiche-preview/fiche-preview.component';
 import { HelpPageComponent } from './components/help-page/help-page.component';
+import { FicheQrViewComponent } from './components/fiche-qr-view/fiche-qr-view.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +84,8 @@ import { HelpPageComponent } from './components/help-page/help-page.component';
     FicheDataComponent,
     DashboardComponent,
     FichePreviewComponent,
-    HelpPageComponent
+    HelpPageComponent,
+    FicheQrViewComponent
   ],
   imports: [
     BrowserModule,
@@ -92,8 +95,8 @@ import { HelpPageComponent } from './components/help-page/help-page.component';
     HttpClientModule,
     StoreModule.forRoot({ auth: authReducer, certificatControls: certificatControlReducer, badges: badgeReducer, chauffeurs: chauffeurReducer, vehicules: vehiculeReducer, toast: toastReducer, usersInspection: userPerInspectionReducer, profil: userProfilReducer, inspections: inspectionReducer, utilisateurs: utilisateurReducer }, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([AuthEffects, CertificatControlEffects, BadgeEffect, ChauffeurEffect, VehiculeEffect, UsersPerInspectionEffect, UserProfilEffect, InspectionEffect, UtilisateurEffect])
-
+    EffectsModule.forRoot([AuthEffects, CertificatControlEffects, BadgeEffect, ChauffeurEffect, VehiculeEffect, UsersPerInspectionEffect, UserProfilEffect, InspectionEffect, UtilisateurEffect]),
+    PdfViewerModule
   ],
   providers: [
     CurrencyPipe,

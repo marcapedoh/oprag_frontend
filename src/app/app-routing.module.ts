@@ -19,11 +19,17 @@ import { FicheDataComponent } from './components/fiche-data/fiche-data.component
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FichePreviewComponent } from './components/fiche-preview/fiche-preview.component';
 import { HelpPageComponent } from './components/help-page/help-page.component';
+import { FicheQrViewComponent } from './components/fiche-qr-view/fiche-qr-view.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'fiche/:id',
+    component: FicheQrViewComponent,
+    canActivate: [guardGuard]
   },
   {
     path: "",
