@@ -43,3 +43,7 @@ export const deleteInspectionMontantFailure = createAction("[InspectionMontant] 
 export const getStat = createAction("[Stat] get Stat", (dateDebut, dateFin, inspectionId) => ({ dateDebut, dateFin, inspectionId }))
 export const getStatSuccess = createAction("[Stat] get Stat success", (stat: any) => ({ stat }))
 export const getStatFailure = createAction("[Stat] get Stat failure", (error: string) => ({ error }))
+
+export const getStatWithoutInspection = createAction("[Stat] get Stat Without Inspection", (dateDebut, dateFin) => ({ dateDebut, dateFin }))
+export const getStatWithoutInspectionSuccess = createAction("[Stat] get Stat Without Inspection success", (stat: any) => ({ stat }))
+export const getStatWithoutInspectionFailure = createAction("[Stat] get Stat Without Inspection failure", (error: string) => ({ error }))

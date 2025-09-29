@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
 
+
   constructor(private httpClient: HttpClient) { }
   baseUrl: string = "https://badge.routeafrique.com"
 
@@ -141,6 +142,9 @@ export class DataService {
   }
   getState(dateDebut = "2025-09-20", dateFin = "2025-09-24", inspectionId: number) {
     return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Statistiques/" + dateDebut + "/" + dateFin + "/" + inspectionId)
+  }
+  getStatWithoutInspection(dateDebut: any, dateFin: any) {
+    return this.httpClient.get<any>(this.baseUrl + ":1020/OPRAG/v0/endpoint/Statistiques/" + dateDebut + "/" + dateFin)
   }
 
   changeState(userId: number) {

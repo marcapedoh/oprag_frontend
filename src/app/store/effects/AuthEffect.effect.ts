@@ -55,6 +55,7 @@ export class AuthEffects {
         catchError((error: string) => of(registerUserFailure(error)))
       )), tap((action) => {
         if (action.type === "[RegisterUser] Register User Success") {
+          this.notificationService.success("Utilisateur enregistré/modifié avec succès")
           this.router.navigate(["users"])
         }
       })

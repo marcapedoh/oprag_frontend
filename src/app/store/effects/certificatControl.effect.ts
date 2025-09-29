@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { DataService } from "src/app/services/data.service";
-import { createCertificatControl, createCertificatControlFailure, createCertificatControlSuccess, createInspectionMontant, createInspectionMontantFailure, createInspectionMontantSuccess, deleteCertificatControl, deleteCertificatControlFailure, deleteCertificatControlSuccess, deleteInspectionMontant, deleteInspectionMontantFailure, deleteInspectionMontantSuccess, generateCertificatControl, getAllCertificatControl, getAllCertificatControlFailure, getAllCertificatControlSuccess, getCertificatControlsAmount, getCertificatControlsAmountFailure, getCertificatControlsAmountSuccess, getInspectionMontant, getInspectionMontantFailure, getInspectionMontantSuccess, getStat, getStatFailure, getStatSuccess, visualiserCertificatControl, visualiserCertificatControlFailure, visualiserCertificatControlSuccess } from "../actions/certificatControl.action";
+import { createCertificatControl, createCertificatControlFailure, createCertificatControlSuccess, createInspectionMontant, createInspectionMontantFailure, createInspectionMontantSuccess, deleteCertificatControl, deleteCertificatControlFailure, deleteCertificatControlSuccess, deleteInspectionMontant, deleteInspectionMontantFailure, deleteInspectionMontantSuccess, generateCertificatControl, getAllCertificatControl, getAllCertificatControlFailure, getAllCertificatControlSuccess, getCertificatControlsAmount, getCertificatControlsAmountFailure, getCertificatControlsAmountSuccess, getInspectionMontant, getInspectionMontantFailure, getInspectionMontantSuccess, getStat, getStatFailure, getStatSuccess, getStatWithoutInspection, getStatWithoutInspectionFailure, getStatWithoutInspectionSuccess, visualiserCertificatControl, visualiserCertificatControlFailure, visualiserCertificatControlSuccess } from "../actions/certificatControl.action";
 import { catchError, concatMap, exhaustMap, map, of, switchMap, tap } from "rxjs";
 import { Router } from "@angular/router";
 import { showToast } from "../actions/toast.action";
@@ -167,5 +167,16 @@ export class CertificatControlEffects {
           catchError((error: string) => of(getStatFailure(error)))
         ))
     ))
+
+  getStatWithoutInspection$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getStatWithoutInspection),
+      concatMap(({ dateDebut, dateFin }) =>
+        this.dataService.getStatWithoutInspection(dateDebut, dateFin).pipe(
+          map((stat) => getStatWithoutInspectionSuccess(stat)),
+          catchError((error: string) => of(getStatWithoutInspectionFailure(error)))
+        ))
+    )
+  )
   constructor(private actions$: Actions, private dataService: DataService, private router: Router, private notificationService: NotificationService) { }
 }

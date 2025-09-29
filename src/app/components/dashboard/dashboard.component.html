@@ -1,4 +1,15 @@
-<div class="max-w-screen-xl p-6 mx-auto bg-white shadow-md rounded-xl">
+<!-- Spinner de chargement -->
+<div *ngIf="!dataLoaded" class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80">
+
+  <div class="text-center">
+    <!-- Spinner personnalisé avec les couleurs de votre charte -->
+    <div class="inline-block w-16 h-16 border-4 border-blue-200 rounded-full border-t-blue-800 animate-spin"></div>
+    <p class="mt-4 text-lg font-medium text-blue-800">Chargement des données...</p>
+  </div>
+</div>
+
+
+<div class="max-w-screen-xl p-6 mx-auto bg-white shadow-md rounded-xl" [class.opacity-50]="!dataLoaded">
   <h2 class="mb-6 text-2xl font-medium text-gray-800">Tableau de Bord</h2>
 
   <!-- Statistiques -->
@@ -6,31 +17,29 @@
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
       <!-- Statistique 1 : Cartes d'inspection -->
       <div class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
-        <h3 class="mb-2 text-xl font-semibold text-gray-800">Cartes
-          d'inspection</h3>
-        <p class="text-3xl font-bold text-gray-800">{{ badges }}</p>
+        <h3 class="mb-2 text-xl font-semibold text-gray-800">Cartes d'inspection</h3>
+        <p class="text-3xl font-bold text-gray-800">{{ dataLoaded ? badges : '-' }}</p>
       </div>
 
       <!-- Statistique 2 : Rapports d'inspection -->
       <div class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
-        <h3 class="mb-2 text-xl font-semibold text-gray-800">Rapports
-          d'inspection</h3>
-        <p class="text-3xl font-bold text-gray-800">{{ certificatControls
-          }}</p>
+        <h3 class="mb-2 text-xl font-semibold text-gray-800">Rapports d'inspection</h3>
+        <p class="text-3xl font-bold text-gray-800">{{ dataLoaded ? certificatControls : '-' }}</p>
       </div>
 
       <!-- Statistique 3 : Cartes actives -->
       <div class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
         <h3 class="mb-2 text-xl font-semibold text-gray-800">Cartes actives</h3>
-        <p class="text-3xl font-bold text-gray-800">{{ totalBadgesActive ?
-          totalBadgesActive : 0 }}</p>
+        <p class="text-3xl font-bold text-gray-800">{{ dataLoaded ? (totalBadgesActive ? totalBadgesActive : 0) : '-' }}
+        </p>
       </div>
 
       <!-- Nouvelle statistique : Taux de conformité -->
       <div class="p-6 text-center bg-white border border-blue-200 shadow-sm rounded-xl">
-        <h3 class="mb-2 text-xl font-semibold text-gray-800">Taux de
-          conformité</h3>
-        <p class="text-3xl font-bold text-gray-800">{{ complianceRate }}%</p>
+        <h3 class="mb-2 text-xl font-semibold text-gray-800">Taux de conformité</h3>
+        <p class="text-3xl font-bold text-gray-800">
+          {{ dataLoaded ? (complianceRate/certificatControls*100 | number:'1.1-2') + '%' : '-' }}
+        </p>
       </div>
     </div>
   </div>
@@ -39,14 +48,12 @@
   <div class="p-6 mt-8 bg-white border border-blue-200 shadow-sm rounded-xl">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-5">
       <div>
-        <label for="dateDebut" class="block mb-2 text-sm font-medium text-blue-800">Date
-          Début</label>
+        <label for="dateDebut" class="block mb-2 text-sm font-medium text-blue-800">Date Début</label>
         <input type="date" id="dateDebut" name="dateDebut" [(ngModel)]="dateDebut"
           class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
       </div>
       <div>
-        <label for="dateFin" class="block mb-2 text-sm font-medium text-blue-800">Date de
-          Fin</label>
+        <label for="dateFin" class="block mb-2 text-sm font-medium text-blue-800">Date de Fin</label>
         <input type="date" id="dateFin" name="dateFin" [(ngModel)]="dateFin"
           class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
       </div>
@@ -54,9 +61,8 @@
         <label for="societe" class="block mb-2 text-sm font-medium text-blue-800">Partenaires</label>
         <select id="societe" [(ngModel)]="selectedInspection" name="societe"
           class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-          <option value>Tous les partenaires</option>
-          <option *ngFor="let societe of inspections" [value]="societe.id">{{ societe.nom
-            }}</option>
+          <option value="-1">Sélectionner le partenaire</option>
+          <option *ngFor="let societe of inspections" [value]="societe.id">{{ societe.nom }}</option>
         </select>
       </div>
 
@@ -84,8 +90,7 @@
 
     <!-- Graphique 2: Répartition par type de véhicule -->
     <div class="p-4 bg-white border border-blue-200 shadow-sm rounded-xl">
-      <h3 class="mb-4 text-lg font-semibold">Répartition par type de
-        véhicule</h3>
+      <h3 class="mb-4 text-lg font-semibold">Répartition par type de véhicule</h3>
       <div id="vehicle-type-chart">
         <apx-chart [series]="vehicleTypeChart.series!" [chart]="vehicleTypeChart.chart!"
           [labels]="vehicleTypeChart.labels!" [responsive]="vehicleTypeChart.responsive!"
@@ -96,8 +101,7 @@
 
     <!-- Graphique 3: Conformité par statut -->
     <div class="p-4 bg-white border border-blue-200 shadow-sm rounded-xl">
-      <h3 class="mb-4 text-lg font-semibold">Inspections conformes vs non
-        conformes</h3>
+      <h3 class="mb-4 text-lg font-semibold">Inspections conformes/non conformes</h3>
       <div id="status-chart">
         <apx-chart [series]="statusChart.series!" [chart]="statusChart.chart!" [plotOptions]="statusChart.plotOptions!"
           [dataLabels]="statusChart.dataLabels!" [stroke]="statusChart.stroke!" [xaxis]="statusChart.xaxis!"
@@ -108,27 +112,72 @@
     </div>
 
     <!-- Graphique 4: Taux de conformité par catégorie -->
-    <div class="p-4 bg-white border border-blue-200 shadow-sm rounded-xl">
-      <h3 class="mb-4 text-lg font-semibold">Évolution des rapports d'inspection par partenaire</h3>
+    <!-- <div class="p-4 bg-white border border-blue-200 shadow-sm rounded-xl"> -->
+    <!-- <h3 class="mb-4 text-lg font-semibold">Évolution des rapports d'inspection par partenaire</h3>
       <div id="line-chart" class="mt-2">
         <apx-chart class="mt-5" [series]="lineChart.series!" [chart]="lineChart.chart!" [xaxis]="lineChart.xaxis!"
           [yaxis]="lineChart.yaxis!" [stroke]="lineChart.stroke!" [markers]="lineChart.markers!"
           [dataLabels]="lineChart.dataLabels!" [colors]="lineChart.colors!" [grid]="lineChart.grid!"
           [legend]="lineChart.legend!">
         </apx-chart>
+      </div> -->
+    <!-- </div> -->
+
+    <!-- Graphique 5: Inspections par société (pleine largeur) -->
+    <div class="col-span-2 p-4 bg-white border border-blue-200 shadow-sm rounded-xl">
+      <h3 class="mb-4 text-lg font-semibold">Nombre d'inspections par société</h3>
+      <div id="inspection-societe-chart">
+        <apx-chart [series]="inspectionSocieteChart.series!" [chart]="inspectionSocieteChart.chart!"
+          [plotOptions]="inspectionSocieteChart.plotOptions!" [dataLabels]="inspectionSocieteChart.dataLabels!"
+          [xaxis]="inspectionSocieteChart.xaxis!" [yaxis]="inspectionSocieteChart.yaxis!"
+          [colors]="inspectionSocieteChart.colors!" [tooltip]="inspectionSocieteChart.tooltip!"
+          [grid]="inspectionSocieteChart.grid!" [legend]="inspectionSocieteChart.legend!">
+        </apx-chart>
       </div>
     </div>
   </div>
-
   <!-- Tableau des données -->
   <div class="mt-8 bg-white border border-blue-200 shadow-sm rounded-xl">
     <div class="p-6">
       <h3 class="mb-4 text-lg font-semibold">Détails des inspections</h3>
-      <div class="flex justify-between mb-4">
-        <div class="relative">
-          <input type="text" placeholder="Rechercher..." (input)="onInputChange($event)"
-            class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pl-10">
+
+      <!-- Bouton de téléchargement multiple -->
+      <div *ngIf="selectedInspections.length > 0" class="p-3 mb-4 border border-blue-200 rounded-lg bg-blue-50">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-blue-800">
+            {{ selectedInspections.length }} élément(s) sélectionné(s)
+          </span>
+          <button (click)="downloadSelectedInspections()"
+            class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Télécharger
+          </button>
         </div>
+      </div>
+
+      <div class="flex justify-between mb-4">
+        <div class="grid grid-cols-3 gap-2">
+          <div class="relative">
+            <input type="text" placeholder="Rechercher..." (input)="onInputChange($event)"
+              class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+          </div>
+          <div class="relative">
+            <input type="date" name="dateDebut" (input)="onDateInputChange($event)"
+              class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+          </div>
+          <div class="relative">
+            <select (input)="onStatusChange($event)" name="status"
+              class="bg-gray-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+              <option value="-1">Selectionner un statut</option>
+              <option value="conforme">Conforme</option>
+              <option value="non-conforme">Non conforme</option>
+            </select>
+          </div>
+        </div>
+
         <button (click)="exportToExcel()"
           class="flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">
           <span>Exporter en Excel</span>
@@ -139,6 +188,10 @@
         <table class="w-full text-sm text-left text-gray-800">
           <thead class="text-xs text-gray-700 uppercase bg-gray-100">
             <tr>
+              <th scope="col" class="w-12 px-4 py-3">
+                <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($event)"
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+              </th>
               <th scope="col" class="px-4 py-3">N° Inspection</th>
               <th scope="col" class="px-4 py-3">Date inspection</th>
               <th scope="col" class="px-4 py-3">Société</th>
@@ -148,10 +201,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let inspection of paginatedInspections; let i=index" class="bg-white border-b hover:bg-gray-50">
+            <tr *ngFor="let inspection of paginatedInspections; let i=index" class="bg-white border-b hover:bg-gray-50"
+              [class.bg-blue-50]="isSelected(inspection.id)">
+              <td class="px-4 py-3">
+                <input type="checkbox" [checked]="isSelected(inspection.id)"
+                  (change)="toggleInspectionSelection(inspection.id)"
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+              </td>
               <td class="px-4 py-3 font-medium">{{ i+1}}</td>
-              <td class="px-4 py-3">{{ inspection.creationDate |
-                date:'dd/MM/yyyy' }}</td>
+              <td class="px-4 py-3">{{ inspection.creationDate | date:'dd/MM/yyyy' }}</td>
               <td class="px-4 py-3">{{ inspection.societe }}</td>
               <td class="px-4 py-3">{{ inspection.vehicule?.numeroAssurance }}</td>
               <td class="px-4 py-3">
@@ -175,8 +233,8 @@
       <!-- Pagination -->
       <div class="flex items-center justify-between pt-4">
         <span class="text-sm font-normal text-gray-700">
-          Affichage de <span class="font-semibold">{{ startIndex }}-{{ endIndex
-            }}</span> sur <span class="font-semibold">{{ totalItems }}</span>
+          Affichage de <span class="font-semibold">{{ startIndex }}-{{ endIndex }}</span> sur <span
+            class="font-semibold">{{ totalItems }}</span>
         </span>
         <div class="inline-flex space-x-2">
           <button (click)="previousPage()" [disabled]="currentPage === 1"

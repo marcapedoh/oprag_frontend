@@ -34,6 +34,8 @@ export class UtilisateurFormComponent implements OnInit {
   usersInspecteur = []
   inspections: any = []
   inspectionFieldActive = false
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
   selectedInspection = ""
   origin = ""
   ngOnInit(): void {
@@ -83,6 +85,15 @@ export class UtilisateurFormComponent implements OnInit {
       this.currentStep--;
     }
   }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPasswordVisibility(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
   handleSaveMethod() {
     if (this.router.url.includes('/utilisateurs/ajout/')) {
       this.store.dispatch(updateUser(this.user))

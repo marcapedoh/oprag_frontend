@@ -17,7 +17,8 @@ import {
   ApexLegend,
   ApexTitleSubtitle,
   ChartComponent,
-  ApexResponsive
+  ApexResponsive,
+  ApexTooltip
 } from 'ng-apexcharts';
 import { debounceTime, distinctUntilChanged, map, Observable, Subject, Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
@@ -76,6 +77,22 @@ export type LineChartOptions2 = {
   tooltip: any;
 }
 
+export interface InspectionSocieteChartOptions {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
+  tooltip: ApexTooltip;
+  fill?: ApexFill;
+  grid: ApexGrid;
+  stroke?: ApexStroke;
+  legend: ApexLegend;
+  colors: string[];
+  title?: ApexTitleSubtitle;
+}
+
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -106,20 +123,27 @@ export class DashboardComponent implements OnInit {
   public trendChart!: Partial<LineChartOptions>;
   public lineChart!: Partial<LineChartOptions2>;
   public vehicleTypeChart!: Partial<PieChartOptions>;
-
+  public inspectionSocieteChart!: Partial<InspectionSocieteChartOptions>;
+  searchDate = ''
   paginatedInspections: any[] = [];
   badges = 150;
   certificatControls = 120;
+  certificatControlsTab: any[] = [];
   totalBadgesActive = 135;
   complianceRate = 82;
   subscription!: Subscription;
+  dateSubscription!: Subscription;
+  statusSubscription!: Subscription;
   inputSubject = new Subject<string>();
+  dateInputSubject = new Subject<string>();
+  statusSubject = new Subject<string>();
   dateDebut: string = '';
+  selectedInspections: number[] = [];
   dateFin: string = '';
   selectedSociete: string = '';
   selectedStatut: string = '';
   searchTerm: string = '';
-
+  selectedStatus = -1
   societes = ['Transports ABC', 'Logistique XYZ', 'Camions 123', 'Fret Ouest', 'Transporteurs Associés'];
 
   filteredInspections: any[] = [];
@@ -148,32 +172,228 @@ export class DashboardComponent implements OnInit {
     this.initTrendChart();
     this.initVehicleTypeChart();
     this.initLineChart();
+    this.initInspectionSocieteChart();
     this.inpections$ = this.store.pipe(select(selectAllInspections))
   }
   inspections: any[] = [];
   selectedInspection = 0
+  moisOptions = [
+    { value: 'UN_MOIS', label: '1 MOIS' },
+    { value: 'DEUX_MOIS', label: '2 MOIS' },
+    { value: 'TROIS_MOIS', label: '3 MOIS' },
+    { value: 'QUATRE_MOIS', label: '4 MOIS' },
+    { value: 'CINQ_MOIS', label: '5 MOIS' },
+    { value: 'SIX_MOIS', label: '6 MOIS' },
+    { value: 'SEPT_MOIS', label: '7 MOIS' },
+    { value: 'HUIT_MOIS', label: '8 MOIS' },
+    { value: 'NEUF_MOIS', label: '9 MOIS' },
+    { value: 'DIX_MOIS', label: '10 MOIS' },
+    { value: 'ONZE_MOIS', label: '11 MOIS' },
+    { value: 'DOUZE_MOIS', label: '12 MOIS' },
+    { value: 'TREIZE_MOIS', label: '13 MOIS' },
+    { value: 'QUATORZE_MOIS', label: '14 MOIS' },
+    { value: 'QUINZE_MOIS', label: '15 MOIS' },
+    { value: 'SEIZE_MOIS', label: '16 MOIS' },
+    { value: 'DIX_SEPT_MOIS', label: '17 MOIS' },
+    { value: 'DIX_HUIT_MOIS', label: '18 MOIS' },
+    { value: 'DIX_NEUF_MOIS', label: '19 MOIS' },
+    { value: 'VINGT_MOIS', label: '20 MOIS' }
+  ];
   ngOnInit(): void {
 
-    // Initialiser les dates par défaut (du 1er au 14 septembre 2025)
-    this.dateDebut = '2025-09-01';
-    this.dateFin = '2025-09-14';
-    this.selectedInspection = +localStorage.getItem("InspectionId")!
+    const today = new Date();
+
+    // Date de début = un mois en arrière
+    const lastMonth = new Date();
+    lastMonth.setMonth(lastMonth.getMonth() - 1);
+
+    // Formater en LocalDate (yyyy-MM-dd)
+    function formatDate(date: Date): string {
+      return date.toISOString().split('T')[0];
+    }
+
+    this.dateFin = formatDate(today);
+    this.dateDebut = formatDate(lastMonth);
+    this.selectedInspection = -1
     // this.store.dispatch(getStat(this.dateDebut, this.dateFin, +localStorage.getItem("InspectionId")!));
     this.inpections$.subscribe((inspections: any) => {
       console.log(inspections.inspections)
       if (Array.isArray(inspections.inspections) && inspections.inspections.length > 0) {
         this.inspections = inspections.inspections
+        this.inspections = this.inspections.filter(inspection => inspection.nom !== "OPRAG");
       } else {
         console.log('No inspections found or still loading.');
       }
+    });
+    this.inpectionsVehicule$.subscribe((certificatControl: any) => {
+      console.log(certificatControl.certificatControls)
+      if (Array.isArray(certificatControl.certificatControls) && certificatControl.certificatControls.length > 0) {
+        this.certificatControlsTab = certificatControl.certificatControls.map((ctrl: any) => {
+          const option = this.moisOptions.find(opt => opt.value === ctrl.validite);
+          return {
+            ...ctrl,
+            validite: option ? option.label : ctrl.validite // si trouvé, remplace par le label
+          };
+        });
+      } else {
+        console.log('No certificatControl found or still loading.');
+      }
+
     });
     // Appliquer les filtres initiaux
     this.applyFilters();
   }
 
+  initInspectionSocieteChart(): void {
+    const inspectionData = { series: [25, 74, 45, 63, 12], labels: ["Transports ABC", "Logistique XYZ", "Camions 123", "Fret Ouest", "Transporteurs Associés"] };
+
+    this.inspectionSocieteChart = {
+      series: [{
+        name: 'Nombre d\'inspections',
+        data: inspectionData.series
+      }],
+      chart: {
+        type: 'bar',
+        height: 500,
+        stacked: false,
+        toolbar: {
+          show: true
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: '60%',
+          borderRadius: 4,
+          dataLabels: {
+            position: 'top'
+          }
+        },
+      },
+      dataLabels: {
+        enabled: true,
+        formatter: (val: number) => {
+          return val.toString();
+        },
+        offsetY: -20,
+        style: {
+          fontSize: '12px',
+          colors: ['#304758']
+        }
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+      },
+      xaxis: {
+        categories: inspectionData.labels,
+        title: {
+          text: '',
+
+        },
+        labels: {
+          style: {
+            fontSize: '11px'
+          },
+        }
+      },
+      yaxis: {
+        title: {
+          text: "Nombre d'inspections"
+        },
+        labels: {
+          formatter: (val: number) => {
+            return Math.round(val).toString();
+          }
+        }
+      },
+      fill: {
+        opacity: 1
+      },
+      colors: ['#008FFB'],
+      legend: {
+        position: 'top',
+        horizontalAlign: 'center',
+      },
+      tooltip: {
+        y: {
+          formatter: (val: number) => {
+            return val + " inspection(s)";
+          }
+        }
+      },
+      grid: {
+        borderColor: '#f1f1f1',
+        row: {
+          colors: ['transparent', '#f8f8f8'],
+          opacity: 0.5
+        }
+      }
+    };
+  }
+
+
+  // Vérifie si une inspection est sélectionnée
+  isSelected(inspectionId: number): boolean {
+    return this.selectedInspections.includes(inspectionId);
+  }
+
+  // Vérifie si toutes les inspections de la page sont sélectionnées
+  isAllSelected(): boolean {
+    if (this.paginatedInspections.length === 0) return false;
+    return this.paginatedInspections.every(inspection =>
+      this.selectedInspections.includes(inspection.id)
+    );
+  }
+
+  toggleInspectionSelection(inspectionId: number): void {
+    const index = this.selectedInspections.indexOf(inspectionId);
+    if (index > -1) {
+      this.selectedInspections.splice(index, 1);
+    } else {
+      this.selectedInspections.push(inspectionId);
+    }
+  }
+
+  toggleSelectAll(event: any): void {
+    if (event.target.checked) {
+      this.paginatedInspections.forEach(inspection => {
+        if (!this.selectedInspections.includes(inspection.id)) {
+          this.selectedInspections.push(inspection.id);
+        }
+      });
+    } else {
+      this.paginatedInspections.forEach(inspection => {
+        const index = this.selectedInspections.indexOf(inspection.id);
+        if (index > -1) {
+          this.selectedInspections.splice(index, 1);
+        }
+      });
+    }
+  }
+
+  downloadSelectedInspections(): void {
+    if (this.selectedInspections.length === 0) return;
+
+
+    this.selectedInspections.forEach(inspectionId => {
+      this.generateReportAction(inspectionId);
+    });
+
+
+    this.selectedInspections = [];
+  }
 
   onInputChange(event: any) {
     this.inputSubject.next(event.target.value);
+  }
+  onDateInputChange(event: any) {
+    this.dateInputSubject.next(event.target.value);
+  }
+
+  onStatusChange(event: any) {
+    this.statusSubject.next(event.target.value);
   }
 
   updatePaginatedInspections(): void {
@@ -228,7 +448,7 @@ export class DashboardComponent implements OnInit {
       colors: ['#4CAF50', '#F44336'],
       legend: {
         position: 'top',
-        horizontalAlign: 'right',
+        horizontalAlign: 'center',
       }
     };
   }
@@ -300,9 +520,6 @@ export class DashboardComponent implements OnInit {
   }
 
   getReportsTrendData(): { series: any[], categories: string[] } {
-    // Ici, vous devrez adapter pour récupérer les données réelles de votre base
-    // Voici un exemple avec des données statiques pour la semaine dernière
-
     return {
       series: this.sampleData.partners,
       categories: this.sampleData.categories
@@ -392,113 +609,85 @@ export class DashboardComponent implements OnInit {
       }
     };
   }
-  private transformTrendData(trendData: any[]): any {
-    // Si vous avez plusieurs inspectionId (multi-lignes)
-    const uniqueInspectionIds = [...new Set(trendData.map(item => item.inspectionId))];
 
-    // Grouper les données par inspectionId
-    const seriesData = uniqueInspectionIds.map(inspectionId => {
-      const filteredData = trendData.filter(item => item.inspectionId === inspectionId);
+  formatDates(dates: string[]): string[] {
+    return dates.map(dateString => {
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('fr-FR', {
+          day: '2-digit',
+          month: '2-digit'
+        });
+      } catch (error) {
+        console.error(`Erreur de formatage de la date: ${dateString}`, error);
+        return dateString;
+      }
+    });
+  }
+  transformTrendData(trendMultiLine: any[]): any {
+    if (!trendMultiLine || trendMultiLine.length === 0) {
+      return { series: [], categories: [] };
+    }
+
+    // Regrouper les données par partenaire
+    const partnersData = new Map<string, Map<string, number>>();
+    const allDates = new Set<string>();
+
+    // Organiser les données
+    trendMultiLine.forEach(item => {
+      const partnerName = item.NomInspection || 'Non spécifié';
+      const date = item.date;
+      const count = item.count || 0;
+
+      if (!partnersData.has(partnerName)) {
+        partnersData.set(partnerName, new Map<string, number>());
+      }
+
+      partnersData.get(partnerName)!.set(date, count);
+      allDates.add(date);
+    });
+
+    // Convertir les dates en tableau et les trier
+    const sortedDates = Array.from(allDates).sort((a, b) =>
+      new Date(a).getTime() - new Date(b).getTime()
+    );
+
+    // Formater les dates pour l'affichage
+    const formatDate = (dateString: string): string => {
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('fr-FR', {
+          day: '2-digit',
+          month: '2-digit'
+        });
+      } catch {
+        return dateString;
+      }
+    };
+
+    const categories = sortedDates.map(formatDate);
+
+    // Créer les séries pour chaque partenaire
+    const series = Array.from(partnersData.entries()).map(([partnerName, dateCounts]) => {
+      const data = sortedDates.map(date => {
+        return dateCounts.get(date) || 0;
+      });
 
       return {
-        name: `Inspection ${inspectionId}`,
-        data: this.prepareDataForSeries(filteredData, this.getDateRange(trendData))
+        name: partnerName,
+        data: data
       };
     });
 
-    // Si vous voulez une seule ligne avec le total
-    const singleSeriesData = [{
-      name: 'Total des inspections',
-      data: this.prepareSingleSeriesData(trendData)
-    }];
-
-    // Dates pour l'axe X
-    const categories = this.getDateRange(trendData).map(date =>
-      this.formatDateForChart(date)
-    );
-
     return {
-      series: singleSeriesData, // ou seriesData pour multi-lignes
+      series: series,
       categories: categories
     };
   }
-
-  /**
-   * Prépare les données pour une série unique (total)
-   */
-  private prepareSingleSeriesData(trendData: any[]): number[] {
-    const dateRange = this.getDateRange(trendData);
-
-    return dateRange.map(date => {
-      const dataForDate = trendData.find(item => item.date === date);
-      return dataForDate ? dataForDate.count : 0;
-    });
-  }
-
-  /**
-   * Prépare les données pour plusieurs séries
-   */
-  private prepareDataForSeries(filteredData: any[], dateRange: string[]): number[] {
-    return dateRange.map(date => {
-      const dataForDate = filteredData.find(item => item.date === date);
-      return dataForDate ? dataForDate.count : 0;
-    });
-  }
-
-  /**
-   * Extrait la plage de dates complète
-   */
-  private getDateRange(trendData: any[]): string[] {
-    if (!trendData || trendData.length === 0) return [];
-
-    // Trier les dates
-    const dates = trendData.map(item => item.date).sort();
-    const startDate = dates[0];
-    const endDate = dates[dates.length - 1];
-
-    // Générer toutes les dates entre startDate et endDate
-    return this.generateDateRange(startDate, endDate);
-  }
-
-  /**
-   * Génère toutes les dates entre deux dates
-   */
-  private generateDateRange(start: string, end: string): string[] {
-    const dates: string[] = [];
-    const currentDate = new Date(start);
-    const endDate = new Date(end);
-
-    while (currentDate <= endDate) {
-      dates.push(currentDate.toISOString().split('T')[0]);
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    return dates;
-  }
-
-  /**
-   * Formate la date pour l'affichage dans le chart
-   */
-  private formatDateForChart(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('fr-FR', {
-      day: '2-digit',
-      month: '2-digit'
-    });
-  }
-
-  /**
-   * Méthode pour mettre à jour le chart avec de nouvelles données
-   */
   updateChartWithData(newData: any[]): void {
     this.trendMultiLine = newData;
     this.initLineChart();
   }
-
-  // Données d'exemple pour la semaine dernière
-
-
-  // Méthode pour générer les jours de la semaine dernière
   getLastWeekDays(): string[] {
     const days = [];
     const dayNames = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
@@ -521,6 +710,7 @@ export class DashboardComponent implements OnInit {
 
 
 
+
   // Mettre à jour les données du graphique
   updateChartData(series: any[], categories: string[]): void {
     if (this.lineChart) {
@@ -536,61 +726,136 @@ export class DashboardComponent implements OnInit {
     this.applyFilters();
   }
 
+  dataLoaded: boolean = false;
+
   applyFilters(): void {
-    this.dataService.getState(this.dateDebut, this.dateFin, this.selectedInspection).subscribe((stat) => {
-      console.log(stat)
-      this.totalBadgesActive = stat.totalCardActive
-      this.badges = stat.totalCard
-      this.certificatControls = stat.totalRapport
-      this.complianceRate = stat.ConformeRate
-      this.trendChart = {
-        ...this.trendChart,
-        series: [
-          {
-            name: "Inspections",
-            data: stat.trend.inspections
+    this.dataLoaded = false
+    if (this.selectedInspection == -1) {
+      this.dataService.getStatWithoutInspection(this.dateDebut, this.dateFin).subscribe((stat) => {
+        this.dataLoaded = true
+        console.log(stat)
+        this.totalBadgesActive = stat.totalCardActive
+        this.badges = stat.totalCard
+
+        this.complianceRate = stat.ConformeRate
+        this.trendMultiLine = stat.trendMultiLine
+        this.trendChart = {
+          ...this.trendChart,
+          series: [
+            {
+              name: "Inspections",
+              data: stat.trend.inspections
+            }
+          ],
+          xaxis: {
+            ...this.trendChart.xaxis,
+            categories: this.formatDates(stat.trend.categories),
           }
-        ],
-        xaxis: {
-          ...this.trendChart.xaxis,
-          categories: stat.trend.categories,
         }
-      }
-      this.vehicleTypeChart = {
-        ...this.vehicleTypeChart,
-        series: stat.vehicleTypes.series,
-        labels: [...stat.vehicleTypes.labels]
-      }
-      this.statusChart = {
-        ...this.statusChart,
-        series: [
-          {
-            name: "Conformes",
-            data: stat.status.conformes
-          },
-          {
-            name: "Non conformes",
-            data: stat.status.nonConformes
+        this.vehicleTypeChart = {
+          ...this.vehicleTypeChart,
+          series: stat.vehicleTypes.series,
+          labels: [...stat.vehicleTypes.labels, "Autres"]
+        }
+        this.statusChart = {
+          ...this.statusChart,
+          series: [
+            {
+              name: "Conformes",
+              data: stat.status.conformes
+            },
+            {
+              name: "Non conformes",
+              data: stat.status.nonConformes
+            }
+          ],
+          xaxis: {
+            ...this.statusChart.xaxis,
+            categories: this.formatDates(stat.status.categories)
           }
-        ],
-        xaxis: {
-          ...this.statusChart.xaxis,
-          categories: stat.status.categories
         }
-      }
-      this.lineChart = {
-        ...this.lineChart,
-        series: stat.partners,
-        xaxis: {
-          ...this.lineChart.xaxis,
-          categories: stat.categories
+        this.lineChart = {
+          ...this.lineChart,
+          series: stat.partners,
+          xaxis: {
+            ...this.lineChart.xaxis,
+            categories: stat.categories
+          }
         }
-      }
-      this.updateChartWithData(stat.trendMultiLine)
-      this.filteredInspections = stat.filteredData
-      this.totalItems = this.filteredInspections.length
-      this.updatePaginatedInspections();
-    })
+        this.inspectionSocieteChart = {
+          ...this.inspectionSocieteChart,
+          series: [{
+            name: 'Nombre d\'inspections',
+            data: stat.InspectionPerSocetite.series
+          }],
+          xaxis: {
+            ...this.inspectionSocieteChart.xaxis,
+            categories: stat.InspectionPerSocetite.labels,
+          }
+        }
+        this.updateChartWithData(stat.trendMultiLine)
+        this.filteredInspections = this.certificatControlsTab
+        this.totalItems = this.filteredInspections.length
+        this.updatePaginatedInspections();
+      })
+    } else {
+      this.dataService.getState(this.dateDebut, this.dateFin, this.selectedInspection).subscribe((stat) => {
+        this.dataLoaded = true
+        console.log(stat)
+        this.totalBadgesActive = stat.totalCardActive
+        this.badges = stat.totalCard
+        this.certificatControls = stat.totalRapport
+        this.complianceRate = stat.ConformeRate
+        this.trendChart = {
+          ...this.trendChart,
+          series: [
+            {
+              name: "Inspections",
+              data: stat.trend.inspections
+            }
+          ],
+          xaxis: {
+            ...this.trendChart.xaxis,
+            categories: this.formatDates(stat.trend.categories),
+          }
+        }
+        this.vehicleTypeChart = {
+          ...this.vehicleTypeChart,
+          series: stat.vehicleTypes.series,
+          labels: [...stat.vehicleTypes.labels, "Autres"]
+        }
+        this.statusChart = {
+          ...this.statusChart,
+          series: [
+            {
+              name: "Conformes",
+              data: stat.status.conformes
+            },
+            {
+              name: "Non conformes",
+              data: stat.status.nonConformes
+            }
+          ],
+          xaxis: {
+            ...this.statusChart.xaxis,
+            categories: this.formatDates(stat.status.categories)
+          }
+        }
+        this.lineChart = {
+          ...this.lineChart,
+          series: stat.partners,
+          xaxis: {
+            ...this.lineChart.xaxis,
+            categories: stat.categories
+          }
+        }
+        this.updateChartWithData(stat.trendMultiLine)
+        this.filteredInspections = this.certificatControlsTab
+        this.totalItems = this.filteredInspections.length
+        this.updatePaginatedInspections();
+      })
+    }
+
     this.subscription = this.inputSubject.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -607,6 +872,49 @@ export class DashboardComponent implements OnInit {
         );
 
         return this.paginatedInspections
+      })
+    ).subscribe(filtered => {
+      this.paginatedInspections = filtered;
+    });
+
+    this.dateSubscription = this.dateInputSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      map(dateText => {
+        if (!dateText.trim()) {
+          return this.paginatedInspections.slice(0, this.itemsPerPage);
+        }
+
+        const dateToString = dateText.toString();
+        this.paginatedInspections = this.filteredInspections.filter((item: any) =>
+          item.creationDate.toString().includes(dateToString)
+
+        );
+
+        return this.paginatedInspections
+      })
+    ).subscribe(filtered => {
+      this.paginatedInspections = filtered;
+    });
+
+    this.statusSubscription = this.statusSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      map(statut => {
+        if (statut === '-1') {
+          return this.filteredInspections.slice(0, this.itemsPerPage);
+        }
+        if (statut === 'conforme') {
+          return this.filteredInspections.filter(
+            (item: any) => item.avisFavorable === true
+          );
+        }
+        if (statut === 'non-conforme') {
+          return this.filteredInspections.filter(
+            (item: any) => item.avisFavorable !== true //&& item.avisFavorable != null
+          );
+        }
+        return this.filteredInspections;
       })
     ).subscribe(filtered => {
       this.paginatedInspections = filtered;
