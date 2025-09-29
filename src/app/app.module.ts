@@ -93,11 +93,10 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     FormsModule,
     NgApexchartsModule,
     HttpClientModule,
-    PdfViewerModule,
     StoreModule.forRoot({ auth: authReducer, certificatControls: certificatControlReducer, badges: badgeReducer, chauffeurs: chauffeurReducer, vehicules: vehiculeReducer, toast: toastReducer, usersInspection: userPerInspectionReducer, profil: userProfilReducer, inspections: inspectionReducer, utilisateurs: utilisateurReducer }, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([AuthEffects, CertificatControlEffects, BadgeEffect, ChauffeurEffect, VehiculeEffect, UsersPerInspectionEffect, UserProfilEffect, InspectionEffect, UtilisateurEffect])
-
+    EffectsModule.forRoot([AuthEffects, CertificatControlEffects, BadgeEffect, ChauffeurEffect, VehiculeEffect, UsersPerInspectionEffect, UserProfilEffect, InspectionEffect, UtilisateurEffect]),
+    PdfViewerModule
   ],
   providers: [
     CurrencyPipe,
