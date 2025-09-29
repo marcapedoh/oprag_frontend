@@ -19,7 +19,8 @@
               "core-js",
               "raf",
               "rgbcolor",
-              "html2canvas"
+              "html2canvas",
+              "file-saver"
             ],
             "outputPath": "dist/oprag",
             "index": "src/index.html",

@@ -101,7 +101,7 @@
 
     <!-- Graphique 3: Conformité par statut -->
     <div class="p-4 bg-white border border-blue-200 shadow-sm rounded-xl">
-      <h3 class="mb-4 text-lg font-semibold">Inspections conformes/non conformes</h3>
+      <h3 class="mb-4 text-lg font-semibold">Conformité des inspections</h3>
       <div id="status-chart">
         <apx-chart [series]="statusChart.series!" [chart]="statusChart.chart!" [plotOptions]="statusChart.plotOptions!"
           [dataLabels]="statusChart.dataLabels!" [stroke]="statusChart.stroke!" [xaxis]="statusChart.xaxis!"
@@ -192,7 +192,7 @@
                 <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($event)"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
               </th>
-              <th scope="col" class="px-4 py-3">N° d'ordre</th>
+              <th scope="col" class="px-4 py-3">N° ordre</th>
               <th scope="col" class="px-4 py-3">Date inspection</th>
               <th scope="col" class="px-4 py-3">Société</th>
               <th scope="col" class="px-4 py-3">Véhicule</th>
