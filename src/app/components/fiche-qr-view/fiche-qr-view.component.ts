@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FicheService } from '../../services/fiche.service';
 
 @Component({
@@ -23,6 +23,7 @@ export class FicheQrViewComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private ficheService: FicheService
   ) { }
 
@@ -108,5 +109,9 @@ export class FicheQrViewComponent implements OnInit, OnDestroy {
       URL.revokeObjectURL(this.pdfObjectUrl);
       this.pdfObjectUrl = null;
     }
+  }
+
+  goToHome(): void {
+    this.router.navigate(['/vue-ensemble']);
   }
 }
