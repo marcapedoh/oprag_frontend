@@ -657,10 +657,10 @@
           <div>
             <div class="flex items-center">
               <label for="numeroDeCarteGrise" class="block mb-2 text-sm font-medium text-gray-800">Numéro de
-                Carte Grise</label>
+                Série</label>
               <span class="ml-1 text-red-500">*</span>
             </div>
-            <input type="text" id="numeroDeCarteGrise" placeholder="Numéro de carte grise" name="numeroCarteGrise"
+            <input type="text" id="numeroDeCarteGrise" placeholder="Numéro de série" name="numeroCarteGrise"
               [(ngModel)]="certificatControl.vehicule.numeroCarteGrise" (ngModelChange)="saveForm()"
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
@@ -690,7 +690,7 @@
           <div>
             <div class="flex items-center">
               <label for="numeroAssurance" class="block mb-2 text-sm font-medium text-gray-800">Numéro
-                d'Assurance</label>
+                d'imatriculation</label>
               <span class="ml-1 text-red-500">*</span>
             </div>
 
@@ -699,19 +699,7 @@
               class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
               required />
           </div>
-          <div>
-            <div class="flex items-center">
-              <label for="numeroVisiteTechnique" class="block mb-2 text-sm font-medium text-gray-800">Numéro de
-                visite Technique</label>
-              <span class="ml-1 text-red-500">*</span>
-            </div>
 
-            <input type="text" id="numeroVisiteTechnique" placeholder="Numéro de visite Technique"
-              name="numeroVisiteTechnique" (ngModelChange)="saveForm()"
-              [(ngModel)]="certificatControl.vehicule.numeroVisiteTechnique"
-              class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-gray-800 focus:border-gray-500 block w-full p-2.5"
-              required />
-          </div>
           <div>
 
             <label for="VGPRemorque" class="block mb-2 text-sm font-medium text-gray-800">Numéro VGP

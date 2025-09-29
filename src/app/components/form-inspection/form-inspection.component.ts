@@ -288,6 +288,7 @@ export class FormInspectionComponent implements OnInit {
       const clone = JSON.parse(JSON.stringify(this.certificatControl));
       this.certificatControl = {
         ...clone,
+        numeroVisiteTechnique: this.certificatControl.vehicule.numeroAssurance,
         utilisateur: {
           id: localStorage.getItem("ConnectedUser")!
         },
@@ -298,6 +299,7 @@ export class FormInspectionComponent implements OnInit {
 
       this.certificatControl = {
         ...this.certificatControl,
+        numeroVisiteTechnique: this.certificatControl.vehicule.numeroAssurance,
         signatureDGM: "null",
         utilisateur: {
           id: localStorage.getItem("ConnectedUser")!
