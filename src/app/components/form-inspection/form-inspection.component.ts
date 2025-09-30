@@ -316,9 +316,13 @@ export class FormInspectionComponent implements OnInit {
       this.certificatControl = {
         ...this.certificatControl,
 
+
         signatureDGM: "null",
         utilisateur: {
-          id: localStorage.getItem("ConnectedUser")!
+          id: localStorage.getItem("ConnectedUser")!,
+          inspection: {
+            code: localStorage.getItem("InspectionCode")!
+          },
         },
         vehicule: {
           id: +localStorage.getItem("vehiculeId")!,
