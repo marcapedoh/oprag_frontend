@@ -306,6 +306,9 @@ export class FormInspectionComponent implements OnInit {
         ...clone,
         numeroVisiteTechnique: this.certificatControl.vehicule.numeroAssurance,
         utilisateur: {
+          inspection: {
+            code: localStorage.getItem("InspectionCode")!
+          },
           id: localStorage.getItem("ConnectedUser")!
         },
         vehicule: { ...this.certificatControl.vehicule },
