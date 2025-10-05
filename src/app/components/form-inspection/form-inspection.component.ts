@@ -90,6 +90,10 @@ export class FormInspectionComponent implements OnInit {
     ETAT_DE_LA_BENNE_PLATEAU: "État de la Benne / Plateau",
     MAIN_D_ACCOUPLEMENT: "Main d'accouplement",
     TOLERANCE_USURE: "Tolérance usure",
+    KLAXON: "Klaxon",
+    BIP_RECUL: "Bip de recul",
+    ETAT_CABINE_HABITACLE: "État cabine / habitacle",
+    PNEUS_PNEUS_SECOURS: "Pneus et pneus secours",
     SYSTEME_DE_CHARGE_BATTERIE: "Système de charge batterie",
     ESSAI_FREINAGE: "Essai freinage",
     FLEXIBLES_DE_FREINAGE: "Flexibles de freinage",
@@ -97,7 +101,7 @@ export class FormInspectionComponent implements OnInit {
     AMORTISSEURS: "Amortisseurs",
     ETAT_DES_BEQUILLES: "Etat des Béquilles",
     DISPOSIF_D_ATTELAGE: "Dispositif d'attelage",
-    USURE_MAILLON_CROCHETS: "Usure maillon crochets",
+    USURE_MAILLON_CROCHETS: "Usure maillon crochets multi-lève",
     MARQUAGE_CHARGE_MULTI_LEVE: "Marquage charge multi-lève",
     PLAQUES_D_IMMATRICULATION: "Plaques d'immatriculation",
     TROUSSE_PREMIER_SECOURS: "Trousse premier secours",
@@ -182,11 +186,21 @@ export class FormInspectionComponent implements OnInit {
 
   // Ajoutez cette méthode pour supprimer un élément
   removeElement(index: number) {
-    this.certificatControl.essaiFonctionnementList.splice(index, 1);
+    const updatedList = [...this.certificatControl.essaiFonctionnementList];
+    updatedList.splice(index, 1);
+    this.certificatControl = {
+      ...this.certificatControl,
+      essaiFonctionnementList: updatedList
+    };
     this.saveForm();
   }
   removeNoCheckingElement(index: number) {
-    this.certificatControl.essaiNonFonctionnementList.splice(index, 1);
+    const updatedList = [...this.certificatControl.essaiNonFonctionnementList];
+    updatedList.splice(index, 1);
+    this.certificatControl = {
+      ...this.certificatControl,
+      essaiNonFonctionnementList: updatedList
+    };
     this.saveForm();
   }
   // Modifiez la méthode onSelectChange

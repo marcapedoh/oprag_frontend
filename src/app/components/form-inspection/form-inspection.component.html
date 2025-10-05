@@ -100,21 +100,22 @@
         <!-- Checkbox 1 -->
         <div>
           <div class="flex items-center">
-            <label for="noticeInstruction" class="block mb-2 text-sm font-medium text-gray-800">Notice
-              Instruction</label>
+            <label for="noticeInstruction" class="block mb-2 text-sm font-medium text-gray-800">Certification de
+              Remorque
+            </label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
           <input type="checkbox" id="noticeInstruction" name="noticeInstruction"
-            [(ngModel)]="certificatControl.noticeInstruction" (ngModelChange)="saveForm()"
+            [(ngModel)]="certificatControl.certificationRemorque" (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
         <!-- Checkbox 2 -->
         <div>
           <div class="flex items-center">
-            <label for="livretMaintenance" class="block mb-2 text-sm font-medium text-gray-800">Livret
-              Maintenance</label>
+            <label for="livretMaintenance" class="block mb-2 text-sm font-medium text-gray-800">Carnet
+              Entrretien</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
 
@@ -126,12 +127,12 @@
         <!-- Checkbox 3 -->
         <div>
           <div class="flex items-center">
-            <label for="declarationConformite" class="block mb-2 text-sm font-medium text-gray-800">Déclaration
-              Conformité</label>
+            <label for="declarationConformite" class="block mb-2 text-sm font-medium text-gray-800">Rapport
+              Controle précédent</label>
             <span class="ml-1 text-red-500">*</span>
           </div>
           <input type="checkbox" id="declarationConformite" name="declarationConformite"
-            [(ngModel)]="certificatControl.declarationConformite" (ngModelChange)="saveForm()"
+            [(ngModel)]="certificatControl.rapportControlePrecedent" (ngModelChange)="saveForm()"
             class="w-4 h-4 text-gray-800 bg-gray-100 border-gray-300 rounded focus:ring-gray-800" />
         </div>
 
